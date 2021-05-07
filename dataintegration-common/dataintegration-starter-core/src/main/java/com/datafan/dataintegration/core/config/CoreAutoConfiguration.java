@@ -1,7 +1,7 @@
-package com.dp.starter.core.config;
+package com.datafan.dataintegration.core.config;
 
-import com.dp.core.handler.GlobalExceptionHandler;
-import com.dp.core.handler.GlobalWebsocketExceptionAspect;
+import com.datafan.dataintegration.core.handler.GlobalExceptionHandler;
+import com.datafan.dataintegration.core.handler.GlobalWebsocketExceptionAspect;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
