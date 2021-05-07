@@ -1,0 +1,1 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.dp.starter.core.config.CoreAutoConfiguration
