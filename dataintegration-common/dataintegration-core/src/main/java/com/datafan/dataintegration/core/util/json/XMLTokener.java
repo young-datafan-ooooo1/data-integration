@@ -1,11 +1,12 @@
 package com.datafan.dataintegration.core.util.json;
 
+import java.io.Reader;
 import org.json.JSONException;
 import org.json.XML;
 
-import java.io.Reader;
-
 /**
+ * XMLTokener.
+ *
  * @author gavin
  * @since 2020/2/16 1:06 下午
  */
@@ -15,15 +16,15 @@ public class XMLTokener extends JSONLinkedTokener {
      * The table of entity values. It initially contains Character values for
      * amp, apos, gt, lt, quot.
      */
-    public static final java.util.HashMap<String, Character> entity;
+    public static final java.util.HashMap<String, Character> ENTITY;
 
     static {
-        entity = new java.util.HashMap<String, Character>(8);
-        entity.put("amp", XML.AMP);
-        entity.put("apos", XML.APOS);
-        entity.put("gt", XML.GT);
-        entity.put("lt", XML.LT);
-        entity.put("quot", XML.QUOT);
+        ENTITY = new java.util.HashMap<String, Character>(8);
+        ENTITY.put("amp", XML.AMP);
+        ENTITY.put("apos", XML.APOS);
+        ENTITY.put("gt", XML.GT);
+        ENTITY.put("lt", XML.LT);
+        ENTITY.put("quot", XML.QUOT);
     }
 
     /**
@@ -45,6 +46,37 @@ public class XMLTokener extends JSONLinkedTokener {
     }
 
     /**
+     * Unescapes an XML entity encoding.
+     *
+     * @param e entity (only the actual entity value, not the preceding & or ending ;
+     * @return
+     */
+    static String unescapeEntity(String e) {
+        // validate
+        if (e == null || e.isEmpty()) {
+            return "";
+        }
+        // if our entity is an encoded unicode point, parse it.
+        if (e.charAt(0) == '#') {
+            int cp;
+            if (e.charAt(1) == 'x') {
+                // hex encoded unicode
+                cp = Integer.parseInt(e.substring(2), 16);
+            } else {
+                // decimal encoded unicode
+                cp = Integer.parseInt(e.substring(1));
+            }
+            return new String(new int[] {cp}, 0, 1);
+        }
+        Character knownEntity = ENTITY.get(e);
+        if (knownEntity == null) {
+            // we don't know the entity so keep it encoded
+            return '&' + e + ';';
+        }
+        return knownEntity.toString();
+    }
+
+    /**
      * Get the text in the CDATA block.
      *
      * @return The string up to the <code>]]&gt;</code>.
@@ -58,8 +90,7 @@ public class XMLTokener extends JSONLinkedTokener {
             c = next();
             sb.append(c);
             i = sb.length() - 3;
-            if (i >= 0 && sb.charAt(i) == ']' &&
-                    sb.charAt(i + 1) == ']' && sb.charAt(i + 2) == '>') {
+            if (i >= 0 && sb.charAt(i) == ']' && sb.charAt(i + 1) == ']' && sb.charAt(i + 2) == '>') {
                 sb.setLength(i);
                 return sb.toString();
             }
@@ -67,19 +98,16 @@ public class XMLTokener extends JSONLinkedTokener {
         throw syntaxError("Unclosed CDATA");
     }
 
-
     /**
      * Get the next XML outer token, trimming whitespace. There are two kinds
      * of tokens: the '<' character which begins a markup tag, and the content
      * text between markup tags.
      *
-     * @return A string, or a '<' Character, or null if there is no more
-     * source text.
-     * @throws JSONException
+     * @return A string, or a '<' Character, or null if there is no more source text.
+     * @throws JSONException json error
      */
     public Object nextContent() throws JSONException {
         char c;
-        StringBuilder sb;
         do {
             c = next();
         } while (Character.isWhitespace(c));
@@ -89,7 +117,7 @@ public class XMLTokener extends JSONLinkedTokener {
         if (c == '<') {
             return XML.LT;
         }
-        sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         for (; ; ) {
             if (c == 0) {
                 return sb.toString().trim();
@@ -106,7 +134,6 @@ public class XMLTokener extends JSONLinkedTokener {
             c = next();
         }
     }
-
 
     /**
      * Return the next entity. These entities are translated to Characters:
@@ -133,44 +160,10 @@ public class XMLTokener extends JSONLinkedTokener {
     }
 
     /**
-     * Unescapes an XML entity encoding;
-     *
-     * @param e entity (only the actual entity value, not the preceding & or ending ;
-     * @return
-     */
-    static String unescapeEntity(String e) {
-        // validate
-        if (e == null || e.isEmpty()) {
-            return "";
-        }
-        // if our entity is an encoded unicode point, parse it.
-        if (e.charAt(0) == '#') {
-            int cp;
-            if (e.charAt(1) == 'x') {
-                // hex encoded unicode
-                cp = Integer.parseInt(e.substring(2), 16);
-            } else {
-                // decimal encoded unicode
-                cp = Integer.parseInt(e.substring(1));
-            }
-            return new String(new int[]{cp}, 0, 1);
-        }
-        Character knownEntity = entity.get(e);
-        if (knownEntity == null) {
-            // we don't know the entity so keep it encoded
-            return '&' + e + ';';
-        }
-        return knownEntity.toString();
-    }
-
-
-    /**
      * Returns the next XML meta token. This is used for skipping over <!...>
      * and <?...?> structures.
      *
-     * @return Syntax characters (<code>< > / = ! ?</code>) are returned as
-     * Character, and strings and names are returned as Boolean. We don't care
-     * what the values actually are.
+     * @return Syntax characters (<code>< > / = ! ?</code>) are returned as Character, and strings and names are returned as Boolean. We don't care what the values actually are.
      * @throws JSONException If a string is not properly closed or if the XML
      *                       is badly structured.
      */
@@ -225,11 +218,12 @@ public class XMLTokener extends JSONLinkedTokener {
                         case '\'':
                             back();
                             return Boolean.TRUE;
+                        default:
+                            return Boolean.FALSE;
                     }
                 }
         }
     }
-
 
     /**
      * Get the next XML Token. These tokens are found inside of angle
@@ -262,9 +256,7 @@ public class XMLTokener extends JSONLinkedTokener {
                 return XML.BANG;
             case '?':
                 return XML.QUEST;
-
 // Quoted string
-
             case '"':
             case '\'':
                 q = c;
@@ -284,9 +276,6 @@ public class XMLTokener extends JSONLinkedTokener {
                     }
                 }
             default:
-
-// Name
-
                 sb = new StringBuilder();
                 for (; ; ) {
                     sb.append(c);
@@ -310,6 +299,7 @@ public class XMLTokener extends JSONLinkedTokener {
                         case '"':
                         case '\'':
                             throw syntaxError("Bad character in a name");
+                        default:
                     }
                 }
         }

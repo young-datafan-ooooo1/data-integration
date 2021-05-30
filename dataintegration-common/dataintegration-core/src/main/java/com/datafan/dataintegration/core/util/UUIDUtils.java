@@ -4,7 +4,7 @@ import java.util.Random;
 import java.util.UUID;
 
 /**
- * UUID工具类，支持生成32位uuid
+ * UUID工具类，支持生成32位uuid.
  *
  * @author renhua.zhang
  * @create 2017-10-20 10:23
@@ -12,10 +12,11 @@ import java.util.UUID;
 public class UUIDUtils {
 
     private static final int SHORT_MAX = 65536;
+
     private static int counter = -1;
 
     /**
-     * 根据jdk生成默认uuid
+     * 根据jdk生成默认uuid.
      *
      * @return uuid字符串
      */
@@ -24,7 +25,7 @@ public class UUIDUtils {
     }
 
     /**
-     * 根据jdk生成32位uuid，不带分隔符(-)
+     * 根据jdk生成32位uuid，不带分隔符(-).
      *
      * @return uuid字符串
      */
@@ -33,17 +34,17 @@ public class UUIDUtils {
         long mostSigBits = uuid.getMostSignificantBits();
         long leastSigBits = uuid.getLeastSignificantBits();
 
-        return (digits(mostSigBits >> 32, 8) +
-                digits(mostSigBits >> 16, 4) +
-                digits(mostSigBits, 4) +
-                digits(leastSigBits >> 48, 4) +
-                digits(leastSigBits, 12));
+        return digits(mostSigBits >> 32, 8)
+            + digits(mostSigBits >> 16, 4)
+            + digits(mostSigBits, 4)
+            + digits(leastSigBits >> 48, 4)
+            + digits(leastSigBits, 12);
     }
 
     /**
-     * 生成唯一的long类型的id
+     * 生成唯一的long类型的id.
      *
-     * @return
+     * @return uuid string
      */
     public static synchronized long nextId() {
         long now = System.currentTimeMillis();

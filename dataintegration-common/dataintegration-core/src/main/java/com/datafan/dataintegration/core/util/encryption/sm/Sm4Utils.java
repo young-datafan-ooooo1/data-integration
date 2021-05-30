@@ -1,13 +1,17 @@
 package com.datafan.dataintegration.core.util.encryption.sm;
 
-
 import com.datafan.dataintegration.core.util.Base64Utils;
 
+/**
+ * sm4 工具类.
+ *
+ * @author gavin
+ */
 public class Sm4Utils {
     private static final String IV = "UISwD5fW1cFh8SNS";
 
     /**
-     * ecb加密
+     * ecb加密.
      *
      * @param secretKey 加密密码
      * @param hexString 加密密码是否是16进制
@@ -16,7 +20,7 @@ public class Sm4Utils {
      * @return 加密后的字符串
      * @throws Exception error.
      */
-    public static String encryptDataECB(String secretKey, boolean hexString, String plainText, String charset) throws Exception {
+    public static String encryptDataECB(final String secretKey, final boolean hexString, final String plainText, final String charset) throws Exception {
         Sm4Context ctx = new Sm4Context();
         ctx.setPadding(true);
         ctx.setMode(Sm4.SM4_ENCRYPT);
@@ -35,7 +39,7 @@ public class Sm4Utils {
     }
 
     /**
-     * ecb解密
+     * ecb解密.
      *
      * @param secretKey  解密密码
      * @param hexString  解密密码是否是16进制
@@ -44,7 +48,7 @@ public class Sm4Utils {
      * @return 解密后字符串
      * @throws Exception error.
      */
-    public static String decryptDataECB(String secretKey, boolean hexString, String cipherText, String charset) throws Exception {
+    public static String decryptDataECB(final String secretKey, final boolean hexString, final String cipherText, final String charset) throws Exception {
         Sm4Context ctx = new Sm4Context();
         ctx.setPadding(true);
         ctx.setMode(Sm4.SM4_DECRYPT);
@@ -63,7 +67,7 @@ public class Sm4Utils {
     }
 
     /**
-     * cbc加密
+     * cbc加密.
      *
      * @param secretKey 加密密码
      * @param hexString 加密密码是否是16进制
@@ -72,7 +76,7 @@ public class Sm4Utils {
      * @return 加密后的字符串
      * @throws Exception error.
      */
-    public static String encryptDataCBC(String secretKey, boolean hexString, String plainText, String charset) throws Exception {
+    public static String encryptDataCBC(final String secretKey, final boolean hexString, final String plainText, final String charset) throws Exception {
         Sm4Context ctx = new Sm4Context();
         ctx.setPadding(true);
         ctx.setMode(Sm4.SM4_ENCRYPT);
@@ -94,7 +98,7 @@ public class Sm4Utils {
     }
 
     /**
-     * cbc解密
+     * cbc解密.
      *
      * @param secretKey  解密密码
      * @param hexString  解密密码是否是16进制
@@ -103,7 +107,7 @@ public class Sm4Utils {
      * @return 解密后字符串
      * @throws Exception error.
      */
-    public static String decryptDataCBC(String secretKey, boolean hexString, String cipherText, String charset) throws Exception {
+    public static String decryptDataCBC(final String secretKey, final boolean hexString, final String cipherText, final String charset) throws Exception {
         Sm4Context ctx = new Sm4Context();
         ctx.setPadding(true);
         ctx.setMode(Sm4.SM4_DECRYPT);

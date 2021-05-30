@@ -1,52 +1,62 @@
 package com.datafan.dataintegration.core.validation;
 
-
-import javax.validation.Constraint;
-import javax.validation.Payload;
 import java.lang.annotation.Documented;
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
-
 import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
 import static java.lang.annotation.ElementType.TYPE;
+import java.lang.annotation.Retention;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
+import java.lang.annotation.Target;
+import javax.validation.Constraint;
+import javax.validation.Payload;
 
 /**
- * @author internet
  * Validation annotation to validate that 2 fields have the same value.
  * An array of fields and their matching confirmation fields can be supplied.
- * <p>
- * Example, compare 1 pair of fields:
- * @FieldMatch(first = "password", second = "confirmPassword", message = "The password fields must match")
- * <p>
- * Example, compare more than 1 pair of fields:
- * @FieldMatch.List({
- * @FieldMatch(first = "password", second = "confirmPassword", message = "The password fields must match"),
- * @FieldMatch(first = "email", second = "confirmEmail", message = "The email fields must match")})
+ *
+ * @author gavin
  */
 @Target({TYPE, ANNOTATION_TYPE})
 @Retention(RUNTIME)
 @Constraint(validatedBy = FieldMatchValidator.class)
 @Documented
 public @interface FieldMatch {
+    /**
+     * 提示信息.
+     *
+     * @return string msg
+     */
     String message() default "{constraints.fieldMatch}";
 
+    /**
+     * group.
+     *
+     * @return group class
+     */
     Class<?>[] groups() default {};
 
+    /**
+     * payload.
+     *
+     * @return payload class.
+     */
     Class<? extends Payload>[] payload() default {};
 
     /**
+     * 第一个字段.
+     *
      * @return The first field
      */
     String first();
 
     /**
+     * 第二个字段.
+     *
      * @return The second field
      */
     String second();
 
     /**
-     * Defines several <code>@FieldMatch</code> annotations on the same element
+     * Defines several <code>@FieldMatch</code> annotations on the same element.
      *
      * @see FieldMatch
      */

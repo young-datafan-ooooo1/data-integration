@@ -12,6 +12,13 @@
     <artifactId>dataintegration-core</artifactId>
 
     <dependencies>
+        <!-- lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+        </dependency>
+
         <!--APACHE工具包 -->
         <dependency>
             <groupId>org.apache.commons</groupId>

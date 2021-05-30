@@ -6,12 +6,19 @@ import org.bouncycastle.crypto.params.ECPrivateKeyParameters;
 import org.bouncycastle.crypto.params.ECPublicKeyParameters;
 import org.bouncycastle.math.ec.ECPoint;
 
-import java.io.IOException;
 import java.math.BigInteger;
 
+/**
+ * sm2加密工具类.
+ *
+ * @author gavin
+ */
 public class Sm2Utils {
+
     /**
-     * 生成随机秘钥对
+     * 生成随机秘钥对.
+     *
+     * @return sm2 key pair
      */
     public static Pair<String, String> generateKeyPair() {
         Sm2 sm2 = Sm2.getInstance();
@@ -21,19 +28,18 @@ public class Sm2Utils {
         BigInteger privateKey = ecpriv.getD();
         ECPoint publicKey = ecpub.getQ();
 
-        return new Pair<>(Utils.byteToHex(publicKey.getEncoded(false))
-                , Utils.byteToHex(privateKey.toByteArray()));
+        return new Pair<>(Utils.byteToHex(publicKey.getEncoded(false)),
+            Utils.byteToHex(privateKey.toByteArray()));
     }
 
     /**
-     * 数据加密
+     * 数据加密.
      *
      * @param publicKey 公钥
      * @param data      数据
      * @return 加密后字符串
-     * @throws IOException io erro.
      */
-    public static String encrypt(byte[] publicKey, byte[] data) throws IOException {
+    public static String encrypt(final byte[] publicKey, final byte[] data) {
         if (publicKey == null || publicKey.length == 0) {
             return null;
         }
@@ -59,14 +65,13 @@ public class Sm2Utils {
     }
 
     /**
-     * 数据解密
+     * 数据解密.
      *
      * @param privateKey    私钥
      * @param encryptedData 加密数据
      * @return 解密后的数据
-     * @throws IOException io error.
      */
-    public static byte[] decrypt(byte[] privateKey, byte[] encryptedData) throws IOException {
+    public static byte[] decrypt(final byte[] privateKey, final byte[] encryptedData) {
         if (privateKey == null || privateKey.length == 0) {
             return null;
         }
@@ -81,10 +86,10 @@ public class Sm2Utils {
          * （C3 = C3实体部分64位  = 64）
          * （C2 = encryptedData.length * 2 - C1长度  - C2长度）
          */
-        byte[] c1Bytes = Utils.hexToByte(data.substring(0, 130));
+        byte[] c1Bytes = Utils.hexToByteArray(data.substring(0, 130));
         int c2Len = encryptedData.length - 97;
-        byte[] c2 = Utils.hexToByte(data.substring(130, 130 + 2 * c2Len));
-        byte[] c3 = Utils.hexToByte(data.substring(130 + 2 * c2Len, 194 + 2 * c2Len));
+        byte[] c2 = Utils.hexToByteArray(data.substring(130, 130 + 2 * c2Len));
+        byte[] c3 = Utils.hexToByteArray(data.substring(130 + 2 * c2Len, 194 + 2 * c2Len));
 
         Sm2 sm2 = Sm2.getInstance();
         BigInteger userD = new BigInteger(1, privateKey);

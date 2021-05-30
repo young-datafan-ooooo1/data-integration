@@ -1,19 +1,23 @@
 package com.datafan.dataintegration.core.util.json;
 
-
-import org.json.JSONException;
-import org.json.JSONPointer;
-import org.json.JSONPointerException;
-
 import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import org.json.JSONException;
+import org.json.JSONPointer;
+import org.json.JSONPointerException;
 
 /**
+ * JSONArray.
+ *
  * @author gavin
  * @since 2020/2/16 2:25 下午
  */
@@ -28,7 +32,7 @@ public class JSONArray implements Iterable<Object> {
      * Construct an empty JSONArray.
      */
     public JSONArray() {
-        this.myArrayList = new ArrayList<Object>();
+        this.myArrayList = new ArrayList<>();
     }
 
     /**
@@ -111,7 +115,7 @@ public class JSONArray implements Iterable<Object> {
     }
 
     /**
-     * Construct a JSONArray from an array
+     * Construct a JSONArray from an array.
      *
      * @throws JSONException If not an array or if an array value is non-finite number.
      */
@@ -125,7 +129,7 @@ public class JSONArray implements Iterable<Object> {
             }
         } else {
             throw new JSONException(
-                    "JSONArray initial value should be a string or collection or array.");
+                "JSONArray initial value should be a string or collection or array.");
         }
     }
 
@@ -161,12 +165,10 @@ public class JSONArray implements Iterable<Object> {
     public boolean getBoolean(int index) throws JSONException {
         Object object = this.get(index);
         if (object.equals(Boolean.FALSE)
-                || (object instanceof String && ((String) object)
-                .equalsIgnoreCase("false"))) {
+            || (object instanceof String && "false".equalsIgnoreCase((String) object))) {
             return false;
         } else if (object.equals(Boolean.TRUE)
-                || (object instanceof String && ((String) object)
-                .equalsIgnoreCase("true"))) {
+            || (object instanceof String && "true".equalsIgnoreCase((String) object))) {
             return true;
         }
         throw new JSONException("JSONArray[" + index + "] is not a boolean.");
@@ -184,7 +186,7 @@ public class JSONArray implements Iterable<Object> {
         Object object = this.get(index);
         try {
             return object instanceof Number ? ((Number) object).doubleValue()
-                    : Double.parseDouble((String) object);
+                : Double.parseDouble((String) object);
         } catch (Exception e) {
             throw new JSONException("JSONArray[" + index + "] is not a number.", e);
         }
@@ -202,10 +204,10 @@ public class JSONArray implements Iterable<Object> {
         Object object = this.get(index);
         try {
             return object instanceof Number ? ((Number) object).floatValue()
-                    : Float.parseFloat(object.toString());
+                : Float.parseFloat(object.toString());
         } catch (Exception e) {
             throw new JSONException("JSONArray[" + index
-                    + "] is not a number.", e);
+                + "] is not a number.", e);
         }
     }
 
@@ -234,6 +236,7 @@ public class JSONArray implements Iterable<Object> {
      *
      * @param clazz The type of enum to retrieve.
      * @param index The index must be between 0 and length() - 1.
+     * @param <E>   Enum
      * @return The enum value at the index location
      * @throws JSONException if the key is not found or if the value cannot be converted
      *                       to an enum.
@@ -245,7 +248,7 @@ public class JSONArray implements Iterable<Object> {
             // If it did, I would re-implement this with the Enum.valueOf
             // method and place any thrown exception in the JSONException
             throw new JSONException("JSONArray[" + index + "] is not an enum of type "
-                    + JSONLinkedObject.quote(clazz.getSimpleName()) + ".");
+                + JSONLinkedObject.quote(clazz.getSimpleName()) + ".");
         }
         return val;
     }
@@ -263,8 +266,7 @@ public class JSONArray implements Iterable<Object> {
         try {
             return new BigDecimal(object.toString());
         } catch (Exception e) {
-            throw new JSONException("JSONArray[" + index +
-                    "] could not convert to BigDecimal.", e);
+            throw new JSONException("JSONArray[" + index + "] could not convert to BigDecimal.", e);
         }
     }
 
@@ -281,8 +283,7 @@ public class JSONArray implements Iterable<Object> {
         try {
             return new BigInteger(object.toString());
         } catch (Exception e) {
-            throw new JSONException("JSONArray[" + index +
-                    "] could not convert to BigInteger.", e);
+            throw new JSONException("JSONArray[" + index + "] could not convert to BigInteger.", e);
         }
     }
 
@@ -297,7 +298,7 @@ public class JSONArray implements Iterable<Object> {
         Object object = this.get(index);
         try {
             return object instanceof Number ? ((Number) object).intValue()
-                    : Integer.parseInt((String) object);
+                : Integer.parseInt((String) object);
         } catch (Exception e) {
             throw new JSONException("JSONArray[" + index + "] is not a number.", e);
         }
@@ -347,7 +348,7 @@ public class JSONArray implements Iterable<Object> {
         Object object = this.get(index);
         try {
             return object instanceof Number ? ((Number) object).longValue()
-                    : Long.parseLong((String) object);
+                : Long.parseLong((String) object);
         } catch (Exception e) {
             throw new JSONException("JSONArray[" + index + "] is not a number.", e);
         }
@@ -417,7 +418,7 @@ public class JSONArray implements Iterable<Object> {
      */
     public Object opt(int index) {
         return (index < 0 || index >= this.length()) ? null : this.myArrayList
-                .get(index);
+            .get(index);
     }
 
     /**
@@ -572,6 +573,7 @@ public class JSONArray implements Iterable<Object> {
      *
      * @param clazz The type of enum to retrieve.
      * @param index The index must be between 0 and length() - 1.
+     * @param <E>   Enum
      * @return The enum value at the index location or null if not found
      */
     public <E extends Enum<E>> E optEnum(Class<E> clazz, int index) {
@@ -584,8 +586,8 @@ public class JSONArray implements Iterable<Object> {
      * @param clazz        The type of enum to retrieve.
      * @param index        The index must be between 0 and length() - 1.
      * @param defaultValue The default in case the value is not found
-     * @return The enum value at the index location or defaultValue if
-     * the value is not found or cannot be assigned to clazz
+     * @param <E>          Enum
+     * @return The enum value at the index location or defaultValue if the value is not found or cannot be assigned to clazz
      */
     public <E extends Enum<E>> E optEnum(Class<E> clazz, int index, E defaultValue) {
         try {
@@ -632,7 +634,7 @@ public class JSONArray implements Iterable<Object> {
             return new BigDecimal(((Number) val).doubleValue()).toBigInteger();
         }
         if (val instanceof Long || val instanceof Integer
-                || val instanceof Short || val instanceof Byte) {
+            || val instanceof Short || val instanceof Byte) {
             return BigInteger.valueOf(((Number) val).longValue());
         }
         try {
@@ -670,7 +672,7 @@ public class JSONArray implements Iterable<Object> {
             return new BigDecimal(((Number) val).doubleValue());
         }
         if (val instanceof Long || val instanceof Integer
-                || val instanceof Short || val instanceof Byte) {
+            || val instanceof Short || val instanceof Byte) {
             return new BigDecimal(((Number) val).longValue());
         }
         try {
@@ -684,8 +686,7 @@ public class JSONArray implements Iterable<Object> {
      * Get the optional JSONArray associated with an index.
      *
      * @param index subscript
-     * @return A JSONArray value, or null if the index has no value, or if the
-     * value is not a JSONArray.
+     * @return A JSONArray value, or null if the index has no value, or if the value is not a JSONArray.
      */
     public JSONArray optJSONArray(int index) {
         Object o = this.opt(index);
@@ -810,7 +811,7 @@ public class JSONArray implements Iterable<Object> {
     public String optString(int index, String defaultValue) {
         Object object = this.opt(index);
         return JSONLinkedObject.NULL.equals(object) ? defaultValue : object
-                .toString();
+            .toString();
     }
 
     /**
@@ -829,7 +830,6 @@ public class JSONArray implements Iterable<Object> {
      *
      * @param value A Collection value.
      * @return this.
-     * @throws JSONException If the value is non-finite number.
      */
     public JSONArray put(Collection<?> value) {
         return this.put(new JSONArray(value));
@@ -883,7 +883,6 @@ public class JSONArray implements Iterable<Object> {
      *
      * @param value A Map value.
      * @return this.
-     * @throws JSONException        If a value in the map is non-finite number.
      * @throws NullPointerException If a key in the map is <code>null</code>
      */
     public JSONArray put(Map<?, ?> value) {
@@ -897,7 +896,6 @@ public class JSONArray implements Iterable<Object> {
      *              Integer, JSONArray, JSONLinkedObject, Long, or String, or the
      *              JSONLinkedObject.NULL object.
      * @return this.
-     * @throws JSONException If the value is non-finite number.
      */
     public JSONArray put(Object value) {
         JSONLinkedObject.testValidity(value);
@@ -995,9 +993,8 @@ public class JSONArray implements Iterable<Object> {
      * @param index The subscript.
      * @param value The Map value.
      * @return this.
-     * @throws JSONException        If the index is negative or if the the value is an invalid
-     *                              number.
-     * @throws NullPointerException If a key in the map is <code>null</code>
+     * @throws JSONException If the index is negative or if the the value is an invalid
+     *                       number.
      */
     public JSONArray put(int index, Map<?, ?> value) throws JSONException {
         this.put(index, new JSONLinkedObject(value));
@@ -1118,13 +1115,10 @@ public class JSONArray implements Iterable<Object> {
      * Remove an index and close the hole.
      *
      * @param index The index of the element to be removed.
-     * @return The value that was associated with the index, or null if there
-     * was no value.
+     * @return The value that was associated with the index, or null if there was no value.
      */
     public Object remove(int index) {
-        return index >= 0 && index < this.length()
-                ? this.myArrayList.remove(index)
-                : null;
+        return index >= 0 && index < this.length() ? this.myArrayList.remove(index) : null;
     }
 
     /**
@@ -1172,8 +1166,7 @@ public class JSONArray implements Iterable<Object> {
      *
      * @param names A JSONArray containing a list of key strings. These will be
      *              paired with the values.
-     * @return A JSONLinkedObject, or null if there are no names or if this JSONArray
-     * has no values.
+     * @return A JSONLinkedObject, or null if there are no names or if this JSONArray has no values.
      * @throws JSONException If any of the names are null.
      */
     public JSONLinkedObject toJSONLinkedObject(JSONArray names) throws JSONException {
@@ -1192,12 +1185,9 @@ public class JSONArray implements Iterable<Object> {
      * whitespace is added. If it is not possible to produce a syntactically
      * correct JSON text then null will be returned instead. This could occur if
      * the array contains an invalid number.
-     * <p><b>
      * Warning: This method assumes that the data structure is acyclical.
-     * </b>
      *
-     * @return a printable, displayable, transmittable representation of the
-     * array.
+     * @return a printable, displayable, transmittable representation of the array.
      */
     @Override
     public String toString() {
@@ -1223,16 +1213,12 @@ public class JSONArray implements Iterable<Object> {
      * 3
      * ]
      * }</pre>
-     * <p><b>
      * Warning: This method assumes that the data structure is acyclical.
-     * </b>
      *
      * @param indentFactor The number of spaces to add to each level of indentation.
-     * @return a printable, displayable, transmittable representation of the
-     * object, beginning with <code>[</code>&nbsp;<small>(left
-     * bracket)</small> and ending with <code>]</code>
-     * &nbsp;<small>(right bracket)</small>.
-     * @throws JSONException
+     * @return a printable, displayable, transmittable representation of the object, beginning with <code>[</code>&nbsp;<small>(left
+     * bracket)</small> and ending with <code>]</code> &nbsp;<small>(right bracket)</small>.
+     * @throws JSONException e
      */
     public String toString(int indentFactor) throws JSONException {
         StringWriter sw = new StringWriter();
@@ -1244,12 +1230,11 @@ public class JSONArray implements Iterable<Object> {
     /**
      * Write the contents of the JSONArray as JSON text to a writer. For
      * compactness, no whitespace is added.
-     * <p><b>
      * Warning: This method assumes that the data structure is acyclical.
-     * </b>
      *
+     * @param writer Writer
      * @return The writer.
-     * @throws JSONException
+     * @throws JSONException e
      */
     public Writer write(Writer writer) throws JSONException {
         return this.write(writer, 0, 0);
@@ -1270,18 +1255,15 @@ public class JSONArray implements Iterable<Object> {
      * 3
      * ]
      * }</pre>
-     * <p><b>
      * Warning: This method assumes that the data structure is acyclical.
-     * </b>
      *
      * @param writer       Writes the serialized JSON
      * @param indentFactor The number of spaces to add to each level of indentation.
      * @param indent       The indentation of the top level.
      * @return The writer.
-     * @throws JSONException
+     * @throws JSONException e
      */
-    public Writer write(Writer writer, int indentFactor, int indent)
-            throws JSONException {
+    public Writer write(Writer writer, int indentFactor, int indent) throws JSONException {
         try {
             boolean commanate = false;
             int length = this.length();
@@ -1290,7 +1272,7 @@ public class JSONArray implements Iterable<Object> {
             if (length == 1) {
                 try {
                     JSONLinkedObject.writeValue(writer, this.myArrayList.get(0),
-                            indentFactor, indent);
+                        indentFactor, indent);
                 } catch (Exception e) {
                     throw new JSONException("Unable to write JSONArray value at index: 0", e);
                 }
@@ -1307,7 +1289,7 @@ public class JSONArray implements Iterable<Object> {
                     JSONLinkedObject.indent(writer, newindent);
                     try {
                         JSONLinkedObject.writeValue(writer, this.myArrayList.get(i),
-                                indentFactor, newindent);
+                            indentFactor, newindent);
                     } catch (Exception e) {
                         throw new JSONException("Unable to write JSONArray value at index: " + i, e);
                     }
@@ -1329,13 +1311,12 @@ public class JSONArray implements Iterable<Object> {
      * Returns a java.util.List containing all of the elements in this array.
      * If an element in the array is a JSONArray or JSONLinkedObject it will also
      * be converted.
-     * <p>
      * Warning: This method assumes that the data structure is acyclical.
      *
      * @return a java.util.List containing the elements of this array
      */
     public List<Object> toList() {
-        List<Object> results = new ArrayList<Object>(this.myArrayList.size());
+        List<Object> results = new ArrayList<>(this.myArrayList.size());
         for (Object element : this.myArrayList) {
             if (element == null || JSONLinkedObject.NULL.equals(element)) {
                 results.add(null);
