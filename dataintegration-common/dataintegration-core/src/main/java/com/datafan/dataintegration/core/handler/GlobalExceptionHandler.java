@@ -4,11 +4,6 @@ import com.datafan.dataintegration.core.exception.DpException;
 import com.datafan.dataintegration.core.exception.FormValidationException;
 import com.datafan.dataintegration.core.model.Result;
 import com.datafan.dataintegration.core.util.StatusCode;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
 import org.slf4j.Logger;
@@ -21,6 +16,12 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 全局异常处理.
@@ -55,6 +56,10 @@ public class GlobalExceptionHandler {
 
         } else if (t instanceof ServletException) {
             result.setCode(StatusCode.CODE_10003.getCode());
+            result.setMsg(t.getMessage());
+
+        } else if (t instanceof IllegalArgumentException) {
+            result.setCode(StatusCode.CODE_10010.getCode());
             result.setMsg(t.getMessage());
 
         } else if (ex instanceof FormValidationException) {
