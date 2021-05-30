@@ -1,7 +1,7 @@
 package com.datafan.dataintegration.core.handler;
 
 import com.datafan.dataintegration.core.model.Result;
-import com.datafan.dataintegration.core.StatusCode;
+import com.datafan.dataintegration.core.util.StatusCode;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -12,7 +12,7 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.stereotype.Component;
 
 /**
- * 全局的websocket aop异常处理
+ * 全局的websocket aop异常处理.
  *
  * @author gavin
  * @create 2020/3/3 5:03 下午
@@ -21,28 +21,34 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class GlobalWebsocketExceptionAspect {
-    private static final Logger log = LoggerFactory.getLogger(GlobalWebsocketExceptionAspect.class);
+    private static final Logger LOG = LoggerFactory.getLogger(GlobalWebsocketExceptionAspect.class);
 
+    /**
+     * websocket around监听.
+     *
+     * @param pjp ProceedingJoinPoint
+     * @return result
+     */
     @Around("@annotation(org.springframework.messaging.handler.annotation.MessageMapping)")
-    public Object websocketExceptionPoint(ProceedingJoinPoint pjp) {
+    public Object websocketExceptionPoint(final ProceedingJoinPoint pjp) {
         return exceptionHandler(pjp);
     }
 
     /**
-     * 异常处理
+     * 异常处理.
      *
      * @param pjp ProceedingJoinPoint
      * @return Result
      */
-    private Object exceptionHandler(ProceedingJoinPoint pjp) {
+    private Object exceptionHandler(final ProceedingJoinPoint pjp) {
         try {
             return pjp.proceed();
         } catch (Throwable throwable) {
-            log.error("websocket请求异常", throwable);
+            LOG.error("websocket请求异常", throwable);
             try {
                 return GlobalExceptionHandler.buildResult(throwable);
             } catch (Throwable e) {
-                return Result.fail(StatusCode.CODE_10010, null, "业务请求失败");
+                return Result.fail(StatusCode.CODE_10010.getCode(), null, "业务请求失败");
             }
         }
     }

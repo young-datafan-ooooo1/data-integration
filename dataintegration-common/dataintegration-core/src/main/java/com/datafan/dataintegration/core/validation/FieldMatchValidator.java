@@ -1,17 +1,17 @@
 package com.datafan.dataintegration.core.validation;
 
-import org.apache.commons.beanutils.BeanUtils;
-
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+import org.apache.commons.beanutils.BeanUtils;
 
 /**
- * 字段值比较校验器
+ * 字段值比较校验器.
  *
  * @author internet
  */
 public class FieldMatchValidator implements ConstraintValidator<FieldMatch, Object> {
     private String firstFieldName;
+
     private String secondFieldName;
 
     @Override

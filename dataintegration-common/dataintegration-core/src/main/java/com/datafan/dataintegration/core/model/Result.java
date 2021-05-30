@@ -1,19 +1,22 @@
 package com.datafan.dataintegration.core.model;
 
-import com.datafan.dataintegration.core.StatusCode;
+import com.datafan.dataintegration.core.util.StatusCode;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.Serializable;
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
-import java.io.Serializable;
-
 /**
- * 接口数据响应对象
+ * 接口数据响应对象.
  *
  * @author renhua.zhang
  * @create 2017-9-19 16:13
  */
+@Setter
+@Getter
 @ApiModel("接口响应对象")
 public class Result<T, A> implements Serializable {
 
@@ -38,59 +41,62 @@ public class Result<T, A> implements Serializable {
     public Result() {
     }
 
-    public Result(String code) {
+    public Result(final String code) {
         this.code = code;
     }
 
-    public Result(String code, String msg) {
+    public Result(final String code, final String msg) {
         this.code = code;
         this.msg = msg;
     }
 
-    public Result(String code, String msg, T content) {
+    public Result(final String code, final String msg, final T content) {
         this.code = code;
         this.msg = msg;
         this.content = content;
     }
 
     /**
-     * 成功
+     * 成功.
      *
      * @param content 返回内容对象
+     * @param <T>     content type
      * @return 返回PrimeResponse对象
      */
-    public static <T> Result<T, Object> success(T content) {
+    public static <T> Result<T, Object> success(final T content) {
         Result<T, Object> result = new Result<>();
         result.setContent(content);
-        result.setCode(StatusCode.CODE_10000);
+        result.setCode(StatusCode.CODE_10000.getCode());
 
         return result;
     }
 
     /**
-     * 成功
+     * 成功.
      *
      * @param content 返回内容对象
      * @param message 提示信息
+     * @param <T>     content type
      * @return 返回PrimeResponse对象
      */
-    public static <T> Result<T, Object> success(T content, String message) {
+    public static <T> Result<T, Object> success(final T content, final String message) {
         Result<T, Object> result = new Result<>();
         result.setContent(content);
         result.setMsg(message);
-        result.setCode(StatusCode.CODE_10000);
+        result.setCode(StatusCode.CODE_10000.getCode());
         return result;
     }
 
     /**
-     * 失败
+     * 失败.
      *
      * @param code    状态码
      * @param content 返回内容对象
      * @param message 提示信息
+     * @param <T>     content type
      * @return 返回PrimeResponse对象
      */
-    public static <T> Result fail(String code, T content, String message) {
+    public static <T> Result fail(final String code, final T content, final String message) {
         Result<T, Object> result = new Result<>();
         result.setContent(content);
         result.setMsg(message);
@@ -99,57 +105,18 @@ public class Result<T, A> implements Serializable {
     }
 
     /**
-     * 失败
+     * 失败.
      *
      * @param code    状态码
      * @param message 提示信息
+     * @param <T>     content type
      * @return 返回PrimeResponse对象
      */
-    public static <T> Result fail(String code, String message) {
+    public static <T> Result fail(final String code, final String message) {
         Result<T, Object> result = new Result<>();
         result.setMsg(message);
         result.setCode(code);
         return result;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public String getSign() {
-        return sign;
-    }
-
-    public void setSign(String sign) {
-        this.sign = sign;
-    }
-
-    public T getContent() {
-        return content;
-    }
-
-    public void setContent(T content) {
-        this.content = content;
-    }
-
-    public A getAttachment() {
-        return attachment;
-    }
-
-    public void setAttachment(A attachment) {
-        this.attachment = attachment;
     }
 
     @Override

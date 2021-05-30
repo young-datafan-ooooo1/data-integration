@@ -5,7 +5,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 /**
- * base64工具类
+ * base64工具类.
  *
  * @author gavin
  * @Date 2020-01-09 13:50
@@ -16,7 +16,7 @@ public class Base64Utils {
 
 
     /**
-     * Base64对给定的字节数组进行编码。
+     * Base64对给定的字节数组进行编码.
      *
      * @param src 原始字节数组
      * @return 编码字节数组
@@ -29,7 +29,7 @@ public class Base64Utils {
     }
 
     /**
-     * Base64解码给定的字节数组。
+     * Base64解码给定的字节数组.
      *
      * @param src 编码字节数组
      * @return 原始字节数组
@@ -42,7 +42,7 @@ public class Base64Utils {
     }
 
     /**
-     * Base64使用RFC 4648对给定的字节数组进行编码
+     * Base64使用RFC 4648对给定的字节数组进行编码.
      *
      * @param src 原始字节数组
      * @return 编码字节数组
@@ -55,7 +55,7 @@ public class Base64Utils {
     }
 
     /**
-     * Base64使用RFC 4648对给定字节数组进行解码
+     * Base64使用RFC 4648对给定字节数组进行解码.
      *
      * @param src 编码字节数组
      * @return 原始字节数组
@@ -68,7 +68,7 @@ public class Base64Utils {
     }
 
     /**
-     * Base64将给定的字节数组编码为字符串。
+     * Base64将给定的字节数组编码为字符串.
      *
      * @param src 原始字节数组
      * @return 作为UTF-8字符串的编码字节数组
@@ -81,7 +81,7 @@ public class Base64Utils {
     }
 
     /**
-     * Base64从UTF-8字符串解码给定的字节数组。
+     * Base64从UTF-8字符串解码给定的字节数组.
      *
      * @param src 编码的UTF-8字符串
      * @return 原始字节数组
@@ -94,7 +94,7 @@ public class Base64Utils {
     }
 
     /**
-     * Base64使用RFC 4648将给定字节数组编码为字符串
+     * Base64使用RFC 4648将给定字节数组编码为字符串.
      *
      * @param src 原始字节数组
      * @return 作为UTF-8字符串的编码字节数组
@@ -104,7 +104,7 @@ public class Base64Utils {
     }
 
     /**
-     * Base64使用RFC 4648从UTF-8字符串解码给定的字节数组
+     * Base64使用RFC 4648从UTF-8字符串解码给定的字节数组.
      *
      * @param src 编码的UTF-8字符串
      * @return 原始字节数组

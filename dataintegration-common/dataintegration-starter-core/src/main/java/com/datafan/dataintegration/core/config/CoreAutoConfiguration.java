@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 /**
+ * core包自动配置.
+ *
  * @author gavin
  * @create 2020/2/7 5:47 下午
  */

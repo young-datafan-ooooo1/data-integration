@@ -1,14 +1,19 @@
 package com.datafan.dataintegration.core.util.encryption.sm;
 
+/**
+ * sm3算法实现类.
+ *
+ * @author gavin
+ */
 public class Sm3 {
     public static final byte[] IV = {0x73, (byte) 0x80, 0x16, 0x6f, 0x49,
-            0x14, (byte) 0xb2, (byte) 0xb9, 0x17, 0x24, 0x42, (byte) 0xd7,
-            (byte) 0xda, (byte) 0x8a, 0x06, 0x00, (byte) 0xa9, 0x6f, 0x30,
-            (byte) 0xbc, (byte) 0x16, 0x31, 0x38, (byte) 0xaa, (byte) 0xe3,
-            (byte) 0x8d, (byte) 0xee, 0x4d, (byte) 0xb0, (byte) 0xfb, 0x0e,
-            0x4e};
+        0x14, (byte) 0xb2, (byte) 0xb9, 0x17, 0x24, 0x42, (byte) 0xd7,
+        (byte) 0xda, (byte) 0x8a, 0x06, 0x00, (byte) 0xa9, 0x6f, 0x30,
+        (byte) 0xbc, (byte) 0x16, 0x31, 0x38, (byte) 0xaa, (byte) 0xe3,
+        (byte) 0x8d, (byte) 0xee, 0x4d, (byte) 0xb0, (byte) 0xfb, 0x0e,
+        0x4e};
 
-    public static int[] TJ = new int[64];
+    private static final int[] TJ = new int[64];
 
     static {
         for (int i = 0; i < 16; i++) {
@@ -20,51 +25,48 @@ public class Sm3 {
         }
     }
 
-    public static byte[] cf(byte[] v, byte[] b) {
-        int[] v1, b1;
+    /**
+     * cf.
+     *
+     * @param v v.
+     * @param b b.
+     * @return convert data
+     */
+    public static byte[] cf(final byte[] v, final byte[] b) {
+        int[] v1;
+        int[] b1;
         v1 = convert(v);
         b1 = convert(b);
         return convert(cf(v1, b1));
     }
 
-    private static int[] convert(byte[] arr) {
-        int[] out = new int[arr.length / 4];
-        byte[] tmp = new byte[4];
-        for (int i = 0; i < arr.length; i += 4) {
-            System.arraycopy(arr, i, tmp, 0, 4);
-            out[i / 4] = bigEndianByteToInt(tmp);
-        }
-        return out;
-    }
-
-    private static byte[] convert(int[] arr) {
-        byte[] out = new byte[arr.length * 4];
-        byte[] tmp = null;
-        for (int i = 0; i < arr.length; i++) {
-            tmp = bigEndianIntToByte(arr[i]);
-            System.arraycopy(tmp, 0, out, i * 4, 4);
-        }
-        return out;
-    }
-
-    public static int[] cf(int[] v, int[] z) {
-        int a, b, c, d, e, f, g, h;
-        int ss1, ss2, tt1, tt2;
-        a = v[0];
-        b = v[1];
-        c = v[2];
-        d = v[3];
-        e = v[4];
-        f = v[5];
-        g = v[6];
-        h = v[7];
+    /**
+     * cf.
+     *
+     * @param v v.
+     * @param z z.
+     * @return convert data
+     */
+    public static int[] cf(final int[] v, final int[] z) {
+        int ss1;
+        int ss2;
+        int tt1;
+        int tt2;
+        int a = v[0];
+        int b = v[1];
+        int c = v[2];
+        int d = v[3];
+        int e = v[4];
+        int f = v[5];
+        int g = v[6];
+        int h = v[7];
 
         int[][] arr = expand(z);
         int[] w = arr[0];
         int[] w1 = arr[1];
 
         for (int j = 0; j < 64; j++) {
-            ss1 = (bitCycleLeft(a, 12) + e + bitCycleLeft(TJ[j], j));
+            ss1 = bitCycleLeft(a, 12) + e + bitCycleLeft(TJ[j], j);
             ss1 = bitCycleLeft(ss1, 7);
             ss2 = ss1 ^ bitCycleLeft(a, 12);
             tt1 = ffj(a, b, c, j) + d + ss2 + w1[j];
@@ -92,32 +94,58 @@ public class Sm3 {
         return out;
     }
 
-    private static int[][] expand(int[] b) {
-        int w[] = new int[68];
-        int w1[] = new int[64];
+    /**
+     * byte转换为Int.
+     *
+     * @param arr data
+     * @return result
+     */
+    private static int[] convert(final byte[] arr) {
+        int[] out = new int[arr.length / 4];
+        byte[] tmp = new byte[4];
+        for (int i = 0; i < arr.length; i += 4) {
+            System.arraycopy(arr, i, tmp, 0, 4);
+            out[i / 4] = bigEndianByteToInt(tmp);
+        }
+        return out;
+    }
+
+    private static byte[] convert(final int[] arr) {
+        byte[] out = new byte[arr.length * 4];
+        byte[] tmp;
+        for (int i = 0; i < arr.length; i++) {
+            tmp = bigEndianIntToByte(arr[i]);
+            System.arraycopy(tmp, 0, out, i * 4, 4);
+        }
+        return out;
+    }
+
+    private static int[][] expand(final int[] b) {
+        int[] w = new int[68];
+        int[] w1 = new int[64];
         System.arraycopy(b, 0, w, 0, b.length);
 
         for (int i = 16; i < 68; i++) {
             w[i] = p1(w[i - 16] ^ w[i - 9] ^ bitCycleLeft(w[i - 3], 15))
-                    ^ bitCycleLeft(w[i - 13], 7) ^ w[i - 6];
+                ^ bitCycleLeft(w[i - 13], 7) ^ w[i - 6];
         }
 
         for (int i = 0; i < 64; i++) {
             w1[i] = w[i] ^ w[i + 4];
         }
 
-        return new int[][]{w, w1};
+        return new int[][] {w, w1};
     }
 
-    private static byte[] bigEndianIntToByte(int num) {
+    private static byte[] bigEndianIntToByte(final int num) {
         return back(Utils.intToBytes(num));
     }
 
-    private static int bigEndianByteToInt(byte[] bytes) {
+    private static int bigEndianByteToInt(final byte[] bytes) {
         return Utils.byteToInt(back(bytes));
     }
 
-    private static int ffj(int x, int y, int z, int j) {
+    private static int ffj(final int x, final int y, final int z, final int j) {
         if (j >= 0 && j <= 15) {
             return ff1j(x, y, z);
         } else {
@@ -125,7 +153,7 @@ public class Sm3 {
         }
     }
 
-    private static int ggj(int x, int y, int z, int j) {
+    private static int ggj(final int x, final int y, final int z, final int j) {
         if (j >= 0 && j <= 15) {
             return gg1j(x, y, z);
         } else {
@@ -133,24 +161,23 @@ public class Sm3 {
         }
     }
 
-    // 逻辑位运算函数
-    private static int ff1j(int x, int y, int z) {
+    private static int ff1j(final int x, final int y, final int z) {
         return x ^ y ^ z;
     }
 
-    private static int ff2j(int x, int y, int z) {
-        return ((x & y) | (x & z) | (y & z));
+    private static int ff2j(final int x, final int y, final int z) {
+        return (x & y) | (x & z) | (y & z);
     }
 
-    private static int gg1j(int x, int y, int z) {
+    private static int gg1j(final int x, final int y, final int z) {
         return x ^ y ^ z;
     }
 
-    private static int gg2j(int x, int y, int z) {
+    private static int gg2j(final int x, final int y, final int z) {
         return (x & y) | (~x & z);
     }
 
-    private static int po(int x) {
+    private static int po(final int x) {
         int y = rotateLeft(x, 9);
         y = bitCycleLeft(x, 9);
         int z = rotateLeft(x, 17);
@@ -158,17 +185,18 @@ public class Sm3 {
         return x ^ y ^ z;
     }
 
-    private static int p1(int x) {
+    private static int p1(final int x) {
         return x ^ bitCycleLeft(x, 15) ^ bitCycleLeft(x, 23);
     }
 
     /**
-     * 对最后一个分组字节数据padding
+     * 对最后一个分组字节数据padding.
      *
      * @param in   in
      * @param bLen 分组个数
+     * @return result
      */
-    public static byte[] padding(byte[] in, int bLen) {
+    public static byte[] padding(final byte[] in, final int bLen) {
         int k = 448 - (8 * in.length + 1) % 512;
         if (k < 0) {
             k = 960 - (8 * in.length + 1) % 512;
@@ -176,7 +204,7 @@ public class Sm3 {
         k += 1;
         byte[] padd = new byte[k / 8];
         padd[0] = (byte) 0x80;
-        long n = in.length * 8 + bLen * 512;
+        final long n = in.length * 8L + bLen * 512L;
         byte[] out = new byte[in.length + k / 8 + 64 / 8];
         int pos = 0;
         System.arraycopy(in, 0, out, 0, in.length);
@@ -189,11 +217,12 @@ public class Sm3 {
     }
 
     /**
-     * 字节数组逆序
+     * 字节数组逆序.
      *
      * @param in in
+     * @return data
      */
-    private static byte[] back(byte[] in) {
+    private static byte[] back(final byte[] in) {
         byte[] out = new byte[in.length];
         for (int i = 0; i < out.length; i++) {
             out[i] = in[out.length - i - 1];
@@ -202,15 +231,22 @@ public class Sm3 {
         return out;
     }
 
-    public static int rotateLeft(int x, int n) {
+    /**
+     * rotateLeft.
+     *
+     * @param x x
+     * @param n n
+     * @return data
+     */
+    public static int rotateLeft(final int x, final int n) {
         return (x << n) | (x >> (32 - n));
     }
 
-    private static int bitCycleLeft(int n, int bitLen) {
-        bitLen %= 32;
+    private static int bitCycleLeft(final int n, int bitLen) {
+        int bitLenTmp = bitLen % 32;
         byte[] tmp = bigEndianIntToByte(n);
-        int byteLen = bitLen / 8;
-        int len = bitLen % 8;
+        int byteLen = bitLenTmp / 8;
+        int len = bitLenTmp % 8;
         if (byteLen > 0) {
             tmp = byteCycleLeft(tmp, byteLen);
         }
@@ -222,9 +258,11 @@ public class Sm3 {
         return bigEndianByteToInt(tmp);
     }
 
-    private static byte[] bitSmall8CycleLeft(byte[] in, int len) {
+    private static byte[] bitSmall8CycleLeft(final byte[] in, final int len) {
         byte[] tmp = new byte[in.length];
-        int t1, t2, t3;
+        int t1;
+        int t2;
+        int t3;
         for (int i = 0; i < tmp.length; i++) {
             t1 = (byte) ((in[i] & 0x000000ff) << len);
             t2 = (byte) ((in[(i + 1) % tmp.length] & 0x000000ff) >> (8 - len));
@@ -235,7 +273,7 @@ public class Sm3 {
         return tmp;
     }
 
-    private static byte[] byteCycleLeft(byte[] in, int byteLen) {
+    private static byte[] byteCycleLeft(final byte[] in, final int byteLen) {
         byte[] tmp = new byte[in.length];
         System.arraycopy(in, byteLen, tmp, 0, in.length - byteLen);
         System.arraycopy(in, 0, tmp, in.length - byteLen, byteLen);

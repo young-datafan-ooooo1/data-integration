@@ -1,5 +1,15 @@
 package com.datafan.dataintegration.core.util.encryption.sm;
 
+import lombok.Getter;
+import lombok.Setter;
+
+/**
+ * sm4 上下文对象.
+ *
+ * @author gavin
+ */
+@Getter
+@Setter
 public class Sm4Context {
     private int mode;
 
@@ -13,27 +23,4 @@ public class Sm4Context {
         this.sk = new long[32];
     }
 
-    public int getMode() {
-        return mode;
-    }
-
-    public void setMode(int mode) {
-        this.mode = mode;
-    }
-
-    public long[] getSk() {
-        return sk;
-    }
-
-    public void setSk(long[] sk) {
-        this.sk = sk;
-    }
-
-    public boolean isPadding() {
-        return isPadding;
-    }
-
-    public void setPadding(boolean padding) {
-        isPadding = padding;
-    }
 }

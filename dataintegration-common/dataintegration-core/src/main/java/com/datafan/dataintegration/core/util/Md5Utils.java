@@ -3,20 +3,20 @@ package com.datafan.dataintegration.core.util;
 import java.security.MessageDigest;
 
 /**
- * MD5加密工具类
+ * MD5加密工具类.
  *
  * @author renhua.zhang
  * @create 2017-12-18 11:22:40
  */
 public class Md5Utils {
     /**
-     * 16进制的字符数组
+     * 16进制的字符数组.
      */
-    private final static String[] HEX_DIGITS = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d",
-            "e", "f"};
+    private static final String[] HEX_DIGITS = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d",
+        "e", "f"};
 
     /**
-     * md5编码
+     * md5编码.
      *
      * @param source    需要加密的原字符串
      * @param encoding  指定编码类型
@@ -40,7 +40,7 @@ public class Md5Utils {
     }
 
     /**
-     * 转换字节数组为16进制字符串
+     * 转换字节数组为16进制字符串.
      *
      * @param bytes 字节数组
      * @return 16进制转换
@@ -54,7 +54,7 @@ public class Md5Utils {
     }
 
     /**
-     * 转换byte到16进制
+     * 转换byte到16进制.
      *
      * @param b 要转换的byte
      * @return 16进制对应的字符

@@ -3,20 +3,18 @@ package com.datafan.dataintegration.core.util;
 import java.io.Serializable;
 
 /**
- * 键值对存储
+ * 键值对存储.
  *
- * @param <K>
- * @param <V>
+ * @param <K> k
+ * @param <V> v
  * @author renhua.zhang
  */
 public class Pair<K, V> implements Serializable {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = -3245815422835418379L;
 
     private K k;
+
     private V v;
 
     public Pair(K k, V v) {

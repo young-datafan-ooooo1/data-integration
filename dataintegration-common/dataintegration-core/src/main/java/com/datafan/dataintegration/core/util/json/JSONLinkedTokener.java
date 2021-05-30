@@ -1,42 +1,55 @@
 package com.datafan.dataintegration.core.util.json;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.StringReader;
 import org.json.JSONException;
 
-import java.io.*;
-
 /**
+ * JSONLinkedTokener.
+ *
  * @author gavin
  * @since 2020/2/16 2:02 下午
  */
 public class JSONLinkedTokener {
     /**
+     * Reader for the input.
+     */
+    private final Reader reader;
+
+    /**
      * current read character position on the current line.
      */
     private long character;
+
     /**
      * flag to indicate if the end of the input has been found.
      */
     private boolean eof;
+
     /**
      * current read index of the input.
      */
     private long index;
+
     /**
      * current line of the input.
      */
     private long line;
+
     /**
      * previous character read from the input.
      */
     private char previous;
-    /**
-     * Reader for the input.
-     */
-    private final Reader reader;
+
     /**
      * flag to indicate that a previous character was requested.
      */
     private boolean usePrevious;
+
     /**
      * the number of characters read in the previous line.
      */
@@ -50,8 +63,8 @@ public class JSONLinkedTokener {
      */
     public JSONLinkedTokener(Reader reader) {
         this.reader = reader.markSupported()
-                ? reader
-                : new BufferedReader(reader);
+            ? reader
+            : new BufferedReader(reader);
         this.eof = false;
         this.usePrevious = false;
         this.previous = 0;
@@ -81,6 +94,25 @@ public class JSONLinkedTokener {
         this(new StringReader(s));
     }
 
+    /**
+     * Get the hex value of a character (base16).
+     *
+     * @param c A character between '0' and '9' or between 'A' and 'F' or
+     *          between 'a' and 'f'.
+     * @return An int between 0 and 15, or -1 if c was not a hex digit.
+     */
+    public static int dehexchar(char c) {
+        if (c >= '0' && c <= '9') {
+            return c - '0';
+        }
+        if (c >= 'A' && c <= 'F') {
+            return c - ('A' - 10);
+        }
+        if (c >= 'a' && c <= 'f') {
+            return c - ('a' - 10);
+        }
+        return -1;
+    }
 
     /**
      * Back up one character. This provides a sort of lookahead capability,
@@ -110,26 +142,6 @@ public class JSONLinkedTokener {
         } else if (this.character > 0) {
             this.character--;
         }
-    }
-
-    /**
-     * Get the hex value of a character (base16).
-     *
-     * @param c A character between '0' and '9' or between 'A' and 'F' or
-     *          between 'a' and 'f'.
-     * @return An int between 0 and 15, or -1 if c was not a hex digit.
-     */
-    public static int dehexchar(char c) {
-        if (c >= '0' && c <= '9') {
-            return c - '0';
-        }
-        if (c >= 'A' && c <= 'F') {
-            return c - ('A' - 10);
-        }
-        if (c >= 'a' && c <= 'f') {
-            return c - ('a' - 10);
-        }
-        return -1;
     }
 
     /**
@@ -172,6 +184,50 @@ public class JSONLinkedTokener {
         return true;
     }
 
+    /**
+     * Consume the next character, and check that it matches a specified
+     * character.
+     *
+     * @param c The character to match.
+     * @return The character.
+     * @throws JSONException if the character does not match.
+     */
+    public char next(char c) throws JSONException {
+        char n = this.next();
+        if (n != c) {
+            if (n > 0) {
+                throw this.syntaxError("Expected '" + c + "' and instead saw '" + n + "'");
+            }
+            throw this.syntaxError("Expected '" + c + "' and instead saw ''");
+        }
+        return n;
+    }
+
+    /**
+     * Get the next n characters.
+     *
+     * @param n The number of characters to take.
+     * @return A string of n characters.
+     * @throws JSONException Substring bounds error if there are not
+     *                       n characters remaining in the source string.
+     */
+    public String next(int n) throws JSONException {
+        if (n == 0) {
+            return "";
+        }
+
+        char[] chars = new char[n];
+        int pos = 0;
+
+        while (pos < n) {
+            chars[pos] = this.next();
+            if (this.end()) {
+                throw this.syntaxError("Substring bounds error");
+            }
+            pos += 1;
+        }
+        return new String(chars);
+    }
 
     /**
      * Get the next character in the source string.
@@ -191,7 +247,8 @@ public class JSONLinkedTokener {
                 throw new JSONException(exception);
             }
         }
-        if (c <= 0) { // End of stream
+        if (c <= 0) {
+            // End of stream
             this.eof = true;
             return 0;
         }
@@ -226,61 +283,13 @@ public class JSONLinkedTokener {
     }
 
     /**
-     * Consume the next character, and check that it matches a specified
-     * character.
-     *
-     * @param c The character to match.
-     * @return The character.
-     * @throws JSONException if the character does not match.
-     */
-    public char next(char c) throws JSONException {
-        char n = this.next();
-        if (n != c) {
-            if (n > 0) {
-                throw this.syntaxError("Expected '" + c + "' and instead saw '" +
-                        n + "'");
-            }
-            throw this.syntaxError("Expected '" + c + "' and instead saw ''");
-        }
-        return n;
-    }
-
-
-    /**
-     * Get the next n characters.
-     *
-     * @param n The number of characters to take.
-     * @return A string of n characters.
-     * @throws JSONException Substring bounds error if there are not
-     *                       n characters remaining in the source string.
-     */
-    public String next(int n) throws JSONException {
-        if (n == 0) {
-            return "";
-        }
-
-        char[] chars = new char[n];
-        int pos = 0;
-
-        while (pos < n) {
-            chars[pos] = this.next();
-            if (this.end()) {
-                throw this.syntaxError("Substring bounds error");
-            }
-            pos += 1;
-        }
-        return new String(chars);
-    }
-
-
-    /**
      * Get the next char in the string, skipping whitespace.
      *
      * @return A character, or 0 if there are no more characters.
      * @throws JSONException Thrown if there is an error reading the source string.
      */
     public char nextClean() throws JSONException {
-        for (; ; ) {
+        for (; ;) {
             char c = this.next();
             if (c == 0 || c > ' ') {
                 return c;
@@ -304,7 +313,7 @@ public class JSONLinkedTokener {
     public String nextString(char quote) throws JSONException {
         char c;
         StringBuilder sb = new StringBuilder();
-        for (; ; ) {
+        for (; ;) {
             c = this.next();
             switch (c) {
                 case 0:
@@ -367,7 +376,7 @@ public class JSONLinkedTokener {
      */
     public String nextTo(char delimiter) throws JSONException {
         StringBuilder sb = new StringBuilder();
-        for (; ; ) {
+        for (; ;) {
             char c = this.next();
             if (c == delimiter || c == 0 || c == '\n' || c == '\r') {
                 if (c != 0) {
@@ -392,10 +401,9 @@ public class JSONLinkedTokener {
     public String nextTo(String delimiters) throws JSONException {
         char c;
         StringBuilder sb = new StringBuilder();
-        for (; ; ) {
+        for (; ;) {
             c = this.next();
-            if (delimiters.indexOf(c) >= 0 || c == 0 ||
-                    c == '\n' || c == '\r') {
+            if (delimiters.indexOf(c) >= 0 || c == 0 || c == '\n' || c == '\r') {
                 if (c != 0) {
                     this.back();
                 }
@@ -415,7 +423,6 @@ public class JSONLinkedTokener {
      */
     public Object nextValue() throws JSONException {
         char c = this.nextClean();
-        String string;
 
         switch (c) {
             case '"':
@@ -427,6 +434,8 @@ public class JSONLinkedTokener {
             case '[':
                 this.back();
                 return new JSONArray(this);
+            default:
+                break;
         }
 
         /*
@@ -445,21 +454,19 @@ public class JSONLinkedTokener {
         }
         this.back();
 
-        string = sb.toString().trim();
+        String string = sb.toString().trim();
         if ("".equals(string)) {
             throw this.syntaxError("Missing value");
         }
         return JSONLinkedObject.stringToValue(string);
     }
 
-
     /**
      * Skip characters until the next character is the requested character.
      * If the requested character is not found, no characters are skipped.
      *
      * @param to A character to skip to.
-     * @return The requested character, or zero if the requested character
-     * is not found.
+     * @return The requested character, or zero if the requested character is not found.
      * @throws JSONException Thrown if there is an error while searching
      *                       for the to character
      */
@@ -519,7 +526,6 @@ public class JSONLinkedTokener {
      */
     @Override
     public String toString() {
-        return " at " + this.index + " [character " + this.character + " line " +
-                this.line + "]";
+        return " at " + this.index + " [character " + this.character + " line " + this.line + "]";
     }
 }

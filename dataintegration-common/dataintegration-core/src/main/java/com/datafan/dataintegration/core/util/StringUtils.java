@@ -1,7 +1,7 @@
 package com.datafan.dataintegration.core.util;
 
 /**
- * string工具类
+ * string工具类.
  *
  * @author renhua.zhang
  * @create 2017-12-25 13:40
@@ -9,7 +9,7 @@ package com.datafan.dataintegration.core.util;
 public class StringUtils {
 
     /**
-     * 字符串拼接
+     * 字符串拼接.
      *
      * @param strs 字符串数组
      * @return 拼接之后的字符串

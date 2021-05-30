@@ -9,18 +9,17 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * 支持多线程阻塞模式的Map对象。当获取某个Key对应的对象时，若对象不存在，则一直阻塞（可设置timeout致超时）
  * 主要应用于生产者和消费者模式下的数据获取的同步
- * <p>
  * 用于报文处理 ： registe + put 方法是为了防止数据过期不销毁：
  * 在数据写入的时候先注册，数据返回的时候判断是否已经注册。如果没有注册则不做处理
- * 如果数据在超时时间之后返回（我们put的时候不判断，数据就会永远的存在map中）
+ * 如果数据在超时时间之后返回（我们put的时候不判断，数据就会永远的存在map中）.
  *
  * @author renhua.zhang
  * @create 2017-10-28 10:32
  */
 public class HashBlockingMap<K, V> implements BlockingMap<K, V> {
-    private ConcurrentMap<K, Item<V>> map;
-
     private final ReentrantLock lock = new ReentrantLock();
+
+    private ConcurrentMap<K, Item<V>> map;
 
     public HashBlockingMap() {
         map = new ConcurrentHashMap<K, Item<V>>();
@@ -96,13 +95,23 @@ public class HashBlockingMap<K, V> implements BlockingMap<K, V> {
         map.remove(key);
     }
 
+    @Override
+    public void clear() {
+        map.clear();
+    }
+
+    @Override
+    public int size() {
+        return map.size();
+    }
+
     private static class Item<E> {
 
         private final ReentrantLock lock = new ReentrantLock();
 
         private final Condition cond = lock.newCondition();
 
-        private E obj = null;
+        private E obj;
 
         private void put(E o) throws InterruptedException {
             if (o == null) {
@@ -127,9 +136,9 @@ public class HashBlockingMap<K, V> implements BlockingMap<K, V> {
                     while (obj == null) {
                         cond.await();
                     }
-                } catch (InterruptedException ie) {
+                } catch (InterruptedException e) {
                     cond.signal();
-                    throw ie;
+                    throw e;
                 }
                 x = obj;
             } finally {
@@ -139,24 +148,24 @@ public class HashBlockingMap<K, V> implements BlockingMap<K, V> {
         }
 
         private E poll(long timeout) throws InterruptedException {
-            timeout = TimeUnit.MILLISECONDS.toNanos(timeout);
+            long timeoutNanos = TimeUnit.MILLISECONDS.toNanos(timeout);
             E x;
             final ReentrantLock lock = this.lock;
             lock.lockInterruptibly();
             try {
-                for (; ; ) {
+                for (; ;) {
                     if (obj != null) {
                         x = obj;
                         break;
                     }
-                    if (timeout <= 0) {
+                    if (timeoutNanos <= 0) {
                         return null;
                     }
                     try {
-                        timeout = cond.awaitNanos(timeout);
-                    } catch (InterruptedException ie) {
+                        timeoutNanos = cond.awaitNanos(timeoutNanos);
+                    } catch (InterruptedException e) {
                         cond.signal();
-                        throw ie;
+                        throw e;
                     }
                 }
             } finally {
@@ -164,15 +173,5 @@ public class HashBlockingMap<K, V> implements BlockingMap<K, V> {
             }
             return x;
         }
-    }
-
-    @Override
-    public void clear() {
-        map.clear();
-    }
-
-    @Override
-    public int size() {
-        return map.size();
     }
 }
