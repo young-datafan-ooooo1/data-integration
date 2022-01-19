@@ -10,9 +10,8 @@
     "unit": "jest --config test/unit/jest.conf.js --coverage",
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
-    "build": "node build/build.js",
     "client": "node build/client.js",
-    "build:test": "cross-env NODE_ENV=testing env_config=test node build/build.js",
+    "build": "cross-env NODE_ENV=testing env_config=test node build/build.js",
     "build:prod": "cross-env NODE_ENV=production env_config=prod node build/build.js",
     "build:dev": "cross-env NODE_ENV=development env_config=dev node build/build.js",
     "build:uat": "cross-env NODE_ENV=uat env_config=uat node build/build.js"
