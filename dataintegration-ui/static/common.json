@@ -1,0 +1,113 @@
+{
+  "fileTypes":["Number", "String", "Date", "Boolean", "Integer", "BigNumber", "Timestamp"],
+  "formatNumber": ["0", "0.00", "#,##0", "#,##0.00", "\"$\"#,##0_);(\"$\"#,##0)",
+    "\"$\"#,##0_);[Red](\"$\"#,##0)", "\"$\"#,##0.00_);(\"$\"#,##0.00)", "\"$\"#,##0.00_);[Red](\"$\"#,##0.00)",
+    "0%", "0.00%", "0.00E+00", "# ?/?", "# ??/??"
+  ],
+  "formatDate": ["m/d/yy", "d-mmm-yy", "d-mmm", "mmm-yy", "h:mm AM/PM", "h:mm:ss AM/PM", "h:mm", "h:mm:ss",
+    "m/d/yy h:mm",
+    "mm:ss", "[h]:mm:ss", "mm:ss.0", "yyyy-mm-dd hh:mm:ss", "yyyy/mm/dd", "yyyy-MM-dd", "yyyy/mm/dd hh/mm/ss"
+  ],
+  "connectionParams":[
+    {
+      "nameParam":"defaultAutoCommit",
+      "value": "true",
+      "desc":"The default auto-commit state of connections created by this pool."
+    },
+    {
+      "nameParam":"defaultReadOnly",
+      "value": "",
+      "desc":"The default read-only state of connections created by this pool.</br> If not set then the setReadOnly method will not be called.</br> (Some drivers don't support read only mode, ex: Informix)"
+    },
+    {
+      "nameParam":"defaultTransactionIsolation",
+      "value": "",
+      "desc":"the default TransactionIsolation state of connections created by this pool. One of the following: (see javadoc)</br>  * NONE</br>  * READ_COMMITTED</br>  * READ_UNCOMMITTED</br>  * REPEATABLE_READ  * SERIALIZABLE</br>"
+    },
+    {
+      "nameParam":"defaultCatalog",
+      "value": "",
+      "desc":"The default catalog of connections created by this pool."
+    },
+    {
+      "nameParam":"initialSize",
+      "value": 0,
+      "desc":"The initial number of connections that are created when the pool is started."
+    },
+    {
+      "nameParam":"maxActive",
+      "value": 8,
+      "desc":"The maximum number of active connections that can be allocated from this pool at the same time, or non-positive for no limit."
+    },
+    {
+      "nameParam":"maxIdle",
+      "value": 8,
+      "desc":"The maximum number of connections that can remain idle in the pool, without extra ones being released, or negative for no limit."
+    },
+    {
+      "nameParam":"minIdle",
+      "value": 0,
+      "desc":"The minimum number of connections that can remain idle in the pool, without extra ones being created, or zero to create none."
+    },
+    {
+      "nameParam":"maxWait",
+      "value": -1,
+      "desc":"The maximum number of milliseconds that the pool will wait (when there are no available connections) for a connection to be returned before throwing an exception, or -1 to wait indefinitely."
+    },
+    {
+      "nameParam":"validationQuery",
+      "value": 0,
+      "desc":"The SQL query that will be used to validate connections from this pool before returning them to the caller.<br>If specified, this query MUST be an SQL SELECT statement that returns at least one row."
+    },
+    {
+      "nameParam":"testOnBorrow",
+      "value": "true",
+      "desc":"The indication of whether objects will be validated before being borrowed from the pool.<br>If the object fails to validate, it will be dropped from the pool, and we will attempt to borrow another.<br>NOTE - for a true value to have any effect, the validationQuery parameter must be set to a non-null string."
+    },
+    {
+      "nameParam":"testOnReturn",
+      "value": "false",
+      "desc":"The indication of whether objects will be validated before being returned to the pool.<br>NOTE - for a true value to have any effect, the validationQuery parameter must be set to a non-null string."
+    },
+    {
+      "nameParam":"testWhileIdle",
+      "value": "false",
+      "desc":"The indication of whether objects will be validated by the idle object evictor (if any). If an object fails to validate, it will be dropped from the pool.<br>NOTE - for a true value to have any effect, the validationQuery parameter must be set to a non-null string."
+    },
+    {
+      "nameParam":"timeBetweenEvictionRunMillis",
+      "value": "",
+      "desc":"The number of milliseconds to sleep between runs of the idle object evictor thread. When non-positive, no idle object evictor thread will be run."
+    },
+    {
+      "nameParam":"poolPreparedStatements",
+      "value": "false",
+      "desc":"Enable prepared statement pooling for this pool."
+    },
+    {
+      "nameParam":"maxOpenPreparedStatements",
+      "value": -1,
+      "desc":"The maximum number of open statements that can be allocated from the statement pool at the same time, or zero for no limit."
+    },
+    {
+      "nameParam":"accessToUnderlyingConnectionAllowed",
+      "value": "false",
+      "desc":"Controls if the PoolGuard allows access to the underlying connection."
+    },
+    {
+      "nameParam":"removeAbandoned",
+      "value": "false",
+      "desc":"Flag to remove abandoned connections if they exceed the removeAbandonedTimout.<br>If set to true a connection is considered abandoned and eligible for removal if it has been idle longer than the removeAbandonedTimeout. Setting this to true can recover db connections from poorly written applications which fail to close a connection."
+    },
+    {
+      "nameParam":"removeAbandonedTimeout",
+      "value": 300,
+      "desc":"Timeout in seconds before an abandoned connection can be removed."
+    },
+    {
+      "nameParam":"logAbandoned",
+      "value": "false",
+      "desc":"Flag to log stack traces for application code which abandoned a Statement or Connection.<br>Logging of abandoned Statements and Connections adds overhead for every Connection open or new Statement because a stack trace has to be generated."
+    }
+  ]
+}
