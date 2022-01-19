@@ -46,5 +46,5 @@ jobs:
           cd dataintegration-ui
           npm install node-sass --unsafe-perm
           npm install
-          npm run lint
+          # npm run lint
           npm run build
