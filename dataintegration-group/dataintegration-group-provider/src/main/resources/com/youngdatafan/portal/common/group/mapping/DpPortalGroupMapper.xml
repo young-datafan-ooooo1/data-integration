@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youngdatafan.portal.common.group.mapper.DpPortalGroupMapper">
+    <resultMap id="BaseResultMap" type="com.youngdatafan.portal.common.group.entity.DpPortalGroup">
+        <!--@mbg.generated-->
+        <id column="group_id" jdbcType="VARCHAR" property="groupId"/>
+        <result column="group_name" jdbcType="VARCHAR" property="groupName"/>
+        <result column="describe" jdbcType="VARCHAR" property="describe"/>
+        <result column="group_type" jdbcType="VARCHAR" property="groupType"/>
+        <result column="group_order" jdbcType="INTEGER" property="groupOrder"/>
+        <result column="enabled" jdbcType="VARCHAR" property="enabled"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="create_user_id" jdbcType="VARCHAR" property="createUserId"/>
+    </resultMap>
+
+    <resultMap id="PageBaseResultMap" type="com.youngdatafan.portal.common.group.dto.DpPortalGroupDTO">
+        <!--@mbg.generated-->
+        <id column="group_id" jdbcType="VARCHAR" property="groupId"/>
+        <result column="group_name" jdbcType="VARCHAR" property="groupName"/>
+        <result column="describe" jdbcType="VARCHAR" property="describe"/>
+        <result column="group_type" jdbcType="VARCHAR" property="groupType"/>
+        <result column="group_type_name" jdbcType="VARCHAR" property="groupTypeName"/>
+        <result column="group_order" jdbcType="INTEGER" property="groupOrder"/>
+        <result column="enabled" jdbcType="VARCHAR" property="enabled"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="create_user_id" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="create_user_name" jdbcType="VARCHAR" property="createUserName"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        group_id, group_name, `describe`, group_type, group_order, enabled, create_time,
+        update_time, create_user_id
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from dp_portal_group
+        where group_id = #{groupId,jdbcType=VARCHAR}
+    </select>
+    <select id="queryGroupExists" resultType="java.lang.Integer"
+            parameterType="com.youngdatafan.portal.common.group.entity.DpPortalGroup">
+    select count(1) from dp_portal_group where group_name = #{groupName}
+     and group_type = #{groupType} and create_user_id = #{createUserId}
+  </select>
+    <select id="selectAll" resultMap="PageBaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from dp_portal_group
+        where 1=1
+        <if test="userId != '00000000'">
+            and create_user_id = #{userId}
+        </if>
+        order by group_order,group_name
+    </select>
+    <select id="selectLikeByGroupName" resultMap="PageBaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from dp_portal_group
+        where group_name like '%${groupName}%' order by group_order,group_name
+    </select>
+    <select id="selectByGroupType" resultMap="PageBaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from dp_portal_group
+        where group_type = #{groupType}
+        <if test="userId != '00000000'">
+            and create_user_id = #{userId}
+        </if>
+        order by group_order,group_name
+    </select>
+    <select id="selectLikeByGroupType" resultMap="PageBaseResultMap">
+        select
+        t1.*,t2.dict_value as group_type_name,t3.user_name as create_user_name
+        from dp_portal_group t1
+        left join dp_portal_dict t2 on t1.group_type = t2.dict_code and t2.dict_type = 'GROUP'
+        left join dp_portal_user t3 on t1.create_user_id = t3.user_id
+        where t1.group_type = #{groupType}
+        <if test="userId != '00000000'">
+            and t1.create_user_id = #{userId}
+        </if>
+        <if test="groupName != null ">
+            and (t1.group_name like '%${groupName}%' or t1.`describe` like '%${groupName}%')
+        </if>
+        order by t1.group_order,t1.group_name
+    </select>
+    <select id="selectInGroupType" resultMap="PageBaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from dp_portal_group
+        where group_type in
+        <foreach collection="groupTypes" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        <if test="userId != '00000000'">
+            and create_user_id = #{userId}
+        </if>
+        order by group_order,group_name
+    </select>
+    <select id="selectLikeInGroupType" resultMap="PageBaseResultMap">
+        select
+        t1.*,t2.dict_value as group_type_name,t3.user_name as create_user_name
+        from dp_portal_group t1
+        left join dp_portal_dict t2 on t1.group_type = t2.dict_code and t2.dict_type = 'GROUP'
+        left join dp_portal_user t3 on t1.create_user_id = t3.user_id
+        where t1.group_type in
+        <foreach collection="groupTypes" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        <if test="userId != '00000000'">
+            and t1.create_user_id = #{userId}
+        </if>
+        <if test="groupName != null ">
+            and (t1.group_name like '%${groupName}%' or t1.`describe` like '%${groupName}%')
+        </if>
+        order by t1.group_order,t1.group_name
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        <!--@mbg.generated-->
+        delete from dp_portal_group
+        where group_id = #{groupId,jdbcType=VARCHAR}
+    </delete>
+    <delete id="deleteByGrouIds">
+        delete from dp_portal_group
+        where
+        group_id IN
+        <foreach collection="groupIds" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </delete>
+    <insert id="insert" parameterType="com.youngdatafan.portal.common.group.entity.DpPortalGroup">
+        <!--@mbg.generated-->
+        insert into dp_portal_group (group_id, group_name, `describe`,
+        group_type, group_order, enabled,
+        create_time, update_time, create_user_id
+        )
+        values (#{groupId,jdbcType=VARCHAR}, #{groupName,jdbcType=VARCHAR}, #{describe,jdbcType=VARCHAR},
+        #{groupType,jdbcType=VARCHAR}, #{groupOrder,jdbcType=INTEGER}, #{enabled,jdbcType=VARCHAR},
+        #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.youngdatafan.portal.common.group.entity.DpPortalGroup">
+        <!--@mbg.generated-->
+        insert into dp_portal_group
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="groupId != null">
+                group_id,
+            </if>
+            <if test="groupName != null">
+                group_name,
+            </if>
+            <if test="describe != null">
+                `describe`,
+            </if>
+            <if test="groupType != null">
+                group_type,
+            </if>
+            <if test="groupOrder != null">
+                group_order,
+            </if>
+            <if test="enabled != null">
+                enabled,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="createUserId != null">
+                create_user_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="groupId != null">
+                #{groupId,jdbcType=VARCHAR},
+            </if>
+            <if test="groupName != null">
+                #{groupName,jdbcType=VARCHAR},
+            </if>
+            <if test="describe != null">
+                #{describe,jdbcType=VARCHAR},
+            </if>
+            <if test="groupType != null">
+                #{groupType,jdbcType=VARCHAR},
+            </if>
+            <if test="groupOrder != null">
+                #{groupOrder,jdbcType=INTEGER},
+            </if>
+            <if test="enabled != null">
+                #{enabled,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.youngdatafan.portal.common.group.entity.DpPortalGroup">
+        <!--@mbg.generated-->
+        update dp_portal_group
+        <set>
+            <if test="groupName != null">
+                group_name = #{groupName,jdbcType=VARCHAR},
+            </if>
+            <if test="describe != null">
+                `describe` = #{describe,jdbcType=VARCHAR},
+            </if>
+            <if test="groupType != null">
+                group_type = #{groupType,jdbcType=VARCHAR},
+            </if>
+            <if test="groupOrder != null">
+                group_order = #{groupOrder,jdbcType=INTEGER},
+            </if>
+            <if test="enabled != null">
+                enabled = #{enabled,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where group_id = #{groupId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.youngdatafan.portal.common.group.entity.DpPortalGroup">
+        <!--@mbg.generated-->
+        update dp_portal_group
+        set group_name = #{groupName,jdbcType=VARCHAR},
+        `describe` = #{describe,jdbcType=VARCHAR},
+        group_type = #{groupType,jdbcType=VARCHAR},
+        group_order = #{groupOrder,jdbcType=INTEGER},
+        enabled = #{enabled,jdbcType=VARCHAR},
+        update_time = #{updateTime,jdbcType=TIMESTAMP}
+        where group_id = #{groupId,jdbcType=VARCHAR}
+    </update>
+    <!--group_id -->
+    <select id="selectByGroupId" parameterType="java.lang.String" resultMap="PageBaseResultMap">
+        SELECT
+	b.group_id,
+	b.group_name,
+	b.`describe`,
+	b.group_type,
+	b.group_order,
+	b.enabled,
+	b.create_time,
+	b.update_time,
+	b.create_user_id
+FROM dp_portal_project a
+LEFT JOIN dp_portal_group b ON a.group_id=b.group_id
+WHERE a.group_id = #{groupId,jdbcType=VARCHAR} LIMIT 1
+    </select>
+</mapper>
