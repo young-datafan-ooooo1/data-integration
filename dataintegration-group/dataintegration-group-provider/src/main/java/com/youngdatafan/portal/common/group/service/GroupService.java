@@ -1,6 +1,6 @@
 package com.youngdatafan.portal.common.group.service;
 
-import com.datafan.dataintegration.core.StatusCode;
+import com.datafan.dataintegration.core.util.StatusCode;
 import com.datafan.dataintegration.core.exception.DpException;
 import com.datafan.dataintegration.core.exception.FormValidationException;
 import com.datafan.dataintegration.core.exception.ValidationException;
@@ -60,7 +60,7 @@ public class GroupService {
 
         // 判断分组是否存在
         if (queryGroupExists(dpPortalGroup)) {
-            throw new FormValidationException(StatusCode.CODE_10004, "groupName", "分组名称已存在，请切换分组类型或者重命名。");
+            throw new FormValidationException(StatusCode.CODE_10004.getCode(), "groupName", "分组名称已存在，请切换分组类型或者重命名。");
         }
 
         // 自动生成分组id
@@ -125,7 +125,7 @@ public class GroupService {
         for(String str : groupIds){
             DpPortalGroupDTO dpPortalGroupDTO= groupMapper.selectByGroupId(str);
             if (dpPortalGroupDTO!=null){
-                throw new ValidationException(com.datafan.dataintegration.core.util.StatusCode.CODE_10010.getCode(),dpPortalGroupDTO.getGroupName()+"有项目，不可删除");
+                throw new ValidationException(StatusCode.CODE_10010.getCode(),dpPortalGroupDTO.getGroupName()+"有项目，不可删除");
             }
         }
         groupMapper.deleteByGrouIds(groupIds);
