@@ -27,29 +27,20 @@
 # 模块
 
 * dataintegration-common : 公共模块
-
 * dataintegration-group : 分组管理
-
 * dataintegration-project : 脚本管理
-
 * dataintegration-run : 数据集成运行模块
-
 * dataintegration-sso : sso单点登录模块
-
 * dataintegration-sys : 系统管理模块
-
 * dataintegration-vue : 前端vue模块
 
 --------------------------------------------------------------------------------
 
 # 功能特点
 
-* 提供了诸如限流、熔断、转发 、重写、重定向、和路由监控等插件；
-* 支持 HTTP、RESTFul、WebSocket、Dubbo、 GRPC、 Tars、 Spring Cloud 代理；
-* 支持热插拔，用户可以定制化开发；
-* 为了灵活的适配，选择器和规则可以动态的适配；
-* 支持集群部署；
-* 支持 A/B 测试和灰度发布。
+* vue2+springCloud架构（后续支持vue3）
+* 支持kettle本地引擎，后续扩展spark引擎
+* 支持ftp/s3协议的文件读取
 
 --------------------------------------------------------------------------------
 
