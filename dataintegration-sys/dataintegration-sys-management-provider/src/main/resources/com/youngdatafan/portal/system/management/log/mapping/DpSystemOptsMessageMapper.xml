@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youngdatafan.portal.system.management.log.mapper.DpSystemOptsMessageMapper">
+  <resultMap id="BaseResultMap" type="com.youngdatafan.portal.system.management.log.entity.DpSystemOptsMessage">
+    <!--@mbg.generated-->
+    <!--@Table dp_system_opts_message-->
+    <id column="ops_id" jdbcType="VARCHAR" property="opsId" />
+    <result column="ops_user_id" jdbcType="VARCHAR" property="opsUserId" />
+    <result column="ops_user_name" jdbcType="VARCHAR" property="opsUserName" />
+    <result column="ops_to_user_id" jdbcType="VARCHAR" property="opsToUserId" />
+    <result column="ops_to_user_name" jdbcType="VARCHAR" property="opsToUserName" />
+    <result column="ops_type" jdbcType="VARCHAR" property="opsType" />
+    <result column="ops_item_id" jdbcType="VARCHAR" property="opsItemId" />
+    <result column="ops_item_name" jdbcType="VARCHAR" property="opsItemName" />
+    <result column="ops_item_type" jdbcType="VARCHAR" property="opsItemType" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="ops_level" jdbcType="INTEGER" property="opsLevel" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    ops_id, ops_user_id, ops_user_name, ops_to_user_id, ops_to_user_name, ops_type, ops_item_id,
+    ops_item_name, ops_item_type, create_time, ops_level
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from dp_system_opts_message
+    where ops_id = #{opsId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <!--@mbg.generated-->
+    delete from dp_system_opts_message
+    where ops_id = #{opsId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.youngdatafan.portal.system.management.log.entity.DpSystemOptsMessage">
+    <!--@mbg.generated-->
+    insert into dp_system_opts_message (ops_id, ops_user_id, ops_user_name, 
+      ops_to_user_id, ops_to_user_name, ops_type, 
+      ops_item_id, ops_item_name, ops_item_type, 
+      create_time, ops_level)
+    values (#{opsId,jdbcType=VARCHAR}, #{opsUserId,jdbcType=VARCHAR}, #{opsUserName,jdbcType=VARCHAR}, 
+      #{opsToUserId,jdbcType=VARCHAR}, #{opsToUserName,jdbcType=VARCHAR}, #{opsType,jdbcType=VARCHAR}, 
+      #{opsItemId,jdbcType=VARCHAR}, #{opsItemName,jdbcType=VARCHAR}, #{opsItemType,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{opsLevel,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.youngdatafan.portal.system.management.log.entity.DpSystemOptsMessage">
+    <!--@mbg.generated-->
+    insert into dp_system_opts_message
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="opsId != null">
+        ops_id,
+      </if>
+      <if test="opsUserId != null">
+        ops_user_id,
+      </if>
+      <if test="opsUserName != null">
+        ops_user_name,
+      </if>
+      <if test="opsToUserId != null">
+        ops_to_user_id,
+      </if>
+      <if test="opsToUserName != null">
+        ops_to_user_name,
+      </if>
+      <if test="opsType != null">
+        ops_type,
+      </if>
+      <if test="opsItemId != null">
+        ops_item_id,
+      </if>
+      <if test="opsItemName != null">
+        ops_item_name,
+      </if>
+      <if test="opsItemType != null">
+        ops_item_type,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="opsLevel != null">
+        ops_level,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="opsId != null">
+        #{opsId,jdbcType=VARCHAR},
+      </if>
+      <if test="opsUserId != null">
+        #{opsUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="opsUserName != null">
+        #{opsUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="opsToUserId != null">
+        #{opsToUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="opsToUserName != null">
+        #{opsToUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="opsType != null">
+        #{opsType,jdbcType=VARCHAR},
+      </if>
+      <if test="opsItemId != null">
+        #{opsItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="opsItemName != null">
+        #{opsItemName,jdbcType=VARCHAR},
+      </if>
+      <if test="opsItemType != null">
+        #{opsItemType,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opsLevel != null">
+        #{opsLevel,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.youngdatafan.portal.system.management.log.entity.DpSystemOptsMessage">
+    <!--@mbg.generated-->
+    update dp_system_opts_message
+    <set>
+      <if test="opsUserId != null">
+        ops_user_id = #{opsUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="opsUserName != null">
+        ops_user_name = #{opsUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="opsToUserId != null">
+        ops_to_user_id = #{opsToUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="opsToUserName != null">
+        ops_to_user_name = #{opsToUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="opsType != null">
+        ops_type = #{opsType,jdbcType=VARCHAR},
+      </if>
+      <if test="opsItemId != null">
+        ops_item_id = #{opsItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="opsItemName != null">
+        ops_item_name = #{opsItemName,jdbcType=VARCHAR},
+      </if>
+      <if test="opsItemType != null">
+        ops_item_type = #{opsItemType,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opsLevel != null">
+        ops_level = #{opsLevel,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ops_id = #{opsId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.youngdatafan.portal.system.management.log.entity.DpSystemOptsMessage">
+    <!--@mbg.generated-->
+    update dp_system_opts_message
+    set ops_user_id = #{opsUserId,jdbcType=VARCHAR},
+      ops_user_name = #{opsUserName,jdbcType=VARCHAR},
+      ops_to_user_id = #{opsToUserId,jdbcType=VARCHAR},
+      ops_to_user_name = #{opsToUserName,jdbcType=VARCHAR},
+      ops_type = #{opsType,jdbcType=VARCHAR},
+      ops_item_id = #{opsItemId,jdbcType=VARCHAR},
+      ops_item_name = #{opsItemName,jdbcType=VARCHAR},
+      ops_item_type = #{opsItemType,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      ops_level = #{opsLevel,jdbcType=INTEGER}
+    where ops_id = #{opsId,jdbcType=VARCHAR}
+  </update>
+  <select id="selectLast7DayMessage" resultMap="BaseResultMap">
+    select
+     <include refid="Base_Column_List" />
+     from dp_system_opts_message
+        <if test="userId != '00000000'">
+     where ops_level = 0 or ops_to_user_id = #{userId,jdbcType=VARCHAR}
+        </if>
+    order by ops_level,create_time desc
+        limit 100
+  </select>
+
+
+</mapper>

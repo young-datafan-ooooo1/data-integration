@@ -1,0 +1,509 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youngdatafan.portal.system.management.summary.mapper.IndexSummaryMapper">
+    <resultMap id="TaskRunSummaryResult" type="com.youngdatafan.portal.system.management.summary.model.TaskRunSummary">
+        <result column="start_date" jdbcType="VARCHAR" property="startDate"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="project_type" jdbcType="VARCHAR" property="projectType"/>
+        <result column="cnt" jdbcType="VARCHAR" property="cnt"/>
+    </resultMap>
+
+    <resultMap id="ProjectOnlineResult" type="com.youngdatafan.portal.system.management.summary.model.ProjectOnline">
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="cnt" jdbcType="VARCHAR" property="cnt"/>
+    </resultMap>
+
+
+    <resultMap id="FileSummaryResult" type="com.youngdatafan.portal.system.management.summary.model.FileSummary">
+        <result column="file_type" jdbcType="VARCHAR" property="fileType"/>
+        <result column="cnt" jdbcType="VARCHAR" property="cnt"/>
+        <result column="create_channel" jdbcType="VARCHAR" property="createChannel"/>
+        <result column="mon" jdbcType="VARCHAR" property="mon"/>
+    </resultMap>
+
+
+    <resultMap id="ProjectStatusSumResult" type="com.youngdatafan.portal.system.management.summary.model.ProjectStatusSum">
+        <result column="projec_type" jdbcType="VARCHAR" property="projecType"/>
+        <result column="wfb" jdbcType="INTEGER" property="wfb"/>
+        <result column="ONLINE" jdbcType="INTEGER" property="ONLINE"/>
+        <result column="OFFLINE" jdbcType="INTEGER" property="OFFLINE"/>
+        <result column="CHECKING" jdbcType="INTEGER" property="CHECKING"/>
+        <result column="REFUSE" jdbcType="INTEGER" property="REFUSE"/>
+        <result column="CANCEL" jdbcType="INTEGER" property="CANCEL"/>
+        <result column="CANCELING" jdbcType="INTEGER" property="CANCELING"/>
+    </resultMap>
+    <select id="selectTaskRunSummary" resultMap="TaskRunSummaryResult">
+
+
+        SELECT
+        COUNT(1) cnt ,
+        date_format(t2.start_time , '%Y-%m-%d') AS start_date ,
+        t2.`status`,
+        t3.project_type
+        FROM
+        dp_portal_project_online t1
+        INNER JOIN commander.job_runtime_details t2 ON t1.project_id = t2.job_id
+        inner join dp_portal_project t3 on t1.project_id=t3.project_id
+        where
+        t2.start_time is not null
+
+
+        <if test="userId != '00000000'">
+
+
+            and t1.create_user_id = #{userId,jdbcType=VARCHAR} or t1.review_user_id = #{userId,jdbcType=VARCHAR}
+
+
+        </if>
+
+
+        GROUP BY
+        date_format(t2.start_time , '%Y-%m-%d') ,
+        t2.`status`,
+        t3.project_type
+
+    </select>
+
+    <select id="selectProjectOnline" resultMap="ProjectOnlineResult">
+
+
+        select COUNT(1) cnt
+        ,`status`
+        from dp_portal_project_online
+
+
+        <if test="userId != '00000000'">
+
+
+            where create_user_id = #{userId,jdbcType=VARCHAR}
+            or review_user_id = #{userId,jdbcType=VARCHAR}
+
+
+        </if>
+
+
+        GROUP BY `status`
+
+
+    </select>
+    <select id="selectFileSummary" resultMap="FileSummaryResult">
+
+
+        SELECT
+        count(1) cnt ,
+        case when file_type in('xlsx','xls')then 'Excel'
+        when file_type='csv' then 'CSV'
+        when file_type='txt' then 'TXT'
+        else '其他' end as file_type,
+        case when   create_channel IS NULL then  "UPLOAD"  else create_channel end create_channel,
+        date_format(upload_time , '%Y-%m') AS mon
+        FROM
+        dp_portal_file_manager
+
+
+        <if test="userId != '00000000'">
+
+
+            where create_user_id = #{userId,jdbcType=VARCHAR}
+
+
+        </if>
+
+
+        GROUP BY
+        case when file_type in('xlsx','xls')then 'Excel'
+        when file_type='csv' then 'CSV'
+        when file_type='txt' then 'TXT'
+        else '其他' end,
+        create_channel,
+        date_format(upload_time , '%Y-%m')
+
+
+    </select>
+    <select id="selectProjectStatus"
+            resultMap="ProjectStatusSumResult">
+
+
+        SELECT
+        a.dict_code as projec_type,
+        count(b.project_id) AS total ,
+        count(
+        CASE
+        WHEN c.`status` = 'ONLINE' THEN
+        1
+        ELSE
+        NULL
+        END
+        ) AS ONLINE ,
+        count(
+        CASE
+        WHEN c.`status` = 'OFFLINE' THEN
+        1
+        ELSE
+        NULL
+        END
+        ) AS OFFLINE ,
+        count(
+        CASE
+        WHEN c.`status` = 'CHECKING' THEN
+        1
+        ELSE
+        NULL
+        END
+        ) AS CHECKING ,
+        count(
+        CASE
+        WHEN c.`status` = 'REFUSE' THEN
+        1
+        ELSE
+        NULL
+        END
+        ) AS REFUSE ,
+        count(
+        CASE
+        WHEN c.`status` = 'CANCEL' THEN
+        1
+        ELSE
+        NULL
+        END
+        ) AS CANCEL ,
+        count(
+        CASE
+        WHEN c.`status` = 'CANCELING' THEN
+        1
+        ELSE
+        NULL
+        END
+        ) AS CANCELING ,
+        count(
+        CASE
+        WHEN b.project_id IS NOT NULL
+        AND c.project_id IS NULL THEN
+        1
+        ELSE
+        NULL
+        END
+        ) AS wfb
+        FROM
+        dp_portal_dict a
+        LEFT JOIN dp_portal_project b ON a.dict_code = b.project_type
+        LEFT JOIN dp_portal_project_online c ON b.project_id = c.project_id
+        WHERE
+        a.dict_type = 'PROJECT'
+
+
+        <if test="userId != '00000000'">
+
+
+            and b.create_user_id = #{userId,jdbcType=VARCHAR}
+            or c.review_user_id = #{userId,jdbcType=VARCHAR})
+
+
+        </if>
+
+
+        GROUP BY
+        a.dict_code
+
+
+    </select>
+    <resultMap id="ProjectSumMonth" type="com.youngdatafan.portal.system.management.summary.model.ProjectSumMonth">
+        <result column="project_type" jdbcType="VARCHAR" property="projectType"/>
+        <result column="mon" jdbcType="VARCHAR" property="mon"/>
+        <result column="cnt" jdbcType="INTEGER" property="cnt"/>
+    </resultMap>
+    <select id="selectProjectSumMonth" resultMap="ProjectSumMonth">
+
+
+       SELECT
+            count(project_id) as cnt,
+            date_format(create_time , '%Y-%m') as mon,
+            project_type
+        FROM
+            dp_portal_project
+        where create_time is not null
+        <!--        <if test="userId != '00000000'">-->
+        <!--        and  create_user_id= #{userId,jdbcType=VARCHAR}-->
+        <!--        </if>-->
+        GROUP BY
+            date_format(create_time , '%Y-%m'),project_type
+
+
+    </select>
+
+
+    <resultMap id="MonthSumDetail" type="com.youngdatafan.portal.system.management.summary.model.MonthSumDetail">
+        <result column="mon" jdbcType="VARCHAR" property="mon"/>
+        <result column="cnt" jdbcType="INTEGER" property="cnt"/>
+    </resultMap>
+    <select id="selectDashboardMonthSumDetail" resultMap="MonthSumDetail">
+
+
+        SELECT
+            count(*) AS cnt ,
+            date_format(create_time , '%Y-%m') AS mon
+        FROM
+            dp_portal_dashboard
+        where create_time is not null
+        GROUP BY
+            date_format(create_time , '%Y-%m')
+
+
+    </select>
+    <select id="selectReportMonthSumDetail" resultMap="MonthSumDetail">
+
+
+            SELECT
+                count(*) AS cnt ,
+                date_format(create_time , '%Y-%m') AS mon
+            FROM
+                dp_portal_report_record
+            where create_time is not null
+            GROUP BY
+                date_format(create_time , '%Y-%m')
+
+
+    </select>
+    <select id="selectBasicModelMonthSumDetail" resultMap="MonthSumDetail">
+
+
+    SELECT
+        count(*) AS cnt ,
+        date_format(create_time , '%Y-%m') AS mon
+    FROM
+        dp_portal_basic_model
+    WHERE
+        create_time IS NOT NULL
+    GROUP BY
+        date_format(create_time , '%Y-%m')
+
+
+    </select>
+    <select id="selectBusinessModelMonthSumDetail" resultMap="MonthSumDetail">
+
+
+        SELECT
+            count(*) AS cnt ,
+            date_format(create_time , '%Y-%m') AS mon
+        FROM
+            dp_portal_business_model
+        WHERE
+            create_time IS NOT NULL
+        GROUP BY
+            date_format(create_time , '%Y-%m')
+
+    </select>
+
+    <resultMap id="DpPortalBasicModel" type="com.youngdatafan.portal.system.management.summary.model.DpPortalBasicModel">
+        <!--@mbg.generated-->
+        <!--@Table dp_portal_basic_model-->
+        <id column="model_name" jdbcType="VARCHAR" property="modelName"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="model_type" jdbcType="VARCHAR" property="modelType"/>
+        <result column="ds_name" jdbcType="VARCHAR" property="dsName"/>
+        <result column="table_schema" jdbcType="VARCHAR" property="tableSchema"/>
+        <result column="table_name" jdbcType="VARCHAR" property="tableName"/>
+        <result column="table_chinese_name" jdbcType="VARCHAR" property="tableChineseName"/>
+        <result column="table_description" jdbcType="VARCHAR" property="tableDescription"/>
+        <result column="statistics_time" jdbcType="TIMESTAMP" property="statisticsTime"/>
+        <result column="row_cnt" jdbcType="INTEGER" property="rowCnt"/>
+        <result column="enabled" jdbcType="VARCHAR" property="enabled"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="create_user_id" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="model_sort" jdbcType="VARCHAR" property="modelSort"/>
+        <result column="c_name" jdbcType="VARCHAR" property="cName"/>
+    </resultMap>
+    <select id="selectLastSixBasicModel" resultMap="DpPortalBasicModel">
+        SELECT
+             model_name, description, model_type, ds_name, table_schema, `table_name`, table_chinese_name,
+        table_description, statistics_time, row_cnt, enabled, create_time, update_time, create_user_id,
+        model_sort, c_name
+        FROM
+            dp_portal_basic_model
+        <if test="userId != '00000000'">
+        where create_user_id = #{userId,jdbcType=VARCHAR}
+        </if>
+        ORDER BY
+            create_time DESC
+        LIMIT 6;
+    </select>
+    <resultMap id="DpPortalBusinessModel" type="com.youngdatafan.portal.system.management.summary.model.DpPortalBusinessModel">
+        <!--@mbg.generated-->
+        <!--@Table dp_portal_business_model-->
+        <id column="model_name" jdbcType="VARCHAR" property="modelName"/>
+        <result column="chinese_name" jdbcType="VARCHAR" property="chineseName"/>
+        <result column="basic_model_name" jdbcType="VARCHAR" property="basicModelName"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="filter_rule" jdbcType="VARCHAR" property="filterRule"/>
+        <result column="enabled" jdbcType="VARCHAR" property="enabled"/>
+        <result column="query_sql" jdbcType="LONGVARCHAR" property="querySql"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="create_user_id" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="model_sort" jdbcType="VARCHAR" property="modelSort"/>
+    </resultMap>
+
+    <select id="selectLastSixBusinessModel" resultMap="DpPortalBusinessModel">
+
+    SELECT
+         model_name, chinese_name, basic_model_name, description, filter_rule, enabled, query_sql,
+    create_time, update_time, create_user_id, model_sort
+    from
+        dp_portal_business_model
+
+        <if test="userId != '00000000'">
+
+        where create_user_id = #{userId,jdbcType=VARCHAR}
+
+        </if>
+
+    order by
+        create_time desc
+    limit 6
+
+    </select>
+
+    <resultMap id="DpPortalDashboard" type="com.youngdatafan.portal.system.management.summary.model.DpPortalDashboard">
+    <!--@mbg.generated-->
+    <!--@Table dp_portal_dashboard-->
+    <id column="dashboard_id" jdbcType="VARCHAR" property="dashboardId" />
+    <result column="dashboard_name" jdbcType="VARCHAR" property="dashboardName" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="dashboard_is_pubulic" jdbcType="VARCHAR" property="dashboardIsPubulic" />
+    <result column="create_user_id" jdbcType="VARCHAR" property="createUserId" />
+    <result column="data_json" jdbcType="LONGVARCHAR" property="dataJson" />
+  </resultMap>
+
+  <select id="selectLastSixPortalDashboard" resultMap="DpPortalDashboard">
+    select dashboard_id, dashboard_name, create_time, update_time, dashboard_is_pubulic, create_user_id,
+    data_json from dp_portal_dashboard
+        <if test="userId != '00000000'">
+      where create_user_id = #{userId,jdbcType=VARCHAR}
+        </if>
+     order by create_time desc limit 6;
+
+</select>
+
+ <resultMap id="DpPortalFileManager" type="com.youngdatafan.portal.system.management.summary.model.DpPortalFileManager">
+        <!--@mbg.generated-->
+        <!--@Table dp_portal_file_manager-->
+        <id column="file_id" jdbcType="VARCHAR" property="fileId"/>
+        <result column="file_name" jdbcType="VARCHAR" property="fileName"/>
+        <result column="file_type" jdbcType="VARCHAR" property="fileType"/>
+        <result column="order" jdbcType="INTEGER" property="order"/>
+        <result column="notes" jdbcType="VARCHAR" property="notes"/>
+        <result column="is_valid" jdbcType="VARCHAR" property="isValid"/>
+        <result column="upload_time" jdbcType="TIMESTAMP" property="uploadTime"/>
+        <result column="create_user_id" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="group_id" jdbcType="VARCHAR" property="groupId"/>
+        <result column="group_name" jdbcType="VARCHAR" property="groupName"/>
+        <result column="is_folder" jdbcType="VARCHAR" property="isFolder"/>
+        <result column="create_channel" jdbcType="VARCHAR" property="createChannel"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        file_id, file_name, file_type, `order`, notes, is_valid, upload_time, create_user_id,
+        group_id, group_name, is_folder, create_channel
+    </sql>
+    <select id="selectLastSixFileOutPut" resultMap="DpPortalFileManager">
+
+      SELECT
+        file_id, file_name, file_type, `order`, notes, is_valid, upload_time, create_user_id,
+        group_id, group_name, is_folder, create_channel
+    FROM
+        dp_portal_file_manager
+    WHERE
+        create_channel = 'OUTPUT'
+        <if test="userId != '00000000'">
+
+        and create_user_id = #{userId,jdbcType=VARCHAR}
+
+        </if>
+    ORDER BY
+        upload_time DESC
+    LIMIT 6;
+
+    </select>
+    <select id="selectLastSixFileUpload" resultMap="DpPortalFileManager">
+            select
+             file_id, file_name, file_type, `order`, notes, is_valid, upload_time, create_user_id,
+        group_id, group_name, is_folder, create_channel
+        from
+            dp_portal_file_manager
+        where
+            create_channel = 'UPLOAD'
+        <if test="userId != '00000000'">
+
+        and create_user_id = #{userId,jdbcType=VARCHAR}
+
+        </if>
+        order by
+            upload_time desc
+        limit 6;
+    </select>
+
+      <resultMap id="DpPortalProject" type="com.youngdatafan.portal.system.management.summary.model.DpPortalProject">
+        <!--@mbg.generated-->
+        <!--@Table dp_portal_project-->
+        <id column="project_id" jdbcType="VARCHAR" property="projectId"/>
+        <result column="project_name" jdbcType="VARCHAR" property="projectName"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="project_type" jdbcType="VARCHAR" property="projectType"/>
+        <result column="project_status" jdbcType="VARCHAR" property="projectStatus"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="create_user_id" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="create_user_name" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="update_user_id" jdbcType="VARCHAR" property="updateUserId"/>
+        <result column="update_user_name" jdbcType="VARCHAR" property="updateUserName"/>
+        <result column="group_id" jdbcType="VARCHAR" property="groupId"/>
+        <result column="group_name" jdbcType="VARCHAR" property="groupName"/>
+    </resultMap>
+
+    <select id="selectLastSixTSJB" resultMap="DpPortalProject">
+    select  project_id, project_name, description, project_type, project_status, create_time,
+        update_time, create_user_id, create_user_name, update_user_id, update_user_name,
+        group_id, group_name from dp_portal_project
+        where project_type = 'TSJB'
+         <if test="userId != '00000000'">
+        and create_user_id = #{userId,jdbcType=VARCHAR}
+        </if>
+        order by create_time desc limit 6
+    </select>
+
+    <select id="selectLastSixJCJB" resultMap="DpPortalProject">
+    select  project_id, project_name, description, project_type, project_status, create_time,
+        update_time, create_user_id, create_user_name, update_user_id, update_user_name,
+        group_id, group_name from dp_portal_project
+        where project_type = 'JCJB'
+      <if test="userId != '00000000'">
+        and create_user_id = #{userId,jdbcType=VARCHAR}
+      </if>
+        order by create_time desc limit 6
+    </select>
+
+     <resultMap id="DpPortalReportRecord" type="com.youngdatafan.portal.system.management.summary.model.DpPortalReportRecord">
+    <!--@mbg.generated-->
+    <!--@Table dp_portal_report_record-->
+    <id column="report_id" jdbcType="VARCHAR" property="reportId" />
+    <result column="datasource_id" jdbcType="VARCHAR" property="datasourceId" />
+    <result column="query_sql" jdbcType="LONGVARCHAR" property="querySql" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_user_id" jdbcType="VARCHAR" property="createUserId" />
+    <result column="chart_id" jdbcType="VARCHAR" property="chartId" />
+    <result column="report_tittle" jdbcType="VARCHAR" property="reportTittle" />
+    <result column="report_table" jdbcType="LONGVARCHAR" property="reportTable" />
+    <result column="data_json" jdbcType="LONGVARCHAR" property="dataJson" />
+  </resultMap>
+  <select id="selectLastSixReportRecord" resultMap="DpPortalReportRecord">
+    select report_id, datasource_id, query_sql, create_time, create_user_id, chart_id, report_tittle,
+     report_table, data_json from dp_portal_report_record
+       <if test="userId != '00000000'">
+        where create_user_id = #{userId,jdbcType=VARCHAR}
+      </if>
+     order by create_time desc limit 6;
+
+</select>
+</mapper>

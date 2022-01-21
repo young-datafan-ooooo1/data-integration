@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youngdatafan.portal.system.management.user.mapper.DpPortalResourceMapper">
+    <resultMap id="BaseResultMap" type="com.youngdatafan.portal.system.management.user.entity.DpPortalResource">
+        <!--@mbg.generated-->
+        <!--@Table dp_portal_resource-->
+        <id column="res_id" jdbcType="VARCHAR" property="resId"/>
+        <result column="res_name" jdbcType="VARCHAR" property="resName"/>
+        <result column="describe" jdbcType="VARCHAR" property="describe"/>
+        <result column="res_url" jdbcType="VARCHAR" property="resUrl"/>
+        <result column="res_pid" jdbcType="VARCHAR" property="resPid"/>
+        <result column="res_level" jdbcType="INTEGER" property="resLevel"/>
+        <result column="res_type" jdbcType="VARCHAR" property="resType"/>
+        <result column="res_order" jdbcType="INTEGER" property="resOrder"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="route_url" jdbcType="VARCHAR" property="routeUrl"/>
+    </resultMap>
+
+    <resultMap id="BaseResultMapTree" type="com.youngdatafan.portal.system.management.user.entity.DpPortalResource"
+               extends="BaseResultMap">
+        <collection property="childResources" ofType="com.youngdatafan.portal.system.management.user.entity.DpPortalResource"
+                    javaType="list">
+            <id column="res_id_1" jdbcType="VARCHAR" property="resId"/>
+            <result column="res_name_1" jdbcType="VARCHAR" property="resName"/>
+            <result column="describe_1" jdbcType="VARCHAR" property="describe"/>
+            <result column="res_url_1" jdbcType="VARCHAR" property="resUrl"/>
+            <result column="res_pid_1" jdbcType="VARCHAR" property="resPid"/>
+            <result column="res_level_1" jdbcType="INTEGER" property="resLevel"/>
+            <result column="res_type_1" jdbcType="VARCHAR" property="resType"/>
+            <result column="res_order_1" jdbcType="INTEGER" property="resOrder"/>
+            <result column="status_1" jdbcType="VARCHAR" property="status"/>
+            <result column="create_time_1" jdbcType="TIMESTAMP" property="createTime"/>
+            <result column="update_time_1" jdbcType="TIMESTAMP" property="updateTime"/>
+        </collection>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        res_id, res_name, `describe`, res_url, res_pid, res_level, res_type, res_order, `status`,
+        create_time, update_time,route_url
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from dp_portal_resource
+        where res_id = #{resId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        <!--@mbg.generated-->
+        delete from dp_portal_resource
+        where res_id = #{resId,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.youngdatafan.portal.system.management.user.entity.DpPortalResource">
+        <!--@mbg.generated-->
+        insert into dp_portal_resource (res_id, res_name, `describe`,
+        res_url, res_pid, res_level,
+        res_type, res_order, `status`,
+        create_time, update_time,route_url)
+        values (#{resId,jdbcType=VARCHAR}, #{resName,jdbcType=VARCHAR}, #{describe,jdbcType=VARCHAR},
+        #{resUrl,jdbcType=VARCHAR}, #{resPid,jdbcType=VARCHAR}, #{resLevel,jdbcType=VARCHAR},
+        #{resType,jdbcType=VARCHAR}, #{resOrder,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR},
+        #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},#{routeUrl,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.youngdatafan.portal.system.management.user.entity.DpPortalResource">
+        <!--@mbg.generated-->
+        insert into dp_portal_resource
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="resId != null">
+                res_id,
+            </if>
+            <if test="resName != null">
+                res_name,
+            </if>
+            <if test="describe != null">
+                `describe`,
+            </if>
+            <if test="resUrl != null">
+                res_url,
+            </if>
+            <if test="resPid != null">
+                res_pid,
+            </if>
+            <if test="resLevel != null">
+                res_level,
+            </if>
+            <if test="resType != null">
+                res_type,
+            </if>
+            <if test="resOrder != null">
+                res_order,
+            </if>
+            <if test="status != null">
+                `status`,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="routeUrl != null">
+                route_url,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="resId != null">
+                #{resId,jdbcType=VARCHAR},
+            </if>
+            <if test="resName != null">
+                #{resName,jdbcType=VARCHAR},
+            </if>
+            <if test="describe != null">
+                #{describe,jdbcType=VARCHAR},
+            </if>
+            <if test="resUrl != null">
+                #{resUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="resPid != null">
+                #{resPid,jdbcType=VARCHAR},
+            </if>
+            <if test="resLevel != null">
+                #{resLevel,jdbcType=VARCHAR},
+            </if>
+            <if test="resType != null">
+                #{resType,jdbcType=VARCHAR},
+            </if>
+            <if test="resOrder != null">
+                #{resOrder,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="routeUrl != null">
+               #{routeUrl,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective"
+            parameterType="com.youngdatafan.portal.system.management.user.entity.DpPortalResource">
+        <!--@mbg.generated-->
+        update dp_portal_resource
+        <set>
+            <if test="resName != null">
+                res_name = #{resName,jdbcType=VARCHAR},
+            </if>
+            <if test="describe != null">
+                `describe` = #{describe,jdbcType=VARCHAR},
+            </if>
+            <if test="resUrl != null">
+                res_url = #{resUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="resPid != null">
+                res_pid = #{resPid,jdbcType=VARCHAR},
+            </if>
+            <if test="resLevel != null">
+                res_level = #{resLevel,jdbcType=VARCHAR},
+            </if>
+            <if test="resType != null">
+                res_type = #{resType,jdbcType=VARCHAR},
+            </if>
+            <if test="resOrder != null">
+                res_order = #{resOrder,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                `status` = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="routeUrl != null">
+                route_url = #{routeUrl,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where res_id = #{resId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.youngdatafan.portal.system.management.user.entity.DpPortalResource">
+        <!--@mbg.generated-->
+        update dp_portal_resource
+        set res_name = #{resName,jdbcType=VARCHAR},
+        `describe` = #{describe,jdbcType=VARCHAR},
+        res_url = #{resUrl,jdbcType=VARCHAR},
+        res_pid = #{resPid,jdbcType=VARCHAR},
+        res_level = #{resLevel,jdbcType=VARCHAR},
+        res_type = #{resType,jdbcType=VARCHAR},
+        res_order = #{resOrder,jdbcType=INTEGER},
+        `status` = #{status,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+        route_url = #{routeUrl,jdbcType=TIMESTAMP}
+        where res_id = #{resId,jdbcType=VARCHAR},
+    </update>
+
+    <select id="selectAllResourceByUserId" resultMap="BaseResultMapTree" parameterType="java.lang.String">
+        select a.res_id,
+        a.res_name,
+        a. `describe`,
+        a. res_url,
+        a. res_pid,
+        a.res_level,
+        a.res_type,
+        a.res_order,
+        a.`status`,
+        a.create_time,
+        a.update_time,
+        b.res_id as res_id_1,
+        b.res_name as res_name_1,
+        b.`describe` as describe_1,
+        b.res_url as res_url_1,
+        b.res_pid as res_pid_1,
+        b.res_level as res_level_1,
+        b.res_type as res_type_1,
+        b.res_order as res_order_1,
+        b.`status` as status_1,
+        b.create_time create_time_1,
+        b.update_time as update_time_1
+        from (SELECT DISTINCT
+        d.*
+        FROM
+        dp_portal_user_role a
+        INNER JOIN dp_portal_role b ON a.role_id = b.role_id
+        INNER JOIN dp_portal_role_resource c ON b.role_id = c.role_id
+        INNER JOIN dp_portal_resource d ON c.resource_id = d.res_id
+        <if test="userId != '00000000'">
+            where a.user_id = #{userId,jdbcType=VARCHAR}
+        </if>) a
+        left join (SELECT DISTINCT
+        d.*
+        FROM
+        dp_portal_user_role a
+        INNER JOIN dp_portal_role b ON a.role_id = b.role_id
+        INNER JOIN dp_portal_role_resource c ON b.role_id = c.role_id
+        INNER JOIN dp_portal_resource d ON c.resource_id = d.res_id
+        <if test="userId != '00000000'">
+            where a.user_id = #{userId,jdbcType=VARCHAR}
+        </if>) b
+        on b.res_pid=a.res_id
+        where a.res_level='0'
+        <if test="userId != '00000000'">
+            and a.status='0'
+            and IFNULL(b.status,'0')='0'
+        </if>
+        order by a.res_order,b.res_order
+    </select>
+
+    <select id="selectGrantedResources" resultMap="BaseResultMapTree" parameterType="java.lang.String">
+        select a.res_id,
+        a.res_name,
+        a. `describe`,
+        a. res_url,
+        a. res_pid,
+        a.res_level,
+        a.res_type,
+        a.res_order,
+        a.`status`,
+        a.create_time,
+        a.update_time,
+        b.res_id as res_id_1,
+        b.res_name as res_name_1,
+        b.`describe` as describe_1,
+        b.res_url as res_url_1,
+        b.res_pid as res_pid_1,
+        b.res_level as res_level_1,
+        b.res_type as res_type_1,
+        b.res_order as res_order_1,
+        b.`status` as status_1,
+        b.create_time create_time_1,
+        b.update_time as update_time_1
+        from (SELECT DISTINCT
+        d.*
+        FROM
+        dp_portal_role_resource c
+        INNER JOIN dp_portal_resource d ON c.resource_id = d.res_id
+        where c.role_id = #{roleId,jdbcType=VARCHAR}
+        ) a
+        left join (SELECT DISTINCT
+        d.*
+        FROM
+        dp_portal_role_resource c
+        INNER JOIN dp_portal_resource d ON c.resource_id = d.res_id
+        where c.role_id = #{roleId,jdbcType=VARCHAR}
+        ) b
+        on b.res_pid=a.res_id
+        where a.res_level=0
+        and a.status='0'
+        and IFNULL(b.status,'0')='0'
+        order by a.res_order,b.res_order
+    </select>
+
+    <select id="checkResourceName" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select
+        count(1)
+        from dp_portal_resource
+        where res_name = #{resName,jdbcType=VARCHAR}
+    </select>
+    <select id="selectAllResourceByResName" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from dp_portal_resource
+        <if test="resName != null and resName != ''">
+            where res_name like concat(concat('%', #{resName,jdbcType=VARCHAR} ),'%')
+        </if>
+
+
+    </select>
+    <select id="checkIsHavingChild" resultType="int">
+        select count(1) from dp_portal_resource
+        where res_pid = #{resId,jdbcType=VARCHAR}
+
+    </select>
+    <select id="selectAllValidResourceByUserId" resultMap="BaseResultMapTree">
+        select a.res_id,
+        a.res_name,
+        a. `describe`,
+        a. res_url,
+        a. res_pid,
+        a.res_level,
+        a.res_type,
+        a.res_order,
+        a.`status`,
+        a.create_time,
+        a.update_time,
+        b.res_id as res_id_1,
+        b.res_name as res_name_1,
+        b.`describe` as describe_1,
+        b.res_url as res_url_1,
+        b.res_pid as res_pid_1,
+        b.res_level as res_level_1,
+        b.res_type as res_type_1,
+        b.res_order as res_order_1,
+        b.`status` as status_1,
+        b.create_time create_time_1,
+        b.update_time as update_time_1
+        from (SELECT DISTINCT
+        d.*
+        FROM
+        dp_portal_user_role a
+        INNER JOIN dp_portal_role b ON a.role_id = b.role_id
+        INNER JOIN dp_portal_role_resource c ON b.role_id = c.role_id
+        INNER JOIN dp_portal_resource d ON c.resource_id = d.res_id
+        <if test="userId != '00000000'">
+            where a.user_id = #{userId,jdbcType=VARCHAR}
+        </if>) a
+        left join (SELECT DISTINCT
+        d.*
+        FROM
+        dp_portal_user_role a
+        INNER JOIN dp_portal_role b ON a.role_id = b.role_id
+        INNER JOIN dp_portal_role_resource c ON b.role_id = c.role_id
+        INNER JOIN dp_portal_resource d ON c.resource_id = d.res_id
+        <if test="userId != '00000000'">
+            where a.user_id = #{userId,jdbcType=VARCHAR}
+        </if>) b
+        on b.res_pid=a.res_id
+        where a.res_level='0'
+        and a.status='0'
+        and IFNULL(b.status,'0')='0'
+        order by a.res_order,b.res_order
+    </select>
+
+    <select id="selectResourceTree" resultMap="BaseResultMap">
+     select  res_id, res_name, `describe`, res_pid, res_level, res_type, res_order, `status`,
+        create_time, update_time,route_url,res_url from dp_portal_resource a
+      where  1=1
+        <if test="userId != '00000000'">
+            and a.res_id in (
+            select DISTINCT b.resource_id from
+            dp_portal_user_role a
+            inner join dp_portal_role_resource b
+            on a.role_id=b.role_id
+                where a.user_id = #{userId,jdbcType=VARCHAR}
+            )
+        </if>
+    order by a.res_pid,a.res_order
+  </select>
+
+    <select id="selectGrantedResourcesTree" resultMap="BaseResultMap">
+            SELECT
+            res_id, res_name, `describe`, res_pid,res_url,res_level, res_type, res_order, `status`,
+            create_time, update_time,route_url
+            FROM
+                dp_portal_resource a
+            WHERE
+                a.res_id IN(
+                    SELECT
+                        resource_id
+                    FROM
+                        dp_portal_role_resource a
+                    WHERE
+                        a.role_id = #{roleId,jdbcType=VARCHAR}
+                )
+        order by a.res_pid,a.res_order
+    </select>
+
+    <update id="updateResourceOrder" >
+       update dp_portal_resource
+        set res_order=#{order,jdbcType=INTEGER},
+        res_pid=#{resPid,jdbcType=VARCHAR},
+        res_level=#{resLevel,jdbcType=INTEGER}
+        where res_id = #{resId,jdbcType=VARCHAR}
+    </update>
+
+    <select id="checkResourceId" resultType="int">
+        select
+        count(1)
+        from dp_portal_resource
+        where res_id = #{resId,jdbcType=VARCHAR}
+    </select>
+</mapper>

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youngdatafan.portal.system.management.user.mapper.DpPortalRoleMapper">
+    <resultMap id="BaseResultMap" type="com.youngdatafan.portal.system.management.user.entity.DpPortalRole">
+        <!--@mbg.generated-->
+        <!--@Table dp_portal_role-->
+        <id column="role_id" jdbcType="VARCHAR" property="roleId"/>
+        <result column="role_name" jdbcType="VARCHAR" property="roleName"/>
+        <result column="describe" jdbcType="VARCHAR" property="describe"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="create_user_id" jdbcType="VARCHAR" property="createUserId"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        role_id, role_name, `describe`, `status`, create_time, update_time, create_user_id
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from dp_portal_role
+        where role_id = #{roleId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        <!--@mbg.generated-->
+        delete from dp_portal_role
+        where role_id = #{roleId,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.youngdatafan.portal.system.management.user.entity.DpPortalRole">
+        <!--@mbg.generated-->
+        insert into dp_portal_role (role_id, role_name, `describe`,
+        `status`, create_time, update_time,
+        create_user_id)
+        values (#{roleId,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR}, #{describe,jdbcType=VARCHAR},
+        #{status,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+        #{createUserId,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.youngdatafan.portal.system.management.user.entity.DpPortalRole">
+        <!--@mbg.generated-->
+        insert into dp_portal_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="roleId != null">
+                role_id,
+            </if>
+            <if test="roleName != null">
+                role_name,
+            </if>
+            <if test="describe != null">
+                `describe`,
+            </if>
+            <if test="status != null">
+                `status`,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="createUserId != null">
+                create_user_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="roleId != null">
+                #{roleId,jdbcType=VARCHAR},
+            </if>
+            <if test="roleName != null">
+                #{roleName,jdbcType=VARCHAR},
+            </if>
+            <if test="describe != null">
+                #{describe,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.youngdatafan.portal.system.management.user.entity.DpPortalRole">
+        <!--@mbg.generated-->
+        update dp_portal_role
+        <set>
+            <if test="roleName != null">
+                role_name = #{roleName,jdbcType=VARCHAR},
+            </if>
+            <if test="describe != null">
+                `describe` = #{describe,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                `status` = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where role_id = #{roleId,jdbcType=VARCHAR}
+        <if test="createUserId != '00000000'">
+            and create_user_id = #{createUserId,jdbcType=VARCHAR}
+        </if>
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.youngdatafan.portal.system.management.user.entity.DpPortalRole">
+        <!--@mbg.generated-->
+        update dp_portal_role
+        set role_name = #{roleName,jdbcType=VARCHAR},
+        `describe` = #{describe,jdbcType=VARCHAR},
+        `status` = #{status,jdbcType=VARCHAR},
+        update_time = #{updateTime,jdbcType=TIMESTAMP}
+        where role_id = #{roleId,jdbcType=VARCHAR}
+        <if test="createUserId != '00000000'">
+        and create_user_id = #{createUserId,jdbcType=VARCHAR}
+        </if>
+    </update>
+    <select id="checkRoleName" resultType="int">
+        select
+        count(1)
+        from dp_portal_role
+        where role_name = #{roleName,jdbcType=VARCHAR}
+        <if test="roleId != null">
+            and role_id != #{roleId,jdbcType=VARCHAR}
+        </if>
+    </select>
+    <select id="selectAllRole" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from dp_portal_role
+        where status='0'
+        <if test="createUserId != '00000000'">
+            and create_user_id = #{createUserId,jdbcType=VARCHAR}
+        </if>
+    </select>
+    <select id="selectAllRoleByKeyWord" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from dp_portal_role
+        where 1=1
+        <if test="createUserId != '00000000'">
+            and create_user_id = #{createUserId,jdbcType=VARCHAR}
+        </if>
+        <if test="keyWord != null and keyWord != ''">
+            and role_name like concat(concat('%', #{keyWord,jdbcType=VARCHAR} ),'%')
+        </if>
+
+    </select>
+
+    <select id="selectGrantedRolesByUserId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select distinct
+        b.role_id,
+        b.role_name,
+        b.`describe`,
+        b.`status`,
+        b.create_time
+        from dp_portal_user_role a
+        inner join dp_portal_role b
+        on a.role_id=b.role_id
+        where a.user_id = #{userId,jdbcType=VARCHAR}
+        and b.status='0'
+    </select>
+
+    <delete id="deleteByPrimaryKeys" parameterType="java.util.List">
+        delete from dp_portal_role
+        where role_id in
+        <foreach collection="roleIds" item="roleId" open="(" close=")" separator=",">
+            #{roleId,jdbcType=VARCHAR}
+        </foreach>
+
+        <if test="createUserId != '00000000'">
+            and create_user_id = #{createUserId,jdbcType=VARCHAR}
+        </if>
+    </delete>
+</mapper>

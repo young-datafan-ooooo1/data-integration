@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youngdatafan.portal.system.management.gateway.mapper.DpGatewayRouteMapper">
+  <resultMap id="BaseResultMap" type="com.youngdatafan.portal.system.management.gateway.entity.DpGatewayRoute">
+    <!--@mbg.generated-->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="uri" jdbcType="VARCHAR" property="uri" />
+    <result column="order" jdbcType="INTEGER" property="order" />
+    <result column="predicates" jdbcType="VARCHAR" property="predicates" />
+    <result column="filters" jdbcType="VARCHAR" property="filters" />
+    <result column="metadata" jdbcType="VARCHAR" property="metadata" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+  <resultMap id="BaseResultMapDTO" type="com.youngdatafan.portal.system.management.gateway.dto.DpGatewayRouteDTO">
+    <!--@mbg.generated-->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="uri" jdbcType="VARCHAR" property="uri" />
+    <result column="order" jdbcType="INTEGER" property="order" />
+    <result column="predicates" jdbcType="VARCHAR" property="predicates" />
+    <result column="filters" jdbcType="VARCHAR" property="filters" />
+    <result column="metadata" jdbcType="VARCHAR" property="metadata" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+
+
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, uri, `order`, predicates, filters, metadata, create_time, update_time, `status`
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from dp_gateway_route
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <!--@mbg.generated-->
+    delete from dp_gateway_route
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.youngdatafan.portal.system.management.gateway.entity.DpGatewayRoute">
+    <!--@mbg.generated-->
+    insert into dp_gateway_route (id, uri, `order`, 
+      predicates, filters, metadata, 
+      create_time, update_time, `status`
+      )
+    values (#{id,jdbcType=VARCHAR}, #{uri,jdbcType=VARCHAR}, #{order,jdbcType=INTEGER}, 
+      #{predicates,jdbcType=VARCHAR}, #{filters,jdbcType=VARCHAR}, #{metadata,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.youngdatafan.portal.system.management.gateway.entity.DpGatewayRoute">
+    <!--@mbg.generated-->
+    insert into dp_gateway_route
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="uri != null">
+        uri,
+      </if>
+      <if test="order != null">
+        `order`,
+      </if>
+      <if test="predicates != null">
+        predicates,
+      </if>
+      <if test="filters != null">
+        filters,
+      </if>
+      <if test="metadata != null">
+        metadata,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="uri != null">
+        #{uri,jdbcType=VARCHAR},
+      </if>
+      <if test="order != null">
+        #{order,jdbcType=INTEGER},
+      </if>
+      <if test="predicates != null">
+        #{predicates,jdbcType=VARCHAR},
+      </if>
+      <if test="filters != null">
+        #{filters,jdbcType=VARCHAR},
+      </if>
+      <if test="metadata != null">
+        #{metadata,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.youngdatafan.portal.system.management.gateway.entity.DpGatewayRoute">
+    <!--@mbg.generated-->
+    update dp_gateway_route
+    <set>
+      <if test="uri != null">
+        uri = #{uri,jdbcType=VARCHAR},
+      </if>
+      <if test="order != null">
+        `order` = #{order,jdbcType=INTEGER},
+      </if>
+      <if test="predicates != null">
+        predicates = #{predicates,jdbcType=VARCHAR},
+      </if>
+      <if test="filters != null">
+        filters = #{filters,jdbcType=VARCHAR},
+      </if>
+      <if test="metadata != null">
+        metadata = #{metadata,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.youngdatafan.portal.system.management.gateway.entity.DpGatewayRoute">
+    <!--@mbg.generated-->
+    update dp_gateway_route
+    set uri = #{uri,jdbcType=VARCHAR},
+      `order` = #{order,jdbcType=INTEGER},
+      predicates = #{predicates,jdbcType=VARCHAR},
+      filters = #{filters,jdbcType=VARCHAR},
+      metadata = #{metadata,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      `status` = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectAll" resultMap="BaseResultMapDTO">
+    select
+    <include refid="Base_Column_List" />
+    from dp_gateway_route where status = 1
+  </select>
+</mapper>

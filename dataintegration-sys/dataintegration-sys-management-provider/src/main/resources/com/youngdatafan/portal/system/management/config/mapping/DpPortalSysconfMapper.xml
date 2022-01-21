@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youngdatafan.portal.system.management.config.mapper.DpPortalSysconfMapper">
+  <resultMap id="BaseResultMap" type="com.youngdatafan.portal.system.management.config.entity.DpPortalSysconf">
+    <!--@mbg.generated-->
+    <!--@Table dp_portal_sysconf-->
+    <id column="param_key" jdbcType="VARCHAR" property="paramKey" />
+    <result column="param_value" jdbcType="VARCHAR" property="paramValue" />
+    <result column="param_describe" jdbcType="VARCHAR" property="paramDescribe" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="param_type" jdbcType="VARCHAR" property="paramType" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    param_key, param_value, param_describe, create_time, update_time, param_type
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from dp_portal_sysconf
+    where param_key = #{paramKey,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <!--@mbg.generated-->
+    delete from dp_portal_sysconf
+    where param_key = #{paramKey,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.youngdatafan.portal.system.management.config.entity.DpPortalSysconf">
+    <!--@mbg.generated-->
+    insert into dp_portal_sysconf (param_key, param_value, param_describe, 
+      create_time, update_time, param_type
+      )
+    values (#{paramKey,jdbcType=VARCHAR}, #{paramValue,jdbcType=VARCHAR}, #{paramDescribe,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{paramType,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.youngdatafan.portal.system.management.config.entity.DpPortalSysconf">
+    <!--@mbg.generated-->
+    insert into dp_portal_sysconf
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="paramKey != null">
+        param_key,
+      </if>
+      <if test="paramValue != null">
+        param_value,
+      </if>
+      <if test="paramDescribe != null">
+        param_describe,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="paramType != null">
+        param_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="paramKey != null">
+        #{paramKey,jdbcType=VARCHAR},
+      </if>
+      <if test="paramValue != null">
+        #{paramValue,jdbcType=VARCHAR},
+      </if>
+      <if test="paramDescribe != null">
+        #{paramDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paramType != null">
+        #{paramType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.youngdatafan.portal.system.management.config.entity.DpPortalSysconf">
+    <!--@mbg.generated-->
+    update dp_portal_sysconf
+    <set>
+      <if test="paramValue != null">
+        param_value = #{paramValue,jdbcType=VARCHAR},
+      </if>
+      <if test="paramDescribe != null">
+        param_describe = #{paramDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paramType != null">
+        param_type = #{paramType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where param_key = #{paramKey,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.youngdatafan.portal.system.management.config.entity.DpPortalSysconf">
+    <!--@mbg.generated-->
+    update dp_portal_sysconf
+    set param_value = #{paramValue,jdbcType=VARCHAR},
+      param_describe = #{paramDescribe,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      param_type = #{paramType,jdbcType=VARCHAR}
+    where param_key = #{paramKey,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectByType" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from dp_portal_sysconf
+    where param_type = #{paramType,jdbcType=VARCHAR}
+  </select>
+</mapper>

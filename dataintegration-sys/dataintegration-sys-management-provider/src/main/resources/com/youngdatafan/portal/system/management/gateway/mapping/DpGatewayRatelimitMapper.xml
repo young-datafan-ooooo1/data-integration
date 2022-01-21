@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youngdatafan.portal.system.management.gateway.mapper.DpGatewayRatelimitMapper">
+  <resultMap id="BaseResultMap" type="com.youngdatafan.portal.system.management.gateway.entity.DpGatewayRatelimit">
+    <!--@mbg.generated-->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="resource" jdbcType="VARCHAR" property="resource" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="namespace" jdbcType="VARCHAR" property="namespace" />
+    <result column="mode" jdbcType="VARCHAR" property="mode" />
+    <result column="threshold_type" jdbcType="VARCHAR" property="thresholdType" />
+    <result column="threshold_value" jdbcType="VARCHAR" property="thresholdValue" />
+    <result column="time_out" jdbcType="INTEGER" property="timeOut" />
+    <result column="fall_back" jdbcType="VARCHAR" property="fallBack" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, `resource`, `type`, namespace, `mode`, threshold_type, threshold_value, time_out, 
+    fall_back, create_time, update_time, `status`
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from dp_gateway_ratelimit
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <!--@mbg.generated-->
+    delete from dp_gateway_ratelimit
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.youngdatafan.portal.system.management.gateway.entity.DpGatewayRatelimit">
+    <!--@mbg.generated-->
+    insert into dp_gateway_ratelimit (id, `resource`, `type`, 
+      namespace, `mode`, threshold_type, 
+      threshold_value, time_out, fall_back, 
+      create_time, update_time, `status`
+      )
+    values (#{id,jdbcType=VARCHAR}, #{resource,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{namespace,jdbcType=VARCHAR}, #{mode,jdbcType=VARCHAR}, #{thresholdType,jdbcType=VARCHAR}, 
+      #{thresholdValue,jdbcType=VARCHAR}, #{timeOut,jdbcType=INTEGER}, #{fallBack,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.youngdatafan.portal.system.management.gateway.entity.DpGatewayRatelimit">
+    <!--@mbg.generated-->
+    insert into dp_gateway_ratelimit
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="resource != null">
+        `resource`,
+      </if>
+      <if test="type != null">
+        `type`,
+      </if>
+      <if test="namespace != null">
+        namespace,
+      </if>
+      <if test="mode != null">
+        `mode`,
+      </if>
+      <if test="thresholdType != null">
+        threshold_type,
+      </if>
+      <if test="thresholdValue != null">
+        threshold_value,
+      </if>
+      <if test="timeOut != null">
+        time_out,
+      </if>
+      <if test="fallBack != null">
+        fall_back,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="resource != null">
+        #{resource,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="namespace != null">
+        #{namespace,jdbcType=VARCHAR},
+      </if>
+      <if test="mode != null">
+        #{mode,jdbcType=VARCHAR},
+      </if>
+      <if test="thresholdType != null">
+        #{thresholdType,jdbcType=VARCHAR},
+      </if>
+      <if test="thresholdValue != null">
+        #{thresholdValue,jdbcType=VARCHAR},
+      </if>
+      <if test="timeOut != null">
+        #{timeOut,jdbcType=INTEGER},
+      </if>
+      <if test="fallBack != null">
+        #{fallBack,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.youngdatafan.portal.system.management.gateway.entity.DpGatewayRatelimit">
+    <!--@mbg.generated-->
+    update dp_gateway_ratelimit
+    <set>
+      <if test="resource != null">
+        `resource` = #{resource,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        `type` = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="namespace != null">
+        namespace = #{namespace,jdbcType=VARCHAR},
+      </if>
+      <if test="mode != null">
+        `mode` = #{mode,jdbcType=VARCHAR},
+      </if>
+      <if test="thresholdType != null">
+        threshold_type = #{thresholdType,jdbcType=VARCHAR},
+      </if>
+      <if test="thresholdValue != null">
+        threshold_value = #{thresholdValue,jdbcType=VARCHAR},
+      </if>
+      <if test="timeOut != null">
+        time_out = #{timeOut,jdbcType=INTEGER},
+      </if>
+      <if test="fallBack != null">
+        fall_back = #{fallBack,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.youngdatafan.portal.system.management.gateway.entity.DpGatewayRatelimit">
+    <!--@mbg.generated-->
+    update dp_gateway_ratelimit
+    set `resource` = #{resource,jdbcType=VARCHAR},
+      `type` = #{type,jdbcType=VARCHAR},
+      namespace = #{namespace,jdbcType=VARCHAR},
+      `mode` = #{mode,jdbcType=VARCHAR},
+      threshold_type = #{thresholdType,jdbcType=VARCHAR},
+      threshold_value = #{thresholdValue,jdbcType=VARCHAR},
+      time_out = #{timeOut,jdbcType=INTEGER},
+      fall_back = #{fallBack,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      `status` = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from dp_gateway_ratelimit
+  </select>
+    <select id="selectByResource" parameterType="java.lang.String" resultMap="BaseResultMap">
+      <!--@mbg.generated-->
+      select
+      <include refid="Base_Column_List" />
+      from dp_gateway_ratelimit
+      where `resource` = #{resource,jdbcType=VARCHAR}
+    </select>
+</mapper>

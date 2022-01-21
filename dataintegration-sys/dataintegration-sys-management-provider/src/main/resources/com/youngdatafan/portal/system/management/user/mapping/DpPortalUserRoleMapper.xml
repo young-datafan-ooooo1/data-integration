@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youngdatafan.portal.system.management.user.mapper.DpPortalUserRoleMapper">
+    <resultMap id="BaseResultMap" type="com.youngdatafan.portal.system.management.user.entity.DpPortalUserRole">
+        <!--@mbg.generated-->
+        <!--@Table dp_portal_user_role-->
+        <result column="user_id" jdbcType="VARCHAR" property="userId"/>
+        <result column="role_id" jdbcType="VARCHAR" property="roleId"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.youngdatafan.portal.system.management.user.entity.DpPortalUserRole">
+        <!--@mbg.generated-->
+        insert into dp_portal_user_role (user_id, role_id)
+        values (#{userId,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.youngdatafan.portal.system.management.user.entity.DpPortalUserRole">
+        <!--@mbg.generated-->
+        insert into dp_portal_user_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="roleId != null">
+                role_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="roleId != null">
+                #{roleId,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="selectRolesByUserId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select role_id,user_id from dp_portal_user_role
+        where user_id = #{userId,jdbcType=VARCHAR}
+    </select>
+    <insert id="batchInsert" parameterType="com.youngdatafan.portal.system.management.user.entity.DpPortalUserRole">
+        insert into dp_portal_user_role (user_id, role_id) values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.userId,jdbcType=VARCHAR}, #{item.roleId,jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+
+    <delete id="deleteByUserId" parameterType="java.lang.String">
+        delete from dp_portal_user_role
+        where user_id = #{userId,jdbcType=VARCHAR}
+    </delete>
+    <delete id="deleteByRoleId" parameterType="java.lang.String">
+        delete from dp_portal_user_role
+        where role_id = #{roleId,jdbcType=VARCHAR}
+    </delete>
+    <delete id="deleteByUserIds" parameterType="java.util.List">
+        delete from dp_portal_user_role
+        where user_id in
+        <foreach collection="list" item="userId" open="(" close=")" separator=",">
+            #{userId,jdbcType=VARCHAR}
+
+        </foreach>
+    </delete>
+
+
+</mapper>
