@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youngdatafan.portal.common.project.mapper.DpPortalProjectMapper">
+    <resultMap id="BaseResultMap" type="com.youngdatafan.portal.common.project.entity.DpPortalProject">
+        <!--@mbg.generated-->
+        <id column="project_id" jdbcType="VARCHAR" property="projectId"/>
+        <result column="project_name" jdbcType="VARCHAR" property="projectName"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="project_type" jdbcType="VARCHAR" property="projectType"/>
+        <result column="project_status" jdbcType="VARCHAR" property="projectStatus"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="create_user_id" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="create_user_name" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="update_user_id" jdbcType="VARCHAR" property="updateUserId"/>
+        <result column="update_user_name" jdbcType="VARCHAR" property="updateUserName"/>
+        <result column="group_id" jdbcType="VARCHAR" property="groupId"/>
+        <result column="group_name" jdbcType="VARCHAR" property="groupName"/>
+    </resultMap>
+
+    <resultMap id="ProjectDTOMap" type="com.youngdatafan.portal.common.project.dto.ProjectDTO">
+        <!--@mbg.generated-->
+        <id column="project_id" jdbcType="VARCHAR" property="projectId"/>
+        <result column="project_name" jdbcType="VARCHAR" property="projectName"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="project_type" jdbcType="VARCHAR" property="projectType"/>
+        <result column="project_status" jdbcType="VARCHAR" property="projectStatus"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="create_user_id" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="create_user_describe" jdbcType="VARCHAR" property="createUserName"/>
+
+        <result column="create_user_name" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="update_user_id" jdbcType="VARCHAR" property="updateUserId"/>
+        <result column="update_user_name" jdbcType="VARCHAR" property="updateUserName"/>
+        <result column="group_id" jdbcType="VARCHAR" property="groupId"/>
+        <result column="group_name" jdbcType="VARCHAR" property="groupName"/>
+        <result column="group_describe" jdbcType="VARCHAR" property="groupDescribe"/>
+
+        <association property="projectOnlineDTO" column="online"
+                     javaType="com.youngdatafan.portal.common.project.dto.ProjectOnlineDTO">
+            <result column="online.status" jdbcType="VARCHAR" property="status"/>
+            <result column="online.create_time" jdbcType="TIMESTAMP" property="createTime"/>
+            <result column="online.update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+            <result column="online.create_user_id" jdbcType="VARCHAR" property="createUserId"/>
+            <result column="online.create_user_name" jdbcType="VARCHAR" property="createUserName"/>
+            <result column="online.review_user_id" jdbcType="VARCHAR" property="reviewUserId"/>
+            <result column="online.review_user_name" jdbcType="VARCHAR" property="reviewUserName"/>
+            <result column="online.review_notes" jdbcType="VARCHAR" property="reviewNotes"/>
+        </association>
+    </resultMap>
+    <resultMap id="GrantMyProjectDTOMap" type="com.youngdatafan.portal.common.project.dto.UserInfoDTO">
+        <result column="user_id" jdbcType="VARCHAR" property="userId"/>
+        <result column="describe" jdbcType="VARCHAR" property="describe"/>
+        <collection property="projectDTOList" ofType="com.youngdatafan.portal.common.project.dto.ProjectDTO">
+            <!--@mbg.generated-->
+            <id column="project_id" jdbcType="VARCHAR" property="projectId"/>
+            <result column="project_name" jdbcType="VARCHAR" property="projectName"/>
+            <result column="description" jdbcType="VARCHAR" property="description"/>
+            <result column="project_type" jdbcType="VARCHAR" property="projectType"/>
+            <result column="project_status" jdbcType="VARCHAR" property="projectStatus"/>
+            <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+            <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+            <result column="create_user_id" jdbcType="VARCHAR" property="createUserId"/>
+            <result column="create_user_name" jdbcType="VARCHAR" property="createUserName"/>
+            <result column="update_user_id" jdbcType="VARCHAR" property="updateUserId"/>
+            <result column="update_user_name" jdbcType="VARCHAR" property="updateUserName"/>
+            <result column="group_id" jdbcType="VARCHAR" property="groupId"/>
+            <result column="group_name" jdbcType="VARCHAR" property="groupName"/>
+            <result column="group_describe" jdbcType="VARCHAR" property="groupDescribe"/>
+
+            <association property="projectOnlineDTO" column="online"
+                         javaType="com.youngdatafan.portal.common.project.dto.ProjectOnlineDTO">
+                <result column="status" jdbcType="VARCHAR" property="status"/>
+                <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+                <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+                <result column="create_user_id" jdbcType="VARCHAR" property="createUserId"/>
+                <result column="create_user_name" jdbcType="VARCHAR" property="createUserName"/>
+                <result column="review_user_id" jdbcType="VARCHAR" property="reviewUserId"/>
+                <result column="review_user_name" jdbcType="VARCHAR" property="reviewUserName"/>
+                <result column="review_notes" jdbcType="VARCHAR" property="reviewNotes"/>
+            </association>
+        </collection>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        project_id, project_name, description, project_type, project_status, create_time,
+        update_time, create_user_id, create_user_name, update_user_id, update_user_name,
+        group_id, group_name
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from dp_portal_project
+        where project_id = #{projectId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        <!--@mbg.generated-->
+        delete from dp_portal_project
+        where project_id = #{projectId,jdbcType=VARCHAR}
+    </delete>
+    <delete id="deleteByProjectIds">
+        delete from dp_portal_project
+        where
+        project_id IN
+        <foreach collection="projectIds" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </delete>
+    <insert id="insert" parameterType="com.youngdatafan.portal.common.project.entity.DpPortalProject">
+        <!--@mbg.generated-->
+        insert into dp_portal_project (project_id, project_name, description,
+        project_type, project_status, create_time,
+        update_time, create_user_id, create_user_name,
+        update_user_id, update_user_name, group_id,
+        group_name)
+        values (#{projectId,jdbcType=VARCHAR}, #{projectName,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR},
+        #{projectType,jdbcType=VARCHAR}, #{projectStatus,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+        #{updateTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR},
+        #{updateUserId,jdbcType=VARCHAR}, #{updateUserName,jdbcType=VARCHAR}, #{groupId,jdbcType=VARCHAR},
+        #{groupName,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.youngdatafan.portal.common.project.entity.DpPortalProject">
+        <!--@mbg.generated-->
+        insert into dp_portal_project
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="projectId != null">
+                project_id,
+            </if>
+            <if test="projectName != null">
+                project_name,
+            </if>
+            <if test="description != null">
+                description,
+            </if>
+            <if test="projectType != null">
+                project_type,
+            </if>
+            <if test="projectStatus != null">
+                project_status,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="createUserId != null">
+                create_user_id,
+            </if>
+            <if test="createUserName != null">
+                create_user_name,
+            </if>
+            <if test="updateUserId != null">
+                update_user_id,
+            </if>
+            <if test="updateUserName != null">
+                update_user_name,
+            </if>
+            <if test="groupId != null">
+                group_id,
+            </if>
+            <if test="groupName != null">
+                group_name,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="projectId != null">
+                #{projectId,jdbcType=VARCHAR},
+            </if>
+            <if test="projectName != null">
+                #{projectName,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="projectType != null">
+                #{projectType,jdbcType=VARCHAR},
+            </if>
+            <if test="projectStatus != null">
+                #{projectStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserName != null">
+                #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="updateUserId != null">
+                #{updateUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="updateUserName != null">
+                #{updateUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="groupId != null">
+                #{groupId,jdbcType=VARCHAR},
+            </if>
+            <if test="groupName != null">
+                #{groupName,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.youngdatafan.portal.common.project.entity.DpPortalProject">
+        <!--@mbg.generated-->
+        update dp_portal_project
+        <set>
+            <if test="projectName != null">
+                project_name = #{projectName,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="projectType != null">
+                project_type = #{projectType,jdbcType=VARCHAR},
+            </if>
+            <if test="projectStatus != null">
+                project_status = #{projectStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserName != null">
+                create_user_name = #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="updateUserId != null">
+                update_user_id = #{updateUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="updateUserName != null">
+                update_user_name = #{updateUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="groupId != null">
+                group_id = #{groupId,jdbcType=VARCHAR},
+            </if>
+            <if test="groupName != null">
+                group_name = #{groupName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where project_id = #{projectId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.youngdatafan.portal.common.project.entity.DpPortalProject">
+        <!--@mbg.generated-->
+        update dp_portal_project
+        set project_name = #{projectName,jdbcType=VARCHAR},
+        description = #{description,jdbcType=VARCHAR},
+        project_type = #{projectType,jdbcType=VARCHAR},
+        project_status = #{projectStatus,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+        create_user_id = #{createUserId,jdbcType=VARCHAR},
+        create_user_name = #{createUserName,jdbcType=VARCHAR},
+        update_user_id = #{updateUserId,jdbcType=VARCHAR},
+        update_user_name = #{updateUserName,jdbcType=VARCHAR},
+        group_id = #{groupId,jdbcType=VARCHAR},
+        group_name = #{groupName,jdbcType=VARCHAR}
+        where project_id = #{projectId,jdbcType=VARCHAR}
+    </update>
+    <select id="selectLikeByProjectName" resultMap="ProjectDTOMap">
+        SELECT
+        t1.*,
+        t3.`describe` as 'create_user_describe',
+        t2.STATUS AS 'online.status',
+        t2.create_time AS 'online.create_time',
+        t2.update_Time AS 'online.update_Time',
+        t2.create_user_id AS 'online.create_user_id',
+        t2.create_user_name AS 'online.create_user_name',
+        t2.review_user_id AS 'online.review_user_id',
+        t2.review_user_name AS 'online.review_user_name',
+        t2.review_notes AS 'online.review_notes'
+        FROM
+        dp_portal_project t1
+        LEFT JOIN dp_portal_project_online t2 ON t1.project_id = t2.project_id
+        LEFT JOIN dp_portal_user t3 ON t3.user_id = t1.create_user_id
+        where 1=1
+        and t1.project_type = #{projectType}
+        <if test="userId != '00000000'">
+            and t1.create_user_id = #{userId}
+        </if>
+        <if test="projectName != null ">
+            and t1.project_name like '%${projectName}%'
+        </if>
+
+    </select>
+    <select id="selectLikeByGroupId" resultMap="ProjectDTOMap">
+        SELECT
+        t1.*,
+        t2.STATUS AS 'online.status',
+        t2.create_time AS 'online.create_time',
+        t2.update_Time AS 'online.update_Time',
+        t2.create_user_id AS 'online.create_user_id',
+        t2.create_user_name AS 'online.create_user_name',
+        t2.review_user_id AS 'online.review_user_id',
+        t2.review_user_name AS 'online.review_user_name',
+        t2.review_notes AS 'online.review_notes'
+        FROM
+        dp_portal_project t1
+        LEFT JOIN dp_portal_project_online t2 ON t1.project_id = t2.project_id
+        where 1=1
+        <if test="userId != '00000000'">
+            and t1.create_user_id = #{userId}
+        </if>
+        and t1.group_id = #{groupId}
+        and t1.project_type = #{projectType}
+        <if test="projectName != null ">
+            and t1.project_name like '%${projectName}%'
+        </if>
+    </select>
+    <select id="selectMyProject" resultMap="ProjectDTOMap">
+        SELECT
+        t1.*,
+        t2.`describe` AS group_describe,
+        t3.STATUS AS 'online.status',
+        t3.create_time AS 'online.create_time',
+        t3.update_Time AS 'online.update_Time',
+        t3.create_user_id AS 'online.create_user_id',
+        t3.create_user_name AS 'online.create_user_name',
+        t3.review_user_id AS 'online.review_user_id',
+        t3.review_user_name AS 'online.review_user_name',
+        t3.review_notes AS 'online.review_notes'
+        FROM
+        dp_portal_project t1
+        LEFT JOIN dp_portal_group t2 ON t1.group_id = t2.group_id
+        LEFT JOIN dp_portal_project_online t3 ON t1.project_id = t3.project_id
+        where t1.project_type = #{projectType}
+        <if test="userId != '00000000'">
+            and t1.create_user_id = #{userId}
+        </if>
+        <if test="projectName != null ">
+            and t1.project_name like '%${projectName}%'
+        </if>
+        <if test="groupName != null ">
+            and t2.group_name = #{groupName}
+        </if>
+
+        ORDER BY
+        t2.group_order,t1.create_time desc
+    </select>
+    <select id="selectGrantMyProject" resultMap="GrantMyProjectDTOMap">
+        SELECT
+        t2.create_user_id,
+        t3.`describe`,
+        t2.*,
+        t4.`describe` AS group_describe
+        FROM
+        dp_portal_project_user_grant t1
+        LEFT JOIN dp_portal_project t2 ON t1.project_id = t2.project_id
+        LEFT JOIN dp_portal_user t3 ON t3.user_id = t2.create_user_id
+        LEFT JOIN dp_portal_group t4 ON t4.group_id = t2.group_id
+        WHERE
+        t2.project_type = #{projectType}
+        AND t1.user_id = #{userId}
+        <if test="projectName != null ">
+            and t2.project_name like '%${projectName}%'
+        </if>
+        ORDER BY
+        t4.group_order,t2.create_time desc
+    </select>
+    <select id="selectAllProject" resultMap="ProjectDTOMap">
+        SELECT
+        t1.*,
+        t2.`describe` AS group_describe
+        FROM
+        dp_portal_project t1
+        LEFT JOIN dp_portal_group t2 ON t1.group_id = t2.group_id
+        <if test="userId != '00000000'">
+            left join dp_portal_project_user_grant t3 on t3.project_id = t1.project_id
+        </if>
+        where 1=1
+        <if test="userId != '00000000'">
+            and (t1.create_user_id = #{userId} or t3.user_id  = #{userId})
+        </if>
+        <if test="projectName != null ">
+            and t1.project_name like '%${projectName}%'
+        </if>
+        ORDER BY
+        t2.group_order,t1.create_time desc
+    </select>
+    <select id="selectExists" resultType="java.lang.Integer">
+        select count(1) from dp_portal_project
+        where project_name = #{projectName} and project_type = #{projectType}
+        and create_user_id = #{createUserId}
+
+    </select>
+</mapper>

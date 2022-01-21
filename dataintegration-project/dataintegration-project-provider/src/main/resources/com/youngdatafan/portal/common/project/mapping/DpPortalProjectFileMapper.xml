@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youngdatafan.portal.common.project.mapper.DpPortalProjectFileMapper">
+  <resultMap id="BaseResultMap" type="com.youngdatafan.portal.common.project.dto.ProjectFileDTO">
+    <!--@mbg.generated-->
+    <id column="project_id" jdbcType="VARCHAR" property="projectId" />
+    <result column="project_file" jdbcType="LONGVARCHAR" property="projectFile" />
+    <result column="project_version" jdbcType="VARCHAR" property="projectVersion" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    project_id, project_file, project_version, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from dp_portal_project_file
+    where project_id = #{projectId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <!--@mbg.generated-->
+    delete from dp_portal_project_file
+    where project_id = #{projectId,jdbcType=VARCHAR}
+  </delete>
+    <delete id="deleteByProjectIds">
+      delete from dp_portal_project_file
+      where
+      project_id IN
+      <foreach collection="projectIds" item="item" index="index" open="(" close=")" separator=",">
+        #{item}
+      </foreach>
+    </delete>
+    <insert id="insert" parameterType="com.youngdatafan.portal.common.project.entity.DpPortalProjectFile">
+    <!--@mbg.generated-->
+    insert into dp_portal_project_file (project_id, project_file, project_version, 
+      create_time)
+    values (#{projectId,jdbcType=VARCHAR}, #{projectFile,jdbcType=LONGVARCHAR}, #{projectVersion,jdbcType=VARCHAR},
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.youngdatafan.portal.common.project.entity.DpPortalProjectFile">
+    <!--@mbg.generated-->
+    insert into dp_portal_project_file
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="projectId != null">
+        project_id,
+      </if>
+      <if test="projectFile != null">
+        project_file,
+      </if>
+      <if test="projectVersion != null">
+        project_version,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="projectId != null">
+        #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="projectFile != null">
+        #{projectFile,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="projectVersion != null">
+        #{projectVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.youngdatafan.portal.common.project.entity.DpPortalProjectFile">
+    <!--@mbg.generated-->
+    update dp_portal_project_file
+    <set>
+      <if test="projectFile != null">
+        project_file = #{projectFile,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="projectVersion != null">
+        project_version = #{projectVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where project_id = #{projectId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.youngdatafan.portal.common.project.entity.DpPortalProjectFile">
+    <!--@mbg.generated-->
+    update dp_portal_project_file
+    set project_file = #{projectFile,jdbcType=LONGVARCHAR},
+      project_version = #{projectVersion,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where project_id = #{projectId,jdbcType=VARCHAR}
+  </update>
+</mapper>
