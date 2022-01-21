@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youngdatafan.portal.system.management.user.mapper.DpPortalRoleResourceMapper">
+    <resultMap id="BaseResultMap" type="com.youngdatafan.portal.system.management.user.entity.DpPortalRoleResource">
+        <!--@mbg.generated-->
+        <!--@Table dp_portal_role_resource-->
+        <result column="role_id" jdbcType="VARCHAR" property="roleId"/>
+        <result column="resource_id" jdbcType="VARCHAR" property="resourceId"/>
+    </resultMap>
+    <insert id="insert" parameterType="com.youngdatafan.portal.system.management.user.entity.DpPortalRoleResource">
+        <!--@mbg.generated-->
+        insert into dp_portal_role_resource (role_id, resource_id)
+        values (#{roleId,jdbcType=VARCHAR}, #{resourceId,jdbcType=VARCHAR})
+    </insert>
+
+
+    <insert id="batchInsert" parameterType="java.util.List">
+        insert into dp_portal_role_resource (role_id, resource_id)
+        values
+        <foreach collection="list" separator="," item="item">
+            (#{item.roleId,jdbcType=VARCHAR}, #{item.resourceId,jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+    <insert id="insertSelective" parameterType="com.youngdatafan.portal.system.management.user.entity.DpPortalRoleResource">
+        <!--@mbg.generated-->
+        insert into dp_portal_role_resource
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="roleId != null">
+                role_id,
+            </if>
+            <if test="resourceId != null">
+                resource_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="roleId != null">
+                #{roleId,jdbcType=VARCHAR},
+            </if>
+            <if test="resourceId != null">
+                #{resourceId,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="deleteByRoleId" parameterType="java.lang.String">
+        delete from dp_portal_role_resource
+        where role_id = #{roleId,jdbcType=VARCHAR}
+    </delete>
+
+    <delete id="deleteByRoleIds" parameterType="java.util.List">
+        delete from dp_portal_role_resource
+        where role_id in
+        <foreach collection="roleIds" item="roleId" open="(" close=")" separator=",">
+            #{roleId,jdbcType=VARCHAR}
+        </foreach>
+    </delete>
+
+    <delete id="deleteByResId" parameterType="java.util.List">
+        delete from dp_portal_role_resource
+        where resource_id = #{resourceId,jdbcType=VARCHAR}
+    </delete>
+</mapper>

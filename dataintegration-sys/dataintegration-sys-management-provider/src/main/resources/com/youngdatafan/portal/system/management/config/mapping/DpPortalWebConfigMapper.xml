@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youngdatafan.portal.system.management.config.mapper.DpPortalWebConfigMapper">
+  <resultMap id="BaseResultMap" type="com.youngdatafan.portal.system.management.config.entity.DpPortalWebConfig">
+    <!--@mbg.generated-->
+    <!--@Table dp_portal_web_config-->
+    <id column="key" jdbcType="VARCHAR" property="key" />
+    <result column="value" jdbcType="VARCHAR" property="value" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    `key`, `value`
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from dp_portal_web_config
+    where `key` = #{key,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <!--@mbg.generated-->
+    delete from dp_portal_web_config
+    where `key` = #{key,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.youngdatafan.portal.system.management.config.entity.DpPortalWebConfig">
+    <!--@mbg.generated-->
+    insert into dp_portal_web_config (`key`, `value`)
+    values (#{key,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.youngdatafan.portal.system.management.config.entity.DpPortalWebConfig">
+    <!--@mbg.generated-->
+    insert into dp_portal_web_config
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="key != null">
+        `key`,
+      </if>
+      <if test="value != null">
+        `value`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="key != null">
+        #{key,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null">
+        #{value,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.youngdatafan.portal.system.management.config.entity.DpPortalWebConfig">
+    <!--@mbg.generated-->
+    update dp_portal_web_config
+    <set>
+      <if test="value != null">
+        `value` = #{value,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where `key` = #{key,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.youngdatafan.portal.system.management.config.entity.DpPortalWebConfig">
+    <!--@mbg.generated-->
+    update dp_portal_web_config
+    set `value` = #{value,jdbcType=VARCHAR}
+    where `key` = #{key,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from dp_portal_web_config
+  </select>
+
+</mapper>

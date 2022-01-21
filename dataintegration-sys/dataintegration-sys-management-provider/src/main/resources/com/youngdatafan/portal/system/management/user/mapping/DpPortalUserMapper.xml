@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youngdatafan.portal.system.management.user.mapper.DpPortalUserMapper">
+    <resultMap id="BaseResultMap" type="com.youngdatafan.portal.system.management.user.entity.DpPortalUser">
+        <!--@mbg.generated-->
+        <!--@Table dp_portal_user-->
+        <id column="user_id" jdbcType="VARCHAR" property="userId"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="describe" jdbcType="VARCHAR" property="describe"/>
+        <result column="user_passwd" jdbcType="VARCHAR" property="userPasswd"/>
+        <result column="user_mobile" jdbcType="VARCHAR" property="userMobile"/>
+        <result column="user_email" jdbcType="VARCHAR" property="userEmail"/>
+        <result column="Last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="create_user_id" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="lock_time" jdbcType="TIMESTAMP" property="lockTime"/>
+    </resultMap>
+    <resultMap id="UserRoleMap" type="com.youngdatafan.portal.system.management.user.entity.UserRoleEntity">
+        <result column="user_id" jdbcType="VARCHAR" property="userId"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="role_id" jdbcType="VARCHAR" property="roleId"/>
+        <result column="describe" jdbcType="VARCHAR" property="userNameCn"/>
+    </resultMap>
+
+    <resultMap id="loginInfoMap" type="com.youngdatafan.portal.system.management.user.entity.DpPortalUser" extends="BaseResultMap">
+        <collection property="roleIds" ofType="java.lang.String" column="role_id">
+            <result column="role_id" jdbcType="VARCHAR"/>
+        </collection>
+        <collection property="tenantIds" ofType="java.lang.String">
+            <result column="tenant_id" jdbcType="VARCHAR"/>
+        </collection>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        user_id, user_name, `describe`, user_passwd, user_mobile, user_email, Last_login_time,
+        create_time, update_time, create_user_id, `status`,lock_time
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from dp_portal_user
+        where user_id = #{userId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        <!--@mbg.generated-->
+        delete from dp_portal_user
+        where user_id = #{userId,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.youngdatafan.portal.system.management.user.entity.DpPortalUser">
+        <!--@mbg.generated-->
+        insert into dp_portal_user (user_id, user_name, `describe`,
+        user_passwd, user_mobile, user_email,
+        Last_login_time, create_time, update_time,
+        create_user_id, `status`)
+        values (#{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{describe,jdbcType=VARCHAR},
+        #{userPasswd,jdbcType=VARCHAR}, #{userMobile,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR},
+        #{lastLoginTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+        #{createUserId,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.youngdatafan.portal.system.management.user.entity.DpPortalUser">
+        <!--@mbg.generated-->
+        insert into dp_portal_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="userName != null">
+                user_name,
+            </if>
+            <if test="describe != null">
+                `describe`,
+            </if>
+            <if test="userPasswd != null">
+                user_passwd,
+            </if>
+            <if test="userMobile != null">
+                user_mobile,
+            </if>
+            <if test="userEmail != null">
+                user_email,
+            </if>
+            <if test="lastLoginTime != null">
+                Last_login_time,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="createUserId != null">
+                create_user_id,
+            </if>
+            <if test="status != null">
+                `status`,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="describe != null">
+                #{describe,jdbcType=VARCHAR},
+            </if>
+            <if test="userPasswd != null">
+                #{userPasswd,jdbcType=VARCHAR},
+            </if>
+            <if test="userMobile != null">
+                #{userMobile,jdbcType=VARCHAR},
+            </if>
+            <if test="userEmail != null">
+                #{userEmail,jdbcType=VARCHAR},
+            </if>
+            <if test="lastLoginTime != null">
+                #{lastLoginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.youngdatafan.portal.system.management.user.entity.DpPortalUser">
+        <!--@mbg.generated-->
+        update dp_portal_user
+        <set>
+            <if test="userName != null">
+                user_name = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="describe != null">
+                `describe` = #{describe,jdbcType=VARCHAR},
+            </if>
+            <if test="userPasswd != null">
+                user_passwd = #{userPasswd,jdbcType=VARCHAR},
+            </if>
+            <if test="userMobile != null">
+                user_mobile = #{userMobile,jdbcType=VARCHAR},
+            </if>
+            <if test="userEmail != null">
+                user_email = #{userEmail,jdbcType=VARCHAR},
+            </if>
+            <if test="lastLoginTime != null">
+                Last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                `status` = #{status,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where user_id = #{userId,jdbcType=VARCHAR}
+    </update>
+
+
+    <update id="updateByUserNameSelective" parameterType="com.youngdatafan.portal.system.management.user.entity.DpPortalUser">
+        <!--@mbg.generated-->
+        update dp_portal_user
+        <set>
+            <if test="userName != null">
+                user_name = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="describe != null">
+                `describe` = #{describe,jdbcType=VARCHAR},
+            </if>
+            <if test="userPasswd != null">
+                user_passwd = #{userPasswd,jdbcType=VARCHAR},
+            </if>
+            <if test="userMobile != null">
+                user_mobile = #{userMobile,jdbcType=VARCHAR},
+            </if>
+            <if test="userEmail != null">
+                user_email = #{userEmail,jdbcType=VARCHAR},
+            </if>
+            <if test="lastLoginTime != null">
+                Last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                `status` = #{status,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where user_name = #{userName,jdbcType=VARCHAR}
+        <if test="createUserId != '00000000'">
+            and create_user_id = #{createUserId,jdbcType=VARCHAR}
+        </if>
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.youngdatafan.portal.system.management.user.entity.DpPortalUser">
+        <!--@mbg.generated-->
+        update dp_portal_user
+        set user_name = #{userName,jdbcType=VARCHAR},
+        `describe` = #{describe,jdbcType=VARCHAR},
+        user_passwd = #{userPasswd,jdbcType=VARCHAR},
+        user_mobile = #{userMobile,jdbcType=VARCHAR},
+        user_email = #{userEmail,jdbcType=VARCHAR},
+        Last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+        create_user_id = #{createUserId,jdbcType=VARCHAR},
+        `status` = #{status,jdbcType=VARCHAR}
+        where user_id = #{userId,jdbcType=VARCHAR}
+    </update>
+    <select id="selectByUserName" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from dp_portal_user
+        where user_name = #{userName,jdbcType=VARCHAR}
+    </select>
+    <select id="checkExistsByUserName" resultType="java.lang.Integer" parameterType="java.lang.String">
+        select 1
+        from dp_portal_user
+        where user_name = #{userName,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByUserId" parameterType="java.lang.String">
+        delete from dp_portal_user
+        where user_id = #{userId,jdbcType=VARCHAR}
+        <if test="createUserId != '00000000'">
+            and create_user_id = #{createUserId,jdbcType=VARCHAR}
+        </if>
+    </delete>
+
+    <delete id="deleteByUserIds" parameterType="java.util.List">
+        delete from dp_portal_user
+        where user_id in
+        <foreach collection="userIds" item="userId" open="(" close=")" separator=",">
+            #{userId,jdbcType=VARCHAR}
+        </foreach>
+        <if test="createUserId != '00000000'">
+            and create_user_id = #{createUserId,jdbcType=VARCHAR}
+        </if>
+    </delete>
+    <select id="selectUsers" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from dp_portal_user
+        where 1=1
+        <if test="createUserId != '00000000'">
+            and create_user_id = #{createUserId,jdbcType=VARCHAR}
+        </if>
+        <if test="keyWord != null and keyWord != ''">
+            and (
+            user_name like concat(concat('%', #{keyWord,jdbcType=VARCHAR} ),'%')
+            or `describe` like concat(concat('%', #{keyWord,jdbcType=VARCHAR} ),'%')
+            )
+        </if>
+
+    </select>
+    <update id="updateStatus">
+        update dp_portal_user
+        set update_time = NOW(),
+        <if test="status == 1">
+            lock_time = NOW()
+        </if>
+        `status` = #{status,jdbcType=VARCHAR}
+        where user_id = #{userId,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateLastLoginTime">
+        update dp_portal_user
+        set update_time = NOW(),
+        Last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP}
+        where user_id = #{userId,jdbcType=VARCHAR}
+    </update>
+    <select id="selectUserRoleByUserName" resultMap="UserRoleMap">
+        select a.user_id,a.user_name,b.role_id ,a.`describe` from dp_portal_user a
+        left join dp_portal_user_role b
+        on a.user_id=b.user_id
+        where a.user_name= #{userName,jdbcType=VARCHAR}
+    </select>
+    <select id="selectAuditingUser" resultMap="BaseResultMap">
+        select a.user_id,a.user_Name, a.`describe` from dp_portal_user a
+        where a.user_id in
+        ( select create_user_id from dp_portal_user a
+        where a.user_id = #{userId,jdbcType=VARCHAR})
+
+    </select>
+
+    <select id="selectLoginInfoByUserName" resultMap="loginInfoMap">
+        SELECT
+            a.user_id ,
+            a.user_name ,
+            a.`describe` ,
+            a.`status` ,
+            a.user_passwd ,
+            a.lock_time,
+            b.role_id ,
+            c.tenant_id
+        FROM
+            dp_portal_user a
+        LEFT JOIN dp_portal_user_role b ON a.user_id = b.user_id
+        LEFT JOIN dp_user_tenant c ON a.user_id = c.user_id
+        where a.user_name = #{userName,jdbcType=VARCHAR}
+    </select>
+
+
+</mapper>

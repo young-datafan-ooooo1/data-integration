@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youngdatafan.portal.system.management.log.mapper.DpPortalLogMapper">
+    <resultMap id="BaseResultMap" type="com.youngdatafan.portal.system.management.log.entity.DpPortalLog">
+        <!--@mbg.generated-->
+        <!--@Table dp_portal_log-->
+        <id column="log_id" jdbcType="BIGINT" property="logId"/>
+        <result column="server_name" jdbcType="VARCHAR" property="serverName"/>
+        <result column="req_uri" jdbcType="VARCHAR" property="reqUri"/>
+        <result column="req_ip" jdbcType="VARCHAR" property="reqIp"/>
+        <result column="req_time" jdbcType="TIMESTAMP" property="reqTime"/>
+        <result column="req_size" jdbcType="INTEGER" property="reqSize"/>
+        <result column="req_user_id" jdbcType="VARCHAR" property="reqUserId" />
+        <result column="req_user_name" jdbcType="VARCHAR" property="reqUserName" />
+        <result column="exc_time" jdbcType="INTEGER" property="excTime"/>
+    </resultMap>
+    <resultMap id="BaseResultMapDTO" type="com.youngdatafan.portal.system.management.log.dto.LogDTO">
+        <!--@mbg.generated-->
+        <!--@Table dp_portal_log-->
+        <id column="log_id" jdbcType="BIGINT" property="logId"/>
+        <result column="server_name" jdbcType="VARCHAR" property="serverName"/>
+        <result column="req_uri" jdbcType="VARCHAR" property="reqUri"/>
+        <result column="req_ip" jdbcType="VARCHAR" property="reqIp"/>
+        <result column="req_time" jdbcType="TIMESTAMP" property="reqTime"/>
+        <result column="req_size" jdbcType="INTEGER" property="reqSize"/>
+        <result column="req_user_id" jdbcType="VARCHAR" property="reqUserId" />
+        <result column="req_user_name" jdbcType="VARCHAR" property="reqUserName" />
+        <result column="exc_time" jdbcType="INTEGER" property="excTime"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        log_id, `server_name`, req_uri, req_ip, req_time, req_size, req_user_id, req_user_name,exc_time
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from dp_portal_log
+        where log_id = #{logId,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        <!--@mbg.generated-->
+        delete from dp_portal_log
+        where log_id = #{logId,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.youngdatafan.portal.system.management.log.entity.DpPortalLog">
+        <!--@mbg.generated-->
+        insert into dp_portal_log (log_id, `server_name`, req_uri,
+        req_ip, req_time, req_size,req_user_id, req_user_name,
+        exc_time)
+        values (#{logId,jdbcType=BIGINT}, #{serverName,jdbcType=VARCHAR}, #{reqUri,jdbcType=VARCHAR},
+        #{reqIp,jdbcType=VARCHAR}, #{reqTime,jdbcType=TIMESTAMP}, #{reqSize,jdbcType=INTEGER},
+        #{reqUserId,jdbcType=VARCHAR}, #{reqUserName,jdbcType=VARCHAR},
+        #{excTime,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" parameterType="com.youngdatafan.portal.system.management.log.entity.DpPortalLog">
+        <!--@mbg.generated-->
+        insert into dp_portal_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="logId != null">
+                log_id,
+            </if>
+            <if test="serverName != null">
+                `server_name`,
+            </if>
+            <if test="reqUri != null">
+                req_uri,
+            </if>
+            <if test="reqIp != null">
+                req_ip,
+            </if>
+            <if test="reqTime != null">
+                req_time,
+            </if>
+            <if test="reqSize != null">
+                req_size,
+            </if>
+            <if test="reqUserId != null">
+                req_user_id,
+            </if>
+            <if test="reqUserName != null">
+                req_user_name,
+            </if>
+            <if test="excTime != null">
+                exc_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="logId != null">
+                #{logId,jdbcType=BIGINT},
+            </if>
+            <if test="serverName != null">
+                #{serverName,jdbcType=VARCHAR},
+            </if>
+            <if test="reqUri != null">
+                #{reqUri,jdbcType=VARCHAR},
+            </if>
+            <if test="reqIp != null">
+                #{reqIp,jdbcType=VARCHAR},
+            </if>
+            <if test="reqTime != null">
+                #{reqTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="reqSize != null">
+                #{reqSize,jdbcType=INTEGER},
+            </if>
+            <if test="reqUserId != null">
+                #{reqUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="reqUserName != null">
+                #{reqUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="excTime != null">
+                #{excTime,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <insert id="batchInsert" parameterType="java.util.List">
+        insert into dp_portal_log (log_id, `server_name`, req_uri,
+        req_ip, req_time, req_size,req_user_id, req_user_name,
+        exc_time)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.logId,jdbcType=BIGINT}, #{item.serverName,jdbcType=VARCHAR}, #{item.reqUri,jdbcType=VARCHAR},
+            #{item.reqIp,jdbcType=VARCHAR}, #{item.reqTime,jdbcType=TIMESTAMP}, #{item.reqSize,jdbcType=INTEGER},
+            #{item.reqUserId,jdbcType=VARCHAR}, #{item.reqUserName,jdbcType=VARCHAR},
+            #{item.excTime,jdbcType=INTEGER})
+        </foreach>
+    </insert>
+
+    <delete id="deleteByReqTime" parameterType="java.util.Date">
+        delete from dp_portal_log
+        where req_time &lt; #{date,jdbcType=TIMESTAMP}
+    </delete>
+    <select id="selectByReqTime" resultMap="BaseResultMapDTO">
+        select
+        <include refid="Base_Column_List"/>
+        from dp_portal_log
+        where req_time &gt;= #{startDate,jdbcType=TIMESTAMP}
+        and req_time &lt;= #{endDate,jdbcType=TIMESTAMP}
+        <if test="userName != null and userName != ''">
+            and req_user_name = #{userName}
+        </if>
+        order by req_time desc
+    </select>
+</mapper>

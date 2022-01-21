@@ -1,0 +1,9 @@
+spring:
+  profiles:
+    active: local
+  main:
+    allow-bean-definition-overriding: true
+
+feign:
+  hystrix:
+    enabled: false
