@@ -5,7 +5,7 @@ spring:
         file-extension: yaml
         server-addr: localhost:8848
   application:
-    name: dataintegration-group-provider
+    name: dataintegration-project-provider
 management:
   endpoints:
     web:

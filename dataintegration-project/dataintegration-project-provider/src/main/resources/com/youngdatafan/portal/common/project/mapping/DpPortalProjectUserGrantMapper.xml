@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youngdatafan.portal.common.project.mapper.DpPortalProjectUserGrantMapper">
+    <resultMap id="BaseResultMap" type="com.youngdatafan.portal.common.project.entity.DpPortalProjectUserGrant">
+        <!--@mbg.generated-->
+        <result column="project_id" jdbcType="VARCHAR" property="projectId"/>
+        <result column="user_id" jdbcType="VARCHAR" property="userId"/>
+        <result column="op_model" jdbcType="VARCHAR" property="opModel"/>
+    </resultMap>
+
+    <resultMap id="ProjectUserGrantDTOMap" type="com.youngdatafan.portal.common.project.dto.ProjectUserGrantDTO">
+        <!--@mbg.generated-->
+        <result column="project_id" jdbcType="VARCHAR" property="projectId"/>
+        <result column="user_id" jdbcType="VARCHAR" property="userId"/>
+        <result column="op_model" jdbcType="VARCHAR" property="opModel"/>
+        <result column="describe" jdbcType="VARCHAR" property="describe"/>
+    </resultMap>
+
+    <resultMap id="UserInfoDtOMap" type="com.youngdatafan.portal.common.project.dto.UserInfoDTO">
+        <result column="user_id" jdbcType="VARCHAR" property="userId"/>
+        <result column="describe" jdbcType="VARCHAR" property="describe"/>
+
+    </resultMap>
+    <insert id="insert" parameterType="com.youngdatafan.portal.common.project.entity.DpPortalProjectUserGrant">
+        <!--@mbg.generated-->
+        insert into dp_portal_project_user_grant (project_id, user_id, op_model
+        )
+        values (#{projectId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{opModel,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.youngdatafan.portal.common.project.entity.DpPortalProjectUserGrant">
+        <!--@mbg.generated-->
+        insert into dp_portal_project_user_grant
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="projectId != null">
+                project_id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="opModel != null">
+                op_model,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="projectId != null">
+                #{projectId,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="opModel != null">
+                #{opModel,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <insert id="insertGrant">
+        insert into dp_portal_project_user_grant (project_id, user_id, op_model
+        )
+        values
+        <foreach collection="projectUserGrants" item="item" index="index" separator=",">
+            (
+            #{projectId,jdbcType=VARCHAR},#{item.userId}, #{item.opModel}
+            )
+        </foreach>
+    </insert>
+    <delete id="deleteByProjectId">
+        delete from dp_portal_project_user_grant
+        where project_id = #{projectId}
+    </delete>
+    <delete id="deleteByProjectIds">
+        delete from dp_portal_project_user_grant
+        where
+        project_id IN
+        <foreach collection="projectIds" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </delete>
+
+    <select id="selectUserGrant" resultMap="ProjectUserGrantDTOMap">
+        select a.project_id, a.user_id, a.op_model , b.`describe` from dp_portal_project_user_grant a
+        inner join dp_portal_user b on a.user_id=b.user_id
+        where a.project_id = #{projectId}
+    </select>
+    <select id="selectNotGrantedUser" resultMap="UserInfoDtOMap">
+        SELECT
+        a.user_id ,
+        a.`describe`
+        FROM
+        dp_portal_user a
+        WHERE
+        NOT EXISTS(
+        SELECT
+        1
+        FROM
+        dp_portal_project_user_grant b
+        WHERE
+        a.user_id = b.user_id
+        and b.project_id = #{projectId,jdbcType=VARCHAR}
+        )
+        and a.user_id not in (#{userId,jdbcType=VARCHAR},'00000000')
+        <if test="describe != null ">
+            and a.describe like '%${describe}%'
+        </if>
+    </select>
+</mapper>

@@ -1,0 +1,55 @@
+server:
+  port: 10202
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        heart-beat-interval: 30000
+        heart-beat-timeout: 90000
+
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.10.211:13306/dataintegration?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: 123456
+    hikari:
+      minimum-idle: 1
+      maximum-pool-size: 10
+      max-lifetime: 1800000
+      idle-timeout: 600000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+
+#配置MyBatis
+mybatis:
+  mapper-locations: classpath*:com/youngdatafan/portal/common/project/**/*Mapper.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#pagehelper
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
+# 异步线程池配置
+dp:
+  async:
+    taskExecutor:
+      corePoolSize: 10
+      maxPoolSize: 100
+      queueCapacity: 100
+      keepAliveSeconds: 60
+

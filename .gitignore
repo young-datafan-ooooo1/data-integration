@@ -37,3 +37,4 @@ config.gypi
 test/coverage
 dataintegration-ui/dist
 dataintegration-ui/node
+*.iml
