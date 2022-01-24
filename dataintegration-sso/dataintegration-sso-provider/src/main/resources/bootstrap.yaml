@@ -2,10 +2,10 @@ spring:
   cloud:
     nacos:
       config:
-        server-addr: 192.168.124.166:8848
         file-extension: yaml
+        server-addr: localhost:8848
   application:
-    name: dataintegration-portal-system-management-provider
+    name: dataintegration-common-sso-provider
 management:
   endpoints:
     web:
