@@ -36,8 +36,9 @@
         </dependency>
         <!--核心依赖包，provider模块必须引入-->
         <dependency>
-            <groupId>com.dp</groupId>
-            <artifactId>dp-starter-core</artifactId>
+            <groupId>com.datafan.dataintegration</groupId>
+            <artifactId>dataintegration-core</artifactId>
+            <version>${revision}</version>
         </dependency>
 
         <dependency>
@@ -115,12 +116,6 @@
         <dependency>
             <groupId>io.github.openfeign</groupId>
             <artifactId>feign-httpclient</artifactId>
-        </dependency>
-
-        <!-- swagger-ui -->
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-boot-starter</artifactId>
         </dependency>
 
         <dependency>
