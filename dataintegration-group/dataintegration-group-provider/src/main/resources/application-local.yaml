@@ -9,11 +9,11 @@ management:
 
 spring:
   cloud:
-    nacos:
+    consul:
+      host: localhost
+      port: 8500
       discovery:
-        server-addr: localhost:8848
-        heart-beat-interval: 30000
-        heart-beat-timeout: 30000
+        service-name: ${spring.application.name}
 
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
