@@ -14,9 +14,9 @@ nohup ./consul agent -dev &
 
 使用继承示例，引入dp-portal-system-management-api依赖
 ```
-package com.dp.portal.system.management.client;
+package com.youngdatafan.portal.system.management.client;
 
-import com.dp.portal.system.management.user.api.UserServiceApi;
+import com.youngdatafan.portal.system.management.user.api.UserServiceApi;
 
 /**
  * @author gavin

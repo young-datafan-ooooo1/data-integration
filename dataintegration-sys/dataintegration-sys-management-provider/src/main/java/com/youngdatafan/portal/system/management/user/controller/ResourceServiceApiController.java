@@ -64,7 +64,7 @@ public class ResourceServiceApiController extends BaseController<ResourceDTO> im
     public Result<ResourceDTO, Object> add(ResourceAddVO resourceAddVO, String optUserId) {
 
 //        if (optUserId == null || optUserId.equals("") || !optUserId.equals("00000000")) {
-//            return Result.fail(StatusCode.CODE_10010, null, "只有超级管理员能操作菜单");
+//            return Result.fail(StatusCode.CODE_10010.getCode(), null, "只有超级管理员能操作菜单");
 //        }
         int i = dpPortalResourceService.checkResourceId(resourceAddVO.getResId());
         if (i > 0) {
@@ -102,7 +102,7 @@ public class ResourceServiceApiController extends BaseController<ResourceDTO> im
     public Result<ResourceDTO, Object> update(ResourceUpdateVO resourceUpdateDTO, String optUserId) {
 
 //        if (optUserId == null || optUserId.equals("") || !optUserId.equals("00000000")) {
-//            return Result.fail(StatusCode.CODE_10010, null, "只有超级管理员能操作菜单");
+//            return Result.fail(StatusCode.CODE_10010.getCode(), null, "只有超级管理员能操作菜单");
 //        }
         DpPortalResource dpPortalResource = new DpPortalResource();
         dpPortalResource.setResId(resourceUpdateDTO.getResId());
@@ -132,7 +132,7 @@ public class ResourceServiceApiController extends BaseController<ResourceDTO> im
     @Transactional
     public Result<Boolean, Object> deleteResource(String resId, String optUserId) {
 //        if (optUserId == null || optUserId.equals("") || !optUserId.equals("00000000")) {
-//            return Result.fail(StatusCode.CODE_10010, null, "只有超级管理员能操作菜单");
+//            return Result.fail(StatusCode.CODE_10010.getCode(), null, "只有超级管理员能操作菜单");
 //        }
         int check = dpPortalResourceService.checkIsHavingChild(resId);
         if (check > 0) {

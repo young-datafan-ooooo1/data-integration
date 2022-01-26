@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youngdatafan.portal.model.management.util.mapper.ExcelColumnsMapper">
+  <resultMap id="BaseResultMap" type="com.youngdatafan.portal.model.management.util.model.ExcelColumns">
+    <id column="table_id" jdbcType="VARCHAR" property="tableId" />
+    <id column="column_index" jdbcType="INTEGER" property="columnIndex" />
+    <result column="column_name" jdbcType="VARCHAR" property="columnName" />
+    <result column="column_desc" jdbcType="VARCHAR" property="columnDesc" />
+    <result column="data_type" jdbcType="VARCHAR" property="dataType" />
+    <result column="regexp_check" jdbcType="VARCHAR" property="regexpCheck" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    table_id, column_index, column_name, column_desc, data_type, regexp_check
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dp_portal_excel_columns
+    where table_id = #{tableId,jdbcType=VARCHAR}
+      and column_index = #{columnIndex,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from dp_portal_excel_columns
+    where table_id = #{tableId,jdbcType=VARCHAR}
+      and column_index = #{columnIndex,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.youngdatafan.portal.model.management.util.model.ExcelColumns">
+    insert into dp_portal_excel_columns (table_id, column_index, column_name, 
+      column_desc, data_type, regexp_check
+      )
+    values (#{tableId,jdbcType=VARCHAR}, #{columnIndex,jdbcType=INTEGER}, #{columnName,jdbcType=VARCHAR}, 
+      #{columnDesc,jdbcType=VARCHAR}, #{dataType,jdbcType=VARCHAR}, #{regexpCheck,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.youngdatafan.portal.model.management.util.model.ExcelColumns">
+    insert into dp_portal_excel_columns
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tableId != null">
+        table_id,
+      </if>
+      <if test="columnIndex != null">
+        column_index,
+      </if>
+      <if test="columnName != null">
+        column_name,
+      </if>
+      <if test="columnDesc != null">
+        column_desc,
+      </if>
+      <if test="dataType != null">
+        data_type,
+      </if>
+      <if test="regexpCheck != null">
+        regexp_check,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tableId != null">
+        #{tableId,jdbcType=VARCHAR},
+      </if>
+      <if test="columnIndex != null">
+        #{columnIndex,jdbcType=INTEGER},
+      </if>
+      <if test="columnName != null">
+        #{columnName,jdbcType=VARCHAR},
+      </if>
+      <if test="columnDesc != null">
+        #{columnDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="dataType != null">
+        #{dataType,jdbcType=VARCHAR},
+      </if>
+      <if test="regexpCheck != null">
+        #{regexpCheck,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.youngdatafan.portal.model.management.util.model.ExcelColumns">
+    update dp_portal_excel_columns
+    <set>
+      <if test="columnName != null">
+        column_name = #{columnName,jdbcType=VARCHAR},
+      </if>
+      <if test="columnDesc != null">
+        column_desc = #{columnDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="dataType != null">
+        data_type = #{dataType,jdbcType=VARCHAR},
+      </if>
+      <if test="regexpCheck != null">
+        regexp_check = #{regexpCheck,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where table_id = #{tableId,jdbcType=VARCHAR}
+      and column_index = #{columnIndex,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.youngdatafan.portal.model.management.util.model.ExcelColumns">
+    update dp_portal_excel_columns
+    set column_name = #{columnName,jdbcType=VARCHAR},
+      column_desc = #{columnDesc,jdbcType=VARCHAR},
+      data_type = #{dataType,jdbcType=VARCHAR},
+      regexp_check = #{regexpCheck,jdbcType=VARCHAR}
+    where table_id = #{tableId,jdbcType=VARCHAR}
+      and column_index = #{columnIndex,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByTable" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from dp_portal_excel_columns
+    where table_id = #{tableId,jdbcType=VARCHAR}
+    order by  column_index
+  </select>
+</mapper>

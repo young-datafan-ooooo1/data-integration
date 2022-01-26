@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youngdatafan.portal.model.management.modelgrant.mapper.UserGrantMapper">
+    <resultMap id="BaseResultMap" type="com.youngdatafan.portal.model.management.modelgrant.entity.UserGrant">
+        <id column="user_grant_id" jdbcType="VARCHAR" property="userGrantId"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="enabled" jdbcType="VARCHAR" property="enabled"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="create_user_id" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+
+    <resultMap id="UserIdAndNames" type="UserIdAndNamesDTO">
+        <id column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="user_id" jdbcType="VARCHAR" property="userId"/>
+
+    </resultMap>
+
+
+    <sql id="Base_Column_List">
+    user_grant_id, user_name, description, enabled, create_time, create_user_id, update_time
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from dp_portal_user_grant
+        where user_grant_id = #{userName,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from dp_portal_user_grant
+    where user_grant_id = #{userGrantId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.youngdatafan.portal.model.management.modelgrant.entity.UserGrant">
+    insert into dp_portal_user_grant (user_grant_id, user_name, description,
+      enabled, create_time, create_user_id,
+      update_time)
+    values (#{userGrantId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR},
+      #{enabled,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=VARCHAR},
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.youngdatafan.portal.model.management.modelgrant.entity.UserGrant">
+        insert into dp_portal_user_grant
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userGrantId != null">
+                user_grant_id,
+            </if>
+            <if test="userName != null">
+                user_name,
+            </if>
+            <if test="description != null">
+                description,
+            </if>
+            <if test="enabled != null">
+                enabled,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="createUserId != null">
+                create_user_id,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userGrantId != null">
+                #{userGrantId,jdbcType=INTEGER},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="enabled != null">
+                #{enabled,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.youngdatafan.portal.model.management.modelgrant.entity.UserGrant">
+        update dp_portal_user_grant
+        <set>
+            <if test="userName != null">
+                user_name = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="enabled != null">
+                enabled = #{enabled,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where user_grant_id = #{userGrantId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.youngdatafan.portal.model.management.modelgrant.entity.UserGrant">
+    update dp_portal_user_grant
+    set user_name = #{userName,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      enabled = #{enabled,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where user_grant_id = #{userGrantId,jdbcType=INTEGER}
+  </update>
+    <select id="selectUserGrantByUserIdAndUserName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from dp_portal_user_grant where user_grant_id = #{grantId,jdbcType=VARCHAR}
+        <if test="userId !='00000000'">
+            and create_user_id=#{userId,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+
+    <select id="selectAllByUserIdAndUserNameAndGrantGroupName" parameterType="java.lang.String"
+            resultMap="modelGroupGrantUserDTOMap">
+        SELECT
+        t1.user_grant_id,
+        t1.user_name,
+        t1.create_time,
+        t1.description,
+        t1.enabled,
+        t4.model_name,
+        t5.user_name as create_user_name,
+        t7.group_name as model_group_name,
+        t7.group_type,
+        t8.group_id,
+        t8.group_name
+        FROM
+        dp_portal_user_grant t1
+        LEFT JOIN dp_portal_user t2 ON t1.user_name = t2.user_name
+        LEFT JOIN dp_portal_model_group_user_grant t3 ON t2.user_id = t3.user_id
+        LEFT JOIN dp_portal_model_user_grant t4 ON t4.user_id = t3.user_id
+        LEFT JOIN dp_portal_user t5 on t5.user_id =t1.create_user_id
+        LEFT JOIN dp_portal_model_group_grant t6 on t6.mode_name=t4.model_name
+        LEFT JOIN dp_portal_group t7 on t7.group_id=t6.group_id
+        LEFT JOIN dp_portal_model_group t8 ON t3.group_name = t8.group_id
+        where
+        1=1
+        <if test="userId !='00000000'">
+            and t1.create_user_id=#{userId,jdbcType=VARCHAR}
+        </if>
+        <if test="userName !=null and userName !=''">
+            and t1.user_name like #{userName,jdbcType=VARCHAR}
+        </if>
+        <if test="grantGroupName !=null and grantGroupName !=''">
+            and t8.group_name = #{grantGroupName,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <select id="selectAllUserByCreateUserId" parameterType="java.lang.String" resultMap="UserIdAndNames">
+
+        SELECT
+        t1.user_id,
+        t1.user_name
+        FROM
+        dp_portal_user t1
+        WHERE 1=1
+        AND t1.user_id NOT IN ( SELECT t2.user_name FROM dp_portal_user_grant t2 WHERE 1=1
+        <if test="userId !='00000000'">
+            and t2.create_user_id = #{userId,jdbcType=VARCHAR}
+        </if>
+        )
+    </select>
+
+    <select id="selectUserIdByUserName" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT user_id from dp_portal_user WHERE user_id=#{userName,jdbcType=VARCHAR}
+    </select>
+
+    <resultMap id="modelGroupGrantUserDTOMap"
+               type="ModelGroupGrantUserDTO">
+        <id column="user_grant_id" jdbcType="VARCHAR" property="userGrantId"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="enabled" jdbcType="VARCHAR" property="enabled"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="create_user_name" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="user_id" jdbcType="VARCHAR" property="userId"/>
+
+    </resultMap>
+
+    <select id="selectUserGrant" parameterType="java.lang.String" resultMap="modelGroupGrantUserDTOMap">
+        SELECT
+        t1.user_grant_id,
+        t1.user_name AS user_id,
+        t1.description,
+        t1.enabled,
+        t1.create_time,
+        t4.user_name,
+        t5.user_name AS create_user_name
+        FROM
+        dp_portal_user_grant t1
+        LEFT JOIN dp_portal_model_group_user_grant t2 ON t1.user_name = t2.user_id
+        LEFT JOIN dp_portal_model_group t3 ON t2.group_name = t3.group_id
+        LEFT JOIN dp_portal_user t4 ON t1.user_name = t4.user_id
+        LEFT JOIN dp_portal_user t5 ON t1.create_user_id = t5.user_id
+        WHERE
+        1 =1
+
+        <if test="userId !='00000000'">
+            and t1.create_user_id = #{userId,jdbcType=VARCHAR}
+        </if>
+
+        <if test="grantGroupName !='' and grantGroupName!=null">
+            and t3.group_name like #{grantGroupName,jdbcType=VARCHAR}
+        </if>
+
+        <if test="userName !='' and userName!=null">
+            and t4.user_name like #{userName,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+
+    <resultMap id="GroupIdAndGroupNameMap"
+               type="UserIdAndGroupIdAndGroupNamesDTO">
+        <id column="user_id" jdbcType="VARCHAR" property="userId"/>
+        <collection property="list" ofType="GroupIdAndGroupNamesDTO">
+            <id column="group_id" jdbcType="VARCHAR" property="grantId"/>
+            <result column="group_name" jdbcType="VARCHAR" property="grantGroupName"/>
+        </collection>
+    </resultMap>
+
+    <select id="selecGroupIdAndGroupNames" parameterType="java.lang.String" resultMap="GroupIdAndGroupNameMap">
+        SELECT
+        t1.user_id,
+        t2.group_id,
+        t2.group_name
+        FROM
+        dp_portal_model_group_user_grant t1
+        LEFT JOIN dp_portal_model_group t2 ON t1.group_name = t2.group_id
+        WHERE t1.user_id in
+        <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </select>
+
+    <resultMap id="BusinessModelListMap"
+               type="UserIdAndBusinessModelListDTO">
+        <id column="user_id" jdbcType="VARCHAR" property="userId"/>
+        <collection property="listDTOS" ofType="BusinessModelListDTO">
+            <id column="model_name" jdbcType="VARCHAR" property="modelName"/>
+            <result column="chinese_name" jdbcType="VARCHAR" property="modelChineseName"/>
+            <result column="group_name" jdbcType="VARCHAR" property="modelGroupName"/>
+            <result column="group_type" jdbcType="VARCHAR" property="modelGroupType"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectBusinessModelList" parameterType="java.lang.String" resultMap="BusinessModelListMap">
+        SELECT
+        t1.user_id,
+        t4.model_name,
+        t4.chinese_name,
+        t3.group_name,
+        t3.group_type
+        FROM
+        dp_portal_model_user_grant t1
+        INNER JOIN dp_portal_model_group_grant t2 ON t1.model_name = t2.mode_name
+        INNER JOIN dp_portal_business_model t4 ON t2.mode_name = t4.model_name
+        INNER JOIN dp_portal_group t3 ON t2.group_id = t3.group_id
+        where t1.user_id in
+        <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+        UNION
+        SELECT
+        t1.user_id,
+        t4.model_name,
+        t4.c_name as chinese_name,
+        t3.group_name,
+        t3.group_type
+        FROM
+        dp_portal_model_user_grant t1
+        INNER JOIN dp_portal_model_group_grant t2 ON t1.model_name = t2.mode_name
+        INNER JOIN dp_portal_basic_model t4 ON t2.mode_name = t4.model_name
+        INNER JOIN dp_portal_group t3 ON t2.group_id = t3.group_id
+        where t1.user_id in
+        <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </select>
+</mapper>
+
+        <!--SELECT-->
+
+        <!--t1.user_name,-->
+        <!--t1.create_time,-->
+        <!--t1.description,-->
+        <!--t1.enabled,-->
+        <!--t8.group_id,-->
+        <!--t8.group_name,-->
+        <!--t5.user_name AS create_user_name-->
+        <!--FROM-->
+        <!--dp_portal_user_grant t1-->
+        <!--LEFT JOIN dp_portal_user t2 ON t1.user_name = t2.user_name-->
+        <!--LEFT JOIN dp_portal_model_group_user_grant t3 ON t2.user_id = t3.user_id-->
+        <!--LEFT JOIN dp_portal_user t5 ON t5.user_id = t1.create_user_id-->
+        <!--LEFT JOIN dp_portal_model_group t8 ON t3.group_name = t8.group_id-->
+        <!--WHERE-->
+        <!--1 =1-->

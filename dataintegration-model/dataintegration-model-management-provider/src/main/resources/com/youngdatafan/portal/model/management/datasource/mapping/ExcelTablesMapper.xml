@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youngdatafan.portal.model.management.util.mapper.ExcelTablesMapper">
+    <resultMap id="BaseResultMap" type="com.youngdatafan.portal.model.management.util.model.ExcelTables">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="sheet" jdbcType="VARCHAR" property="sheet"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, sheet
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from dp_portal_excel_tables
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from dp_portal_excel_tables
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.youngdatafan.portal.model.management.util.model.ExcelTables">
+    insert into dp_portal_excel_tables (id, sheet)
+    values (#{id,jdbcType=VARCHAR}, #{sheet,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.youngdatafan.portal.model.management.util.model.ExcelTables">
+        insert into dp_portal_excel_tables
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="sheet != null">
+                sheet,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="sheet != null">
+                #{sheet,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.youngdatafan.portal.model.management.util.model.ExcelTables">
+        update dp_portal_excel_tables
+        <set>
+            <if test="sheet != null">
+                sheet = #{sheet,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.youngdatafan.portal.model.management.util.model.ExcelTables">
+    update dp_portal_excel_tables
+    set sheet = #{sheet,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

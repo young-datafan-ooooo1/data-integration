@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youngdatafan.portal.model.management.businessmodel.mapper.GroupMapper">
+    <resultMap id="BaseResultMap" type="com.youngdatafan.portal.model.management.businessmodel.entity.Group">
+        <id column="group_id" jdbcType="VARCHAR" property="groupId"/>
+        <result column="group_name" jdbcType="VARCHAR" property="groupName"/>
+        <result column="describe" jdbcType="VARCHAR" property="describe"/>
+        <result column="group_type" jdbcType="VARCHAR" property="groupType"/>
+        <result column="group_order" jdbcType="INTEGER" property="groupOrder"/>
+        <result column="enabled" jdbcType="VARCHAR" property="enabled"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="create_user_id" jdbcType="VARCHAR" property="createUserId"/>
+    </resultMap>
+
+    <resultMap id="GroupDTOMap" type="GroupDTO">
+        <id column="group_id" jdbcType="VARCHAR" property="groupId"/>
+        <result column="group_name" jdbcType="VARCHAR" property="groupName"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    group_id, group_name, describe, group_type, group_order, enabled, create_time, update_time, 
+    create_user_id
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from dp_portal_group
+        where group_id = #{groupId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from dp_portal_group
+    where group_id = #{groupId,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.youngdatafan.portal.model.management.businessmodel.entity.Group">
+    insert into dp_portal_group (group_id, group_name, describe, 
+      group_type, group_order, enabled, 
+      create_time, update_time, create_user_id
+      )
+    values (#{groupId,jdbcType=VARCHAR}, #{groupName,jdbcType=VARCHAR}, #{describe,jdbcType=VARCHAR}, 
+      #{groupType,jdbcType=VARCHAR}, #{groupOrder,jdbcType=INTEGER}, #{enabled,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.youngdatafan.portal.model.management.businessmodel.entity.Group">
+        insert into dp_portal_group
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="groupId != null">
+                group_id,
+            </if>
+            <if test="groupName != null">
+                group_name,
+            </if>
+            <if test="describe != null">
+                describe,
+            </if>
+            <if test="groupType != null">
+                group_type,
+            </if>
+            <if test="groupOrder != null">
+                group_order,
+            </if>
+            <if test="enabled != null">
+                enabled,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="createUserId != null">
+                create_user_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="groupId != null">
+                #{groupId,jdbcType=VARCHAR},
+            </if>
+            <if test="groupName != null">
+                #{groupName,jdbcType=VARCHAR},
+            </if>
+            <if test="describe != null">
+                #{describe,jdbcType=VARCHAR},
+            </if>
+            <if test="groupType != null">
+                #{groupType,jdbcType=VARCHAR},
+            </if>
+            <if test="groupOrder != null">
+                #{groupOrder,jdbcType=INTEGER},
+            </if>
+            <if test="enabled != null">
+                #{enabled,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.youngdatafan.portal.model.management.businessmodel.entity.Group">
+        update dp_portal_group
+        <set>
+            <if test="groupName != null">
+                group_name = #{groupName,jdbcType=VARCHAR},
+            </if>
+            <if test="describe != null">
+                describe = #{describe,jdbcType=VARCHAR},
+            </if>
+            <if test="groupType != null">
+                group_type = #{groupType,jdbcType=VARCHAR},
+            </if>
+            <if test="groupOrder != null">
+                group_order = #{groupOrder,jdbcType=INTEGER},
+            </if>
+            <if test="enabled != null">
+                enabled = #{enabled,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where group_id = #{groupId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.youngdatafan.portal.model.management.businessmodel.entity.Group">
+    update dp_portal_group
+    set group_name = #{groupName,jdbcType=VARCHAR},
+      describe = #{describe,jdbcType=VARCHAR},
+      group_type = #{groupType,jdbcType=VARCHAR},
+      group_order = #{groupOrder,jdbcType=INTEGER},
+      enabled = #{enabled,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=VARCHAR}
+    where group_id = #{groupId,jdbcType=VARCHAR}
+  </update>
+
+    <select id="selectAllGroup" parameterType="java.lang.String" resultMap="GroupDTOMap">
+        select group_name,group_id from dp_portal_group where group_type=#{groupName,jdbcType=VARCHAR}
+            and create_user_id = #{userId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectGroupIdByGroupNameAndUserId" parameterType="java.lang.String" resultType="java.lang.String">
+
+        SELECT group_id FROM dp_portal_group WHERE group_type=#{groupType,jdbcType=VARCHAR} AND group_name=#{groupName}
+            and create_user_id = #{userId,jdbcType=VARCHAR}
+    </select>
+
+
+</mapper>

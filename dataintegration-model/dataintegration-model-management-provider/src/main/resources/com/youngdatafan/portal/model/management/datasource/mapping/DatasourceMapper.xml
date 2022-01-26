@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youngdatafan.portal.model.management.datasource.mapper.DatasourceMapper">
+    <resultMap id="BaseResultMap" type="com.youngdatafan.portal.model.management.datasource.entity.Datasource">
+        <id column="datasource_id" jdbcType="VARCHAR" property="datasourceId"/>
+        <result column="ds_name" jdbcType="VARCHAR" property="dsName"/>
+        <result column="describe" jdbcType="VARCHAR" property="describe"/>
+        <result column="ds_type" jdbcType="VARCHAR" property="dsType"/>
+        <result column="ds_url" jdbcType="VARCHAR" property="dsUrl"/>
+        <result column="driver_class_name" jdbcType="VARCHAR" property="driverClassName"/>
+        <result column="ds_username" jdbcType="VARCHAR" property="dsUsername"/>
+        <result column="ds_password" jdbcType="VARCHAR" property="dsPassword"/>
+        <result column="enabled" jdbcType="VARCHAR" property="enabled"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="create_user_id" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="ds_conector_setting" jdbcType="VARCHAR" property="dsConectorSetting"/>
+        <result column="source_platform" jdbcType="VARCHAR" property="sourcePlatform"/>
+    </resultMap>
+
+
+    <sql id="Base_Column_List">
+        datasource_id,
+        ds_name,
+        `describe`,
+        ds_type,
+        ds_url,
+        driver_class_name,
+        ds_username,
+        ds_password,
+        `enabled`,
+        create_time,
+        update_time,
+        create_user_id,
+        ds_conector_setting,
+        source_platform
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from dp_portal_datasource
+        where datasource_id = #{datasourceId,jdbcType=VARCHAR}
+    </select>
+    <select id="selectOneByUserIdAndDsName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select *
+        from dp_portal_datasource
+        where datasource_id = #{dsId}
+        <if test="userId!='00000000'">
+            and create_user_id = #{userId}
+        </if>
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete
+        from dp_portal_datasource
+        where datasource_id = #{datasourceId,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.youngdatafan.portal.model.management.datasource.entity.Datasource">
+        insert into dp_portal_datasource (datasource_id, ds_name, `describe`,
+                                          ds_type, ds_url, driver_class_name,
+                                          ds_username, ds_password, enabled,
+                                          create_time, update_time, create_user_id,
+                                          ds_conector_setting, source_platform)
+        values (#{datasourceId,jdbcType=VARCHAR}, #{dsName,jdbcType=VARCHAR}, #{describe,jdbcType=VARCHAR},
+                #{dsType,jdbcType=VARCHAR}, #{dsUrl,jdbcType=VARCHAR}, #{driverClassName,jdbcType=VARCHAR},
+                #{dsUsername,jdbcType=VARCHAR}, #{dsPassword,jdbcType=VARCHAR}, #{enabled,jdbcType=VARCHAR},
+                #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=VARCHAR},
+                #{dsConectorSetting,jdbcType=VARCHAR}
+                   , #{sourcePlatform,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.youngdatafan.portal.model.management.datasource.entity.Datasource">
+        insert into dp_portal_datasource
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="datasourceId != null">
+                datasource_id,
+            </if>
+            <if test="dsName != null">
+                ds_name,
+            </if>
+            <if test="describe != null">
+                `describe`,
+            </if>
+            <if test="dsType != null">
+                ds_type,
+            </if>
+            <if test="dsUrl != null">
+                ds_url,
+            </if>
+            <if test="driverClassName != null">
+                driver_class_name,
+            </if>
+            <if test="dsUsername != null">
+                ds_username,
+            </if>
+            <if test="dsPassword != null">
+                ds_password,
+            </if>
+            <if test="enabled != null">
+                enabled,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="createUserId != null">
+                create_user_id,
+            </if>
+            <if test="dsConectorSetting != null">
+                ds_conector_setting,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="datasourceId != null">
+                #{datasourceId,jdbcType=VARCHAR},
+            </if>
+            <if test="dsName != null">
+                #{dsName,jdbcType=VARCHAR},
+            </if>
+            <if test="describe != null">
+                #{describe,jdbcType=VARCHAR},
+            </if>
+            <if test="dsType != null">
+                #{dsType,jdbcType=VARCHAR},
+            </if>
+            <if test="dsUrl != null">
+                #{dsUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="driverClassName != null">
+                #{driverClassName,jdbcType=VARCHAR},
+            </if>
+            <if test="dsUsername != null">
+                #{dsUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="dsPassword != null">
+                #{dsPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="enabled != null">
+                #{enabled,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="dsConectorSetting != null">
+                #{dsConectorSetting,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective"
+            parameterType="com.youngdatafan.portal.model.management.datasource.entity.Datasource">
+        update dp_portal_datasource
+        <set>
+            <if test="dsName != null">
+                ds_name = #{dsName,jdbcType=VARCHAR},
+            </if>
+            <if test="describe != null">
+                `describe` = #{describe,jdbcType=VARCHAR},
+            </if>
+            <if test="dsType != null">
+                ds_type = #{dsType,jdbcType=VARCHAR},
+            </if>
+            <if test="dsUrl != null">
+                ds_url = #{dsUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="driverClassName != null">
+                driver_class_name = #{driverClassName,jdbcType=VARCHAR},
+            </if>
+            <if test="dsUsername != null">
+                ds_username = #{dsUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="dsPassword != null">
+                ds_password = #{dsPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="enabled != null">
+                enabled = #{enabled,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="dsConectorSetting != null">
+                ds_conector_setting = #{dsConectorSetting,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where datasource_id = #{datasourceId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.youngdatafan.portal.model.management.datasource.entity.Datasource">
+        update dp_portal_datasource
+        set ds_name             = #{dsName,jdbcType=VARCHAR},
+            describe            = #{describe,jdbcType=VARCHAR},
+            ds_type             = #{dsType,jdbcType=VARCHAR},
+            ds_url              = #{dsUrl,jdbcType=VARCHAR},
+            driver_class_name   = #{driverClassName,jdbcType=VARCHAR},
+            ds_username         = #{dsUsername,jdbcType=VARCHAR},
+            ds_password         = #{dsPassword,jdbcType=VARCHAR},
+            enabled             = #{enabled,jdbcType=VARCHAR},
+            create_time         = #{createTime,jdbcType=TIMESTAMP},
+            update_time         = #{updateTime,jdbcType=TIMESTAMP},
+            create_user_id      = #{createUserId,jdbcType=VARCHAR},
+            ds_conector_setting = #{dsConectorSetting,jdbcType=VARCHAR}
+        where datasource_id = #{datasourceId,jdbcType=VARCHAR}
+    </update>
+
+    <select id="selectAllByUserId" resultMap="DatasourceListDTOMap" parameterType="java.lang.String">
+        SELECT dp_portal_datasource.ds_name,
+        dp_portal_datasource.`describe`,
+        dp_portal_datasource.ds_type,
+        dp_portal_datasource.ds_url,
+        dp_portal_datasource.driver_class_name,
+        dp_portal_datasource.ds_username,
+        dp_portal_datasource.ds_password,
+        dp_portal_datasource.`enabled`,
+        dp_portal_datasource.create_time,
+        dp_portal_datasource.update_time,
+        dp_portal_datasource.ds_conector_setting,
+        dp_portal_user.user_name AS create_user_id,
+        dp_portal_datasource.datasource_id,
+        dp_portal_datasource.create_user_id as r_user_id,
+        dp_portal_dict.dict_value as 'source_platform'
+        FROM dp_portal_datasource
+        LEFT JOIN dp_portal_user ON dp_portal_user.user_id = dp_portal_datasource.create_user_id
+        left JOIN dp_portal_dict on dp_portal_dict.dict_code = dp_portal_datasource.source_platform and
+        dict_type='DATASOURCEPLATFORM'
+        where 1 = 1
+
+        <if test="userId != '00000000'">
+            and dp_portal_datasource.create_user_id = #{userId}
+        </if>
+        <if test="datasourceName != null">
+            and dp_portal_datasource.ds_name like #{datasourceName,jdbcType=VARCHAR}
+        </if>
+        <if test="datasourceType != null">
+            and dp_portal_datasource.ds_type = #{datasourceType,jdbcType=VARCHAR}
+        </if>
+        UNION
+
+        SELECT dp_portal_datasource.ds_name,
+        dp_portal_datasource.`describe`,
+        dp_portal_datasource.ds_type,
+        dp_portal_datasource.ds_url,
+        dp_portal_datasource.driver_class_name,
+        dp_portal_datasource.ds_username,
+        dp_portal_datasource.ds_password,
+        dp_portal_datasource.`enabled`,
+        dp_portal_datasource.create_time,
+        dp_portal_datasource.update_time,
+        dp_portal_datasource.ds_conector_setting,
+        dp_portal_datasource.create_user_id as r_user_id,
+        dp_portal_user.user_name AS create_user_id,
+        dp_portal_datasource.datasource_id,
+        dp_portal_dict.dict_value as 'source_platform'
+        FROM dp_portal_datasource
+        LEFT JOIN dp_portal_user ON dp_portal_user.user_id = dp_portal_datasource.create_user_id
+        left JOIN dp_portal_dict on dp_portal_dict.dict_code = dp_portal_datasource.source_platform and
+        dict_type='DATASOURCEPLATFORM'
+        LEFT JOIN dp_portal_user_datasource dud on dud.ds_id=dp_portal_datasource.datasource_id
+        WHERE 1 = 1
+        <if test="userId != '' and  userId != null">
+            and dud.user_id= #{userId}
+        </if>
+        <if test="datasourceName != null">
+            and dp_portal_datasource.ds_name like #{datasourceName,jdbcType=VARCHAR}
+        </if>
+        <if test="datasourceType != null">
+            and dp_portal_datasource.ds_type = #{datasourceType,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <resultMap id="DatasourceDTOMap" type="DatasourceDTO">
+        <id column="datasource_id" jdbcType="VARCHAR" property="datasourceId"/>
+        <result column="ds_name" jdbcType="VARCHAR" property="dsName"/>
+        <result column="describe" jdbcType="VARCHAR" property="describe"/>
+        <result column="ds_type" jdbcType="VARCHAR" property="dsType"/>
+        <result column="ds_url" jdbcType="VARCHAR" property="dsUrl"/>
+        <result column="driver_class_name" jdbcType="VARCHAR" property="driverClassName"/>
+        <result column="ds_username" jdbcType="VARCHAR" property="dsUsername"/>
+        <result column="ds_password" jdbcType="VARCHAR" property="dsPassword"/>
+        <result column="enabled" jdbcType="VARCHAR" property="enabled"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="create_user_id" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="ds_conector_setting" jdbcType="VARCHAR" property="dsConectorSetting"/>
+        <result column="source_platform" jdbcType="VARCHAR" property="sourcePlatform"/>
+    </resultMap>
+
+    <resultMap id="DatasourceListDTOMap" type="DataSourceListDTO">
+        <id column="datasource_id" jdbcType="VARCHAR" property="datasourceId"/>
+        <result column="ds_name" jdbcType="VARCHAR" property="dsName"/>
+        <result column="describe" jdbcType="VARCHAR" property="describe"/>
+        <result column="ds_type" jdbcType="VARCHAR" property="dsType"/>
+        <result column="ds_url" jdbcType="VARCHAR" property="dsUrl"/>
+        <result column="driver_class_name" jdbcType="VARCHAR" property="driverClassName"/>
+        <result column="ds_username" jdbcType="VARCHAR" property="dsUsername"/>
+        <result column="ds_password" jdbcType="VARCHAR" property="dsPassword"/>
+        <result column="enabled" jdbcType="VARCHAR" property="enabled"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="create_user_id" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="ds_conector_setting" jdbcType="VARCHAR" property="dsConectorSetting"/>
+        <result column="source_platform" jdbcType="VARCHAR" property="sourcePlatform"/>
+        <result column="r_user_id" jdbcType="VARCHAR" property="realyUserId"/>
+    </resultMap>
+    <select id="selectAll" resultMap="DatasourceDTOMap" parameterType="java.lang.String">
+        SELECT dp_portal_datasource.ds_name,
+        dp_portal_datasource.`describe`,
+        dp_portal_datasource.ds_type,
+        dp_portal_datasource.ds_url,
+        dp_portal_datasource.driver_class_name,
+        dp_portal_datasource.ds_username,
+        dp_portal_datasource.ds_password,
+        dp_portal_datasource.`enabled`,
+        dp_portal_datasource.create_time,
+        dp_portal_datasource.update_time,
+        dp_portal_datasource.ds_conector_setting,
+        dp_portal_user.user_name AS create_user_id,
+        dp_portal_datasource.datasource_id,
+        dp_portal_datasource.ds_conector_setting
+        FROM dp_portal_datasource
+        LEFT JOIN dp_portal_user ON dp_portal_user.user_id = dp_portal_datasource.create_user_id
+        where 1=1
+        <if test="userId!='00000000'">
+            and dp_portal_datasource.create_user_id = #{userId,jdbcType=VARCHAR}
+        </if>
+        <if test="sourcePlat!='' and sourcePlat!= null">
+            and dp_portal_datasource.source_platform=#{sourcePlat}
+        </if>
+    </select>
+
+    <select id="selectAllByPlat" resultMap="DatasourceDTOMap" parameterType="java.lang.String">
+        SELECT dp_portal_datasource.ds_name,
+        dp_portal_datasource.`describe`,
+        dp_portal_datasource.ds_type,
+        dp_portal_datasource.ds_url,
+        dp_portal_datasource.driver_class_name,
+        dp_portal_datasource.ds_username,
+        dp_portal_datasource.ds_password,
+
+        dp_portal_datasource.`enabled`,
+        dp_portal_datasource.create_time,
+        dp_portal_datasource.update_time,
+        dp_portal_datasource.ds_conector_setting,
+        dp_portal_user.user_name AS create_user_id,
+        dp_portal_datasource.datasource_id,
+        dp_portal_datasource.ds_conector_setting,
+        dp_portal_datasource.source_platform,
+        dp_portal_datasource.datasource_id
+        FROM dp_portal_datasource
+        LEFT JOIN dp_portal_user ON dp_portal_user.user_id = dp_portal_datasource.create_user_id
+        where dp_portal_datasource.source_platform = #{sourcePlatform,jdbcType=VARCHAR}
+
+        <if test="userId!='00000000'">
+            AND dp_portal_datasource.create_user_id = #{userId,jdbcType=VARCHAR}
+        </if>
+
+    </select>
+
+
+    <select id="getDatasourceByIdAndUserId" parameterType="java.lang.String" resultMap="DatasourceDTOMap">
+        select
+        <include refid="Base_Column_List"/>
+        from dp_portal_datasource
+        where datasource_id = #{datasourceName,jdbcType=VARCHAR}
+        <!--and create_user_id=#{userId}-->
+    </select>
+
+    <select id="getDatasourceById" parameterType="java.lang.String" resultMap="DatasourceDTOMap">
+        select
+        <include refid="Base_Column_List"/>
+        from dp_portal_datasource
+        where datasource_id = #{datasourceName,jdbcType=VARCHAR}
+    </select>
+
+    <select id="getDatasourceByNameAndUserId" parameterType="java.lang.String" resultMap="DatasourceDTOMap">
+        select
+        <include refid="Base_Column_List"/>
+        from dp_portal_datasource
+        where ds_name = #{datasourceName,jdbcType=VARCHAR}
+    </select>
+
+    <select id="getDatasourceByNameAndSourcePlat" parameterType="java.lang.String" resultMap="DatasourceDTOMap">
+        select
+        <include refid="Base_Column_List"/>
+        from dp_portal_datasource
+        where 1 = 1
+        and ds_name = #{datasourceName,jdbcType=VARCHAR}
+        and source_platform = #{source}
+    </select>
+
+    <select id="getEngineDatasourceIds" parameterType="java.lang.String" resultType="java.lang.String">
+        select ds_name
+        from dp_portal_datasource
+        where source_platform = #{source}
+    </select>
+
+
+    <insert id="insertDefaultDataSource" parameterType="com.youngdatafan.portal.model.management.config.DefaultDatasource">
+        insert into dp_portal_datasource (datasource_id, ds_name, `describe`,
+                                          ds_type, ds_url, driver_class_name,
+                                          ds_username, ds_password, enabled,
+                                          create_time, update_time, create_user_id,
+                                          ds_conector_setting, source_platform)
+        values (#{datasourceId,jdbcType=VARCHAR}, #{dsName,jdbcType=VARCHAR}, #{describe,jdbcType=VARCHAR},
+                #{dsType,jdbcType=VARCHAR}, #{dsUrl,jdbcType=VARCHAR}, #{driverClassName,jdbcType=VARCHAR},
+                #{dsUserName,jdbcType=VARCHAR}, #{dsPassword,jdbcType=VARCHAR}, #{enabled,jdbcType=VARCHAR},
+                #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=VARCHAR},
+                #{dsConectorSetting,jdbcType=VARCHAR}, #{sourcePlatform,jdbcType=VARCHAR})
+    </insert>
+
+
+    <select id="selectDataSourceByBusinessName" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT t1.*
+        FROM dp_portal_datasource t1
+                 LEFT JOIN dp_portal_basic_model t2
+                           ON t2.ds_name = t1.datasource_id
+                 LEFT JOIN dp_portal_business_model t3 ON t2.`model_name` = t3.basic_model_name
+        WHERE t3.model_name = #{businessModelName,jdbcType=VARCHAR}
+    </select>
+</mapper>
