@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youngdatafan.portal.model.management.basicmodel.mapper.BasiceModelMetadataMapper">
+    <resultMap id="BaseResultMap" type="com.youngdatafan.portal.model.management.basicmodel.entity.BasiceModelMetadata">
+        <result column="model_name" jdbcType="VARCHAR" property="modelName"/>
+        <result column="column_name" jdbcType="VARCHAR" property="columnName"/>
+        <result column="column_type" jdbcType="VARCHAR" property="columnType"/>
+        <result column="column_length" jdbcType="INTEGER" property="columnLength"/>
+        <result column="column_precision" jdbcType="INTEGER" property="columnPrecision"/>
+        <result column="column_chinese_name" jdbcType="VARCHAR" property="columnChineseName"/>
+        <result column="column_description" jdbcType="VARCHAR" property="columnDescription"/>
+        <result column="column_etl_sql" jdbcType="VARCHAR" property="columnEtlSql"/>
+        <result column="dimension_metric" jdbcType="VARCHAR" property="dimensionMetric"/>
+        <result column="metric_group" jdbcType="VARCHAR" property="metricGroup"/>
+        <result column="statistics" jdbcType="VARCHAR" property="statistics"/>
+        <result column="model_data_sort" jdbcType="VARCHAR" property="modelDataSort"/>
+    </resultMap>
+    <resultMap id="SelectModelNameAndColumnCountDTOMap"
+               type="SelectModelNameAndColumnCountDTO">
+        <id column="model_name" jdbcType="VARCHAR" property="modelName"/>
+        <collection property="basicModelMetaDataDTOS"
+                    ofType="BasicModelMetaDataDTO">
+            <id column="model_name" jdbcType="VARCHAR" property="modelName"/>
+            <id column="column_name" jdbcType="VARCHAR" property="columnName"/>
+            <result column="column_type" jdbcType="VARCHAR" property="columnType"/>
+            <result column="column_length" jdbcType="INTEGER" property="columnLength"/>
+            <result column="column_precision" jdbcType="INTEGER" property="columnPrecision"/>
+            <result column="column_chinese_name" jdbcType="VARCHAR" property="columnChineseName"/>
+            <result column="column_description" jdbcType="VARCHAR" property="columnDescription"/>
+            <result column="column_etl_sql" jdbcType="VARCHAR" property="columnEtlSql"/>
+            <result column="dimension_metric" jdbcType="VARCHAR" property="dimensionMetric"/>
+            <result column="metric_group" jdbcType="VARCHAR" property="metricGroup"/>
+            <result column="statistics" jdbcType="VARCHAR" property="statistics"/>
+            <result column="model_data_sort" jdbcType="VARCHAR" property="modelDataSort"/>
+        </collection>
+
+    </resultMap>
+    <insert id="insert" parameterType="com.youngdatafan.portal.model.management.basicmodel.entity.BasiceModelMetadata">
+    insert into dp_portal_basic_model_metadata (model_name, column_name, column_type,
+      column_length, column_precision, column_chinese_name,
+      column_description, column_etl_sql, dimension_metric,
+      metric_group, statistics, model_data_sort
+      )
+    values (#{modelName,jdbcType=VARCHAR}, #{columnName,jdbcType=VARCHAR}, #{columnType,jdbcType=VARCHAR},
+      #{columnLength,jdbcType=INTEGER}, #{columnPrecision,jdbcType=INTEGER}, #{columnChineseName,jdbcType=VARCHAR},
+      #{columnDescription,jdbcType=VARCHAR}, #{columnEtlSql,jdbcType=VARCHAR}, #{dimensionMetric,jdbcType=VARCHAR},
+      #{metricGroup,jdbcType=VARCHAR}, #{statistics,jdbcType=VARCHAR}, #{modelDataSort,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.youngdatafan.portal.model.management.basicmodel.entity.BasiceModelMetadata">
+        insert into dp_portal_basic_model_metadata
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="modelName != null">
+                model_name,
+            </if>
+            <if test="columnName != null">
+                column_name,
+            </if>
+            <if test="columnType != null">
+                column_type,
+            </if>
+            <if test="columnLength != null">
+                column_length,
+            </if>
+            <if test="columnPrecision != null">
+                column_precision,
+            </if>
+            <if test="columnChineseName != null">
+                column_chinese_name,
+            </if>
+            <if test="columnDescription != null">
+                column_description,
+            </if>
+            <if test="columnEtlSql != null">
+                column_etl_sql,
+            </if>
+            <if test="dimensionMetric != null">
+                dimension_metric,
+            </if>
+            <if test="metricGroup != null">
+                metric_group,
+            </if>
+            <if test="statistics != null">
+                statistics,
+            </if>
+            <if test="modelDataSort != null">
+                model_data_sort,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="modelName != null">
+                #{modelName,jdbcType=VARCHAR},
+            </if>
+            <if test="columnName != null">
+                #{columnName,jdbcType=VARCHAR},
+            </if>
+            <if test="columnType != null">
+                #{columnType,jdbcType=VARCHAR},
+            </if>
+            <if test="columnLength != null">
+                #{columnLength,jdbcType=INTEGER},
+            </if>
+            <if test="columnPrecision != null">
+                #{columnPrecision,jdbcType=INTEGER},
+            </if>
+            <if test="columnChineseName != null">
+                #{columnChineseName,jdbcType=VARCHAR},
+            </if>
+            <if test="columnDescription != null">
+                #{columnDescription,jdbcType=VARCHAR},
+            </if>
+            <if test="columnEtlSql != null">
+                #{columnEtlSql,jdbcType=VARCHAR},
+            </if>
+            <if test="dimensionMetric != null">
+                #{dimensionMetric,jdbcType=VARCHAR},
+            </if>
+            <if test="metricGroup != null">
+                #{metricGroup,jdbcType=VARCHAR},
+            </if>
+            <if test="statistics != null">
+                #{statistics,jdbcType=VARCHAR},
+            </if>
+            <if test="modelDataSort != null">
+                #{modelDataSort,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <delete id="deleteByModelName" parameterType="java.lang.String">
+        delete from dp_portal_basic_model_metadata where model_name=#{modelName,jdbcType=VARCHAR}
+    </delete>
+
+
+    <select id="selectBusinessModelNameAndColumnCount" parameterType="java.util.List"
+            resultMap="SelectModelNameAndColumnCountDTOMap">
+        SELECT
+        t1.model_name,
+        t1.column_name,
+        t1.column_type,
+        t1.column_length,
+        t1.column_precision,
+        t1.column_chinese_name,
+        t1.column_description,
+        t1.column_etl_sql,
+        t1.dimension_metric,
+        t1.metric_group,
+        case t1.statistics
+        WHEN 'T' THEN '是'
+        else '否'
+        END statistics,
+        t1.model_data_sort,
+        t2.model_name
+        FROM
+        dp_portal_basic_model_metadata t1
+        LEFT JOIN dp_portal_basic_model t2 ON t1.model_name = t2.model_name where
+        t1.model_name IN
+        <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </select>
+
+    <insert id="insertBasicModelMetaData" parameterType="java.util.List">
+        insert into dp_portal_basic_model_metadata (model_name, column_name, column_type,
+        column_length, column_precision, column_chinese_name,
+        column_description, dimension_metric,
+        metric_group, statistics, model_data_sort
+        ) values
+        <foreach collection="list" index="index" separator="," item="item">
+            (#{item.modelName},#{item.columnName},#{item.columnType},#{item.columnLength},#{item.columnPrecision}
+            ,#{item.columnChineseName},#{item.columnDescription},#{item.dimensionMetric},#{item.metricGroup}
+            ,#{item.statistics},#{item.modelDataSort})
+        </foreach>
+    </insert>
+
+    <insert id="insertIntoBatch" parameterType="java.util.List">
+        insert into dp_portal_basic_model_metadata (model_name, column_name, column_type,
+        column_length, column_precision, column_chinese_name,
+        column_description, column_etl_sql, dimension_metric,
+        metric_group, statistics,model_data_sort)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.modelName}, #{item.columnName}, #{item.columnType},
+            #{item.columnLength}, #{item.columnPrecision}, #{item.columnChineseName},
+            #{item.columnDescription}, #{item.columnEtlSql}, #{item.dimensionMetric},
+            #{item.metricGroup}, #{item.statistics},#{item.modelDataSort})
+        </foreach>
+    </insert>
+
+    <insert id="insertAllColunms" parameterType="java.util.List">
+        insert into dp_portal_basic_model_metadata (model_name, column_name, column_type,
+        column_length, column_precision, column_chinese_name,
+        column_description, column_etl_sql, dimension_metric,
+        metric_group, statistics,model_data_sort)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.modelName}, #{item.columnName}, #{item.columnType},
+            #{item.columnLength}, #{item.columnPrecision}, #{item.columnChineseName},
+            #{item.columnDescription}, #{item.columnEtlSql}, #{item.dimensionMetric},
+            #{item.metricGroup}, #{item.statistics},#{item.modelDataSort})
+        </foreach>
+    </insert>
+</mapper>

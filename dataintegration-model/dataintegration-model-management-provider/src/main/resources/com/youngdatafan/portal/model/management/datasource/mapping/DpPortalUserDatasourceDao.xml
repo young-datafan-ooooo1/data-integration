@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youngdatafan.portal.model.management.datasource.mapper.DpPortalUserDatasourceDao">
+
+    <resultMap type="com.youngdatafan.portal.model.management.datasource.entity.DpPortalUserDatasource"
+               id="DpPortalUserDatasourceMap">
+        <result property="userId" column="user_id" jdbcType="VARCHAR"/>
+        <result property="dsId" column="ds_id" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <resultMap type="UserListDTO"
+               id="userListMap">
+        <result property="userId" column="user_id" jdbcType="VARCHAR"/>
+        <result property="userName" column="user_name" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="getUsersByDsId" parameterType="java.lang.String" resultMap="userListMap">
+        SELECT t2.user_id,
+               t2.user_name
+        FROM dp_portal_user_datasource t1
+                 LEFT JOIN dp_portal_user t2 ON t1.user_id = t2.user_id
+        WHERE t1.ds_id = #{dsId}
+    </select>
+
+    <select id="getAllUser" parameterType="java.lang.String" resultMap="userListMap">
+        SELECT t2.user_id,
+               t2.user_name
+        FROM dp_portal_user t2
+    </select>
+    <!--查询单个-->
+    <select id="queryById" resultMap="DpPortalUserDatasourceMap">
+        select user_id,
+               ds_id
+        from dp_portal_user_datasource
+
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="DpPortalUserDatasourceMap">
+        select user_id,
+               ds_id
+        from dp_portal_user_datasource
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="DpPortalUserDatasourceMap">
+        select
+        user_id, ds_id
+        from dp_portal_user_datasource
+        <where>
+            <if test="userId != null and userId != ''">
+                and user_id = #{userId}
+            </if>
+            <if test="dsId != null and dsId != ''">
+                and ds_id = #{dsId}
+            </if>
+        </where>
+    </select>
+
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="" useGeneratedKeys="true">
+        insert into dp_portal_user_datasource(user_id, ds_id)
+        values (#{userId}, #{dsId})
+    </insert>
+
+    <insert id="batchInsert" parameterType="com.youngdatafan.portal.model.management.datasource.entity.DpPortalUserDatasource">
+        insert into dp_portal_user_datasource(user_id, ds_id)
+        values
+        <foreach collection="list" index="index" separator="," item="item">
+            (#{item.userId,jdbcType=VARCHAR},#{item.dsId,jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update dp_portal_user_datasource
+        <set>
+            <if test="userId != null and userId != ''">
+                user_id = #{userId},
+            </if>
+            <if test="dsId != null and dsId != ''">
+                ds_id = #{dsId},
+            </if>
+        </set>
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from dp_portal_user_datasource
+    </delete>
+
+    <!--通过主键删除-->
+    <delete id="deleteByDsId" parameterType="java.lang.String">
+        delete
+        from dp_portal_user_datasource
+        where ds_id = #{dsId}
+    </delete>
+</mapper>

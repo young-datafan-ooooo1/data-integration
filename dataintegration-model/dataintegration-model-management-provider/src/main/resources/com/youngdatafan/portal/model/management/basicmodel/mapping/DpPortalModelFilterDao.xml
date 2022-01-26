@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youngdatafan.portal.model.management.basicmodel.mapper.DpPortalModelFilterMapper">
+
+    <resultMap type="com.youngdatafan.portal.model.management.basicmodel.entity.DpPortalModelFilter" id="DpPortalModelFilterMap">
+        <result property="modelId" column="model_id" jdbcType="VARCHAR"/>
+        <result property="modelColumn" column="model_column" jdbcType="VARCHAR"/>
+        <result property="opertationSign" column="opertation_sign" jdbcType="VARCHAR"/>
+        <result property="fixedValue" column="fixed_value" jdbcType="VARCHAR"/>
+        <result property="modelColumnVal" column="model_column_val" jdbcType="VARCHAR"/>
+        <result property="variable" column="variable" jdbcType="VARCHAR"/>
+        <result property="relation" column="relation" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="DpPortalModelFilterMap">
+        select
+        model_id, model_column, opertation_sign, fixed_value, model_column_val, variable, relation
+        from dp_portal_model_filter
+        where  model_id= #{modelId}
+    </select>
+
+    <resultMap type="ModelFilterVO" id="ModelFilterVOMap">
+        <result property="modelId" column="model_id" jdbcType="VARCHAR"/>
+        <result property="modelColumn" column="model_column" jdbcType="VARCHAR"/>
+        <result property="opertationSign" column="opertation_sign" jdbcType="VARCHAR"/>
+        <result property="fixedValue" column="fixed_value" jdbcType="VARCHAR"/>
+        <result property="modelColumnVal" column="model_column_val" jdbcType="VARCHAR"/>
+        <result property="variable" column="variable" jdbcType="VARCHAR"/>
+        <result property="relation" column="relation" jdbcType="VARCHAR"/>
+        <result property="columnType" column="column_type" jdbcType="VARCHAR"/>
+
+    </resultMap>
+
+    <select id="queryByModelName" resultMap="ModelFilterVOMap">
+        select
+        model_id, model_column, opertation_sign, fixed_value, model_column_val, variable, relation,column_type
+        from dp_portal_model_filter
+        where  model_id= #{modelId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="DpPortalModelFilterMap">
+        select
+          model_id, model_column, opertation_sign, fixed_value, model_column_val, variable, relation
+        from dp_dev.dp_portal_model_filter
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="DpPortalModelFilterMap">
+        select
+        model_id, model_column, opertation_sign, fixed_value, model_column_val, variable, relation
+        from dp_dev.dp_portal_model_filter
+        <where>
+            <if test="modelId != null and modelId != ''">
+                and model_id = #{modelId}
+            </if>
+            <if test="modelColumn != null and modelColumn != ''">
+                and model_column = #{modelColumn}
+            </if>
+            <if test="opertationSign != null and opertationSign != ''">
+                and opertation_sign = #{opertationSign}
+            </if>
+            <if test="fixedValue != null and fixedValue != ''">
+                and fixed_value = #{fixedValue}
+            </if>
+            <if test="modelColumnVal != null and modelColumnVal != ''">
+                and model_column_val = #{modelColumnVal}
+            </if>
+            <if test="variable != null and variable != ''">
+                and variable = #{variable}
+            </if>
+            <if test="relation != null and relation != ''">
+                and relation = #{relation}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="" useGeneratedKeys="true">
+        insert into dp_dev.dp_portal_model_filter(model_id, model_column, opertation_sign, fixed_value, model_column_val, variable, relation)
+        values (#{modelId}, #{modelColumn}, #{opertationSign}, #{fixedValue}, #{modelColumnVal}, #{variable}, #{relation})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update dp_dev.dp_portal_model_filter
+        <set>
+            <if test="modelId != null and modelId != ''">
+                model_id = #{modelId},
+            </if>
+            <if test="modelColumn != null and modelColumn != ''">
+                model_column = #{modelColumn},
+            </if>
+            <if test="opertationSign != null and opertationSign != ''">
+                opertation_sign = #{opertationSign},
+            </if>
+            <if test="fixedValue != null and fixedValue != ''">
+                fixed_value = #{fixedValue},
+            </if>
+            <if test="modelColumnVal != null and modelColumnVal != ''">
+                model_column_val = #{modelColumnVal},
+            </if>
+            <if test="variable != null and variable != ''">
+                variable = #{variable},
+            </if>
+            <if test="relation != null and relation != ''">
+                relation = #{relation},
+            </if>
+        </set>
+        where = #{}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById" parameterType="java.lang.String">
+        delete from dp_portal_model_filter where  model_id= #{modelName,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insertModelFilter" parameterType="java.util.List">
+        insert into dp_portal_model_filter(model_id, model_column, opertation_sign, fixed_value, model_column_val,
+        variable, relation,column_type)
+        values
+        <foreach collection="list" index="index" separator="," item="item">
+            (#{item.modelId}, #{item.modelColumn}, #{item.opertationSign}, #{item.fixedValue}, #{item.modelColumnVal},
+            #{item.variable}, #{item.relation},#{item.columnType})
+        </foreach>
+
+    </insert>
+
+
+    <resultMap type="ModelNameAndModelFilterDTO"
+               id="ModelNameAndModelFilterDTOMap">
+        <id property="modelName" column="model_id" jdbcType="VARCHAR"/>
+        <collection property="modelFilterVOS" ofType="ModelFilterVO">
+            <result property="modelColumn" column="model_column" jdbcType="VARCHAR"/>
+            <result property="opertationSign" column="opertation_sign" jdbcType="VARCHAR"/>
+            <result property="fixedValue" column="fixed_value" jdbcType="VARCHAR"/>
+            <result property="modelColumnVal" column="model_column_val" jdbcType="VARCHAR"/>
+            <result property="variable" column="variable" jdbcType="VARCHAR"/>
+            <result property="relation" column="relation" jdbcType="VARCHAR"/>
+            <result property="columnType" column="column_type" jdbcType="VARCHAR"/>
+
+        </collection>
+    </resultMap>
+    <select id="selectMdelFilters" parameterType="java.util.List" resultMap="ModelNameAndModelFilterDTOMap">
+        select * from dp_portal_model_filter
+        where model_id in
+        <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+            #{item,jdbcType=VARCHAR}
+        </foreach>
+    </select>
+</mapper>

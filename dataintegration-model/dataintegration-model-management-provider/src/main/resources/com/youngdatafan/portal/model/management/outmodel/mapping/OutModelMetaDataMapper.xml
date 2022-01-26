@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youngdatafan.portal.model.management.outmodel.mapper.OutModelMetaDataMapper">
+    <resultMap id="BaseResultMap" type="com.youngdatafan.portal.model.management.outmodel.entity.OutModelMetaData">
+        <result column="model_name" jdbcType="VARCHAR" property="modelName"/>
+        <result column="column_name" jdbcType="VARCHAR" property="columnName"/>
+        <result column="column_type" jdbcType="VARCHAR" property="columnType"/>
+        <result column="column_length" jdbcType="INTEGER" property="columnLength"/>
+        <result column="column_precision" jdbcType="INTEGER" property="columnPrecision"/>
+        <result column="column_chinese_name" jdbcType="VARCHAR" property="columnChineseName"/>
+        <result column="column_description" jdbcType="VARCHAR" property="columnDescription"/>
+        <result column="column_etl_sql" jdbcType="VARCHAR" property="columnEtlSql"/>
+        <result column="dimension_metric" jdbcType="VARCHAR" property="dimensionMetric"/>
+        <result column="metric_group" jdbcType="VARCHAR" property="metricGroup"/>
+        <result column="statistics" jdbcType="VARCHAR" property="statistics"/>
+        <result column="model_data_sort" jdbcType="VARCHAR" property="modelDataSort"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.youngdatafan.portal.model.management.outmodel.entity.OutModelMetaData">
+
+
+    insert into dp_portal_out_model_metadata (model_name, column_name, column_type, 
+      column_length, column_precision, column_chinese_name, 
+      column_description, column_etl_sql, dimension_metric, 
+      metric_group, statistics, model_data_sort
+      )
+    values (#{modelName,jdbcType=VARCHAR}, #{columnName,jdbcType=VARCHAR}, #{columnType,jdbcType=VARCHAR}, 
+      #{columnLength,jdbcType=INTEGER}, #{columnPrecision,jdbcType=INTEGER}, #{columnChineseName,jdbcType=VARCHAR}, 
+      #{columnDescription,jdbcType=VARCHAR}, #{columnEtlSql,jdbcType=VARCHAR}, #{dimensionMetric,jdbcType=VARCHAR}, 
+      #{metricGroup,jdbcType=VARCHAR}, #{statistics,jdbcType=VARCHAR}, #{modelDataSort,jdbcType=VARCHAR}
+      )
+
+
+    </insert>
+    <insert id="insertSelective" parameterType="com.youngdatafan.portal.model.management.outmodel.entity.OutModelMetaData">
+
+
+        insert into dp_portal_out_model_metadata
+
+
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="modelName != null">
+                model_name,
+
+
+            </if>
+            <if test="columnName != null">
+
+
+                column_name,
+
+
+            </if>
+            <if test="columnType != null">
+
+
+                column_type,
+
+
+            </if>
+            <if test="columnLength != null">
+
+
+                column_length,
+
+
+            </if>
+            <if test="columnPrecision != null">
+
+
+                column_precision,
+
+
+            </if>
+            <if test="columnChineseName != null">
+
+
+                column_chinese_name,
+
+
+            </if>
+            <if test="columnDescription != null">
+
+
+                column_description,
+
+
+            </if>
+            <if test="columnEtlSql != null">
+
+
+                column_etl_sql,
+
+
+            </if>
+            <if test="dimensionMetric != null">
+
+
+                dimension_metric,
+
+
+            </if>
+            <if test="metricGroup != null">
+
+
+                metric_group,
+
+
+            </if>
+            <if test="statistics != null">
+
+
+                statistics,
+
+
+            </if>
+            <if test="modelDataSort != null">
+
+
+                model_data_sort,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="modelName != null">
+                #{modelName,jdbcType=VARCHAR},
+
+
+            </if>
+            <if test="columnName != null">
+
+
+                #{columnName,jdbcType=VARCHAR},
+
+
+            </if>
+            <if test="columnType != null">
+
+
+                #{columnType,jdbcType=VARCHAR},
+
+
+            </if>
+            <if test="columnLength != null">
+
+
+                #{columnLength,jdbcType=INTEGER},
+
+
+            </if>
+            <if test="columnPrecision != null">
+
+
+                #{columnPrecision,jdbcType=INTEGER},
+
+
+            </if>
+            <if test="columnChineseName != null">
+
+
+                #{columnChineseName,jdbcType=VARCHAR},
+
+
+            </if>
+            <if test="columnDescription != null">
+
+
+                #{columnDescription,jdbcType=VARCHAR},
+
+
+            </if>
+            <if test="columnEtlSql != null">
+
+
+                #{columnEtlSql,jdbcType=VARCHAR},
+
+
+            </if>
+            <if test="dimensionMetric != null">
+
+
+                #{dimensionMetric,jdbcType=VARCHAR},
+
+
+            </if>
+            <if test="metricGroup != null">
+
+
+                #{metricGroup,jdbcType=VARCHAR},
+
+
+            </if>
+            <if test="statistics != null">
+
+
+                #{statistics,jdbcType=VARCHAR},
+
+
+            </if>
+            <if test="modelDataSort != null">
+
+
+                #{modelDataSort,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <delete id="deleteOutModelMetaDataByModelName" parameterType="java.lang.String">
+
+    delete  from dp_portal_out_model_metadata where model_name
+    in
+
+        <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+            #{item,jdbcType=VARCHAR}
+        </foreach>
+    </delete>
+    <delete id="deleteOutModelMetaDataByOne" parameterType="java.lang.String">
+
+        delete  from dp_portal_out_model_metadata where model_name=#{modelName}
+
+    </delete>
+
+
+
+    <insert id="batchInsertOutModelMeta" parameterType="java.util.List">
+
+
+        insert into dp_portal_out_model_metadata (model_name, column_name, column_type,
+        column_length, column_precision, column_chinese_name,
+        column_description, column_etl_sql, dimension_metric,
+        metric_group, statistics, model_data_sort
+        ) values
+
+
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.modelName}, #{item.columnName}, #{item.columnType},
+            #{item.columnLength}, #{item.columnPrecision}, #{item.columnChineseName},
+            #{item.columnDescription}, #{item.columnEtlSql}, #{item.dimensionMetric},
+            #{item.metricGroup}, #{item.statistics},#{item.modelDataSort})
+        </foreach>
+    </insert>
+
+    <resultMap id="ModelIdAndModelMetaDataDTOMap"
+               type="ModelIdAndModelMetaDataDTO">
+        <id column="model_name" jdbcType="VARCHAR" property="modelId"/>
+        <collection property="list" ofType="OutModelMetaDataDTO">
+            <result column="model_name" jdbcType="VARCHAR" property="modelName"/>
+            <result column="column_name" jdbcType="VARCHAR" property="columnName"/>
+            <result column="column_type" jdbcType="VARCHAR" property="columnType"/>
+            <result column="column_length" jdbcType="INTEGER" property="columnLength"/>
+            <result column="column_precision" jdbcType="INTEGER" property="columnPrecision"/>
+            <result column="column_chinese_name" jdbcType="VARCHAR" property="columnChineseName"/>
+            <result column="column_description" jdbcType="VARCHAR" property="columnDescription"/>
+            <result column="column_etl_sql" jdbcType="VARCHAR" property="columnEtlSql"/>
+            <result column="dimension_metric" jdbcType="VARCHAR" property="dimensionMetric"/>
+            <result column="metric_group" jdbcType="VARCHAR" property="metricGroup"/>
+            <result column="statistics" jdbcType="VARCHAR" property="statistics"/>
+            <result column="model_data_sort" jdbcType="VARCHAR" property="modelDataSort"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectModelMeataDataList" parameterType="java.util.List" resultMap="ModelIdAndModelMetaDataDTOMap">
+
+
+        select * from dp_portal_out_model_metadata where model_name in
+
+
+        <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+            #{item,jdbcType=VARCHAR}
+        </foreach>
+    </select>
+
+    <resultMap id="OutModelProjectIdAndNamesDTOMap"
+               type="OutModelProjectIdAndNamesDTO">
+        <id column="project_id" jdbcType="VARCHAR" property="projectId"/>
+        <result column="project_name" jdbcType="VARCHAR" property="projectName"/>
+    </resultMap>
+    <select id="selectProjects" parameterType="java.lang.String" resultMap="OutModelProjectIdAndNamesDTOMap">
+
+
+        SELECT project_id,project_name from dp_portal_project WHERE 1=1
+
+
+        <if test="userId != '0000000'">
+
+
+            and create_user_id =#{userId} or update_user_id=#{userId}
+
+
+        </if>
+    </select>
+</mapper>

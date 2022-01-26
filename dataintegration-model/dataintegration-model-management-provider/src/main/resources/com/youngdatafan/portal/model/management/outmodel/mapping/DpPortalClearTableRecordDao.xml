@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youngdatafan.portal.model.management.outmodel.mapper.DpPortalClearTableRecordDao">
+    <resultMap type="com.youngdatafan.portal.model.management.outmodel.entity.DpPortalClearTableRecord"
+               id="DpPortalClearTableRecordMap">
+        <result property="modelId" column="model_id" jdbcType="VARCHAR"/>
+        <result property="createUserId" column="create_user_id" jdbcType="VARCHAR"/>
+        <result property="datasourceId" column="datasource_id" jdbcType="VARCHAR"/>
+        <result property="tableName" column="table_name" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="modelType" column="model_type" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="DpPortalClearTableRecordMap">
+
+
+
+
+        select
+          model_id, create_user_id, datasource_id, table_name, create_time, model_type
+        from dp.dp_portal_clear_table_record
+        where model_id = #{modelId}
+
+
+
+
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="DpPortalClearTableRecordMap">
+
+
+
+
+        select
+          model_id, create_user_id, datasource_id, table_name, create_time, model_type
+        from dp.dp_portal_clear_table_record
+        limit #{offset}, #{limit}
+
+
+
+
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="DpPortalClearTableRecordMap">
+
+
+
+
+        select
+          model_id, create_user_id, datasource_id, table_name, create_time, model_type
+        from dp.dp_portal_clear_table_record
+
+
+
+
+        <where>
+            <if test="modelId != null and modelId != ''">
+                and model_id = #{modelId}
+
+
+
+
+            </if>
+            <if test="createUserId != null and createUserId != ''">
+
+
+
+
+                and create_user_id = #{createUserId}
+
+
+
+
+            </if>
+            <if test="datasourceId != null and datasourceId != ''">
+
+
+
+
+                and datasource_id = #{datasourceId}
+
+
+
+
+            </if>
+            <if test="tableName != null and tableName != ''">
+
+
+
+
+                and table_name = #{tableName}
+
+
+
+
+            </if>
+            <if test="createTime != null and createTime != ''">
+
+
+
+
+                and create_time = #{createTime}
+
+
+
+
+            </if>
+            <if test="modelType != null and modelType != ''">
+
+
+
+
+                and model_type = #{modelType}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="modelId" useGeneratedKeys="true">
+
+
+
+
+        insert into dp.dp_portal_clear_table_record(model_id,create_user_id, datasource_id, table_name, create_time, model_type)
+        values (#{modelId},#{createUserId}, #{datasourceId}, #{tableName}, #{createTime}, #{modelType})
+
+
+
+
+    </insert>
+
+    <!--新增所有列-->
+    <insert id="batchInsert" parameterType="java.util.List">
+
+        insert into dp.dp_portal_clear_table_record(model_id,create_user_id, datasource_id, `table_name`, create_time, model_type)
+        values
+
+        <foreach collection="list" index="index" separator="," item="item">
+            (#{item.modelId},#{item.createUserId}, #{item.datasourceId}, #{item.tableName}, #{item.createTime}, #{item.modelType})
+        </foreach>
+
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+
+
+
+
+        update dp.dp_portal_clear_table_record
+
+
+
+
+        <set>
+            <if test="createUserId != null and createUserId != ''">
+                create_user_id = #{createUserId},
+
+
+
+
+            </if>
+            <if test="datasourceId != null and datasourceId != ''">
+
+
+
+
+                datasource_id = #{datasourceId},
+
+
+
+
+            </if>
+            <if test="tableName != null and tableName != ''">
+
+
+
+
+                table_name = #{tableName},
+
+
+
+
+            </if>
+            <if test="createTime != null and createTime != ''">
+
+
+
+
+                create_time = #{createTime},
+
+
+
+
+            </if>
+            <if test="modelType != null and modelType != ''">
+
+
+
+
+                model_type = #{modelType},
+            </if>
+        </set>
+
+
+
+
+        where model_id = #{modelId}
+
+
+
+
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+
+
+
+
+        delete from dp.dp_portal_clear_table_record where model_id = #{modelId}
+
+
+
+
+    </delete>
+</mapper>

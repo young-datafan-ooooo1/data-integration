@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youngdatafan.portal.model.management.businessmodel.mapper.BusinessModelMetadataMapper">
+    <resultMap id="BaseResultMap" type="com.youngdatafan.portal.model.management.businessmodel.entity.BusinessModelMetadata">
+        <result column="business_model_name" jdbcType="VARCHAR" property="businessModelName"/>
+        <result column="column_name" jdbcType="VARCHAR" property="columnName"/>
+        <result column="column_serial" jdbcType="VARCHAR" property="columnSerial"/>
+        <result column="custom_column_name" jdbcType="VARCHAR" property="customColumnName"/>
+        <result column="column_etl_sql" jdbcType="VARCHAR" property="columnEtlSql"/>
+    </resultMap>
+
+    <resultMap id="BasicModelAndMetaDataDTOMap"
+               type="BasicModelAndMetaDataDTO">
+        <result column="model_name" jdbcType="VARCHAR" property="modelName"/>
+        <result column="column_name" jdbcType="VARCHAR" property="columnName"/>
+        <result column="column_type" jdbcType="VARCHAR" property="columnType"/>
+        <result column="column_length" jdbcType="INTEGER" property="columnLength"/>
+        <result column="column_precision" jdbcType="INTEGER" property="columnPrecision"/>
+        <result column="column_chinese_name" jdbcType="VARCHAR" property="columnChineseName"/>
+        <result column="column_description" jdbcType="VARCHAR" property="columnDescription"/>
+        <result column="column_etl_sql" jdbcType="VARCHAR" property="columnEtlSql"/>
+        <result column="dimension_metric" jdbcType="VARCHAR" property="dimensionMetric"/>
+        <result column="metric_group" jdbcType="VARCHAR" property="metricGroup"/>
+        <result column="statistics" jdbcType="VARCHAR" property="statistics"/>
+        <result column="model_data_sort" jdbcType="VARCHAR" property="modelDataSort"/>
+    </resultMap>
+    <insert id="insert" parameterType="com.youngdatafan.portal.model.management.businessmodel.entity.BusinessModelMetadata">
+    insert into dp_portal_business_model_metadata (business_model_name, column_name, column_serial, 
+      custom_column_name, column_etl_sql)
+    values (#{businessModelName,jdbcType=VARCHAR}, #{columnName,jdbcType=VARCHAR}, #{columnSerial,jdbcType=VARCHAR}, 
+      #{customColumnName,jdbcType=VARCHAR}, #{columnEtlSql,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective"
+            parameterType="com.youngdatafan.portal.model.management.businessmodel.entity.BusinessModelMetadata">
+        insert into dp_portal_business_model_metadata
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="businessModelName != null">
+                business_model_name,
+            </if>
+            <if test="columnName != null">
+                column_name,
+            </if>
+            <if test="columnSerial != null">
+                column_serial,
+            </if>
+            <if test="customColumnName != null">
+                custom_column_name,
+            </if>
+            <if test="columnEtlSql != null">
+                column_etl_sql,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="businessModelName != null">
+                #{businessModelName,jdbcType=VARCHAR},
+            </if>
+            <if test="columnName != null">
+                #{columnName,jdbcType=VARCHAR},
+            </if>
+            <if test="columnSerial != null">
+                #{columnSerial,jdbcType=VARCHAR},
+            </if>
+            <if test="customColumnName != null">
+                #{customColumnName,jdbcType=VARCHAR},
+            </if>
+            <if test="columnEtlSql != null">
+                #{columnEtlSql,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <delete id="deleteByModelName" parameterType="map">
+    delete from dp_portal_business_model_metadata
+    where business_model_name = #{businessModelName,jdbcType=VARCHAR}
+  </delete>
+
+    <insert id="insertIntoBatch"
+            parameterType="com.youngdatafan.portal.model.management.businessmodel.entity.BusinessModelMetadata">
+        insert into dp_portal_business_model_metadata (business_model_name, column_name, column_serial,
+        custom_column_name, column_etl_sql)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.businessModelName}, #{item.columnName}, #{item.columnSerial},
+            #{item.customColumnName},#{item.columnEtlSql})
+        </foreach>
+    </insert>
+
+
+    <insert id="insertBusinessModelMetaData"
+            parameterType="BusinessModelMetaDataVO">
+        insert into dp_portal_business_model_metadata (business_model_name, column_name, column_serial,
+        custom_column_name, column_etl_sql)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.businessModelName}, #{item.columnName}, #{item.columnSerial},
+            #{item.customColumnName},#{item.columnEtlSql})
+        </foreach>
+    </insert>
+
+    <select id="selectBasicModelColumns" parameterType="java.lang.String" resultMap="BasicModelAndMetaDataDTOMap">
+          SELECT * FROM dp_portal_basic_model_metadata WHERE model_name=#{basicModel,jdbcType=VARCHAR}
+    </select>
+
+    <resultMap id="XmlBeanResultMap" type="com.youngdatafan.portal.model.management.forward.superset.XmlBean">
+        <id column="column_name" jdbcType="VARCHAR" property="column"/>
+        <id column="custom_column_name" jdbcType="VARCHAR" property="chineseName"/>
+        <result column="column_type" jdbcType="VARCHAR" property="columnType"/>
+        <result column="dimension_metric" jdbcType="VARCHAR" property="typeEnum"/>
+    </resultMap>
+    <select id="findModelMetaDataByName" parameterType="java.lang.String" resultMap="XmlBeanResultMap">
+        SELECT
+        t1.column_name,
+        t1.custom_column_name,
+        t3.column_type,
+        t1.column_etl_sql,
+        t3.dimension_metric
+        FROM
+        dp_portal_business_model_metadata t1
+        LEFT JOIN dp_portal_business_model t2 ON t1.business_model_name = t2.model_name
+        LEFT JOIN dp_portal_basic_model_metadata t3 ON t3.column_name = t1.column_name
+        AND t3.model_name = t2.basic_model_name
+        WHERE
+        t1.business_model_name = #{businessModelName,jdbcType=VARCHAR}
+        AND t3.column_name IN
+        <foreach collection="list" index="index" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+</mapper>

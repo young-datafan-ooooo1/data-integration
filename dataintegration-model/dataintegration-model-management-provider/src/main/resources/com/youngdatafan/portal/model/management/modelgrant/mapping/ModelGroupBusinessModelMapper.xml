@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youngdatafan.portal.model.management.modelgrant.mapper.ModelGroupBusinessModelMapper">
+    <resultMap id="BaseResultMap" type="com.youngdatafan.portal.model.management.modelgrant.entity.ModelGroupBusinessModel">
+        <result column="group_name" jdbcType="VARCHAR" property="groupName"/>
+        <result column="model_name" jdbcType="VARCHAR" property="modelName"/>
+    </resultMap>
+    <insert id="insert" parameterType="com.youngdatafan.portal.model.management.modelgrant.entity.ModelGroupBusinessModel">
+    insert into dp_portal_model_group_business_model (group_name, model_name)
+    values (#{groupName,jdbcType=VARCHAR}, #{modelName,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective"
+            parameterType="com.youngdatafan.portal.model.management.modelgrant.entity.ModelGroupBusinessModel">
+        insert into dp_portal_model_group_business_model
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="groupName != null">
+                group_name,
+            </if>
+            <if test="modelName != null">
+                model_name,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="groupName != null">
+                #{groupName,jdbcType=VARCHAR},
+            </if>
+            <if test="modelName != null">
+                #{modelName,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <insert id="addModelGroupBusinessModels" parameterType="java.util.List">
+        insert into dp_portal_model_group_business_model(group_name, model_name)
+        values
+        <foreach collection="list" index="index" separator="," item="item">
+            (#{item.groupName},#{item.modelName})
+        </foreach>
+    </insert>
+
+    <delete id="deleteByGroupName" parameterType="java.lang.String">
+        delete  from dp_portal_model_group_business_model where 
+         group_name=#{groupName,jdbcType=VARCHAR}
+    </delete>
+</mapper>

@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youngdatafan.portal.model.management.modelgrant.mapper.ModelGroupMapper">
+    <resultMap id="BaseResultMap" type="com.youngdatafan.portal.model.management.modelgrant.entity.ModelGroup">
+        <id column="group_id" jdbcType="VARCHAR" property="groupId"/>
+        <result column="group_name" jdbcType="VARCHAR" property="groupName"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="create_user_id" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="enabled" jdbcType="VARCHAR" property="enabled"/>
+    </resultMap>
+
+    <resultMap id="modelGrantGroupDTOMap" type="ModelGrantGroupDTO">
+        <result column="group_id" jdbcType="VARCHAR" property="groupId"/>
+        <result column="group_name" jdbcType="VARCHAR" property="groupName"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="user_name" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="enabled" jdbcType="VARCHAR" property="enabled"/>
+        <collection property="businessModelListDTOS"
+                    ofType="BusinessModelListDTO">
+            <id column="model_name" jdbcType="VARCHAR" property="modelName"/>
+            <result column="chinese_name" jdbcType="VARCHAR" property="modelChineseName"/>
+            <result column="model_grou_name" jdbcType="VARCHAR" property="modelGroupName"/>
+            <result column="group_type" jdbcType="VARCHAR" property="modelGroupType"/>
+        </collection>
+    </resultMap>
+
+
+    <resultMap id="AddUserGrantGroupListDTOMap"
+               type="AddUserGrantGroupListDTO">
+        <id column="group_id" jdbcType="VARCHAR" property="grantId"/>
+        <result column="group_name" jdbcType="VARCHAR" property="grantGroupName"/>
+        <collection property="businessModelName" ofType="java.lang.String">
+            <constructor>
+                <arg column="model_name"/>
+            </constructor>
+        </collection>
+    </resultMap>
+    <sql id="Base_Column_List">
+
+       group_id, group_name, description, create_time, update_time, create_user_id, enabled
+
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+
+        select
+
+        <include refid="Base_Column_List"/>
+
+        from dp_portal_model_group
+        where group_name = #{groupName,jdbcType=VARCHAR}
+
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+
+    delete from dp_portal_model_group
+    where group_id = #{groupName,jdbcType=VARCHAR}
+        <if test="userId != '00000000'">
+          and  create_user_id=#{userId,jdbcType=VARCHAR}
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.youngdatafan.portal.model.management.modelgrant.entity.ModelGroup">
+
+    insert into dp_portal_model_group (group_id, group_name, description,
+      create_time, update_time, create_user_id,
+      enabled)
+    values (#{groupId,jdbcType=INTEGER}, #{groupName,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR},
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=VARCHAR},
+      #{enabled,jdbcType=VARCHAR})
+
+    </insert>
+    <insert id="insertSelective" parameterType="com.youngdatafan.portal.model.management.modelgrant.entity.ModelGroup">
+
+        insert into dp_portal_model_group
+
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="groupId != null">
+                group_id,
+
+            </if>
+            <if test="groupName != null">
+
+                group_name,
+
+            </if>
+            <if test="description != null">
+
+                description,
+
+            </if>
+            <if test="createTime != null">
+
+                create_time,
+
+            </if>
+            <if test="updateTime != null">
+
+                update_time,
+
+            </if>
+            <if test="createUserId != null">
+
+                create_user_id,
+
+            </if>
+            <if test="enabled != null">
+
+                enabled,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="groupId != null">
+                #{groupId,jdbcType=INTEGER},
+
+            </if>
+            <if test="groupName != null">
+
+                #{groupName,jdbcType=VARCHAR},
+
+            </if>
+            <if test="description != null">
+
+                #{description,jdbcType=VARCHAR},
+
+            </if>
+            <if test="createTime != null">
+
+                #{createTime,jdbcType=TIMESTAMP},
+
+            </if>
+            <if test="updateTime != null">
+
+                #{updateTime,jdbcType=TIMESTAMP},
+
+            </if>
+            <if test="createUserId != null">
+
+                #{createUserId,jdbcType=VARCHAR},
+
+            </if>
+            <if test="enabled != null">
+
+                #{enabled,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective"
+            parameterType="com.youngdatafan.portal.model.management.modelgrant.entity.ModelGroup">
+
+        update dp_portal_model_group
+
+        <set>
+            <if test="groupName != null">
+                group_name = #{groupName,jdbcType=VARCHAR},
+
+            </if>
+            <if test="description != null">
+
+                description = #{description,jdbcType=VARCHAR},
+
+            </if>
+            <if test="createTime != null">
+
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+
+            </if>
+            <if test="updateTime != null">
+
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+
+            </if>
+            <if test="createUserId != null">
+
+                create_user_id = #{createUserId,jdbcType=VARCHAR},
+
+            </if>
+            <if test="enabled != null">
+
+                enabled = #{enabled,jdbcType=VARCHAR},
+            </if>
+        </set>
+
+        where group_id = #{groupId,jdbcType=INTEGER}
+
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.youngdatafan.portal.model.management.modelgrant.entity.ModelGroup">
+
+    update dp_portal_model_group
+    set group_name = #{groupName,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=VARCHAR},
+      enabled = #{enabled,jdbcType=VARCHAR}
+    where group_id = #{groupId,jdbcType=INTEGER}
+
+    </update>
+
+    <select id="selectAllModelGrantGroup" parameterType="java.lang.String"
+            resultMap="modelGrantGroupDTOMap">
+
+        SELECT
+        t1.group_id,
+        t1.group_name,
+        t1.description,
+        t1.enabled,
+        t1.create_time
+        , t2.user_name
+        FROM
+        dp_portal_model_group t1
+
+        LEFT JOIN dp_portal_user t2 ON t1.create_user_id = t2.user_id
+        WHERE 1=1
+
+        <if test="userId != '00000000'">
+
+            and t1.create_user_id=#{userId,jdbcType=VARCHAR}
+
+        </if>
+        <if test="name != null">
+
+            and t1.group_name like #{name,jdbcType=VARCHAR}
+
+        </if>
+    </select>
+
+    <resultMap id="groupIdBusinessModelListDTOMap"
+               type="GroupIdBusinessModelListDTO">
+        <result column="group_name" jdbcType="VARCHAR" property="groupid"/>
+        <collection property="businessModelListDTOS"
+                    ofType="BusinessModelListDTO">
+            <id column="model_name" jdbcType="VARCHAR" property="modelName"/>
+            <result column="chinese_name" jdbcType="VARCHAR" property="modelChineseName"/>
+            <result column="model_group_name" jdbcType="VARCHAR" property="modelGroupName"/>
+            <result column="group_type" jdbcType="VARCHAR" property="modelGroupType"/>
+        </collection>
+    </resultMap>
+    <select id="selectAllBusinessModelByGroupIds" parameterType="java.util.List"
+            resultMap="groupIdBusinessModelListDTOMap">
+
+        SELECT
+        t3.group_name,
+        t6.chinese_name,
+        t6.model_name,
+        t5.group_name as model_group_name,
+        t5.group_type
+        FROM
+        dp_portal_model_group_business_model t3
+        inner JOIN dp_portal_model_group_grant t4 on t3.model_name=t4.mode_name
+        inner JOIN dp_portal_group t5 on t4.group_id = t5.group_id
+        inner JOIN dp_portal_business_model t6 on t3.model_name=t6.model_name
+        WHERE 1=1
+        AND t3.group_name in
+
+        <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+
+        UNION
+        SELECT
+        t3.group_name,
+        t6.c_name as chinese_name,
+        t6.model_name,
+        t5.group_name as model_grou_name,
+        t5.group_type
+        FROM
+        dp_portal_model_group_business_model t3
+        INNER JOIN dp_portal_model_group_grant t4 on t3.model_name=t4.mode_name
+        INNER JOIN dp_portal_group t5 on t4.group_id = t5.group_id
+        INNER JOIN dp_portal_basic_model t6 on t3.model_name=t6.model_name
+        WHERE 1=1
+        AND t3.group_name in
+
+        <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </select>
+    <select id="selectGroupModelNameAndModelList" parameterType="java.lang.String"
+            resultMap="AddUserGrantGroupListDTOMap">
+
+        SELECT
+        t1.group_id,
+        t1.group_name,
+        t2.model_name
+        FROM
+        dp_portal_model_group t1
+        LEFT JOIN dp_portal_model_group_business_model t2 ON t1.group_id = t2.group_name
+        WHERE 1=1
+
+        <if test="groupName != null and groupName != ''">
+
+            and t1.group_name = #{groupName}
+
+        </if>
+        <if test="userId != '00000000'">
+
+            and t1.create_user_id=#{userId,jdbcType=VARCHAR}
+
+        </if>
+    </select>
+
+    <delete id="deleteModelGroupBusinessModel" parameterType="java.lang.String">
+
+        DELETE from dp_portal_model_group_business_model WHERE group_name=#{modelGroupName}
+
+    </delete>
+
+    <select id="selectModelGroupByGroupName" parameterType="java.lang.String" resultType="java.lang.Integer">
+
+        select  count(*) from  dp_portal_model_group where  group_name=#{modelGroupName} and  create_user_id=#{userId,jdbcType=VARCHAR}
+
+    </select>
+</mapper>

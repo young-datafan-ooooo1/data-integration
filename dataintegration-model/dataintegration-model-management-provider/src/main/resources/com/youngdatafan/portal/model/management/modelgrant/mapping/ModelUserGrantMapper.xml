@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youngdatafan.portal.model.management.modelgrant.mapper.ModelUserGrantMapper">
+    <resultMap id="BaseResultMap" type="com.youngdatafan.portal.model.management.modelgrant.entity.ModelUserGrant">
+        <result column="model_name" jdbcType="VARCHAR" property="modelName"/>
+        <result column="user_id" jdbcType="VARCHAR" property="userId"/>
+    </resultMap>
+    <insert id="insert" parameterType="com.youngdatafan.portal.model.management.modelgrant.entity.ModelUserGrant">
+    insert into dp_portal_model_user_grant (model_name, user_id)
+    values (#{modelName,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.youngdatafan.portal.model.management.modelgrant.entity.ModelUserGrant">
+        insert into dp_portal_model_user_grant
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="modelName != null">
+                model_name,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="modelName != null">
+                #{modelName,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <insert id="insertModelUserGrants" parameterType="java.util.List">
+        insert into dp_portal_model_user_grant(model_name,user_id)
+        values
+        <foreach collection="list" index="index" separator="," item="item">
+            (#{item.modelName,jdbcType=VARCHAR},#{item.userId,jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+
+    <delete id="deleteModelByUserId" parameterType="java.lang.String">
+        delete from  dp_portal_model_user_grant where user_id=#{userId}
+    </delete>
+
+    <delete id="deleteModelByUserName" parameterType="java.lang.String">
+        DELETE
+        t1
+        FROM
+            dp_portal_model_user_grant t1
+        where
+	    t1.user_id =  #{userName,jdbcType=VARCHAR}
+    </delete>
+
+</mapper>

@@ -1,0 +1,1028 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youngdatafan.portal.model.management.outinterfacemodel.mapper.OutinterfaceModelMapper">
+    <resultMap id="BaseResultMap" type="com.youngdatafan.portal.model.management.outinterfacemodel.entity.OutinterfaceModel">
+        <id column="model_name" jdbcType="VARCHAR" property="modelName"/>
+        <result column="chinese_name" jdbcType="VARCHAR" property="chineseName"/>
+        <result column="basic_model_name" jdbcType="VARCHAR" property="basicModelName"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="filter_rule" jdbcType="VARCHAR" property="filterRule"/>
+        <result column="enabled" jdbcType="VARCHAR" property="enabled"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="create_user_id" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="model_sort" jdbcType="VARCHAR" property="modelSort"/>
+    </resultMap>
+
+    <resultMap id="SelectModelNameAndColumnCountDTOMap"
+               type="SelectOutinterfaceModelNameAndColumnCountDTO">
+        <id column="model_name" jdbcType="VARCHAR" property="modelName"/>
+        <collection property="outinterfaceModelMetaDataDTOS"
+                    ofType="BasicModelMetaDataDTO">
+            <!--<id column="model_name(1)" jdbcType="VARCHAR" property="modelName"/>-->
+            <id column="column_name" jdbcType="VARCHAR" property="columnName"/>
+            <result column="column_type" jdbcType="VARCHAR" property="columnType"/>
+            <result column="column_length" jdbcType="INTEGER" property="columnLength"/>
+            <result column="column_precision" jdbcType="INTEGER" property="columnPrecision"/>
+            <result column="column_chinese_name" jdbcType="VARCHAR" property="columnChineseName"/>
+            <result column="column_description" jdbcType="VARCHAR" property="columnDescription"/>
+            <result column="column_etl_sql" jdbcType="VARCHAR" property="columnEtlSql"/>
+            <result column="dimension_metric" jdbcType="VARCHAR" property="dimensionMetric"/>
+            <result column="metric_group" jdbcType="VARCHAR" property="metricGroup"/>
+            <result column="statistics" jdbcType="VARCHAR" property="statistics"/>
+            <result column="column_serial" jdbcType="VARCHAR" property="modelDataSort"/>
+        </collection>
+    </resultMap>
+
+    <resultMap id="BasicModelNameAndCnameDTOMap"
+               type="OutinterfaceModelNameAndCnameDTO">
+        <id column="model_name" jdbcType="VARCHAR" property="modelName"/>
+        <result column="c_name" jdbcType="VARCHAR" property="cName"/>
+    </resultMap>
+
+    <resultMap id="BasicModelGroupDTOMap"
+               type="OutinterfaceModelGroupDTO">
+        <id column="group_id" jdbcType="VARCHAR" property="modelGroupId"/>
+        <result column="group_name" jdbcType="VARCHAR" property="modelGroupName"/>
+    </resultMap>
+
+    <resultMap id="OutinterfaceModelDTOMap" type="OutinterfaceModelDTO">
+        <id column="model_name" jdbcType="VARCHAR" property="modelName"/>
+        <result column="chinese_name" jdbcType="VARCHAR" property="chineseName"/>
+        <result column="basic_model_name" jdbcType="VARCHAR" property="basicModelName"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="filter_rule" jdbcType="VARCHAR" property="filterRule"/>
+        <result column="enabled" jdbcType="VARCHAR" property="enabled"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="create_user_id" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="model_sort" jdbcType="VARCHAR" property="sortNum"/>
+        <result column="user_name" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="group_name" jdbcType="VARCHAR" property="groupName"/>
+        <result column="c_name" jdbcType="VARCHAR" property="cName"/>
+        <result column="basicmodel_group_name" jdbcType="VARCHAR" property="basicmodelGroupName"/>
+        <result column="basicmodel_group_id" jdbcType="VARCHAR" property="basicmodelGroupId"/>
+    </resultMap>
+
+    <resultMap id="OutinterfaceModelMetaDataDTOMap"
+               type="OutinterfaceModelMetaDataDTO">
+        <result column="model_name" jdbcType="VARCHAR" property="modelName"/>
+        <result column="column_name" jdbcType="VARCHAR" property="columnName"/>
+        <result column="column_type" jdbcType="VARCHAR" property="columnType"/>
+        <result column="column_length" jdbcType="INTEGER" property="columnLength"/>
+        <result column="column_precision" jdbcType="INTEGER" property="columnPrecision"/>
+        <result column="column_chinese_name" jdbcType="VARCHAR" property="columnChineseName"/>
+        <result column="column_description" jdbcType="VARCHAR" property="columnDescription"/>
+        <result column="column_etl_sql" jdbcType="VARCHAR" property="columnEtlSql"/>
+        <result column="dimension_metric" jdbcType="VARCHAR" property="dimensionMetric"/>
+        <result column="metric_group" jdbcType="VARCHAR" property="metricGroup"/>
+        <result column="statistics" jdbcType="VARCHAR" property="statistics"/>
+        <result column="model_data_sort" jdbcType="VARCHAR" property="modelDataSort"/>
+    </resultMap>
+
+
+    <resultMap id="ModelDatasourceDTOMap" type="OutinterfaceModelDatasourceDTO">
+        <id column="datasource_id" jdbcType="VARCHAR" property="datasourceId"/>
+        <result column="ds_name" jdbcType="VARCHAR" property="dsName"/>
+        <result column="describe" jdbcType="VARCHAR" property="describe"/>
+        <result column="ds_type" jdbcType="VARCHAR" property="dsType"/>
+        <result column="ds_url" jdbcType="VARCHAR" property="dsUrl"/>
+        <result column="driver_class_name" jdbcType="VARCHAR" property="driverClassName"/>
+        <result column="ds_username" jdbcType="VARCHAR" property="dsUsername"/>
+        <result column="ds_password" jdbcType="VARCHAR" property="dsPassword"/>
+        <result column="enabled" jdbcType="VARCHAR" property="enabled"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="create_user_id" jdbcType="VARCHAR" property="createUserId"/>
+    </resultMap>
+
+    <resultMap id="OutinterfaceModelListDTOMap" type="BusinessModelListDTO">
+        <id column="model_name" jdbcType="VARCHAR" property="modelName"/>
+        <result column="chinese_name" jdbcType="VARCHAR" property="modelChineseName"/>
+        <result column="group_name" jdbcType="VARCHAR" property="modelGroupName"/>
+        <result column="group_type" jdbcType="VARCHAR" property="modelGroupType"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
+               type="com.youngdatafan.portal.model.management.outinterfacemodel.entity.OutinterfaceModel">
+        <result column="query_sql" jdbcType="LONGVARCHAR" property="querySql"/>
+    </resultMap>
+
+    <resultMap id="OutinterfaceModelAndGroupListMap"
+               type="OutinterfaceModelAndGroupListDTO">
+        <id column="group_id" jdbcType="VARCHAR" property="groupId"/>
+        <association property="groupDTO" javaType="OutinterfaceGroupDTO">
+            <id column="group_id" jdbcType="VARCHAR" property="groupId"/>
+            <result column="group_name" jdbcType="VARCHAR" property="groupName"/>
+            <result column="describe" jdbcType="VARCHAR" property="describe"/>
+            <result column="group_type" jdbcType="VARCHAR" property="groupType"/>
+            <result column="group_order" jdbcType="INTEGER" property="groupOrder"/>
+            <result column="enabled" jdbcType="VARCHAR" property="enabled"/>
+            <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+            <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+            <result column="create_user_id" jdbcType="VARCHAR" property="createUserId"/>
+        </association>
+        <collection property="outinterfaceModels"
+                    ofType="OutinterfaceModelDTO">
+            <id column="model_name" jdbcType="VARCHAR" property="modelName"/>
+            <result column="chinese_name" jdbcType="VARCHAR" property="chineseName"/>
+            <result column="basic_model_name" jdbcType="VARCHAR" property="basicModelName"/>
+            <result column="description" jdbcType="VARCHAR" property="description"/>
+            <result column="filter_rule" jdbcType="VARCHAR" property="filterRule"/>
+            <result column="enabled(1)" jdbcType="VARCHAR" property="enabled"/>
+            <result column="create_time(1)" jdbcType="TIMESTAMP" property="createTime"/>
+            <result column="update_time(1)" jdbcType="TIMESTAMP" property="updateTime"/>
+            <result column="create_user_id(1)" jdbcType="VARCHAR" property="createUserId"/>
+        </collection>
+    </resultMap>
+
+
+    <resultMap id="OutinterfaceModelMap"
+               type="OutinterfaceModelDTO">
+        <id column="model_name" jdbcType="VARCHAR" property="modelName"/>
+        <result column="chinese_name" jdbcType="VARCHAR" property="chineseName"/>
+        <result column="basic_model_name" jdbcType="VARCHAR" property="basicModelName"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="filter_rule" jdbcType="VARCHAR" property="filterRule"/>
+        <result column="enabled" jdbcType="VARCHAR" property="enabled"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="create_user_id" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="query_sql" jdbcType="VARCHAR" property="querySql"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+
+    model_name, chinese_name, basic_model_name, description, filter_rule, enabled, create_time,
+    update_time, create_user_id, model_sort
+
+    </sql>
+    <sql id="Blob_Column_List">
+
+    query_sql
+
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="OutinterfaceModelMap">
+
+        select
+
+        <include refid="Base_Column_List"/>
+
+        ,
+
+        <include refid="Blob_Column_List"/>
+
+        from dp_portal_out_interface_model t1
+        LEFT JOIN dp_portal_model_group_grant t2 ON t1.model_name = t2.mode_name
+        where chinese_name= #{modelName,jdbcType=VARCHAR} and create_user_id=#{userId}
+        and
+        t2.group_id=#{groupId,jdbcType=VARCHAR}
+
+    </select>
+
+    <select id="selectModelByModelName" parameterType="java.lang.String" resultMap="OutinterfaceModelMap">
+
+        select
+
+        <include refid="Base_Column_List"/>
+
+        ,
+
+        <include refid="Blob_Column_List"/>
+
+        from dp_portal_out_interface_model
+        where model_name= #{modelName,jdbcType=VARCHAR}
+
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+
+    delete from dp_portal_out_interface_model
+    where model_name = #{modelName,jdbcType=VARCHAR}
+
+    </delete>
+    <insert id="insert" parameterType="com.youngdatafan.portal.model.management.outinterfacemodel.entity.OutinterfaceModel">
+
+    insert into dp_portal_out_interface_model (model_name, chinese_name, basic_model_name,
+      description, filter_rule, enabled,
+      create_time, update_time, create_user_id,
+      model_sort)
+    values (#{modelName,jdbcType=VARCHAR}, #{chineseName,jdbcType=VARCHAR}, #{basicModelName,jdbcType=VARCHAR},
+      #{description,jdbcType=VARCHAR}, #{filterRule,jdbcType=VARCHAR}, #{enabled,jdbcType=VARCHAR},
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=VARCHAR},
+      #{modelSort,jdbcType=VARCHAR})
+
+    </insert>
+
+    <insert id="insertOutinterfaceModel"
+            parameterType="OutinterfaceModelAndBasicModelName">
+
+    insert into dp_portal_out_interface_model (model_name, chinese_name, basic_model_name,
+      description, enabled,
+      create_time, update_time, create_user_id,
+      model_sort,query_sql)
+    values (#{outinterfaceModelId,jdbcType=VARCHAR}, #{outinterfaceModelName,jdbcType=VARCHAR}, #{basicModelName,jdbcType=VARCHAR},
+      #{description,jdbcType=VARCHAR}, #{outinterfaceModelEnable,jdbcType=VARCHAR},
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=VARCHAR},
+      #{modelSort,jdbcType=VARCHAR},#{querySql})
+
+    </insert>
+    <insert id="insertSelective" parameterType="com.youngdatafan.portal.model.management.outinterfacemodel.entity.OutinterfaceModel">
+
+        insert into dp_portal_out_interface_model
+
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="modelName != null">
+                model_name,
+
+            </if>
+            <if test="chineseName != null">
+
+                chinese_name,
+
+            </if>
+            <if test="basicModelName != null">
+
+                basic_model_name,
+
+            </if>
+            <if test="description != null">
+
+                description,
+
+            </if>
+            <if test="filterRule != null">
+
+                filter_rule,
+
+            </if>
+            <if test="enabled != null">
+
+                enabled,
+
+            </if>
+            <if test="createTime != null">
+
+                create_time,
+
+            </if>
+            <if test="updateTime != null">
+
+                update_time,
+
+            </if>
+            <if test="createUserId != null">
+
+                create_user_id,
+
+            </if>
+            <if test="modelSort != null">
+
+                model_sort,
+
+            </if>
+            <if test="querySql != null">
+
+                query_sql,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="modelName != null">
+                #{modelName,jdbcType=VARCHAR},
+
+            </if>
+            <if test="chineseName != null">
+
+                #{chineseName,jdbcType=VARCHAR},
+
+            </if>
+            <if test="basicModelName != null">
+
+                #{basicModelName,jdbcType=VARCHAR},
+
+            </if>
+            <if test="description != null">
+
+                #{description,jdbcType=VARCHAR},
+
+            </if>
+            <if test="filterRule != null">
+
+                #{filterRule,jdbcType=VARCHAR},
+
+            </if>
+            <if test="enabled != null">
+
+                #{enabled,jdbcType=VARCHAR},
+
+            </if>
+            <if test="createTime != null">
+
+                #{createTime,jdbcType=TIMESTAMP},
+
+            </if>
+            <if test="updateTime != null">
+
+                #{updateTime,jdbcType=TIMESTAMP},
+
+            </if>
+            <if test="createUserId != null">
+
+                #{createUserId,jdbcType=VARCHAR},
+
+            </if>
+            <if test="modelSort != null">
+
+                #{modelSort,jdbcType=VARCHAR},
+
+            </if>
+            <if test="querySql != null">
+
+                #{querySql,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective"
+            parameterType="com.youngdatafan.portal.model.management.outinterfacemodel.entity.OutinterfaceModel">
+
+        update dp_portal_out_interface_model
+
+        <set>
+            <if test="chineseName != null">
+                chinese_name = #{chineseName,jdbcType=VARCHAR},
+
+            </if>
+            <if test="basicModelName != null">
+
+                basic_model_name = #{basicModelName,jdbcType=VARCHAR},
+
+            </if>
+            <if test="description != null">
+
+                description = #{description,jdbcType=VARCHAR},
+
+            </if>
+            <if test="filterRule != null">
+
+                filter_rule = #{filterRule,jdbcType=VARCHAR},
+
+            </if>
+            <if test="enabled != null">
+
+                enabled = #{enabled,jdbcType=VARCHAR},
+
+            </if>
+            <if test="createTime != null">
+
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+
+            </if>
+            <if test="updateTime != null">
+
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+
+            </if>
+            <if test="modelSort != null">
+
+                model_sort = #{modelSort,jdbcType=VARCHAR},
+
+            </if>
+            <if test="querySql != null">
+
+                query_sql = #{querySql,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+
+        where model_name = #{modelName,jdbcType=VARCHAR}
+        and create_user_id = #{createUserId,jdbcType=VARCHAR}
+
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs"
+            parameterType="com.youngdatafan.portal.model.management.outinterfacemodel.entity.OutinterfaceModel">
+
+    update dp_portal_out_interface_model
+    set chinese_name = #{chineseName,jdbcType=VARCHAR},
+      basic_model_name = #{basicModelName,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      filter_rule = #{filterRule,jdbcType=VARCHAR},
+      enabled = #{enabled,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=VARCHAR},
+      model_sort = #{modelSort,jdbcType=VARCHAR},
+      query_sql = #{querySql,jdbcType=LONGVARCHAR}
+    where model_name = #{modelName,jdbcType=VARCHAR}
+
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.youngdatafan.portal.model.management.outinterfacemodel.entity.OutinterfaceModel">
+
+    update dp_portal_out_interface_model
+    set chinese_name = #{chineseName,jdbcType=VARCHAR},
+      basic_model_name = #{basicModelName,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      filter_rule = #{filterRule,jdbcType=VARCHAR},
+      enabled = #{enabled,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=VARCHAR},
+      model_sort = #{modelSort,jdbcType=VARCHAR}
+    where model_name = #{modelName,jdbcType=VARCHAR}
+
+    </update>
+
+    <select id="selectOutinterfaceModelByCreatUserId" parameterType="java.lang.String" resultMap="OutinterfaceModelListDTOMap">
+
+        SELECT
+        t1.model_name,
+        t1.chinese_name,
+        t3.group_name,
+        t3.group_type
+        FROM
+        dp_portal_out_interface_model t1
+        LEFT JOIN dp_portal_model_group_grant t2 ON t1.model_name = t2.mode_name
+        LEFT JOIN dp_portal_group t3 ON t3.group_id=t2.group_id
+        where 1=1
+
+        <if test="userId != '00000000'">
+
+            and t1.create_user_id=#{userId,jdbcType=VARCHAR}
+
+        </if>
+        <if test="outinterfaceModelName != null and outinterfaceModelName != ''">
+
+            and t1.chinese_name=#{outinterfaceModelName,jdbcType=VARCHAR}
+
+        </if>
+        <if test="modelGroupName != null and modelGroupName != ''">
+
+            and t3.group_name=#{modelGroupName,jdbcType=VARCHAR}
+
+        </if>
+        <if test="modelGroupType != null  and modelGroupType != ''">
+
+            and t3.group_type=#{modelGroupType,jdbcType=VARCHAR}
+
+        </if>
+
+
+        UNION
+        SELECT
+        t1.model_name,
+        t1.c_name,
+        t3.group_name,
+        t3.group_type
+        FROM
+        dp_portal_basic_model t1
+        LEFT JOIN dp_portal_model_group_grant t2 ON t1.model_name = t2.mode_name
+        LEFT JOIN dp_portal_group t3 ON t3.group_id = t2.group_id
+        WHERE
+        1 = 1
+        AND t1.model_type = 'ZDYMX'
+
+
+        <if test="userId != '00000000'">
+
+            and t1.create_user_id=#{userId,jdbcType=VARCHAR}
+
+        </if>
+        <if test="outinterfaceModelName != null and outinterfaceModelName != ''">
+
+            and t1.c_name=#{outinterfaceModelName,jdbcType=VARCHAR}
+
+        </if>
+        <if test="modelGroupName != null and modelGroupName != ''">
+
+            and t3.group_name=#{modelGroupName,jdbcType=VARCHAR}
+
+        </if>
+        <if test="modelGroupType != null  and modelGroupType != ''">
+
+            and t3.group_type=#{modelGroupType,jdbcType=VARCHAR}
+
+        </if>
+    </select>
+
+
+    <select id="selectModelAndGroupList" parameterType="java.lang.String" resultMap="OutinterfaceModelAndGroupListMap">
+
+        SELECT
+            t3.*,
+            t4.*
+        FROM
+            dp_portal_model_user_grant t1
+            inner JOIN dp_portal_model_group_grant t2 ON t1.model_name = t2.mode_name
+            inner JOIN dp_portal_group t3 ON t3.group_id = t2.group_id
+            inner JOIN dp_portal_out_interface_model t4 ON t4.model_name = t1.model_name
+        WHERE
+            t1.user_id = #{userId,jdbcType=VARCHAR} UNION
+        SELECT
+            t5.*,
+            t4.*
+        FROM
+            dp_portal_model_group_user_grant t1
+            inner JOIN dp_portal_model_group_out_interface_model t2 ON t1.group_name = t2.group_name
+            inner JOIN dp_portal_out_interface_model t4 ON t2.model_name = t4.model_name
+            inner JOIN dp_portal_model_group_grant t3 ON t3.mode_name = t4.model_name
+            inner JOIN dp_portal_group t5 ON t5.group_id = t3.group_id
+        WHERE
+            t1.user_id = #{userId,jdbcType=VARCHAR}
+
+        UNION
+        SELECT
+            t3.*,
+            t1.*
+        FROM
+            dp_portal_out_interface_model t1
+            INNER JOIN dp_portal_model_group_grant t2 ON t1.model_name = t2.mode_name
+            INNER JOIN dp_portal_group t3 ON t3.group_id = t2.group_id
+        WHERE
+            t1.create_user_id =  #{userId,jdbcType=VARCHAR}
+
+
+    </select>
+
+
+    <resultMap id="OutModelAndGroupListMap"
+               type="OutinterfaceModelAndGroupListDTO">
+        <id column="group_id" jdbcType="VARCHAR" property="groupId"/>
+        <association property="groupDTO" javaType="OutinterfaceGroupDTO">
+            <id column="group_id" jdbcType="VARCHAR" property="groupId"/>
+            <result column="group_name" jdbcType="VARCHAR" property="groupName"/>
+            <result column="describe" jdbcType="VARCHAR" property="describe"/>
+            <result column="group_type" jdbcType="VARCHAR" property="groupType"/>
+            <result column="group_order" jdbcType="INTEGER" property="groupOrder"/>
+            <result column="enabled" jdbcType="VARCHAR" property="enabled"/>
+            <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+            <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+            <result column="create_user_id" jdbcType="VARCHAR" property="createUserId"/>
+        </association>
+        <collection property="outinterfaceModels"
+                    ofType="OutinterfaceModelDTO">
+            <id column="model_id" jdbcType="VARCHAR" property="modelName"/>
+            <result column="model_name" jdbcType="VARCHAR" property="chineseName"/>
+            <result column="basic_model_name" jdbcType="VARCHAR" property="basicModelName"/>
+            <result column="description" jdbcType="VARCHAR" property="description"/>
+            <result column="create_time(1)" jdbcType="TIMESTAMP" property="createTime"/>
+            <result column="update_time(1)" jdbcType="TIMESTAMP" property="updateTime"/>
+            <result column="create_user_id(1)" jdbcType="VARCHAR" property="createUserId"/>
+        </collection>
+    </resultMap>
+    <select id="selectOutModelAndGroupList" parameterType="java.lang.String" resultMap="OutModelAndGroupListMap">
+
+        SELECT
+            t3.*,
+            t4.*
+        FROM
+            dp_portal_out_model t4
+                INNER JOIN dp_portal_model_group_grant t2 ON t4.model_id = t2.mode_name
+                INNER  JOIN dp_portal_model_group_user_grant t5 ON t5.group_name = t2.group_id
+                AND t5.user_id = #{userId,jdbcType=VARCHAR}
+                INNER JOIN dp_portal_group t3 ON t3.group_id = t2.group_id
+        WHERE
+            t4.create_user_id = #{userId,jdbcType=VARCHAR} UNION
+        SELECT
+            t3.*,
+            t4.*
+        FROM
+            dp_portal_out_model t4
+                INNER JOIN dp_portal_model_group_grant t2 ON t4.model_id = t2.mode_name
+                INNER JOIN dp_portal_group t3 ON t3.group_id = t2.group_id
+        WHERE
+            t4.create_user_id =#{userId,jdbcType=VARCHAR}
+          AND t4.enabled = 'T'
+
+    </select>
+
+    <resultMap id="CustomModelAndGroupListMap"
+               type="OutinterfaceModelAndGroupListDTO">
+        <id column="group_id" jdbcType="VARCHAR" property="groupId"/>
+        <association property="groupDTO" javaType="OutinterfaceGroupDTO">
+            <id column="group_id" jdbcType="VARCHAR" property="groupId"/>
+            <result column="group_name" jdbcType="VARCHAR" property="groupName"/>
+            <result column="describe" jdbcType="VARCHAR" property="describe"/>
+            <result column="group_type" jdbcType="VARCHAR" property="groupType"/>
+            <result column="group_order" jdbcType="INTEGER" property="groupOrder"/>
+            <result column="enabled" jdbcType="VARCHAR" property="enabled"/>
+            <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+            <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+            <result column="create_user_id" jdbcType="VARCHAR" property="createUserId"/>
+        </association>
+        <collection property="outinterfaceModels"
+                    ofType="OutinterfaceModelDTO">
+            <id column="model_name" jdbcType="VARCHAR" property="modelName"/>
+            <result column="c_name" jdbcType="VARCHAR" property="chineseName"/>
+            <result column="basic_model_name" jdbcType="VARCHAR" property="basicModelName"/>
+            <result column="description" jdbcType="VARCHAR" property="description"/>
+            <result column="filter_rule" jdbcType="VARCHAR" property="filterRule"/>
+            <result column="enabled(1)" jdbcType="VARCHAR" property="enabled"/>
+            <result column="create_time(1)" jdbcType="TIMESTAMP" property="createTime"/>
+            <result column="update_time(1)" jdbcType="TIMESTAMP" property="updateTime"/>
+            <result column="create_user_id(1)" jdbcType="VARCHAR" property="createUserId"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectCustomModelAndGroupList" parameterType="java.lang.String"
+            resultMap="CustomModelAndGroupListMap">
+
+
+                      SELECT
+            t3.*,
+            t4.*
+        FROM
+            dp_portal_model_user_grant t1
+            INNER JOIN dp_portal_model_group_grant t2 ON t1.model_name = t2.mode_name
+            INNER JOIN dp_portal_group t3 ON t3.group_id = t2.group_id
+            INNER JOIN dp_portal_basic_model t4 ON t4.model_name = t1.model_name
+        WHERE
+            t1.user_id = #{userId,jdbcType=VARCHAR} UNION
+        SELECT
+            t5.*,
+            t4.*
+        FROM
+            dp_portal_model_group_user_grant t1
+            INNER JOIN dp_portal_model_group_out_interface_model t2 ON t1.group_name = t2.group_name
+            INNER JOIN dp_portal_basic_model t4 ON t2.model_name = t4.model_name
+            INNER JOIN dp_portal_model_group_grant t3 ON t3.mode_name = t4.model_name
+            INNER JOIN dp_portal_group t5 ON t5.group_id = t3.group_id
+        WHERE
+            t1.user_id = #{userId,jdbcType=VARCHAR}
+        UNION
+        SELECT
+            t3.*,
+            t1.*
+        FROM
+            dp_portal_basic_model t1
+            INNER JOIN dp_portal_model_group_grant t2 ON t1.model_name = t2.mode_name
+            INNER JOIN dp_portal_group t3 ON t3.group_id = t2.group_id
+        WHERE
+            t1.create_user_id = #{userId,jdbcType=VARCHAR}
+            AND model_type = 'ZDYMX'
+
+    </select>
+
+
+    <select id="selecDatasourceByZDYModelName" parameterType="java.lang.String" resultMap="ModelDatasourceDTOMap">
+        SELECT t2.* FROM dp_portal_basic_model t1
+                             LEFT JOIN dp_portal_datasource t2
+                                       on t1.ds_name=t2.datasource_id
+        WHERE t1.model_name=#{modelName}
+    </select>
+
+    <select id="selecDatasourceBySCLModelName" parameterType="java.lang.String" resultMap="ModelDatasourceDTOMap">
+        SELECT t2.* FROM dp_portal_out_model t1
+            LEFT JOIN dp_portal_datasource t2
+                on t1.datasource_id=t2.datasource_id  WHERE t1.model_id=#{modelName}
+    </select>
+
+    <select id="selecDatasourceByModelName" parameterType="java.lang.String" resultMap="ModelDatasourceDTOMap">
+
+         SELECT
+            t3.*
+        FROM
+            dp_portal_out_interface_model t1
+            LEFT JOIN dp_portal_basic_model t2 ON t1.basic_model_name = t2.model_name
+            LEFT JOIN dp_portal_datasource t3 ON t2.ds_name = t3.datasource_id
+        WHERE
+            t1.model_name = #{modelName,jdbcType=VARCHAR}
+
+    </select>
+    <select id="selectOutinterfaceMetaData" parameterType="java.lang.String" resultMap="OutinterfaceModelMetaDataDTOMap">
+
+        SELECT
+        t1.model_name,
+            t3.*
+        FROM
+            dp_portal_out_interface_model t1
+            INNER JOIN dp_portal_basic_model_metadata t3 ON t1.basic_model_name = t3.model_name
+            INNER JOIN dp_portal_out_interface_model_metadata t2 ON t1.model_name = t2.out_interface_model_name
+            AND t2.column_name = t3.column_name
+        WHERE
+            t1.model_name = #{modelName,jdbcType=VARCHAR}
+
+    </select>
+
+    <insert id="replaceIntoBatch" parameterType="com.youngdatafan.portal.model.management.outinterfacemodel.entity.OutinterfaceModel">
+
+        replace into admin_out_interface_model (name, basic_model, description,
+        filter_rule, enabled, create_time,
+        update_time, query_sql,chinese_name)
+
+        <foreach collection="list" item="item" index="index" separator=" union ">
+            select #{item.name}, #{item.basicModel}, #{item.description},
+            #{item.filterRule}, #{item.enabled},
+            case when abm.name='' or abm.name is null then SYSDATE() else create_time end,
+            SYSDATE(), #{item.querySql},#{item.chineseName}
+            from
+            (select '123' as tmp) t1 left join admin_out_interface_model abm on abm.name=#{item.name}
+        </foreach>
+    </insert>
+
+    <delete id="deleteModelGroup" parameterType="java.lang.String">
+
+        delete  from dp_portal_model_group_grant where mode_name=#{modelName,jdbcType=VARCHAR}
+
+    </delete>
+
+    <insert id="insertModelGroup" parameterType="java.lang.String">
+
+        insert dp_portal_model_group_grant(mode_name,group_id) value(#{modelName,jdbcType=VARCHAR},#{groupId,jdbcType=VARCHAR})
+
+    </insert>
+
+    <select id="getGroupTypes" parameterType="java.lang.String" resultType="java.lang.String">
+
+        SELECT DISTINCT group_type from dp_portal_group WHERE group_type in
+
+        <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </select>
+
+
+    <select id="selectOutinterfaceModel" parameterType="java.lang.String" resultMap="OutinterfaceModelDTOMap">
+
+        SELECT
+        t1.model_name,
+        t1.chinese_name,
+        t4.group_name,
+        t2.c_name,
+        t1.model_sort,
+        t1.description,
+        t1.enabled,
+        t1.create_time,
+        t5.user_name,
+        t3.group_id,
+        t7.group_name AS basicmodel_group_name
+        ,t7.group_id as basicmodel_group_id
+        FROM
+        dp_portal_out_interface_model t1
+        LEFT JOIN dp_portal_basic_model t2 ON t1.basic_model_name = t2.model_name
+        LEFT JOIN dp_portal_model_group_grant t3 ON t1.model_name = t3.mode_name
+        LEFT JOIN dp_portal_group t4 ON t3.group_id = t4.group_id
+        LEFT JOIN dp_portal_user t5 ON t1.create_user_id = t5.user_id
+        LEFT JOIN dp_portal_model_group_grant t6 ON t2.model_name = t6.mode_name
+        LEFT JOIN dp_portal_group t7 ON t7.group_id = t6.group_id
+        WHERE
+        1 = 1
+
+        <if test="userId != '00000000'">
+
+            and t1.create_user_id=#{userId,jdbcType=VARCHAR}
+
+        </if>
+        <if test="outinterfaceModelName != '' and outinterfaceModelName != null">
+
+            and t1.chinese_name like #{outinterfaceModelName,jdbcType=VARCHAR}
+
+        </if>
+
+        <if test="modelGroup != '' and modelGroup != null">
+
+            and t3.group_id=#{modelGroup,jdbcType=VARCHAR}
+
+        </if>
+        <if test="basicModelName != '' and basicModelName != null">
+
+            and t2.model_name=#{basicModelName,jdbcType=VARCHAR}
+
+        </if>
+
+        order by t1.create_time
+
+    </select>
+
+    <select id="selectModelMetaDatas" parameterType="java.util.List" resultMap="SelectModelNameAndColumnCountDTOMap">
+
+        SELECT
+        t1.model_name,
+        t3.*,t2.column_serial
+        FROM
+        dp_portal_out_interface_model t1
+        INNER JOIN dp_portal_basic_model_metadata t3 ON t1.basic_model_name = t3.model_name
+        INNER JOIN dp_portal_out_interface_model_metadata t2 ON t2.out_interface_model_name = t1.model_name
+        AND t2.column_name = t3.column_name
+        where
+        t1.model_name in
+
+        <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="getBasicModelGroup" parameterType="java.lang.String" resultMap="BasicModelGroupDTOMap">
+
+        SELECT group_id,group_name from dp_portal_group WHERE group_type =#{groupType,jdbcType=VARCHAR}
+
+        <if test="userId != '00000000'">
+
+            and create_user_id=#{userId,jdbcType=VARCHAR}
+
+        </if>
+    </select>
+
+    <select id="getBasicModel" parameterType="java.lang.String" resultMap="BasicModelNameAndCnameDTOMap">
+
+        SELECT
+        t1.model_name,t1.c_name
+        FROM
+        dp_portal_basic_model t1
+        LEFT JOIN dp_portal_model_group_grant t2 ON t1.model_name = t2.mode_name
+        LEFT JOIN dp_portal_group t3 on t3.group_id=t2.group_id
+        WHERE 1=1 and t1.model_type=#{modelType,jdbcType=VARCHAR}
+
+        <if test="groupName != null and groupName != ''">
+
+            and t3.group_id=#{groupName,jdbcType=VARCHAR}
+
+        </if>
+
+        <if test="userId != '00000000'">
+
+            and t1.create_user_id=#{userId,jdbcType=VARCHAR}
+
+        </if>
+
+        <if test="enabled != '' and enabled != null">
+            and t1.enabled=#{enabled,jdbcType=VARCHAR}
+        </if>
+
+    </select>
+
+    <resultMap id="BatchDownloadOutinterfaceModelDTOMap"
+               type="BatchDownloadOutinterfaceModelDTO">
+        <id column="c_name" jdbcType="VARCHAR" property="basicModelName"/>
+        <result column="column_name" jdbcType="VARCHAR" property="basicModelColumnName"/>
+        <result column="group_name" jdbcType="VARCHAR" property="basicModelGroup"/>
+        <result column="column_chinese_name" jdbcType="VARCHAR" property="basicModelChineseColumnName"/>
+        <result column="chinese_name" jdbcType="VARCHAR" property="outinterfaceModelName"/>
+        <result column="model_sort" jdbcType="VARCHAR" property="modelSort"/>
+        <result column="enabled" jdbcType="VARCHAR" property="outinterfaceModelEnable"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="outinterface_Model_Group_Name" jdbcType="VARCHAR" property="outinterfaceModelGroupName"/>
+        <result column="column_serial" jdbcType="VARCHAR" property="modelColumnSort"/>
+    </resultMap>
+
+    <select id="batchDownloadExcel" parameterType="java.lang.String" resultMap="BatchDownloadOutinterfaceModelDTOMap">
+
+        SELECT
+        t4.c_name,
+        t5.group_name,
+        t3.column_name,
+        t3.column_chinese_name,
+        t1.chinese_name,
+        t1.model_sort,
+        t2.custom_column_name,
+        t1.enabled,
+        t1.description,
+        t7.group_name AS out_interface_Model_Group_Name,t2.column_serial
+        FROM
+        dp_portal_out_interface_model t1
+        INNER JOIN dp_portal_basic_model t4 ON t1.basic_model_name = t4.model_name
+        INNER JOIN dp_portal_model_group_grant t6 ON t4.model_name = t6.mode_name
+        INNER JOIN dp_portal_group t5 ON t5.group_id = t6.group_id
+        INNER JOIN dp_portal_basic_model_metadata t3 ON t4.model_name = t3.model_name
+        INNER JOIN dp_portal_out_interface_model_metadata t2 ON t2.out_interface_model_name = t1.model_name
+        INNER JOIN dp_portal_model_group_grant t8 ON t8.mode_name = t1.model_name
+        INNER JOIN dp_portal_group t7 ON t7.group_id = t8.group_id
+        AND t2.column_name = t3.column_name
+        WHERE
+        1 =1
+
+        <if test="userId != '00000000'">
+
+            and t1.create_user_id=#{userId,jdbcType=VARCHAR}
+
+        </if>
+
+        and t1.model_name in
+
+        <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="selectBasicModelIdByModelNameAndGroupName" parameterType="java.lang.String"
+            resultType="java.lang.String">
+
+        SELECT
+        t1.model_name
+        FROM
+        dp_portal_basic_model t1
+        LEFT JOIN dp_portal_model_group_grant t2 ON t1.model_name = t2.mode_name
+        LEFT JOIN dp_portal_group t3 on t3. group_id=t2.group_id
+        WHERE c_name=#{modelName,jdbcType=VARCHAR} and t3.group_name=#{groupName}
+            and t1.create_user_id=#{userId,jdbcType=VARCHAR}
+
+    </select>
+
+    <select id="selectTableNameByModelNameAndGroupName" parameterType="java.lang.String"
+            resultType="java.lang.String">
+
+        SELECT
+        t1.table_name
+        FROM
+        dp_portal_basic_model t1
+        LEFT JOIN dp_portal_model_group_grant t2 ON t1.model_name = t2.mode_name
+        LEFT JOIN dp_portal_group t3 on t3. group_id=t2.group_id
+        WHERE c_name=#{modelName,jdbcType=VARCHAR} and t3.group_name=#{groupName}
+            and t1.create_user_id=#{userId,jdbcType=VARCHAR}
+
+    </select>
+
+    <select id="queryOutinterfaceModelExists" parameterType="java.lang.String"
+            resultType="java.lang.Integer">
+
+SELECT
+	count(*)
+FROM
+	dp_portal_out_interface_model t1
+	LEFT JOIN dp_portal_model_group_grant t2 ON t1.model_name = t2.mode_name
+
+	WHERE t1.create_user_id=#{userId,jdbcType=VARCHAR}
+	AND t1.chinese_name=#{outinterfaceModelName,jdbcType=VARCHAR} AND t2.group_id=#{outinterfaceModelGroup,jdbcType=VARCHAR}
+
+    </select>
+
+    <resultMap id="ModelDTOMap"
+               type="ModelDTO">
+        <id column="model_name" jdbcType="VARCHAR" property="name"/>
+        <result column="chinese_name" jdbcType="VARCHAR" property="cName"/>
+        <result column="ds_name" jdbcType="VARCHAR" property="datasourceName"/>
+        <result column="table_name" jdbcType="VARCHAR" property="tableName"/>
+        <result column="table_schema" jdbcType="VARCHAR" property="schemaName"/>
+        <result column="out_interface_model_sql" jdbcType="VARCHAR" property="businessModelSql"/>
+        <result column="basic_model_sql" jdbcType="VARCHAR" property="basicModelSql"/>
+        <result column="query_sql" jdbcType="VARCHAR" property="querySql"/>
+
+
+        <collection property="modelMetaDataDTOS" ofType="ModelMetaDataDTO">
+            <result column="model_name" jdbcType="VARCHAR" property="modelName"/>
+            <result column="column_name" jdbcType="VARCHAR" property="columnName"/>
+            <result column="column_chinese_name" jdbcType="VARCHAR" property="columnChineseName"/>
+            <result column="column_length" jdbcType="VARCHAR" property="columnLength"/>
+            <result column="column_precision" jdbcType="VARCHAR" property="columnPrecision"/>
+            <result column="column_type" jdbcType="VARCHAR" property="columnType"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectModelAndMetaData" parameterType="java.lang.String" resultMap="ModelDTOMap">
+
+               SELECT
+            t1.model_name,
+            t1.chinese_name,
+            t4.ds_name,
+            t4.table_name,
+            t4.table_schema,
+            t5.out_interface_model_sql,
+            t6.basic_model_sql,
+            t3.model_name,
+            t1.query_sql,
+            t3.column_name,
+            t3.column_chinese_name,
+            t3.column_length,
+            t3.column_precision,
+            t3.column_type
+            FROM
+            dp_portal_out_interface_model t1
+            INNER JOIN dp_portal_out_interface_model_metadata t2 ON t1.model_name = t2.out_interface_model_name
+            INNER JOIN dp_portal_basic_model t4 ON t1.basic_model_name = t4.model_name
+            INNER JOIN dp_portal_basic_model_metadata t3 ON t1.basic_model_name = t3.model_name
+            AND t2.column_name = t3.column_name
+            left JOIN dp_portal_out_interface_model_querysql t5 ON t5.out_interface_model_id = t1.model_name
+            left JOIN dp_portal_basic_model_querysql t6 ON t4.model_name = t6.basic_model_id
+            WHERE
+            t1.model_name = #{modelName}
+
+    </select>
+
+    <resultMap id="DatasourceAndTableNameDTOMap"
+               type="OutinterfaceDatasourceAndTableNameDTO">
+        <id column="datasource_id" jdbcType="VARCHAR" property="datasourceId"/>
+        <result column="ds_name" jdbcType="VARCHAR" property="dsName"/>
+        <result column="describe" jdbcType="VARCHAR" property="describe"/>
+        <result column="ds_type" jdbcType="VARCHAR" property="dsType"/>
+        <result column="ds_url" jdbcType="VARCHAR" property="dsUrl"/>
+        <result column="driver_class_name" jdbcType="VARCHAR" property="driverClassName"/>
+        <result column="ds_username" jdbcType="VARCHAR" property="dsUsername"/>
+        <result column="ds_password" jdbcType="VARCHAR" property="dsPassword"/>
+        <result column="enabled" jdbcType="VARCHAR" property="enabled"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="create_user_id" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="ds_conector_setting" jdbcType="VARCHAR" property="dsConectorSetting"/>
+        <result column="table_name" jdbcType="VARCHAR" property="tableName"/>
+        <result column="table_schema" jdbcType="VARCHAR" property="tableSchema"/>
+    </resultMap>
+
+    <select id="selectByBasicModelId" parameterType="java.lang.String" resultMap="DatasourceAndTableNameDTOMap">
+
+        SELECT
+            t2.*,t1.table_name,t1.table_schema
+        FROM
+            dp_portal_basic_model t1
+            LEFT JOIN dp_portal_datasource t2 ON t1.ds_name = t2.datasource_id
+        WHERE
+            t1.model_name = #{modelId}
+
+    </select>
+</mapper>
+

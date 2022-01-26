@@ -1,0 +1,905 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youngdatafan.portal.model.management.outmodel.mapper.OutModelMapper">
+    <resultMap id="BaseResultMap" type="com.youngdatafan.portal.model.management.outmodel.entity.OutModel">
+        <id column="model_id" jdbcType="VARCHAR" property="modelId"/>
+        <result column="model_name" jdbcType="VARCHAR" property="modelName"/>
+        <result column="project_name" jdbcType="VARCHAR" property="projectName"/>
+        <result column="project_type" jdbcType="VARCHAR" property="projectType"/>
+        <result column="column_size" jdbcType="INTEGER" property="columnSize"/>
+        <result column="model_order" jdbcType="INTEGER" property="modelOrder"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="update_frequency" jdbcType="VARCHAR" property="updateFrequency"/>
+        <result column="data_update_strategy" jdbcType="VARCHAR" property="dataUpdateStrategy"/>
+        <result column="data_save_strategy" jdbcType="VARCHAR" property="dataSaveStrategy"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="create_user_id" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="data_count" jdbcType="VARCHAR" property="dataCount"/>
+        <result column="datasource_id" jdbcType="VARCHAR" property="datasourceId"/>
+        <result column="step_name" jdbcType="VARCHAR" property="stepName"/>
+        <result column="table_name" jdbcType="VARCHAR" property="tableName"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
+               type="com.youngdatafan.portal.model.management.outmodel.entity.OutModel">
+        <result column="query_sql" jdbcType="LONGVARCHAR" property="querySql"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+
+
+        model_id, model_name, project_name, project_type, column_size, model_order, description,
+    update_frequency, data_update_strategy, data_save_strategy, create_time, create_user_id,
+    data_count, datasource_id, step_name, table_name
+
+
+    </sql>
+    <sql id="Blob_Column_List">
+
+
+        query_sql
+
+
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+
+
+        select
+
+
+        <include refid="Base_Column_List"/>
+
+
+        ,
+
+
+        <include refid="Blob_Column_List"/>
+
+
+        from dp_portal_out_model
+        where model_id = #{modelId,jdbcType=VARCHAR}
+
+
+    </select>
+    <select id="selectItems" parameterType="java.util.List" resultMap="ResultMapWithBLOBs">
+
+
+        select
+
+        <include refid="Base_Column_List"/>
+
+        ,
+
+        <include refid="Blob_Column_List"/>
+
+        from dp_portal_out_model
+        where model_id in
+
+
+        <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+            #{item,jdbcType=VARCHAR}
+        </foreach>
+    </select>
+
+
+    <delete id="batchDeletePrimaryKey" parameterType="java.util.List">
+
+        delete from dp_portal_out_model where 1=1 <if test="userId != '00000000'">
+
+        and create_user_id=#{userId,jdbcType=VARCHAR}
+
+    </if>  and model_id in
+
+        <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+            #{item,jdbcType=VARCHAR}
+        </foreach>
+    </delete>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+
+
+        delete from dp_portal_out_model
+        where model_id = #{modelName,jdbcType=VARCHAR}
+
+
+        <if test="userId != '00000000'">
+
+
+            and create_user_id=#{userId,jdbcType=VARCHAR}
+
+
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.youngdatafan.portal.model.management.outmodel.entity.OutModel">
+
+
+        insert into dp_portal_out_model (model_id, model_name, project_name,
+                                         project_type, column_size, model_order,
+                                         description, update_frequency, data_update_strategy,
+                                         data_save_strategy, create_time, create_user_id,
+                                         data_count, datasource_id, step_name,
+                                         table_name, query_sql)
+        values (#{modelId,jdbcType=VARCHAR}, #{modelName,jdbcType=VARCHAR}, #{projectName,jdbcType=VARCHAR},
+                #{projectType,jdbcType=VARCHAR}, #{columnSize,jdbcType=INTEGER}, #{modelOrder,jdbcType=INTEGER},
+                #{description,jdbcType=VARCHAR}, #{updateFrequency,jdbcType=VARCHAR},
+                #{dataUpdateStrategy,jdbcType=VARCHAR},
+                #{dataSaveStrategy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+                #{createUserId,jdbcType=VARCHAR},
+                #{dataCount,jdbcType=VARCHAR}, #{datasourceId,jdbcType=VARCHAR}, #{stepName,jdbcType=VARCHAR},
+                #{tableName,jdbcType=VARCHAR}, #{querySql,jdbcType=LONGVARCHAR})
+
+
+    </insert>
+    <insert id="insertSelective" parameterType="com.youngdatafan.portal.model.management.outmodel.entity.OutModel">
+
+
+        insert into dp_portal_out_model
+
+
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="modelId != null">
+                model_id,
+
+
+            </if>
+            <if test="modelName != null">
+
+
+                model_name,
+
+
+            </if>
+            <if test="projectName != null">
+
+
+                project_name,
+
+
+            </if>
+            <if test="projectType != null">
+
+
+                project_type,
+
+
+            </if>
+            <if test="columnSize != null">
+
+
+                column_size,
+
+
+            </if>
+            <if test="modelOrder != null">
+
+
+                model_order,
+
+
+            </if>
+            <if test="description != null">
+
+
+                `description`,
+
+
+            </if>
+            <if test="updateFrequency != null">
+
+
+                update_frequency,
+
+
+            </if>
+            <if test="dataUpdateStrategy != null">
+
+
+                data_update_strategy,
+
+
+            </if>
+            <if test="dataSaveStrategy != null">
+
+
+                data_save_strategy,
+
+
+            </if>
+            <if test="createTime != null">
+
+
+                create_time,
+
+
+            </if>
+            <if test="updateTime != null">
+
+
+                update_time,
+
+
+            </if>
+            <if test="createUserId != null">
+
+
+                create_user_id,
+
+
+            </if>
+            <if test="dataCount != null">
+
+
+                data_count,
+
+
+            </if>
+            <if test="datasourceId != null">
+
+
+                datasource_id,
+
+
+            </if>
+            <if test="stepName != null">
+
+
+                step_name,
+
+
+            </if>
+            <if test="tableName != null">
+
+
+                `table_name`,
+
+
+            </if>
+            <if test="querySql != null">
+
+
+                query_sql,
+            </if>
+            <if test="enabled != null">
+
+
+                enabled,
+            </if>
+            <if test="modelType != null">
+
+
+                model_type,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="modelId != null">
+                #{modelId,jdbcType=VARCHAR},
+
+
+            </if>
+            <if test="modelName != null">
+
+
+                #{modelName,jdbcType=VARCHAR},
+
+
+            </if>
+            <if test="projectName != null">
+
+
+                #{projectName,jdbcType=VARCHAR},
+
+
+            </if>
+            <if test="projectType != null">
+
+
+                #{projectType,jdbcType=VARCHAR},
+
+
+            </if>
+            <if test="columnSize != null">
+
+
+                #{columnSize,jdbcType=INTEGER},
+
+
+            </if>
+            <if test="modelOrder != null">
+
+
+                #{modelOrder,jdbcType=INTEGER},
+
+
+            </if>
+            <if test="description != null">
+
+
+                #{description,jdbcType=VARCHAR},
+
+
+            </if>
+            <if test="updateFrequency != null">
+
+
+                #{updateFrequency,jdbcType=VARCHAR},
+
+
+            </if>
+            <if test="dataUpdateStrategy != null">
+
+
+                #{dataUpdateStrategy,jdbcType=VARCHAR},
+
+
+            </if>
+            <if test="dataSaveStrategy != null">
+
+
+                #{dataSaveStrategy,jdbcType=VARCHAR},
+
+
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUserId != null">
+
+
+                #{createUserId,jdbcType=VARCHAR},
+
+
+            </if>
+            <if test="dataCount != null">
+
+
+                #{dataCount,jdbcType=VARCHAR},
+
+
+            </if>
+            <if test="datasourceId != null">
+
+
+                #{datasourceId,jdbcType=VARCHAR},
+
+
+            </if>
+            <if test="stepName != null">
+
+
+                #{stepName,jdbcType=VARCHAR},
+
+
+            </if>
+            <if test="tableName != null">
+
+
+                #{tableName,jdbcType=VARCHAR},
+
+
+            </if>
+            <if test="querySql != null">
+
+
+                #{querySql,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="enabled != null">
+
+                #{enabled},
+            </if>
+
+            <if test="modelType != null">
+
+                #{modelType},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateSelective" parameterType="UpdateOutModelVO">
+        update dp_portal_out_model
+
+        <set>
+            <if test="modelName != null">
+                model_name = #{modelName,jdbcType=VARCHAR},
+
+
+            </if>
+            <if test="projectName != null">
+
+
+                project_name = #{projectName,jdbcType=VARCHAR},
+
+
+            </if>
+            <if test="projectType != null">
+
+
+                project_type = #{projectType,jdbcType=VARCHAR},
+
+
+            </if>
+
+            <if test="modelOrder != null">
+
+
+                model_order = #{modelOrder,jdbcType=INTEGER},
+
+
+            </if>
+            <if test="description != null">
+
+
+                `description` = #{description,jdbcType=VARCHAR},
+
+
+            </if>
+            <if test="createTime != null">
+
+
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+
+
+            </if>
+            <if test="updateTime != null">
+
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+
+            </if>
+            <if test="createUserId != null">
+
+
+                create_user_id = #{createUserId,jdbcType=VARCHAR},
+
+
+            </if>
+            <if test="dataCount != null">
+
+
+                data_count = #{dataCount,jdbcType=VARCHAR},
+
+
+            </if>
+            <if test="datasourceId != null">
+
+
+                datasource_id = #{datasourceId,jdbcType=VARCHAR},
+
+
+            </if>
+            <if test="stepName != null">
+
+
+                step_name = #{stepName,jdbcType=VARCHAR},
+
+
+            </if>
+            <if test="tableName != null">
+
+
+                `table_name` = #{tableName,jdbcType=VARCHAR},
+
+
+            </if>
+            <if test="querySql != null">
+
+
+                query_sql = #{querySql,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="enabled != null">
+
+                enabled = #{enabled}
+            </if>
+
+        </set>
+
+
+        where model_id = #{modelId,jdbcType=VARCHAR}
+        and create_user_id = #{createUserId,jdbcType=VARCHAR}
+
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.youngdatafan.portal.model.management.outmodel.entity.OutModel">
+
+
+        update dp_portal_out_model
+
+
+        <set>
+            <if test="modelName != null">
+                model_name = #{modelName,jdbcType=VARCHAR},
+
+
+            </if>
+            <if test="projectName != null">
+
+
+                project_name = #{projectName,jdbcType=VARCHAR},
+
+
+            </if>
+            <if test="projectType != null">
+
+
+                project_type = #{projectType,jdbcType=VARCHAR},
+
+
+            </if>
+            <if test="columnSize != null">
+
+
+                column_size = #{columnSize,jdbcType=INTEGER},
+
+
+            </if>
+            <if test="modelOrder != null">
+
+
+                model_order = #{modelOrder,jdbcType=INTEGER},
+
+
+            </if>
+            <if test="description != null">
+
+
+                `description` = #{description,jdbcType=VARCHAR},
+
+
+            </if>
+            <if test="updateFrequency != null">
+
+
+                update_frequency = #{updateFrequency,jdbcType=VARCHAR},
+
+
+            </if>
+            <if test="dataUpdateStrategy != null">
+
+
+                data_update_strategy = #{dataUpdateStrategy,jdbcType=VARCHAR},
+
+
+            </if>
+            <if test="dataSaveStrategy != null">
+
+
+                data_save_strategy = #{dataSaveStrategy,jdbcType=VARCHAR},
+
+
+            </if>
+            <if test="createTime != null">
+
+
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+
+
+            </if>
+            <if test="createUserId != null">
+
+
+                create_user_id = #{createUserId,jdbcType=VARCHAR},
+
+
+            </if>
+            <if test="dataCount != null">
+
+
+                data_count = #{dataCount,jdbcType=VARCHAR},
+
+
+            </if>
+            <if test="datasourceId != null">
+
+
+                datasource_id = #{datasourceId,jdbcType=VARCHAR},
+
+
+            </if>
+            <if test="stepName != null">
+
+
+                step_name = #{stepName,jdbcType=VARCHAR},
+
+
+            </if>
+            <if test="tableName != null">
+
+
+                table_name = #{tableName,jdbcType=VARCHAR},
+
+
+            </if>
+            <if test="querySql != null">
+
+
+                query_sql = #{querySql,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+
+
+        where model_id = #{modelId,jdbcType=VARCHAR}
+
+
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.youngdatafan.portal.model.management.outmodel.entity.OutModel">
+
+
+        update dp_portal_out_model
+        set model_name           = #{modelName,jdbcType=VARCHAR},
+            project_name         = #{projectName,jdbcType=VARCHAR},
+            project_type         = #{projectType,jdbcType=VARCHAR},
+            column_size          = #{columnSize,jdbcType=INTEGER},
+            model_order          = #{modelOrder,jdbcType=INTEGER},
+            description          = #{description,jdbcType=VARCHAR},
+            update_frequency     = #{updateFrequency,jdbcType=VARCHAR},
+            data_update_strategy = #{dataUpdateStrategy,jdbcType=VARCHAR},
+            data_save_strategy   = #{dataSaveStrategy,jdbcType=VARCHAR},
+            create_time          = #{createTime,jdbcType=TIMESTAMP},
+            create_user_id       = #{createUserId,jdbcType=VARCHAR},
+            data_count           = #{dataCount,jdbcType=VARCHAR},
+            datasource_id        = #{datasourceId,jdbcType=VARCHAR},
+            step_name            = #{stepName,jdbcType=VARCHAR},
+            table_name           = #{tableName,jdbcType=VARCHAR},
+            query_sql            = #{querySql,jdbcType=LONGVARCHAR}
+        where model_id = #{modelId,jdbcType=VARCHAR}
+
+
+    </update>
+
+    <update id="updateAllByPrimaryKey" parameterType="UpdateOutModelVO">
+
+        update dp_portal_out_model
+        set model_name     = #{modelName,jdbcType=VARCHAR},
+            project_name   = #{projectName,jdbcType=VARCHAR},
+            project_type   = #{projectType,jdbcType=VARCHAR},
+            model_order    = #{modelOrder,jdbcType=INTEGER},
+            description    = #{description,jdbcType=VARCHAR},
+            create_time    = #{createTime,jdbcType=TIMESTAMP},
+            create_user_id = #{createUserId,jdbcType=VARCHAR},
+            data_count     = #{dataCount,jdbcType=VARCHAR},
+            datasource_id  = #{datasourceId,jdbcType=VARCHAR},
+            step_name      = #{stepName,jdbcType=VARCHAR},
+            table_name     = #{tableName,jdbcType=VARCHAR},
+            enabled        = #{enabled},
+            update_time    = #{updateTime,jdbcType=TIMESTAMP}
+
+        where model_id = #{modelId,jdbcType=VARCHAR}
+          and create_user_id = #{createUserId}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.youngdatafan.portal.model.management.outmodel.entity.OutModel">
+
+
+        update dp_portal_out_model
+        set model_name           = #{modelName,jdbcType=VARCHAR},
+            project_name         = #{projectName,jdbcType=VARCHAR},
+            project_type         = #{projectType,jdbcType=VARCHAR},
+            column_size          = #{columnSize,jdbcType=INTEGER},
+            model_order          = #{modelOrder,jdbcType=INTEGER},
+            description          = #{description,jdbcType=VARCHAR},
+            update_frequency     = #{updateFrequency,jdbcType=VARCHAR},
+            data_update_strategy = #{dataUpdateStrategy,jdbcType=VARCHAR},
+            data_save_strategy   = #{dataSaveStrategy,jdbcType=VARCHAR},
+            create_time          = #{createTime,jdbcType=TIMESTAMP},
+            create_user_id       = #{createUserId,jdbcType=VARCHAR},
+            data_count           = #{dataCount,jdbcType=VARCHAR},
+            datasource_id        = #{datasourceId,jdbcType=VARCHAR},
+            step_name            = #{stepName,jdbcType=VARCHAR},
+            table_name           = #{tableName,jdbcType=VARCHAR}
+        where model_id = #{modelId,jdbcType=VARCHAR}
+
+
+    </update>
+    <resultMap id="OutModelGroupDTOMap" type="OutModelGroupDTO">
+        <id column="group_id" jdbcType="VARCHAR" property="groupId"/>
+        <result column="group_name" jdbcType="VARCHAR" property="groupName"/>
+    </resultMap>
+
+    <select id="selectGroupIdByGroupTypeAndUserId" parameterType="java.lang.String" resultMap="OutModelGroupDTOMap">
+
+
+        SELECT group_id,group_name FROM dp_portal_group WHERE group_type=#{groupType,jdbcType=VARCHAR}
+
+
+        <if test="userId != '00000000'">
+
+
+            and create_user_id = #{userId,jdbcType=VARCHAR}
+
+
+        </if>
+    </select>
+
+    <resultMap id="OutModelAndMetaDataDTOMap" type="OutModelAndMetaDataDTO">
+        <id column="model_id" jdbcType="VARCHAR" property="modelId"/>
+        <result column="model_name" jdbcType="VARCHAR" property="modelName"/>
+        <result column="group_name" jdbcType="VARCHAR" property="groupName"/>
+        <result column="project_name" jdbcType="VARCHAR" property="projectName"/>
+        <result column="project_type" jdbcType="VARCHAR" property="projectType"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="user_name" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="data_count" jdbcType="VARCHAR" property="dataCount"/>
+        <result column="step_name" jdbcType="VARCHAR" property="stepName"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="datasource_id" jdbcType="VARCHAR" property="datasourceId"/>
+        <result column="query_sql" jdbcType="VARCHAR" property="querySql"/>
+        <result column="project_id" jdbcType="VARCHAR" property="projectId"/>
+    </resultMap>
+    <select id="selectAllGroupByUserIdAndProjectIdAndGroupID" parameterType="java.lang.String"
+            resultMap="OutModelAndMetaDataDTOMap">
+
+
+        SELECT
+        t1.model_id,
+        t1.model_name,
+        t4.group_name,
+        t2.project_name,
+        t6.dict_value as project_type,
+        t1.description ,
+        t5.user_name,
+        t1.data_count,
+        t1.step_name,
+        t1.create_time,
+        t1.update_time,
+        t1.datasource_id
+        ,t1.query_sql,
+        t1.project_name as project_id
+
+        FROM
+        dp_portal_out_model t1
+        LEFT JOIN dp_portal_project t2 ON t1.project_name = t2.project_id
+        LEFT JOIN dp_portal_model_group_grant t3 ON t1.model_id = t3.mode_name
+        LEFT JOIN dp_portal_group t4 ON t3.group_id = t4.group_id
+        LEFT JOIN dp_portal_user t5 on t1.create_user_id=t5.user_id
+        LEFT JOIN dp_portal_dict t6 on t1.project_type=t6.dict_code AND t6.dict_type='PROJECT'
+        WHERE 1=1
+
+
+        <if test="userId != '00000000'">
+
+
+            and t1.create_user_id = #{userId,jdbcType=VARCHAR}
+
+
+        </if>
+        <if test="groupId != '' and groupId != null">
+
+
+            and t4.group_id=#{groupId,jdbcType=VARCHAR}
+
+
+        </if>
+        <if test="projectId != '' and projectId != null">
+
+
+            and t2.project_id=#{projectId,jdbcType=VARCHAR}
+
+
+        </if>
+
+        <if test="modelName != '' and modelName != null">
+
+            and t1.model_name like #{modelName,jdbcType=VARCHAR}
+
+        </if>
+        <if test="enabled != '' and enabled != null">
+
+            and t1.enabled like #{enabled,jdbcType=VARCHAR}
+
+        </if>
+    </select>
+
+    <insert id="insertModelGroup" parameterType="java.lang.String">
+
+
+        insert dp_portal_model_group_grant(mode_name, group_id)
+            value (#{modelName,jdbcType=VARCHAR}, #{groupId,jdbcType=VARCHAR})
+
+
+    </insert>
+
+    <delete id="deleteModelGroup" parameterType="java.lang.String">
+
+        delete
+        from dp_portal_model_group_grant
+        where mode_name = #{modelName,jdbcType=VARCHAR}
+
+    </delete>
+
+    <delete id="deleteModelGroupByModelNames" parameterType="java.lang.String">
+
+        delete from dp_portal_model_group_grant
+        where mode_name in
+        <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+            #{item,jdbcType=VARCHAR}
+        </foreach>
+    </delete>
+
+
+    <resultMap id="OutModelAndMetaDataListDTOMap"
+               type="OutModelAndMetaDataListDTO">
+        <id column="model_id" jdbcType="VARCHAR" property="name"/>
+        <result column="model_name" jdbcType="VARCHAR" property="cName"/>
+        <result column="datasource_id" jdbcType="VARCHAR" property="datasourceName"/>
+        <result column="table_name" jdbcType="VARCHAR" property="tableName"/>
+        <result column="query_sql" jdbcType="VARCHAR" property="querySql"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+
+        <collection property="outModelMetaDataDTOS"
+                    ofType="OutModelMetaDataDTO">
+            <result column="model_name" jdbcType="VARCHAR" property="modelName"/>
+            <result column="column_name" jdbcType="VARCHAR" property="columnName"/>
+            <result column="column_chinese_name" jdbcType="VARCHAR" property="columnChineseName"/>
+            <result column="column_length" jdbcType="VARCHAR" property="columnLength"/>
+            <result column="column_precision" jdbcType="VARCHAR" property="columnPrecision"/>
+            <result column="column_type" jdbcType="VARCHAR" property="columnType"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectOutModelAndMetaData" parameterType="java.lang.String" resultMap="OutModelAndMetaDataListDTOMap">
+
+        SELECT t1.model_id,
+        t1.model_name,
+        t1.datasource_id,
+        t1.table_name,
+        t1.update_time,
+        t2.column_name,
+        t2.column_chinese_name,
+        t2.column_length,
+        t2.column_precision,
+        t2.column_type,
+        t1.query_sql
+        FROM dp_portal_out_model t1
+        INNER JOIN dp_portal_out_model_metadata t2 ON t1.model_id = t2.model_name
+        WHERE t1.model_id = #{modelName,jdbcType=VARCHAR}
+
+    </select>
+
+
+    <resultMap id="ModelDTOMap"
+               type="ModelDTO">
+        <id column="model_id" jdbcType="VARCHAR" property="name"/>
+        <result column="model_name" jdbcType="VARCHAR" property="cName"/>
+        <result column="datasource_id" jdbcType="VARCHAR" property="datasourceName"/>
+        <result column="table_name" jdbcType="VARCHAR" property="tableName"/>
+        <result column="query_sql" jdbcType="VARCHAR" property="querySql"/>
+
+        <collection property="modelMetaDataDTOS" ofType="ModelMetaDataDTO">
+            <result column="model_name" jdbcType="VARCHAR" property="modelName"/>
+            <result column="column_name" jdbcType="VARCHAR" property="columnName"/>
+            <result column="column_chinese_name" jdbcType="VARCHAR" property="columnChineseName"/>
+            <result column="column_length" jdbcType="VARCHAR" property="columnLength"/>
+            <result column="column_precision" jdbcType="VARCHAR" property="columnPrecision"/>
+            <result column="column_type" jdbcType="VARCHAR" property="columnType"/>
+        </collection>
+    </resultMap>
+
+
+    <select id="selectModel" parameterType="java.lang.String" resultMap="ModelDTOMap">
+
+
+        SELECT t1.model_id,
+               t1.model_name,
+               t1.datasource_id,
+               t1.table_name,
+               t2.column_name,
+               t2.column_chinese_name,
+               t2.column_length,
+               t2.column_precision,
+               t2.column_type,
+               t1.query_sql
+        FROM dp_portal_out_model t1
+                 left JOIN dp_portal_out_model_metadata t2 ON t1.model_id = t2.model_name
+        WHERE t1.model_id = #{modelName,jdbcType=VARCHAR}
+
+
+    </select>
+
+    <select id="selectModelByModelId" parameterType="java.lang.String" resultType="java.lang.Integer">
+
+
+        SELECT count(*)
+        FROM dp_portal_out_model t1
+        WHERE t1.model_id = #{modelId,jdbcType=VARCHAR}
+          and t1.create_user_id = #{userId}
+
+    </select>
+</mapper>
