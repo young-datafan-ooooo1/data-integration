@@ -208,10 +208,10 @@
         <module>dataintegration-common</module>
         <module>dataintegration-group</module>
         <module>dataintegration-project</module>
-        <module>dataintegration-run</module>
         <module>dataintegration-sso</module>
         <module>dataintegration-sys</module>
         <module>dataintegration-model</module>
+        <module>dataintegration-run</module>
     </modules>
 
 </project>
