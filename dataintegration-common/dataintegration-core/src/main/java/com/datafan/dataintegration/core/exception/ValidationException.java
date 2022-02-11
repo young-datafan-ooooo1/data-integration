@@ -1,5 +1,6 @@
 package com.datafan.dataintegration.core.exception;
 
+import com.datafan.dataintegration.core.util.StatusCode;
 import org.springframework.http.HttpStatus;
 
 /**
@@ -12,6 +13,10 @@ public class ValidationException extends DpException {
 
     public ValidationException(final String statusCode, final String message) {
         super(statusCode, message);
+    }
+
+    public ValidationException(final StatusCode statusCode, final String message) {
+        super(statusCode.getCode(), message);
     }
 
     public ValidationException(final String statusCode, final String message, final HttpStatus httpStatus) {

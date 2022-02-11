@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>dataintegration-run-management-plugins</artifactId>
+        <groupId>com.datafan.dataintegration</groupId>
+        <version>2.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>steps</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>csvinput2</module>
+        <module>excelinput2</module>
+        <module>textfileinput2</module>
+        <module>textfileoutput2</module>
+        <module>exceloutput2</module>
+        <module>typeexitexcelwriterstep2</module>
+        <module>s3-connector</module>
+        <module>ssh2</module>
+        <module>http2</module>
+        <module>getFileNames2</module>
+        <module>parallelGzipCsvInput2</module>
+        <module>getFilesRowsCount2</module>
+        <module>fixedInput2</module>
+        <module>sqlFileOutput2</module>
+        <module>cubeInput2</module>
+        <module>getSubFolders2</module>
+        <module>execSQLRow2</module>
+        <module>joinRows2</module>
+        <module>FileExists2</module>
+        <module>fileLocked2</module>
+    </modules>
+
+</project>
