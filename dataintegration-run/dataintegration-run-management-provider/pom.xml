@@ -33,12 +33,12 @@
         <dependency>
             <groupId>com.datafan.dataintegration</groupId>
             <artifactId>dataintegration-core</artifactId>
-            <version>${revision}</version>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.datafan.dataintegration</groupId>
             <artifactId>dataintegration-model-management-api</artifactId>
-            <version>${revision}</version>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
         <!--项目管理api-->
@@ -273,124 +273,124 @@
         <dependency>
             <groupId>com.datafan.dataintegration</groupId>
             <artifactId>csvinput2</artifactId>
-            <version>2.0.0</version>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>com.datafan.dataintegration</groupId>
             <artifactId>excelinput2</artifactId>
-            <version>2.0.0</version>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>com.datafan.dataintegration</groupId>
             <artifactId>textfileinput2</artifactId>
-            <version>2.0.0</version>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>com.datafan.dataintegration</groupId>
             <artifactId>textfileoutput2</artifactId>
-            <version>2.0.0</version>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>com.datafan.dataintegration</groupId>
             <artifactId>exceloutput2</artifactId>
-            <version>2.0.0</version>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>com.datafan.dataintegration</groupId>
             <artifactId>typeexitexcelwriterstep2</artifactId>
-            <version>2.0.0</version>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>com.datafan.dataintegration</groupId>
             <artifactId>s3-connector</artifactId>
-            <version>2.0.0</version>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>com.datafan.dataintegration</groupId>
             <artifactId>ssh2</artifactId>
-            <version>2.0.0</version>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>com.datafan.dataintegration</groupId>
             <artifactId>http2</artifactId>
-            <version>2.0.0</version>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>com.datafan.dataintegration</groupId>
             <artifactId>parallelGzipCsvInput2</artifactId>
-            <version>2.0.0</version>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>com.datafan.dataintegration</groupId>
             <artifactId>getFileNames2</artifactId>
-            <version>2.0.0</version>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>com.datafan.dataintegration</groupId>
             <artifactId>getFilesRowsCount2</artifactId>
-            <version>2.0.0</version>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>com.datafan.dataintegration</groupId>
             <artifactId>fixedInput2</artifactId>
-            <version>2.0.0</version>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>com.datafan.dataintegration</groupId>
             <artifactId>cubeInput2</artifactId>
-            <version>2.0.0</version>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>com.datafan.dataintegration</groupId>
             <artifactId>sqlFileOutput2</artifactId>
-            <version>2.0.0</version>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>com.datafan.dataintegration</groupId>
             <artifactId>getSubFolders2</artifactId>
-            <version>2.0.0</version>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>com.datafan.dataintegration</groupId>
             <artifactId>execSQLRow2</artifactId>
-            <version>2.0.0</version>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>com.datafan.dataintegration</groupId>
             <artifactId>fixedInput2</artifactId>
-            <version>2.0.0</version>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.datafan.dataintegration</groupId>
             <artifactId>FileExists2</artifactId>
-            <version>2.0.0</version>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.datafan.dataintegration</groupId>
             <artifactId>fileLocked2</artifactId>
-            <version>2.0.0</version>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.datafan.dataintegration</groupId>
             <artifactId>joinRows2</artifactId>
-            <version>2.0.0</version>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
         <!--插件 end-->
         <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
@@ -410,7 +410,7 @@
         <dependency>
             <groupId>com.datafan.dataintegration</groupId>
             <artifactId>s3-connector</artifactId>
-            <version>2.0.0</version>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
 

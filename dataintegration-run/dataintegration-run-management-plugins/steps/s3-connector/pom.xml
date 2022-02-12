@@ -5,10 +5,10 @@
     <parent>
         <artifactId>steps</artifactId>
         <groupId>com.datafan.dataintegration</groupId>
-        <version>2.0.0</version>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <version>2.0.0</version>
+    <version>1.0.0-SNAPSHOT</version>
     <artifactId>s3-connector</artifactId>
 
     <dependencies>

@@ -8,10 +8,7 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
     <artifactId>dataintegration-run-management-api</artifactId>
-
-
   <properties>
         <kettle.version>8.3.0.26-1479</kettle.version>
         <sofaboot.version>3.3.0</sofaboot.version>
@@ -23,7 +20,7 @@
         <dependency>
             <groupId>com.datafan.dataintegration</groupId>
             <artifactId>dataintegration-core</artifactId>
-            <version>${revision}</version>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
         <!-- kettle-->

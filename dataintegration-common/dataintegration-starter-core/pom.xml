@@ -5,7 +5,7 @@
     <parent>
         <artifactId>dataintegration-common</artifactId>
         <groupId>com.datafan.dataintegration</groupId>
-        <version>${revision}</version>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -15,7 +15,7 @@
         <dependency>
             <groupId>com.datafan.dataintegration</groupId>
             <artifactId>dataintegration-core</artifactId>
-            <version>${revision}</version>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
