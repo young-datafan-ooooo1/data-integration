@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Spring Boot WebSocket+广播式</title>
+</head>
+<body onload="disconnect()">
+<noscript>
+    <h2 style="color:#ff0000">貌似你的浏览器不支持websocket</h2>
+</noscript>
+<div>
+    <div>
+        <label>websocket地址</label> <input type="text" id="url" value="ws://127.0.0.1:10220/ws/dp-di-run-management-provider"/>
+        <br>
+        <button id="connect" onclick="connect()">连接</button>
+        <button id="disconnect" onclick="disconnect();">断开连接</button>
+    </div>
+    <div id="conversationDiv">
+        <label>userId</label> <input type="text" id="userId" value="00000000"/>
+        <br>
+        <label>token</label> <input type="text" id="token"
+                                    value="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpbk5hbWUiOiJhZG1pbiIsInJvbGVzIjoiMCwxLDIiLCJleHAiOjE1ODI3OTA2NDYsInVzZXJJZCI6IjAwMDAwMDAwIn0.lxPgDLr_KUOGou-50Yz07dGxfdwmn3MUh4DFeob71Rc"
+                                    width="400px"/>
+        <br>
+        <label>输入消息</label> <input type="text" id="messgae"/>
+        <button id="send" onclick="send();">发送</button>
+        <p id="response"></p>
+    </div>
+</div>
+<script src="https://cdn.bootcss.com/sockjs-client/1.0.0/sockjs.min.js"></script>
+<script src="https://cdn.bootcss.com/stomp.js/2.3.3/stomp.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+    var stompClient = null;
+
+    function connect() {
+        var userId = $("#userId").val();
+        //gateway网关的地址
+        var url = $("#url").val() + '/websocket?Authorization=' + $("#token").val();
+        //地址+端点路径，构建websocket链接地址
+        // var socket = new SockJS(url);
+        // stompClient = Stomp.over(socket);
+        stompClient = Stomp.client(url);
+        stompClient.connect({}, function (frame) {
+            console.log('Connected:' + frame);
+            //监听的路径以及回调
+            stompClient.subscribe('/user/' + userId + '/executeById', function (response) {
+                showResponse(response.body);
+            });
+            //监听的路径以及回调
+            stompClient.subscribe('/user/' + userId + '/runningState', function (response) {
+                showResponse(response.body);
+            });
+        });
+    }
+
+    function disconnect() {
+        if (stompClient != null) {
+            stompClient.disconnect();
+        }
+
+        console.log("Disconnected");
+    }
+
+    function send() {
+        var name = $('#name').val();
+        var message = $('#messgae').val();
+        //发送消息的路径
+        stompClient.send("/executeById", {}, JSON.stringify({
+            projectId: "b38b3b6f5a5c462dae6d517803f4b13f",
+            projectName:"test",
+            logLevel: "Basic",
+            safeModeEnabled: false
+        }));
+    }
+
+    function showResponse(message) {
+        var response = $('#response');
+        response.html(message);
+    }
+
+</script>
+</body>
+</html>

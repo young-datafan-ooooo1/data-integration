@@ -1,0 +1,20 @@
+spring:
+  cloud:
+    nacos:
+      config:
+        file-extension: yaml
+        server-addr: 192.168.124.166:8848
+  application:
+    name: dp-di-run-management-provider
+management:
+  endpoints:
+    web:
+      exposure:
+        # 开放所有端点
+        include: "*"
+logging:
+  file:
+    # 配置日志目录，logbak.xml使用
+    path: ./logs/${spring.application.name}
+    # springboot admin获取日志使用
+    name: ${logging.file.path}/all/${spring.application.name}.log

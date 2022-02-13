@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youngdatafan.di.run.management.server.mapper.DpDeSavemodelHistoryMapper">
+    <resultMap id="BaseResultMap" type="com.youngdatafan.di.run.management.server.entity.DpDeSavemodelHistory">
+        <!--@mbg.generated-->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="model_name" jdbcType="VARCHAR" property="modelName"/>
+        <result column="model_id" jdbcType="VARCHAR" property="modelId"/>
+        <result column="project_id" jdbcType="VARCHAR" property="projectId"/>
+        <result column="step_name" jdbcType="VARCHAR" property="stepName"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="start_time" jdbcType="TIMESTAMP" property="startTime"/>
+        <result column="end_time" jdbcType="TIMESTAMP" property="endTime"/>
+        <result column="exec_second" jdbcType="INTEGER" property="execSecond"/>
+        <result column="user_id" jdbcType="VARCHAR" property="userId"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+    </resultMap>
+    <resultMap id="SavemodelHistoryBaseResultMap" type="com.youngdatafan.di.run.management.server.dto.SavemodelHistoryDTO">
+        <!--@mbg.generated-->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="model_name" jdbcType="VARCHAR" property="modelName"/>
+        <result column="model_id" jdbcType="VARCHAR" property="modelId"/>
+        <result column="project_id" jdbcType="VARCHAR" property="projectId"/>
+        <result column="project_name" jdbcType="VARCHAR" property="projectName"/>
+        <result column="step_name" jdbcType="VARCHAR" property="stepName"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="start_time" jdbcType="TIMESTAMP" property="startTime"/>
+        <result column="end_time" jdbcType="TIMESTAMP" property="endTime"/>
+        <result column="exec_second" jdbcType="INTEGER" property="execSecond"/>
+        <result column="user_id" jdbcType="VARCHAR" property="userId"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, model_name,model_id, project_id, step_name, `status`, start_time, end_time, exec_second,
+        user_id, user_name
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from dp_de_savemodel_history
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectHistory" resultMap="SavemodelHistoryBaseResultMap">
+        SELECT
+        t1.* ,t2.project_name
+        FROM
+        dp_de_savemodel_history t1
+        LEFT JOIN dp_portal_project t2 ON t1.project_id = t2.project_id
+        where t1.user_id = #{userId}
+        <if test="startTime != null">
+            and t1.start_time >= #{startTime}
+        </if>
+        <if test="endTime != null">
+            and t1.start_time &lt;= #{endTime}
+        </if>
+        <if test="modelName != null ">
+            and t1.model_name like '%${modelName}%'
+        </if>
+        order by t1.start_time desc
+    </select>
+
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        <!--@mbg.generated-->
+        delete from dp_de_savemodel_history
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.youngdatafan.di.run.management.server.entity.DpDeSavemodelHistory">
+        <!--@mbg.generated-->
+        insert into dp_de_savemodel_history (id, model_name, project_id,
+        step_name, `status`, start_time,
+        end_time, exec_second, user_id,
+        user_name)
+        values (#{id,jdbcType=BIGINT}, #{modelName,jdbcType=VARCHAR}, #{projectId,jdbcType=VARCHAR},
+        #{stepName,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP},
+        #{endTime,jdbcType=TIMESTAMP}, #{execSecond,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR},
+        #{userName,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.youngdatafan.di.run.management.server.entity.DpDeSavemodelHistory">
+        <!--@mbg.generated-->
+        insert into dp_de_savemodel_history
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="modelName != null">
+                model_name,
+            </if>
+            <if test="projectId != null">
+                project_id,
+            </if>
+            <if test="stepName != null">
+                step_name,
+            </if>
+            <if test="status != null">
+                `status`,
+            </if>
+            <if test="startTime != null">
+                start_time,
+            </if>
+            <if test="endTime != null">
+                end_time,
+            </if>
+            <if test="execSecond != null">
+                exec_second,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="userName != null">
+                user_name,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="modelName != null">
+                #{modelName,jdbcType=VARCHAR},
+            </if>
+            <if test="projectId != null">
+                #{projectId,jdbcType=VARCHAR},
+            </if>
+            <if test="stepName != null">
+                #{stepName,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="startTime != null">
+                #{startTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null">
+                #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="execSecond != null">
+                #{execSecond,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective"
+            parameterType="com.youngdatafan.di.run.management.server.entity.DpDeSavemodelHistory">
+        <!--@mbg.generated-->
+        update dp_de_savemodel_history
+        <set>
+            <if test="modelName != null">
+                model_name = #{modelName,jdbcType=VARCHAR},
+            </if>
+            <if test="modelId != null">
+                model_id = #{modelId,jdbcType=VARCHAR},
+            </if>
+            <if test="projectId != null">
+                project_id = #{projectId,jdbcType=VARCHAR},
+            </if>
+            <if test="stepName != null">
+                step_name = #{stepName,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                `status` = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="startTime != null">
+                start_time = #{startTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null">
+                end_time = #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="execSecond != null">
+                exec_second = #{execSecond,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="userName != null">
+                user_name = #{userName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.youngdatafan.di.run.management.server.entity.DpDeSavemodelHistory">
+        <!--@mbg.generated-->
+        update dp_de_savemodel_history
+        set model_name = #{modelName,jdbcType=VARCHAR},
+        model_id = #{modelId,jdbcType=VARCHAR},
+        project_id = #{projectId,jdbcType=VARCHAR},
+        step_name = #{stepName,jdbcType=VARCHAR},
+        `status` = #{status,jdbcType=VARCHAR},
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+        exec_second = #{execSecond,jdbcType=INTEGER},
+        user_id = #{userId,jdbcType=VARCHAR},
+        user_name = #{userName,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <delete id="deleteByPrimaryKeys">
+        delete from dp_de_savemodel_history
+        where id in
+        <foreach collection="ids" item="item" index="index" open="(" close=")" separator=",">
+            #{item,jdbcType=BIGINT}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,636 @@
+{
+  "transformation": {
+    "info": {
+      "name": "222",
+      "trans_type": "Normal",
+      "directory": "/",
+      "parameters": "
+      ",
+      "log": {
+        "trans-log-table": {
+          "field": [
+            {
+              "id": "ID_BATCH",
+              "enabled": "Y",
+              "name": "ID_BATCH"
+            },
+            {
+              "id": "CHANNEL_ID",
+              "enabled": "Y",
+              "name": "CHANNEL_ID"
+            },
+            {
+              "id": "TRANSNAME",
+              "enabled": "Y",
+              "name": "TRANSNAME"
+            },
+            {
+              "id": "STATUS",
+              "enabled": "Y",
+              "name": "STATUS"
+            },
+            {
+              "id": "LINES_READ",
+              "enabled": "Y",
+              "name": "LINES_READ"
+            },
+            {
+              "id": "LINES_WRITTEN",
+              "enabled": "Y",
+              "name": "LINES_WRITTEN"
+            },
+            {
+              "id": "LINES_UPDATED",
+              "enabled": "Y",
+              "name": "LINES_UPDATED"
+            },
+            {
+              "id": "LINES_INPUT",
+              "enabled": "Y",
+              "name": "LINES_INPUT"
+            },
+            {
+              "id": "LINES_OUTPUT",
+              "enabled": "Y",
+              "name": "LINES_OUTPUT"
+            },
+            {
+              "id": "LINES_REJECTED",
+              "enabled": "Y",
+              "name": "LINES_REJECTED"
+            },
+            {
+              "id": "ERRORS",
+              "enabled": "Y",
+              "name": "ERRORS"
+            },
+            {
+              "id": "STARTDATE",
+              "enabled": "Y",
+              "name": "STARTDATE"
+            },
+            {
+              "id": "ENDDATE",
+              "enabled": "Y",
+              "name": "ENDDATE"
+            },
+            {
+              "id": "LOGDATE",
+              "enabled": "Y",
+              "name": "LOGDATE"
+            },
+            {
+              "id": "DEPDATE",
+              "enabled": "Y",
+              "name": "DEPDATE"
+            },
+            {
+              "id": "REPLAYDATE",
+              "enabled": "Y",
+              "name": "REPLAYDATE"
+            },
+            {
+              "id": "LOG_FIELD",
+              "enabled": "Y",
+              "name": "LOG_FIELD"
+            },
+            {
+              "id": "EXECUTING_SERVER",
+              "enabled": "N",
+              "name": "EXECUTING_SERVER"
+            },
+            {
+              "id": "EXECUTING_USER",
+              "enabled": "N",
+              "name": "EXECUTING_USER"
+            },
+            {
+              "id": "CLIENT",
+              "enabled": "N",
+              "name": "CLIENT"
+            }
+          ]
+        },
+        "perf-log-table": {
+          "field": [
+            {
+              "id": "ID_BATCH",
+              "enabled": "Y",
+              "name": "ID_BATCH"
+            },
+            {
+              "id": "SEQ_NR",
+              "enabled": "Y",
+              "name": "SEQ_NR"
+            },
+            {
+              "id": "LOGDATE",
+              "enabled": "Y",
+              "name": "LOGDATE"
+            },
+            {
+              "id": "TRANSNAME",
+              "enabled": "Y",
+              "name": "TRANSNAME"
+            },
+            {
+              "id": "STEPNAME",
+              "enabled": "Y",
+              "name": "STEPNAME"
+            },
+            {
+              "id": "STEP_COPY",
+              "enabled": "Y",
+              "name": "STEP_COPY"
+            },
+            {
+              "id": "LINES_READ",
+              "enabled": "Y",
+              "name": "LINES_READ"
+            },
+            {
+              "id": "LINES_WRITTEN",
+              "enabled": "Y",
+              "name": "LINES_WRITTEN"
+            },
+            {
+              "id": "LINES_UPDATED",
+              "enabled": "Y",
+              "name": "LINES_UPDATED"
+            },
+            {
+              "id": "LINES_INPUT",
+              "enabled": "Y",
+              "name": "LINES_INPUT"
+            },
+            {
+              "id": "LINES_OUTPUT",
+              "enabled": "Y",
+              "name": "LINES_OUTPUT"
+            },
+            {
+              "id": "LINES_REJECTED",
+              "enabled": "Y",
+              "name": "LINES_REJECTED"
+            },
+            {
+              "id": "ERRORS",
+              "enabled": "Y",
+              "name": "ERRORS"
+            },
+            {
+              "id": "INPUT_BUFFER_ROWS",
+              "enabled": "Y",
+              "name": "INPUT_BUFFER_ROWS"
+            },
+            {
+              "id": "OUTPUT_BUFFER_ROWS",
+              "enabled": "Y",
+              "name": "OUTPUT_BUFFER_ROWS"
+            }
+          ]
+        },
+        "channel-log-table": {
+          "field": [
+            {
+              "id": "ID_BATCH",
+              "enabled": "Y",
+              "name": "ID_BATCH"
+            },
+            {
+              "id": "CHANNEL_ID",
+              "enabled": "Y",
+              "name": "CHANNEL_ID"
+            },
+            {
+              "id": "LOG_DATE",
+              "enabled": "Y",
+              "name": "LOG_DATE"
+            },
+            {
+              "id": "LOGGING_OBJECT_TYPE",
+              "enabled": "Y",
+              "name": "LOGGING_OBJECT_TYPE"
+            },
+            {
+              "id": "OBJECT_NAME",
+              "enabled": "Y",
+              "name": "OBJECT_NAME"
+            },
+            {
+              "id": "OBJECT_COPY",
+              "enabled": "Y",
+              "name": "OBJECT_COPY"
+            },
+            {
+              "id": "REPOSITORY_DIRECTORY",
+              "enabled": "Y",
+              "name": "REPOSITORY_DIRECTORY"
+            },
+            {
+              "id": "FILENAME",
+              "enabled": "Y",
+              "name": "FILENAME"
+            },
+            {
+              "id": "OBJECT_ID",
+              "enabled": "Y",
+              "name": "OBJECT_ID"
+            },
+            {
+              "id": "OBJECT_REVISION",
+              "enabled": "Y",
+              "name": "OBJECT_REVISION"
+            },
+            {
+              "id": "PARENT_CHANNEL_ID",
+              "enabled": "Y",
+              "name": "PARENT_CHANNEL_ID"
+            },
+            {
+              "id": "ROOT_CHANNEL_ID",
+              "enabled": "Y",
+              "name": "ROOT_CHANNEL_ID"
+            }
+          ]
+        },
+        "step-log-table": {
+          "field": [
+            {
+              "id": "ID_BATCH",
+              "enabled": "Y",
+              "name": "ID_BATCH"
+            },
+            {
+              "id": "CHANNEL_ID",
+              "enabled": "Y",
+              "name": "CHANNEL_ID"
+            },
+            {
+              "id": "LOG_DATE",
+              "enabled": "Y",
+              "name": "LOG_DATE"
+            },
+            {
+              "id": "TRANSNAME",
+              "enabled": "Y",
+              "name": "TRANSNAME"
+            },
+            {
+              "id": "STEPNAME",
+              "enabled": "Y",
+              "name": "STEPNAME"
+            },
+            {
+              "id": "STEP_COPY",
+              "enabled": "Y",
+              "name": "STEP_COPY"
+            },
+            {
+              "id": "LINES_READ",
+              "enabled": "Y",
+              "name": "LINES_READ"
+            },
+            {
+              "id": "LINES_WRITTEN",
+              "enabled": "Y",
+              "name": "LINES_WRITTEN"
+            },
+            {
+              "id": "LINES_UPDATED",
+              "enabled": "Y",
+              "name": "LINES_UPDATED"
+            },
+            {
+              "id": "LINES_INPUT",
+              "enabled": "Y",
+              "name": "LINES_INPUT"
+            },
+            {
+              "id": "LINES_OUTPUT",
+              "enabled": "Y",
+              "name": "LINES_OUTPUT"
+            },
+            {
+              "id": "LINES_REJECTED",
+              "enabled": "Y",
+              "name": "LINES_REJECTED"
+            },
+            {
+              "id": "ERRORS",
+              "enabled": "Y",
+              "name": "ERRORS"
+            },
+            {
+              "id": "LOG_FIELD",
+              "enabled": "N",
+              "name": "LOG_FIELD"
+            }
+          ]
+        },
+        "metrics-log-table": {
+          "field": [
+            {
+              "id": "ID_BATCH",
+              "enabled": "Y",
+              "name": "ID_BATCH"
+            },
+            {
+              "id": "CHANNEL_ID",
+              "enabled": "Y",
+              "name": "CHANNEL_ID"
+            },
+            {
+              "id": "LOG_DATE",
+              "enabled": "Y",
+              "name": "LOG_DATE"
+            },
+            {
+              "id": "METRICS_DATE",
+              "enabled": "Y",
+              "name": "METRICS_DATE"
+            },
+            {
+              "id": "METRICS_CODE",
+              "enabled": "Y",
+              "name": "METRICS_CODE"
+            },
+            {
+              "id": "METRICS_DESCRIPTION",
+              "enabled": "Y",
+              "name": "METRICS_DESCRIPTION"
+            },
+            {
+              "id": "METRICS_SUBJECT",
+              "enabled": "Y",
+              "name": "METRICS_SUBJECT"
+            },
+            {
+              "id": "METRICS_TYPE",
+              "enabled": "Y",
+              "name": "METRICS_TYPE"
+            },
+            {
+              "id": "METRICS_VALUE",
+              "enabled": "Y",
+              "name": "METRICS_VALUE"
+            }
+          ]
+        }
+      },
+      "maxdate": {
+        "offset": "0.0",
+        "maxdiff": "0.0"
+      },
+      "size_rowset": "10000",
+      "sleep_time_empty": "50",
+      "sleep_time_full": "50",
+      "unique_connections": "N",
+      "feedback_shown": "Y",
+      "feedback_size": "50000",
+      "using_thread_priorities": "Y",
+      "capture_step_performance": "N",
+      "step_performance_capturing_delay": "1000",
+      "step_performance_capturing_size_limit": "100",
+      "dependencies": "
+      ",
+      "partitionschemas": "
+      ",
+      "slaveservers": "
+      ",
+      "clusterschemas": "
+      ",
+      "created_user": "-",
+      "created_date": "2020/08/06 16:14:31.412",
+      "modified_user": "-",
+      "modified_date": "2020/08/06 16:14:31.412",
+      "key_for_session_key": "H4sIAAAAAAAAAAMAAAAAAAAAAAA=",
+      "is_key_private": "N"
+    },
+    "notepads": "
+    ",
+    "connection": {
+      "name": "deby",
+      "server": "10.242.10.166",
+      "type": "MYSQL",
+      "access": "Native",
+      "database": "kettle_test",
+      "port": "3306",
+      "username": "root",
+      "password": "Encrypted 2be98afc86aa7f2b5aa03b663e9c5f89b",
+      "attributes": {
+        "attribute": [
+          {
+            "code": "FORCE_IDENTIFIERS_TO_LOWERCASE",
+            "attribute": "N"
+          },
+          {
+            "code": "FORCE_IDENTIFIERS_TO_UPPERCASE",
+            "attribute": "N"
+          },
+          {
+            "code": "IS_CLUSTERED",
+            "attribute": "N"
+          },
+          {
+            "code": "PORT_NUMBER",
+            "attribute": "3306"
+          },
+          {
+            "code": "PRESERVE_RESERVED_WORD_CASE",
+            "attribute": "Y"
+          },
+          {
+            "code": "QUOTE_ALL_FIELDS",
+            "attribute": "N"
+          },
+          {
+            "code": "STREAM_RESULTS",
+            "attribute": "Y"
+          },
+          {
+            "code": "SUPPORTS_BOOLEAN_DATA_TYPE",
+            "attribute": "Y"
+          },
+          {
+            "code": "SUPPORTS_TIMESTAMP_DATA_TYPE",
+            "attribute": "Y"
+          },
+          {
+            "code": "USE_POOLING",
+            "attribute": "N"
+          }
+        ]
+      }
+    },
+    "order": {
+      "hop": [
+        {
+          "from": "Table input",
+          "to": "aaa",
+          "enabled": "Y"
+        },
+        {
+          "from": "aaa",
+          "to": "Table output 2",
+          "enabled": "Y"
+        },
+        {
+          "from": "aaa",
+          "to": "Table output",
+          "enabled": "Y"
+        }
+      ]
+    },
+    "step": [
+      {
+        "name": "Table input",
+        "type": "TableInput",
+        "distribute": "Y",
+        "copies": "1",
+        "partitioning": { "method": "none" },
+        "connection": "deby",
+        "sql": "SELECT '1' as aaa",
+        "limit": "0",
+        "execute_each_row": "N",
+        "variables_active": "N",
+        "lazy_conversion_active": "N",
+        "remotesteps": {
+          "input": "
+          ",
+          "output": "
+          "
+        },
+        "GUI": {
+          "xloc": "255",
+          "yloc": "245",
+          "draw": "Y"
+        }
+      },
+      {
+        "name": "aaa",
+        "type": "FilterRows",
+        "distribute": "Y",
+        "copies": "1",
+        "partitioning": { "method": "none" },
+        "send_true_to": "Table output 2",
+        "send_false_to": "Table output",
+        "compare": {
+          "condition": {
+            "negated": "Y",
+            "conditions": {
+              "condition": [
+                {
+                  "negated": "Y",
+                  "operator": "AND",
+                  "conditions": {
+                    "condition": {
+                      "negated": "N",
+                      "operator": "AND",
+                      "leftvalue": "aaa",
+                      "function": "=",
+                      "rightvalue": "aaa"
+                    }
+                  }
+                },
+                {
+                  "negated": "N",
+                  "operator": "AND",
+                  "function": "="
+                },
+                {
+                  "negated": "N",
+                  "operator": "AND",
+                  "function": "="
+                }
+              ]
+            }
+          }
+        },
+        "remotesteps": {
+          "input": "
+          ",
+          "output": "
+          "
+        },
+        "GUI": {
+          "xloc": "634",
+          "yloc": "268",
+          "draw": "Y"
+        }
+      },
+      {
+        "name": "Table output",
+        "type": "TableOutput",
+        "distribute": "Y",
+        "copies": "1",
+        "partitioning": { "method": "none" },
+        "connection": "deby",
+        "commit": "1000",
+        "truncate": "N",
+        "ignore_errors": "N",
+        "use_batch": "Y",
+        "specify_fields": "N",
+        "partitioning_enabled": "Y",
+        "partitioning_field": "aaa",
+        "partitioning_daily": "N",
+        "partitioning_monthly": "Y",
+        "tablename_in_field": "N",
+        "tablename_in_table": "Y",
+        "return_keys": "N",
+        "fields": "
+        ",
+        "remotesteps": {
+          "input": "
+          ",
+          "output": "
+          "
+        },
+        "GUI": {
+          "xloc": "740",
+          "yloc": "133",
+          "draw": "Y"
+        }
+      },
+      {
+        "name": "Table output 2",
+        "type": "TableOutput",
+        "distribute": "Y",
+        "copies": "1",
+        "partitioning": { "method": "none" },
+        "connection": "deby",
+        "table": "test",
+        "commit": "1000",
+        "truncate": "N",
+        "ignore_errors": "N",
+        "use_batch": "Y",
+        "specify_fields": "N",
+        "partitioning_enabled": "N",
+        "partitioning_field": "aaa",
+        "partitioning_daily": "N",
+        "partitioning_monthly": "Y",
+        "tablename_in_field": "N",
+        "tablename_in_table": "Y",
+        "return_keys": "N",
+        "fields": "
+        ",
+        "remotesteps": {
+          "input": "
+          ",
+          "output": "
+          "
+        },
+        "GUI": {
+          "xloc": "755",
+          "yloc": "218",
+          "draw": "Y"
+        }
+      }
+    ],
+    "step_error_handling": "
+    ",
+    "slave-step-copy-partition-distribution": "
+    ",
+    "slave_transformation": "N"
+  }
+}

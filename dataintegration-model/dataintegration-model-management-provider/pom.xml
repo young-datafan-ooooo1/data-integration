@@ -4,7 +4,7 @@
     <parent>
         <artifactId>dataintegration-model</artifactId>
         <groupId>com.datafan.dataintegration</groupId>
-        <version>${revision}</version>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -18,7 +18,6 @@
         <start-class>com.youngdatafan.portal.model.management.ModelManagerApplication</start-class>
         <mysql.version>5.1.47</mysql.version>
         <clickhouse.version>0.2.4</clickhouse.version>
-        <kettle.version>8.3.0.26-1479</kettle.version>
     </properties>
 
     <dependencies>
@@ -51,12 +50,6 @@
             <groupId>ru.yandex.clickhouse</groupId>
             <artifactId>clickhouse-jdbc</artifactId>
             <version>${clickhouse.version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>guava</artifactId>
-                    <groupId>com.google.guava</groupId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <dependency>
@@ -74,14 +67,14 @@
         <dependency>
             <groupId>com.datafan.dataintegration</groupId>
             <artifactId>dataintegration-core</artifactId>
-            <version>${revision}</version>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
         <!--接口-->
         <dependency>
             <groupId>com.datafan.dataintegration</groupId>
             <artifactId>dataintegration-model-management-api</artifactId>
-            <version>${revision}</version>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
         <!--mysql-->
@@ -151,6 +144,7 @@
             <artifactId>jakarta.servlet-api</artifactId>
             <version>4.0.3</version>
         </dependency>
+
 
     </dependencies>
 

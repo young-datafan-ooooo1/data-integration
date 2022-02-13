@@ -1,0 +1,317 @@
+{
+ "children": [
+  {
+   "label": "Transform Constants",
+   "children": [
+    {
+     "label": "SKIP_TRANSFORMATION"
+    },
+    {
+     "label": "ERROR_TRANSFORMATION"
+    },
+    {
+     "label": "CONTINUE_TRANSFORMATION"
+    },
+    {
+     "label": "ABORT_TRANSFORMATION"
+    }
+   ]
+  },
+  {
+   "label": "Transform Functions",
+   "children": [
+    {
+     "label": "String Functions",
+     "children": [
+      {
+       "label": "date2str(var)"
+      },
+      {
+       "label": "date2str(var,var)"
+      },
+      {
+       "label": "date2str(var,var,var)"
+      },
+      {
+       "label": "escapeHtml(var)"
+      },
+      {
+       "label": "escapeSQL(var)"
+      },
+      {
+       "label": "escapeXml(var)"
+      },
+      {
+       "label": "fillString(var)"
+      },
+      {
+       "label": "getOcuranceString(var)"
+      },
+      {
+       "label": "indexOf(var)"
+      },
+      {
+       "label": "indexOf(var,var)"
+      },
+      {
+       "label": "lower(var)"
+      },
+      {
+       "label": "lpad(var,var,var,)"
+      },
+      {
+       "label": "ltrim(var)"
+      },
+      {
+       "label": "num2str(var)"
+      },
+      {
+       "label": "num2str(var,var)"
+      },
+      {
+       "label": "num2str(var,var,var)"
+      },
+      {
+       "label": "num2str(var)"
+      },
+      {
+       "label": "protectXMLCDATA(var)"
+      },
+      {
+       "label": "removeCRLF(var)"
+      },
+      {
+       "label": "replace(var)"
+      },
+      {
+       "label": "rpad(var)"
+      },
+      {
+       "label": "rtrim(var)"
+      },
+      {
+       "label": "str2RegExp(var)"
+      },
+      {
+       "label": "substr(var,var)"
+      },
+      {
+       "label": "substr(var,var,var)"
+      },
+      {
+       "label": "trim(var)"
+      },
+      {
+       "label": "unEscapeHtml(var)"
+      },
+      {
+       "label": "unEscapeXml(var)"
+      },
+      {
+       "label": "upper(var)"
+      }
+     ]
+    },
+    {
+     "label": "Numeric Function",
+     "children": [
+      {
+       "label": "abs(var)"
+      },
+      {
+       "label": "ceil(var)"
+      },
+      {
+       "label": "floor(var)"
+      },
+      {
+       "label": "floor(var)"
+      },
+      {
+       "label": "str2num(var)"
+      },
+      {
+       "label": "str2num(var,var)"
+      },
+      {
+       "label": "trunc(var)"
+      }
+     ]
+    },
+    {
+     "label": "Date Function",
+     "children": [
+      {
+       "label": "abs(var)"
+      },
+      {
+       "label": "ceil(var)"
+      },
+      {
+       "label": "floor(var)"
+      },
+      {
+       "label": "floor(var)"
+      },
+      {
+       "label": "str2num(var)"
+      },
+      {
+       "label": "str2num(var,var)"
+      },
+      {
+       "label": "trunc(var)"
+      }
+     ]
+    },
+    {
+     "label": "Logic Function",
+     "children": [
+      {
+       "label": "isCodepage(var,var)"
+      },
+      {
+       "label": "isDate(var)"
+      },
+      {
+       "label": "isEmpty(var)"
+      },
+      {
+       "label": "isMailValid(var)"
+      },
+      {
+       "label": "isNum(var)"
+      },
+      {
+       "label": "isRegExp(var,var)"
+      },
+      {
+       "label": "isWorkingDay(var)"
+      }
+     ]
+    },
+    {
+     "label": "Special Functions",
+     "children": [
+      {
+       "label": "Alert(var)"
+      },
+      {
+       "label": "LoadScriptFile(var)"
+      },
+      {
+       "label": "LoadScriptFromTab(var)"
+      },
+      {
+       "label": "LuhnCheck(var)"
+      },
+      {
+       "label": "appendToFile(var,var)"
+      },
+      {
+       "label": "decode(var,var,var)"
+      },
+      {
+       "label": "execProcess(var)"
+      },
+      {
+       "label": "fireToDB(var,var)"
+      },
+      {
+       "label": "getDigitsOnly(var)"
+      },
+      {
+       "label": "getEnvironmentVar(var)"
+      },
+      {
+       "label": "getProcessCount(var)"
+      },
+      {
+       "label": "getTransformationName()"
+      },
+      {
+       "label": "getVariable(var,var)"
+      },
+      {
+       "label": "print(var)"
+      },
+      {
+       "label": "println(var)"
+      },
+      {
+       "label": "removeDigits(var)"
+      },
+      {
+       "label": "resolvelP(var)"
+      },
+      {
+       "label": "sendMail(var,var,var,var,var)"
+      },
+      {
+       "label": "setEnvironmentVar(var,var)"
+      },
+      {
+       "label": "setVariable(var,var,var)"
+      },
+      {
+       "label": "writeToLog(var)"
+      },
+      {
+       "label": "writeToLog(var,var)"
+      }
+     ]
+    },
+    {
+     "label": "file Function",
+     "children": [
+      {
+       "label": "copyFile(var,var,var)"
+      },
+      {
+       "label": "createFolder(var)"
+      },
+      {
+       "label": "deleteFile(var)"
+      },
+      {
+       "label": "fileExists(var)"
+      },
+      {
+       "label": "getFileExtension(var)"
+      },
+      {
+       "label": "getFileSize(var)"
+      },
+      {
+       "label": "getLastModifiedTime(var,var)"
+      },
+      {
+       "label": "getParentFoldername(var)"
+      },
+      {
+       "label": "getShortFilename(var)"
+      },
+      {
+       "label": "isFile(var)"
+      },
+      {
+       "label": "isFolder(var)"
+      },
+      {
+       "label": "loadFileContent(var)"
+      },
+      {
+       "label": "loadFileContent(var,var)"
+      },
+      {
+       "label": "moveFile(var,var,var)"
+      },
+      {
+       "label": "touch(var)"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

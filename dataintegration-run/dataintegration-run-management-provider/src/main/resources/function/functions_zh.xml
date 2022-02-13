@@ -1,0 +1,1339 @@
+<?xml version="1.0" encoding="UTF-8"?><libformula-functions>
+
+    <!-- Basic computation : TODO: complete copy from OASIS spec -->  
+
+  <function>
+        <category>%Category.BasicComputation</category> <name>+</name> <description>2个数值的总和</description>  </function>
+  <function>
+        <category>%Category.BasicComputation</category> <name>-</name> <description>减去2个数值</description>  </function>
+  <function>
+        <category>%Category.BasicComputation</category> <name>*</name> <description>乘以2个数值</description>  </function>
+  <function>
+        <category>%Category.BasicComputation</category> <name>/</name> <description>除以2个数值</description>  </function>
+  <function>
+        <category>%Category.BasicComputation</category> <name>^</name> <description>计算一个数字到n次方，例如2 ^ 6解析为64</description>  </function>
+  <function>
+        <category>%Category.BasicComputation</category> <name>%</name> <description>百分比计算，例如12％解析为0.12</description>  </function>
+  <function>
+        <category>%Category.BasicComputation</category>
+        <name>(</name> <description>用开括号影响表达式中的计算顺序</description>  </function>
+  <function>
+        <category>%Category.BasicComputation</category>
+        <name>)</name> <description>右括号可影响表达式中的计算顺序</description>  </function>
+  
+    <!-- Comparisons  : TODO: complete copy from OASIS spec -->  
+  
+  <function>
+        <category>%Category.Comparisons</category> <name>=</name> <description>验证2个值是否相等</description>  </function>
+  <function>
+        <category>%Category.Comparisons</category> <name>&lt;&gt;</name> <description>查看两个值是否不同</description>  </function>
+  <function>
+        <category>%Category.Comparisons</category> <name>&lt;</name> <description>查看一个值是否小于另一个</description>  </function>
+  <function>
+        <category>%Category.Comparisons</category> <name>&gt;</name> <description>查看一个值是否大于另一个值</description>  </function>
+  <function>
+        <category>%Category.Comparisons</category> <name>&lt;=</name> <description>查看一个值是否小于或等于另一个</description>  </function>
+  <function>
+        <category>%Category.Comparisons</category> <name>&gt;=</name> <description>查看一个值是否大于或等于另一个</description>  </function>
+
+
+  <!-- Information : This list is complete -->  
+
+  <function>                       
+    <category>%Category.Information</category>
+    <name>CHOOSE</name>             
+    <description>使用索引从值列表中返回一个值。</description>
+    <syntax>CHOOSE( Integer Index ; { Any Value }+ )</syntax>               
+    <returns>Any</returns>             
+    <constraints>如果Index＆lt;则返回错误。 1，或者在值列表中没有对应的值。</constraints>
+    <semantics>使用索引从值列表中确定要返回的值。如果Index为1，则CHOOSE返回第一个值。如果Index为2，则CHOOSE返回第二个值，依此类推。请注意，值可以是公式表达式。不计算或评估除所选参数以外的其他参数的表达路径是否产生副作用。</semantics>
+    <examples>                      
+      <example>   <expression>CHOOSE(3;"Apple";"Orange";"Grape";"Perry")</expression>   <result>"Grape"</result>    <level>1</level>    <comment>简单的选择。</comment>    </example>
+      <example>   <expression>CHOOSE(0;"Apple";"Orange";"Grape";"Perry")</expression>   <result>Error</result>    <level>1</level>    <comment>索引必须至少为1。</comment>    </example>
+      <example>   <expression>CHOOSE(5;"Apple";"Orange";"Grape";"Perry")</expression>   <result>Error</result>    <level>1</level>    <comment>索引不能引用不存在的条目。</comment>    </example>
+      <example>   <expression>CHOOSE(2;SUM([.B4:.B5]);SUM([.B5]))</expression>   <result>3</result>    <level>1</level>    <comment>使用一组公式进行简单选择。</comment>    </example>
+      <example>   <expression>SUM(CHOOSE(2;[.B4:.B5];[.B5]))</expression>   <result>3</result>    <level>1</level>    <comment>选择可以传递参考</comment>    </example>
+    </examples>                                                                                                         
+  </function>                                                                                                           
+
+  <function>
+    <category>%Category.Information</category>
+    <name>ISBLANK</name>            
+    <description>如果引用的单元格为空，则返回TRUE，否则返回FALSE</description>
+    <syntax>ISBLANK( Scalar X )</syntax>               
+    <returns>Logical</returns>             
+    <constraints>无</constraints>     
+    <semantics>如果X为数字，文本或逻辑类型，则返回FALSE。如果X是对单元格的引用，请检查该单元格；如果为空（无值），则返回TRUE，但如果有值，则返回FALSE。具有空字符串的单元格不被视为空白。</semantics>
+    <examples>                      
+      <example>   <expression>ISBLANK(1)</expression>   <result>False</result>    <level>1</level>    <comment>数字返回false。</comment>    </example>
+      <example>   <expression>ISBLANK("")</expression>   <result>False</result>    <level>1</level>    <comment>文本，即使是空字符串，也返回false。</comment>    </example>
+      <example>   <expression>ISBLANK([.B8])</expression>   <result>True</result>    <level>1</level>    <comment>空白单元格为true。</comment>    </example>
+      <example>   <expression>ISBLANK([.B7])</expression>   <result>False</result>    <level>1</level>    <comment>非空白单元格为false。</comment>    </example>
+    </examples>                                                                                                         
+  </function>                                                                                                           
+
+  <function>
+    <category>%Category.Information</category>
+    <name>ISERR</name>              
+    <description>如果参数的类型为Error并且不是NA，则返回True，否则返回False。</description>
+    <syntax>ISERR( Scalar X )</syntax>               
+    <returns>Logical</returns>             
+    <constraints>无</constraints>     
+    <semantics>如果X的类型为Error，并且ISNA（X）不是true，则返回TRUE。否则返回FALSE。请注意，如果给定NA（），则此函数返回False；否则返回false。如果不希望这样做，请使用ISERROR。请注意，此函数不会传播错误值。
+        ISERR（X）与：
+        IF（ISNA（X），FALSE（），ISERROR（X））</semantics>
+    <examples>                      
+      <example>   <expression>ISERR(1/0)</expression>   <result>True</result>    <level>1</level>    <comment>除NA（）以外的其他错误值均返回true。</comment>    </example>
+      <example>   <expression>ISERR(NA())</expression>   <result>False</result>    <level>1</level>    <comment>NA（）不返回True。</comment>    </example>
+      <example>   <expression>ISERR("#N/A")</expression>   <result>False</result>    <level>1</level>    <comment>文字不是错误。</comment>    </example>
+      <example>   <expression>ISERR(1)</expression>   <result>False</result>    <level>1</level>    <comment>数字不是错误。</comment>    </example>
+    </examples>                                                                                                         
+  </function>                                                                                                           
+
+  <function>
+    <category>%Category.Information</category>
+    <name>ISERROR</name>             
+    <description>如果参数的类型为Error，则返回TRUE，否则返回FALSE</description>
+    <syntax>ISERROR( Scalar X )</syntax>               
+    <returns>Logical</returns>             
+    <constraints>无</constraints>     
+    <semantics>如果X的类型为Error，则返回TRUE，否则返回FALSE。请注意，如果给定NA（），则此函数返回True。如果不需要，请使用ISERR。请注意，此函数不会传播错误值。</semantics>
+    <examples>                      
+      <example>   <expression>ISERROR(1/0)</expression>   <result>True</result>    <level>1</level>    <comment>错误值返回true。</comment>    </example>
+      <example>   <expression>ISERROR(NA())</expression>   <result>True</result>    <level>1</level>    <comment>NA（）返回true</comment>    </example>
+      <example>   <expression>ISERROR("#N/A")</expression>   <result>False</result>    <level>1</level>    <comment>文字不是错误。</comment>    </example>
+      <example>   <expression>ISERROR(1)</expression>   <result>False</result>    <level>1</level>    <comment>数字不是错误。</comment>    </example>
+      <example>   <expression>ISERROR(CHOOSE(0; "Apple"; "Orange"; "Grape"; "Perry"))</expression>   <result>True</result>    <level>1</level>    <comment>如果选择给定超出范围的值，则ISERROR需要捕获它。</comment>    </example>
+    </examples>                                                                                                         
+  </function>                                                                                                           
+
+  <function>
+    <category>%Category.Information</category>
+    <name>ISEVEN</name>              
+    <description>如果值为偶数，则返回TRUE，否则返回FALSE</description>
+    <syntax>ISEVEN( Number X )</syntax>               
+    <returns>Logical</returns>             
+    <constraints>X不能为逻辑</constraints>
+    <semantics>首先，计算X1 = TRUNC（X）。然后，如果X为偶数（被2除以0的余数），则返回True，否则返回False。如果给出逻辑值，则结果是实现定义的；应用程序可能会返回错误或将逻辑值转换为数字的结果（每次转换为数字）。</semantics>
+    <examples>                      
+      <example>   <expression>ISEVEN(2)</expression>   <result>True</result>    <level>3</level>    <comment>2是偶数，因为（2除以2）= 0</comment>    </example>
+      <example>   <expression>ISEVEN(6)</expression>   <result>True</result>    <level>3</level>    <comment>6是偶数，因为（6除以2）= 0</comment>    </example>
+      <example>   <expression>ISEVEN(2.1)</expression>   <result>True</result>    <level>3</level>    <comment/>    </example>
+      <example>   <expression>ISEVEN(2.5)</expression>   <result>True</result>    <level>3</level>    <comment/>    </example>
+      <example>   <expression>ISEVEN(2.9)</expression>   <result>True</result>    <level>3</level>    <comment>TRUNC（2.9）= 2，所以2是偶数。</comment>    </example>
+      <example>   <expression>ISEVEN(3)</expression>   <result>False</result>    <level>3</level>    <comment>3 不是偶数</comment>    </example>
+      <example>   <expression>ISEVEN(3.9)</expression>   <result>False</result>    <level>3</level>    <comment>TRUNC（3.9）= 3，而3不是偶数。</comment>    </example>
+      <example>   <expression>ISEVEN(-2)</expression>   <result>True</result>    <level>3</level>    <comment/>    </example>
+      <example>   <expression>ISEVEN(-2.1)</expression>   <result>True</result>    <level>3</level>    <comment/>    </example>
+      <example>   <expression>ISEVEN(-2.5)</expression>   <result>True</result>    <level>3</level>    <comment/>    </example>
+      <example>   <expression>ISEVEN(-2.9)</expression>   <result>True</result>    <level>3</level>    <comment>TRUNC（-2.9）=-2，而-2是偶数。</comment>    </example>
+      <example>   <expression>ISEVEN(-3)</expression>   <result>False</result>    <level>3</level>    <comment/>    </example>
+      <example>   <expression>ISEVEN(NA())</expression>   <result>NA</result>    <level>3</level>    <comment/>    </example>
+      <example>   <expression>ISEVEN(0)</expression>   <result>True</result>    <level>3</level>    <comment/>    </example>
+    </examples>                                                                                                         
+  </function>                                                                                                           
+
+  <function>
+    <category>%Category.Information</category>
+    <name>ISLOGICAL</name>          
+    <description>如果参数的类型为Logical，则返回TRUE，否则返回FALSEs</description>
+    <syntax>ISLOGICAL( Scalar X )</syntax>               
+    <returns>Logical</returns>             
+    <constraints>无</constraints>     
+    <semantics>如果X为逻辑类型，则返回TRUE，否则返回FALSE。对于没有独特逻辑类型的应用程序，ISNUMBER（X）也将返回TRUE。</semantics>
+    <examples>                      
+      <example>   <expression>ISLOGICAL(TRUE())</expression>   <result>True</result>    <level>1</level>    <comment>逻辑值返回true。</comment>    </example>
+      <example>   <expression>ISLOGICAL(FALSE())</expression>   <result>True</result>    <level>1</level>    <comment>逻辑值返回true。</comment>    </example>
+      <example>   <expression>ISLOGICAL("TRUE")</expression>   <result>False</result>    <level>1</level>    <comment>文本值不是逻辑，即使可以转换也是如此。</comment>    </example>
+    </examples>                                                                                                         
+  </function>                                                                                                           
+
+  <function>
+    <category>%Category.Information</category>
+    <name>ISNA</name>               
+    <description>如果参数的类型为NA，则返回True，否则返回False。</description>
+    <syntax>ISERR( Scalar X )</syntax>               
+    <returns>Logical</returns>             
+    <constraints>无</constraints>     
+    <semantics>如果X为NA，则返回True，否则返回False。注意，如果X是参考，则将考虑被参考的值。此函数不传播错误值。</semantics>
+    <examples>                      
+      <example>   <expression>ISNA(1/0)</expression>   <result>False</result>    <level>1</level>    <comment>除NA（）以外的其他错误值均返回False –错误不会传播。</comment>    </example>
+      <example>   <expression>ISNA(NA())</expression>   <result>True</result>    <level>1</level>    <comment>根据定义</comment>    </example>
+      <example>   <expression>ISNA(#N/A)</expression>   <result>True</result>    <level>1</level>    <comment>根据定义</comment>    </example>
+      <example>   <expression>ISNA("#N/A")</expression>   <result>False</result>    <level>1</level>    <comment>文字不适用</comment>    </example>
+      <example>   <expression>ISNA(1)</expression>   <result>False</result>    <level>1</level>    <comment>数字不是NA</comment>    </example>
+    </examples>                                                                                                         
+  </function>                                                                                                           
+
+  <function>
+    <category>%Category.Information</category>
+    <name>ISNONTEXT</name>          
+    <description>如果参数不具有文本类型，则返回TRUE，否则返回FALSE</description>
+    <syntax>ISNONTEXT( Scalar X )</syntax>               
+    <returns>Logical</returns>             
+    <constraints>无</constraints>     
+    <semantics>如果X为Text类型，则返回TRUE，否则返回FALSE。如果X是一个引用，则检查X个引用。对空白单元格的引用不被视为文本，因此对空白单元格的引用将返回TRUE。
+        ISNONTEXT（X）与以下内容相同：
+        NOT（ISTEXT（X））</semantics>
+    <examples>                      
+      <example>   <expression>ISNONTEXT(1)</expression>   <result>True</result>    <level>1</level>    <comment>数字不是文字</comment>    </example>
+      <example>   <expression>ISNONTEXT(TRUE())</expression>   <result>True</result>    <level>1</level>    <comment>逻辑值不是文本。</comment>    </example>
+      <example>   <expression>ISNONTEXT("1")</expression>   <result>False</result>    <level>1</level>    <comment>文本值是文本，即使可以将其转换为数字也是如此。</comment>    </example>
+      <example>   <expression>ISNONTEXT([.B7])</expression>   <result>False</result>    <level>1</level>    <comment>B7是一个带有文本的单元格</comment>    </example>
+      <example>   <expression>ISNONTEXT([.B9])</expression>   <result>True</result>    <level>1</level>    <comment>B9是错误，因此不是文本</comment>    </example>
+      <example>   <expression>ISNONTEXT([.B8])</expression>   <result>True</result>    <level>1</level>    <comment>B8是一个空白单元格，因此它将返回TRUE</comment>    </example>
+    </examples>                                                                                                         
+  </function>                                                                                                           
+
+  <function>
+    <category>%Category.Information</category>
+    <name>ISNUMBER</name>           
+    <description>如果参数的类型为Number，则返回TRUE，否则返回FALSE</description>
+    <syntax>ISNUMBER( Scalar X )</syntax>               
+    <returns>Logical</returns>             
+    <constraints>无</constraints>     
+    <semantics>如果X为Number类型，则返回TRUE，否则返回FALSE。级别1的实现可能没有可区分的逻辑类型。在此类实现中，ISNUMBER（TRUE（））为TRUE。</semantics>
+    <examples>                      
+      <example>   <expression>ISNUMBER(1)</expression>   <result>True</result>    <level>1</level>    <comment>数字就是数字</comment>    </example>
+      <example>   <expression>ISNUMBER("1")</expression>   <result>False</result>    <level>1</level>    <comment>文本值不是数字，即使它们可以转换为数字。</comment>    </example>
+    </examples>                                                                                                         
+  </function>                                                                                                           
+
+  <function>
+    <category>%Category.Information</category>
+    <name>ISODD</name>              
+    <description>如果值为奇数，则返回TRUE，否则返回FALSE</description>
+    <syntax>ISODD( Number X )</syntax>               
+    <returns>Logical</returns>             
+    <constraints>X不能是逻辑的</constraints>
+    <semantics>首先，计算X1 = TRUNC（X）。然后，如果X为奇数（被2除以1的余数），则返回True，否则返回False。如果给出逻辑值，则结果是实现定义的；应用程序可能会返回错误或将逻辑值转换为数字的结果（每次转换为数字）。</semantics>
+    <examples>                      
+      <example>   <expression>ISODD(3)</expression>   <result>True</result>    <level>3</level>    <comment>3是奇数，因为（3模2）=1</comment>    </example>
+      <example>   <expression>ISODD(5)</expression>   <result>True</result>    <level>3</level>    <comment>5是奇数，因为（5模2）=1</comment>    </example>
+      <example>   <expression>ISODD(3.1)</expression>   <result>True</result>    <level>3</level>    <comment>TRUNC（3.1）=3，3为奇数</comment>    </example>
+      <example>   <expression>ISODD(3.5)</expression>   <result>True</result>    <level>3</level>    <comment>3是奇怪的。</comment>    </example>
+      <example>   <expression>ISODD(3.9)</expression>   <result>True</result>    <level>3</level>    <comment>TRUNC（3.9）=3，3是奇数。</comment>    </example>
+      <example>   <expression>ISODD(4)</expression>   <result>False</result>    <level>3</level>    <comment/>    </example>
+      <example>   <expression>ISODD(4.9)</expression>   <result>False</result>    <level>3</level>    <comment/>    </example>
+      <example>   <expression>ISODD(-3)</expression>   <result>True</result>    <level>3</level>    <comment/>    </example>
+      <example>   <expression>ISODD(-3.1)</expression>   <result>True</result>    <level>3</level>    <comment/>    </example>
+      <example>   <expression>ISODD(-3.5)</expression>   <result>True</result>    <level>3</level>    <comment/>    </example>
+      <example>   <expression>ISODD(-3.9)</expression>   <result>True</result>    <level>3</level>    <comment>TRUNC（-3.9）=-3，-3是奇数。</comment>    </example>
+      <example>   <expression>ISODD(-4)</expression>   <result>False</result>    <level>3</level>    <comment/>    </example>
+      <example>   <expression>ISODD(NA())</expression>   <result>NA</result>    <level>3</level>    <comment/>    </example>
+      <example>   <expression>ISODD(0)</expression>   <result>False</result>    <level>3</level>    <comment/>    </example>
+      <example>   <expression>ISODD(1)</expression>   <result>True</result>    <level>3</level>    <comment/>    </example>
+      <example>   <expression>ISODD(2)</expression>   <result>False</result>    <level>3</level>    <comment/>    </example>
+      <example>   <expression>ISODD(2.9)</expression>   <result>False</result>    <level>3</level>    <comment/>    </example>
+    </examples>
+  </function>
+
+  <function>
+    <category>%Category.Information</category>
+    <name>ISREF</name>
+    <description>如果参数是引用类型，则返回True，否则返回False。</description>
+    <syntax>ISREF( Any X )</syntax>
+    <returns>Logical</returns>
+    <constraints>无</constraints>
+    <semantics>如果X为Reference或ReferenceList类型，则返回True，否则返回False。请注意，与几乎所有其他函数不同，给定引用时，此函数将不检查所引用的值。一些函数和运算符返回引用，因此ISREF在给出结果后将返回True。 X可能是ReferenceList，在这种情况下ISREF返回True。</semantics>
+    <examples>
+      <example>   <expression>ISREF([.B3])</expression>   <result>True</result>    <level>1</level>    <comment/>    </example>
+      <example>   <expression>ISREF([.B3]:[.C4])</expression>   <result>True</result>    <level>1</level>    <comment>range运算符生成引用</comment>    </example>
+      <example>   <expression>ISREF(1)</expression>   <result>False</result>    <level>1</level>    <comment>数字不是参考</comment>    </example>
+      <example>   <expression>ISREF("A1")</expression>   <result>False</result>    <level>1</level>    <comment>文本不是引用，即使它看起来有点像</comment>    </example>
+      <example>   <expression>ISREF(NA())</expression>   <result>NA</result>    <level>1</level>    <comment>错误通过此函数传播</comment>    </example>
+    </examples>
+  </function>
+
+  <function>
+    <category>%Category.Information</category>
+    <name>ISTEXT</name>
+    <description>如果参数具有文本类型，则返回TRUE，否则返回FALSE</description>
+    <syntax>ISTEXT( Scalar X )</syntax>
+    <returns>Logical</returns>
+    <constraints>无</constraints>
+    <semantics>如果X是文本类型，则返回TRUE，否则返回FALSE。对空白单元格的引用不视为文本。</semantics>
+    <examples>
+      <example>   <expression>ISTEXT(1)</expression>   <result>False</result>    <level>1</level>    <comment>数字不是文本</comment>    </example>
+      <example>   <expression>ISTEXT("1")</expression>   <result>True</result>    <level>1</level>    <comment>文本值是文本，即使它们可以转换为数字。</comment>    </example>
+    </examples>
+  </function>
+
+  <function>
+    <category>%Category.Information</category>
+    <name>NA</name>
+    <description>返回常数误差值#不适用。</description>
+    <syntax>NA()</syntax>
+    <returns>Error</returns>
+    <constraints>必须有0个参数</constraints>
+    <semantics>此函数不接受参数并返回错误NA。</semantics>
+    <examples>
+      <example>   <expression>ISERROR(NA())</expression>   <result>True</result>    <level>1</level>    <comment>NA是一个错误。</comment>    </example>
+      <example>   <expression>ISNA(NA())</expression>   <result>True</result>    <level>1</level>    <comment>显然，如果这不起作用，则NA（）或ISNA（）被破坏。</comment>    </example>
+      <example>   <expression>ISNA(5+NA())</expression>   <result>True</result>    <level>1</level>    <comment>NA通过各种函数和运算符传播，就像任何其他错误类型一样。</comment>    </example>
+    </examples>
+  </function>
+
+
+  <!-- Text : this list is complete -->  
+  
+  <function>
+  	<category>%Category.Text</category> 
+  	<name>&amp;</name> 
+  	<description>连接两个字符串。</description>  
+  	<syntax>Text Left &amp; Text Right</syntax>
+  	<returns>Text</returns>
+  	<constraints>无</constraints>
+  	<semantics>连接两个文本（字符串）值。由于转换的工作方式，数字被转换成字符串。注意，这相当于连接（左，右）。（注意：CONCATENATE在libformula版本0.1.18.2中尚不可用）</semantics>
+  	<examples>
+  		<example>
+                <expression>"Hi " &amp; "there"</expression> <result>"Hi there"</result> <level>1</level> <comment>简单的连接。</comment>
+            </example>
+  		<example>
+                <expression>"H" &amp; ""</expression> <result>"H"</result> <level>1</level> <comment>连接空字符串不会产生任何更改。</comment>
+            </example>
+  		<example>
+                <expression>-5&amp;"b"</expression> <result>“-5b”</result> <level>1</level> <comment>一元“-”的优先级高于“&amp;”</comment>
+            </example>
+  		<example>
+                <expression>3&amp;2-1</expression> <result>“31”</result> <level>1</level> <comment>二进制“-”的优先级高于“&amp;”</comment>
+            </example>
+  	</examples>
+  </function>
+  
+  <function>
+  	<category>%Category.Text</category>
+  	<name>EXACT</name> 
+  	<description>使用区分大小写的比较报告两个文本值是否完全相等</description>
+  	<syntax>EXACT( Text t1 ; Text t2 )</syntax>
+  	<returns>Logical</returns>
+  	<constraints>无</constraints>
+  	<semantics>将两边转换为文本，如果两个文本值“完全”相等（包括大小写），则返回TRUE，否则返回FALSE。</semantics>
+  	<examples>
+  		<example>
+                <expression>EXACT("A";"A")</expression> <result>True</result> <level>1</level> <comment>微不足道的比较。</comment>
+            </example>
+  		<example>
+                <expression>EXACT("A";"a")</expression> <result>False</result> <level>1</level> <comment>与“=”不同，EXACT考虑不同的情况。</comment>
+            </example>
+  		<example>
+                <expression>EXACT(1;1)</expression> <result>True</result> <level>1</level> <comment>精确的确实适用于数字。</comment>
+            </example>
+  		<example>
+                <expression>EXACT((1/3)*3;1)</expression> <result>True</result> <level>1</level> <comment>数值比较忽略了仅依赖于有限数值精度的“微小”差异。</comment>
+            </example>
+  		<example>
+                <expression>EXACT(TRUE();TRUE())</expression> <result>True</result> <level>1</level> <comment>使用逻辑值。</comment>
+            </example>
+  		<example>
+                <expression>EXACT("1";2)</expression> <result>False</result> <level>1</level> <comment>具有不同值的不同类型是不同的。</comment>
+            </example>
+  		<example>
+                <expression>EXACT("h";1)</expression> <result>False</result> <level>1</level> <comment>如果文本和数字，以及文本不能转换为数字，它们是不同的，而不是错误。</comment>
+            </example>
+  		<example>
+                <expression>EXACT("1";1)</expression> <result>True</result> <level>1</level> <comment>如果文本和数字，请查看转换为文本的数字是否相等。</comment>
+            </example>
+  		<example>
+                <expression>EXACT(“ 1”;1)</expression> <result>False</result> <level>1</level> <comment>这将1转换为文本值“1”，进行比较后发现它与“1”不同（注意前导空格）。</comment>
+            </example>
+  	</examples>
+  	
+  </function>
+  <function>
+  	<category>%Category.Text</category>
+  	<name>FIND</name> 
+  	<description>返回给定文本的起始位置。</description>
+  	<syntax>FIND( Text Search ; Text T [ ; Integer Start = 1 ] )</syntax>
+  	<returns>Number</returns>
+  	<constraints>开始&gt;=1</constraints>
+  	<examples>
+	   	<example>
+                <expression>FIND("b";"abcabc")</expression> <result>2</result> <level>1</level> <comment>简单查找（）</comment>
+            </example>
+		<example>
+                <expression>FIND("b";"abcabcabc"; 3)</expression> <result>5</result> <level>1</level> <comment>开始更改搜索的开始</comment>
+            </example>
+		<example>
+                <expression>FIND("b";"ABC";1)</expression> <result>Error</result> <level>1</level> <comment>匹配区分大小写。</comment>
+            </example>
+		<example>
+                <expression>FIND("b";"bbbb")</expression> <result>1</result> <level>1</level> <comment>Simple FIND（），默认为1</comment>
+            </example>
+		<example>
+                <expression>FIND("b";"bbbb";2)</expression> <result>2</result> <level>1</level> <comment/>
+            </example>
+		<example>
+                <expression>FIND("b";"bbbb";2.9)</expression> <result>2</result> <level>1</level> <comment>INT（Start）用作起始位置</comment>
+            </example>
+		<example>
+                <expression>FIND("b";"bbbb";0)</expression> <result>Error</result> <level>1</level> <comment>开始&gt;=0</comment>
+            </example>
+		<example>
+                <expression>FIND("b";"bbbb";0.9)</expression> <result>Error</result> <level>1</level> <comment/>
+            </example>
+  	</examples>
+  </function>
+  
+  <function>
+  	<category>%Category.Text</category>
+  	<name>LEFT</name> 
+  	<description>从左侧返回选定数量的文本字符。</description>  
+  	<syntax>LEFT( Text T [ ; Integer Length ] )</syntax>
+  	<returns>Text</returns>
+  	<constraints>长度&gt;=0</constraints>
+  	<semantics>返回文本T的整数（长度）个字符，从左侧开始。如果省略Length，则默认为1；否则，将计算Length=INT（Length）。如果T的长度少于个字符，则返回T。这意味着如果T是空字符串（长度为0）或参数长度为0，则LEFT（）将始终返回空字符串。注意，如果长度小于0，则返回错误。此函数必须返回与MID（T；1；Length）相同的字符串。</semantics>
+  	<examples>
+	   	<example>
+                <expression>LEFT("Hello";2)</expression> <result>"He"</result> <level>1</level> <comment>简单左键（）。</comment>
+            </example>
+	   	<example>
+                <expression>LEFT("Hello";2.9)</expression> <result>"He"</result> <level>1</level> <comment>INT（）不能舍入到最近或舍入到正无穷大，必须用于将长度转换为整数。</comment>
+            </example>
+	   	<example>
+                <expression>LEFT("Hello")</expression> <result>"H"</result> <level>1</level> <comment>长度默认为1。</comment>
+            </example>
+	   	<example>
+                <expression>LEFT("Hello";20)</expression> <result>"Hello"</result> <level>1</level> <comment>如果长度大于T，则返回T。</comment>
+            </example>
+	   	<example>
+                <expression>LEFT("Hello";0)</expression> <result>""</result> <level>2</level> <comment>如果长度为0，则返回空字符串。</comment>
+            </example>
+	   	<example>
+                <expression>LEFT("";4)</expression> <result>""</result> <level>1</level> <comment>给定一个空字符串，总是返回空字符串。</comment>
+            </example>
+	   	<example>
+                <expression>LEFT("xxx";-0.1)</expression> <result>Error</result> <level>1</level> <comment>要求负数字符是没有意义的。此外，此测试确保INT（）用于将非整数转换为整数；如果-0.1被错误地舍入为0（因为它将被舍入为最接近的或舍入为零），则将错误地返回空字符串。</comment>
+            </example>
+	   	<example>
+                <expression>LEFT("Hello";2^15-1)</expression> <result>"Hello"</result> <level>1</level> <comment>如果长度&gt;长度（T），则返回整个字符串。</comment>
+            </example>
+  	</examples>
+  	
+  </function>
+  
+  <function>
+  	<category>%Category.Text</category>
+  	<name>LEN</name> 
+  	<description>返回给定文本的长度（以字符为单位）</description>  
+  	<syntax>LEN( Text T )</syntax>
+  	<returns>Integer</returns>
+  	<constraints>没有。</constraints>
+  	<semantics>计算T中的字符数（不是字节数）。支持ISO 10646/Unicode的实现应将基本多语言平面（BMP）基本平面中的任何字符视为一个字符，即使它们占用多个字节。（BMP是从0到65535（含）的字符）。实现应该将BMP中不包含的任何字符也视为一个字符。</semantics>
+  	<examples>
+	   	<example>
+                <expression>LEN("Hi There")</expression> <result>8</result> <level>1</level> <comment>空间是一个字符。</comment>
+            </example>
+	   	<example>
+                <expression>LEN("")</expression> <result>0</result> <level>1</level> <comment>空字符串没有字符。</comment>
+            </example>
+	   	<example>
+                <expression>LEN(55)</expression> <result>2</result> <level>1</level> <comment>数字会自动转换。</comment>
+            </example>
+	</examples>
+  </function>
+  
+  <function>
+  	<category>%Category.Text</category>
+  	<name>LOWER</name> 
+  	<description>返回输入字符串，但所有大写字母都转换为小写字母。</description>
+  	<syntax>LOWER( Text T )</syntax>
+  	<returns>Text</returns>
+  	<constraints>无</constraints>
+  	<semantics>返回输入字符串，但所有大写字母都转换为小写字母。与大多数函数一样，它没有副作用（它不会修改源值）。所有实现都应将A-Z转换为A-Z。但是，由于此函数可以识别区域设置，因此在某些情况下可能会出现意外结果。例如，在土耳其语地区，大写字母“I without dot”U+0049转换为小写字母“I without dot”U+0131。</semantics>
+	<examples>
+	   	<example>
+                <expression>LOWER("HELLObc7")</expression> <result>"hellobc7"</result> <level>1</level> <comment>大写转换为小写；其他字符刚刚复制到结果中。</comment>
+            </example>
+	</examples>
+  </function>
+  
+  <function>
+  	<category>%Category.Text</category>
+  	<name>MID</name> 
+  	<description>返回提取的文本，给定原始文本、起始位置和长度。</description>  
+    <syntax>MID( Text T ; Integer Start ; Integer Length )</syntax>
+  	<returns>Text</returns>
+  	<constraints>开始&gt;=1，长度&gt;=0。</constraints>
+  	<semantics>从T返回字符，从字符位置开始，最多为长度字符。对于整数转换，Start=INT（Start），Length=INT（Length）。如果从开始处开始的字符少于长度，则返回尽可能多的以开始处开始的字符。特别是，如果Start&gt;LEN（T），则返回空字符串（“”）。如果Start&lt;0，则返回错误。如果Start&gt;=0，Length=0，则返回空字符串。注意MID（T；1；Length）产生的结果与LEFT（T；Length）相同。</semantics>
+	<examples>
+	   	<example>
+                <expression>MID("123456789";5;3)</expression> <result>"567"</result> <level>1</level> <comment>MID的简单使用。</comment>
+            </example>
+	   	<example>
+                <expression>MID("123456789";20;3)
+	   	</expression> <result>""</result> <level>1</level> <comment>如果Start超出string，则返回空字符串。</comment>
+            </example>
+	   	<example>
+                <expression>MID("123456789";-1;0)
+	   	</expression> <result>Error</result> <level>1</level> <comment>开始不能小于1；即使长度为0</comment>
+            </example>
+	   	<example>
+                <expression>MID("123456789";1;0)
+	   	</expression> <result>""</result> <level>1</level> <comment>否则，length=0将生成空字符串</comment>
+            </example>
+	   	<example>
+                <expression>MID("123456789";2.9;1)
+	   	</expression> <result>"2"</result> <level>1</level> <comment>使用INT（Start）</comment>
+            </example>
+	   	<example>
+                <expression>MID("123456789";2;2.9)
+	   	</expression> <result>"23"</result> <level>1</level> <comment>使用INT（长度）</comment>
+            </example>
+	</examples>
+  </function>  
+
+  <function>
+  	<category>%Category.Text</category>
+  	<name>REPLACE</name> 
+   	<description>返回用新文本替换旧文本的文本。</description>  
+    <syntax>REPLACE( Text T ; Number Start ; Number Len ; Text New )</syntax>
+  	<returns>Text</returns>
+  	<constraints>开始&gt;=1。</constraints>
+  	<semantics>返回文本T，但删除Len字符从字符位置开始的字符，并替换为新字符。由Start从1开始定义的字符位置（对于最左边的字符）。如果Len=0，则在字符位置开始之前插入新文本，并保留开始之前和之后的所有文本。</semantics>
+	<examples>
+	   	<example>
+                <expression>REPLACE("123456789";5;3;"Q")</expression> <result>"1234Q89"</result> <level>1</level> <comment>替换文本的长度可能不同。</comment>
+            </example>
+	   	<example>
+                <expression>REPLACE("123456789";5;0;"Q")</expression> <result>"1234Q56789"</result> <level>1</level> <comment>如果Len=0，则删除0个字符。</comment>
+            </example>
+	</examples>
+  </function>  
+
+  <function>
+  	<category>%Category.Text</category>
+  	<name>REPT</name> 
+  	<description>返回文本重复计数次数。</description>  
+    <syntax>REPT( Text T ; Integer Count )</syntax>
+  	<returns>Text</returns>
+  	<constraints>计数&gt;=0</constraints>
+  	<semantics>返回文本T重复计数次数；如果计数为零，则返回空字符串。如果计数小于0，则结果为错误。</semantics>
+	<examples>
+	   	<example>
+                <expression>REPT("X";3)</expression> <result>"XXX"</result> <level>1</level> <comment/>Simple REPT.</example>
+	   	<example>
+                <expression>REPT("XY";2)</expression> <result>"XYXY"</result> <level>1</level> <comment>重复文本的长度可以大于1。</comment>
+            </example>
+	   	<example>
+                <expression>REPT("X";2.9)</expression> <result>"XX"</result> <level>1</level> <comment>如果Count是一个分数，则使用INT（Count）</comment>
+            </example>
+	   	<example>
+                <expression>REPT("X";0)</expression> <result>""</result> <level>1</level> <comment>如果Count为零，则为空字符串</comment>
+            </example>
+	   	<example>
+                <expression>REPT("X";-1)</expression> <result>Error</result> <level>1</level> <comment>如果计数为负，则为错误。</comment>
+            </example>
+	</examples>
+  </function>
+  
+  <function>
+  	<category>%Category.Text</category>
+  	<name>RIGHT</name> 
+  	<description>从右侧返回选定数量的文本字符。</description>  
+    <syntax>RIGHT( Text T [ ; Integer Length ] )</syntax>
+  	<returns>Text</returns>
+  	<constraints>长度&gt;=0</constraints>
+  	<semantics>返回从右边开始的文本T的字符长度。如果省略Length，则默认为1；否则，将计算Length=INT（Length）。如果T少于长度字符，则返回T（不变）。这意味着如果T是空字符串（长度为0）或参数长度为0，RIGHT（）将始终返回空字符串。注意，如果长度小于0，则返回错误。</semantics>
+	<examples>
+	   	<example>
+                <expression>RIGHT("Hello";2)</expression> <result>"lo"</result> <level>1</level> <comment>简单右键（）。</comment>
+            </example>
+	   	<example>
+                <expression>RIGHT("Hello")</expression> <result>"o"</result> <level>1</level> <comment>长度默认为1。</comment>
+            </example>
+	   	<example>
+                <expression>RIGHT("Hello";20)</expression> <result>"Hello"</result> <level>1</level> <comment>如果长度大于T，则返回T。</comment>
+            </example>
+	   	<example>
+                <expression>RIGHT("Hello";0)</expression> <result>""</result> <level>1</level> <comment>如果长度为0，则返回空字符串。</comment>
+            </example>
+	   	<example>
+                <expression>RIGHT("Hello";2^15-1)</expression> <result>“Hello”</result> <level>1</level> <comment>如果长度大于T且非常大，则仍返回原始短字符串。</comment>
+            </example>
+	   	<example>
+                <expression>RIGHT("";4)</expression> <result>""</result> <level>1</level> <comment>给定一个空字符串，总是返回空字符串。</comment>
+            </example>
+	   	<example>
+                <expression>RIGHT("Hello";-1)</expression> <result>Error</result> <level>1</level> <comment>要求负数字符是没有意义的。</comment>
+            </example>
+	   	<example>
+                <expression>RIGHT("Hello";-0.1)</expression> <result>Error</result> <level>1</level> <comment>必须使用INT，而不是四舍五入到最近或四舍五入到零，才能将长度转换为整数</comment>
+            </example>
+	</examples>
+  </function>
+  
+  <function>
+  	<category>%Category.Text</category>
+  	<name>SUBSTITUTE</name> 
+  	<description>返回用新文本替换旧文本的文本。</description>  
+    <syntax>SUBSTITUTE( Text T ; Text Old ; Text New [ ; Number Which ] )</syntax>
+  	<returns>Text</returns>
+  	<constraints>其中&gt;=1（如果提供）</constraints>
+  	<semantics>返回文本T，但文本Old替换为文本New（从左侧搜索时）。如果省略，则每次出现的Old都将替换为New；如果提供，则只有Old的出现将替换为New（从1开始计数）。如果没有匹配项，或者Old的长度为0，则返回T的值。请注意，旧的和新的可能有不同的长度。如果存在且小于1，则返回错误。</semantics>
+	<examples>
+	   	<example>
+                <expression>SUBSTITUTE("121212";"2";"ab")</expression> <result>"1ab1ab1ab"</result> <level>1</level> <comment>没有它，一切都被取代了。</comment>
+            </example>
+	   	<example>
+                <expression>SUBSTITUTE("121212";"2";"ab";2)</expression> <result>"121ab12"</result> <level>1</level> <comment>从1开始计数。</comment>
+            </example>
+	   	<example>
+                <expression>SUBSTITUTE("Hello";"x";"ab")</expression> <result>"Hello"</result> <level>1</level> <comment>如果未找到，则返回未更改。</comment>
+            </example>
+	   	<example>
+                <expression>SUBSTITUTE("xyz";"";"ab")</expression> <result>"xyz"</result> <level>1</level> <comment>如果Old的长度为0，则返回T。</comment>
+            </example>
+	   	<example>
+                <expression>SUBSTITUTE("";"";"ab")</expression> <result>""</result> <level>1</level> <comment>如果Old的长度为0，则返回T，即使T为空（它不认为空T“匹配”空Old）。</comment>
+            </example>
+	   	<example>
+                <expression>SUBSTITUTE("Hello"; "H"; "J"; 0)</expression> <result>Error</result> <level>1</level> <comment>不能小于1。</comment>
+            </example>
+	</examples>
+  </function>
+  
+  <function>
+  	<category>%Category.Text</category>
+  	<name>T</name> 
+  	<description>返回文本（如果是文本），否则返回0长度的文本值</description>  
+    <syntax>T( Any X )</syntax>
+  	<returns>Text</returns>
+  	<constraints>无</constraints>
+  	<semantics>将检查（取消引用的）X的类型；如果是文本类型，则返回该类型，否则返回空字符串（长度为零的文本值）。这不是类型转换函数；T（5）生成空字符串，而不是“5”。</semantics>
+	<examples>
+	   	<example>
+                <expression>T("HI")</expression> <result>"HI"</result> <level>1</level> <comment>T不改变文本。</comment>
+            </example>
+	   	<example>
+                <expression>T([.B3])</expression> <result>"7"</result> <level>1</level> <comment>引用转化为它们引用的内容。</comment>
+            </example>
+	   	<example>
+                <expression>T(5)</expression> <result>""</result> <level>1</level> <comment>非文本转换为空字符串。</comment>
+            </example>
+	</examples>
+  </function>
+  
+  <function>
+  	<category>%Category.Text</category>
+  	<name>TEXT</name> 
+  	<description>返回转换为文本的值。</description>  
+    <syntax>TEXT( Scalar X ; Text FormatCode )</syntax>
+  	<returns>Text</returns>
+  	<constraints>FormatCode是具有应用程序定义的含义的字符序列。</constraints>
+  	<semantics>根据作为format code传递的数字格式代码的规则，将值X转换为文本并返回它。</semantics>
+	<examples>
+	   	<example>
+                <expression>TEXT(12345.6789;"#,##0.00")</expression> <result>"12,345.68"</result> <level>3</level> <comment>非文本转换为文本。这是当地特有的。</comment>
+            </example>
+	   	<example>
+                <expression>TEXT(3;"0"" good things""")</expression> <result>"3 good things"</result> <level>3</level> <comment/>
+            </example>
+	</examples>
+  </function>
+  
+  <function>
+  	<category>%Category.Text</category>
+  	<name>TRIM</name> 
+  	<description>删除前导和尾随空格，并将所有内部多个空格替换为单个空格。</description>
+    <syntax>TRIM( Text T )</syntax>
+  	<returns>Text</returns>
+  	<constraints>无</constraints>
+  	<semantics>取T并删除所有前导和尾随空格。2个或更多空间的任何其他序列将替换为单个空间。</semantics>
+	<examples>
+	   	<example>
+                <expression>TRIM(" ABC  ")</expression> <result>"ABC"</result> <level>1</level> <comment/>
+            </example>
+	</examples>
+  </function>
+  
+  <function>
+  	<category>%Category.Text</category>
+  	<name>UPPER</name> 
+  	<description>返回输入字符串，但所有小写字母都转换为大写字母。</description>  
+    <syntax>UPPER( Text T )</syntax>
+  	<returns>Text</returns>
+  	<constraints>无</constraints>
+  	<semantics>返回输入字符串，但所有小写字母都转换为大写字母。与大多数函数一样，它没有副作用（它不会修改源值）。所有实现都应将a-z转换为a-z。但是，由于此函数可以识别区域设置，因此在某些情况下可能会出现意外结果，例如在土耳其区域设置中，小写“i with dot”U+0069转换为大写“i with dot”U+0130。</semantics>
+	<examples>
+	   	<example>
+                <expression>UPPER("Habc7")</expression> <result>"HABC7"</result> <level>1</level> <comment>小写转换为大写；其他字符刚刚复制到结果中。</comment>
+            </example>
+	</examples>
+  </function>
+  
+  <!-- Mathematical : this list is complete  -->  
+
+  <function>
+    <category>%Category.Mathematical</category>
+    <name>INT</name>
+    <description>将数字向下舍入到最接近的整数。</description>
+    <syntax>INT( Number N )</syntax>
+    <returns>Number</returns>
+    <constraints>无</constraints>
+    <semantics>返回值小于或等于N的最接近整数。舍入朝负无穷大方向。</semantics>
+    <examples>
+      <example>   <expression>INT(2)</expression>   <result>2</result>    <level>1</level>    <comment>正整数保持不变</comment>    </example>
+      <example>   <expression>INT(-3)</expression>   <result>-3</result>    <level>1</level>    <comment>负整数保持不变</comment>    </example>
+      <example>   <expression>INT(1.2)</expression>   <result>1</result>    <level>1</level>    <comment>正浮点值被截断</comment>    </example>
+      <example>   <expression>INT(1.7)</expression>   <result>1</result>    <level>1</level>    <comment>分数部分是否大于0.5并不重要</comment>    </example>
+      <example>   <expression>INT(-1.2)</expression>   <result>-2</result>    <level>1</level>    <comment>向负无穷大舍入的负浮动值</comment>    </example>
+      <example>   <expression>INT((1/3)*3)</expression>   <result>1</result>    <level>1</level>    <comment>天真的用户希望INT“正确”地生成整数，即使精度有限制。</comment>    </example>
+    </examples>
+  </function>
+
+  <function>
+  	<category>%Category.Mathematical</category>
+  	<name>ABS</name>
+  	<description>返回绝对（非负）值。</description>
+    <syntax>ABS( Number N )</syntax>
+  	<returns>Number</returns>
+  	<constraints>无</constraints>
+  	<semantics>如果N&lt;0，则返回-N，否则返回N。</semantics>
+	<examples>
+	   	<example>
+                <expression>ABS(-4)</expression> <result>4</result> <level>1</level> <comment>如果小于零，则返回否定</comment>
+            </example>
+	   	<example>
+                <expression>ABS(4)</expression> <result>4</result> <level>1</level> <comment>正值返回不变。</comment>
+            </example>
+	</examples>
+  </function>
+  
+  <function>
+  	<category>%Category.Mathematical</category>
+  	<name>AVERAGE</name>
+  	<description>平均一组数字</description>
+    <syntax>AVERAGE( { NumberSequence N }+ )</syntax>
+  	<returns>Number</returns>
+  	<constraints>至少包括一个号码。如果未提供数字，则返回错误。</constraints>
+  	<semantics>计算总和（列表）/计数（列表）。</semantics>
+	<examples>
+	   	<example>
+                <expression>AVERAGE(2;4)</expression> <result>3</result> <level>1</level> <comment>简单平均数</comment>
+            </example>
+	</examples>
+  </function>
+
+  <function>
+  	<category>%Category.Mathematical</category>
+  	<name>EVEN</name>
+  	<description>将数字舍入到最接近的偶数。舍入是从零开始的。</description>
+    <syntax>EVEN( Number N )</syntax>
+  	<returns>Number</returns>
+  	<constraints>无</constraints>
+  	<semantics>返回一个偶数整数，其符号与N的符号相同，且其绝对值大于或等于N的绝对值。也就是说，如果需要舍入，则从零开始舍入。</semantics>
+	<examples>
+		<example>
+                <expression>EVEN(6)</expression> <result>6</result> <level>1</level> <comment>正偶数整数保持不变。</comment>
+            </example>
+		<example>
+                <expression>EVEN(-4)</expression> <result>-4</result> <level>1</level> <comment>负偶数整数保持不变。</comment>
+            </example>
+		<example>
+                <expression>EVEN(1)</expression> <result>2</result> <level>1</level> <comment>非偶数正整数向上取整。</comment>
+            </example>
+		<example>
+                <expression>EVEN(0.3)</expression> <result>2</result> <level>1</level> <comment>正浮点数向上舍入。</comment>
+            </example>
+		<example>
+                <expression>EVEN(-1)</expression> <result>-2</result> <level>1</level> <comment>非偶数负整数向下舍入。</comment>
+            </example>
+		<example>
+                <expression>EVEN(-0.3)</expression> <result>-2</result> <level>1</level> <comment>负浮动值向下舍入。</comment>
+            </example>
+		<example>
+                <expression>EVEN(0)</expression> <result>0</result> <level>1</level> <comment>因为零是偶数，偶数（0）返回零。</comment>
+            </example>
+	</examples>
+  </function>
+
+  <function>
+  	<category>%Category.Mathematical</category>
+  	<name>MAX</name>
+  	<description>从一组数字中返回最大值。</description>
+    <syntax>MAX( { NumberSequenceList N } )</syntax>
+  	<returns>Number</returns>
+  	<constraints>无</constraints>
+  	<semantics>返回传入的列表中最大值的值。忽略非数字。请注意，如果逻辑类型是不同的类型，则不包括它们。当MAX被提供0个参数时发生的情况是实现定义的，但是没有参数的MAX应该返回0。</semantics>
+	<examples>
+	   	<example>
+                <expression>MAX(2;4;1;-8)</expression> <result>4</result> <level>1</level> <comment>负数小于正数。</comment>
+            </example>
+	   	<example>
+                <expression>MAX([.B4:.B5])</expression> <result>3</result> <level>1</level> <comment>（2,3）的最大值为3。</comment>
+            </example>
+	</examples>
+  </function>
+
+  <function>
+  	<category>%Category.Mathematical</category>
+  	<name>MIN</name>
+  	<description>从一组数字中返回最小值。</description>
+    <syntax>MIN( { NumberSequenceList N } )</syntax>
+  	<returns>Number</returns>
+  	<constraints>没有。</constraints>
+  	<semantics>返回传入的列表中最小数字的值。如果列表中没有提供数字，则返回零。当MIN被提供0个参数时会发生什么情况是由实现定义的，但是没有参数的MIN（）应该返回0。</semantics>
+	<examples>
+	   	<example>
+                <expression>MIN(2;4;1;-8)</expression> <result>-8</result> <level>1</level> <comment>负数小于正数。</comment>
+            </example>
+	   	<example>
+                <expression>MIN([.B4:.B5])</expression> <result>2</result> <level>1</level> <comment>（2,3）的最小值是2。</comment>
+            </example>
+	   	<example>
+                <expression>MIN([.B3])</expression> <result>0</result> <level>1</level> <comment>如果在所有范围内都没有提供数字，则MIN返回0</comment>
+            </example>
+	   	<example>
+                <expression>MIN("a")</expression> <result>Error</result> <level>1</level> <comment>不忽略内联的非数字。</comment>
+            </example>
+	   	<example>
+                <expression>MIN([.B3:.B5])</expression> <result>2</result> <level>1</level> <comment>单元格文本不转换为数字，将被忽略。</comment>
+            </example>
+	</examples>
+  </function>
+
+  
+  <function>
+  	<category>%Category.Mathematical</category>
+  	<name>ODD</name>
+  	<description>将数字向上舍入到最接近的奇数，其中“up”表示“远离0”。</description>
+    <syntax>ODD( Number N )</syntax>
+  	<returns>Number</returns>
+  	<constraints>无</constraints>
+  	<semantics>返回奇数整数，其符号与N的符号相同，且其绝对值大于或等于N的绝对值。换句话说，任何“舍入”都不等于零。根据定义，奇数（0）是1。</semantics>
+	<examples>
+	   	<example>
+                <expression>ODD(5)</expression> <result>5</result> <level>1</level> <comment>正奇数整数保持不变。</comment>
+            </example>
+	   	<example>
+                <expression>ODD(-5)</expression> <result>-5</result> <level>1</level> <comment>负奇数整数保持不变。</comment>
+            </example>
+	   	<example>
+                <expression>ODD(2)</expression> <result>3</result> <level>1</level> <comment>非奇数正整数取整。</comment>
+            </example>
+	   	<example>
+                <expression>ODD(0.3)</expression> <result>1</result> <level>1</level> <comment>正浮点数向上舍入。</comment>
+            </example>
+	   	<example>
+                <expression>ODD(-2)</expression> <result>-3</result> <level>1</level> <comment>非奇数负整数向下舍入。</comment>
+            </example>
+	   	<example>
+                <expression>ODD(-0.3)</expression> <result>-1</result> <level>1</level> <comment>负浮动值向下舍入。</comment>
+            </example>
+	   	<example>
+                <expression>ODD(0)</expression> <result>1</result> <level>1</level> <comment>根据定义，奇数（0）是1。</comment>
+            </example>
+	</examples>
+  </function>
+
+  <function>
+  	<category>%Category.Mathematical</category>
+  	<name>SUM</name>
+  	<description>求和（加）一组数字，包括范围内的所有数字</description>
+    <syntax>SUM( { NumberSequenceList N }+ )</syntax>
+  	<returns>Number</returns>
+  	<constraints>无</constraints>
+  	<semantics>将数字（仅数字）相加（请参阅转换文本）。应用程序可能允许SUM接收0个参数（并返回0），但可移植文档不能依赖于SUM（），零个参数返回0。</semantics>
+	<examples>
+	   	<example>
+                <expression>SUM(1;2;3)</expression> <result>6</result> <level>1</level> <comment>简单的和。</comment>
+            </example>
+	   	<example>
+                <expression>SUM(TRUE();2;3)</expression> <result>6</result> <level>1</level> <comment>TRUE（）为1。</comment>
+            </example>
+	   	<example>
+                <expression>SUM([.B4:.B5])</expression> <result>5</result> <level>1</level> <comment>2+3等于5。</comment>
+            </example>
+	</examples>
+  </function>
+
+  <!-- Date/Time : this list is complete -->  
+
+  <function>
+  	<category>%Category.DateTime</category>
+  	<name>DATE</name>
+  	<description>从年月日开始构建日期。</description>
+    <syntax>DATE( Integer Year ; Integer Month ; Integer Day )</syntax>
+  	<returns>Date</returns>
+  	<constraints>1&lt;=月&lt;=12；1&lt;=日&lt;=31</constraints>
+  	<semantics>这将计算给定年、月和日的日期序列号。小数被截断。序列号的值取决于当前历元。请注意，有些应用程序可能无法正确处理1904年之前的日期；特别是，许多电子表格错误地声称1900年是闰年（不是；没有1900-02-29）。</semantics>
+	<examples>
+	   	<example>
+                <expression>DATE(2005;1;31)=[.C7]</expression> <result>True</result> <level>1</level> <comment>简单日期值。</comment>
+            </example>
+	   	<example>
+                <expression>DATE(2005;12;31)-DATE(1904;1;1)</expression> <result>37255</result> <level>1</level> <comment>正确计算日期差异。</comment>
+            </example>
+	   	<example>
+                <expression>DATE(2004;2;29)=DATE(2004;2;28)+1</expression> <result>True</result> <level>1</level> <comment>2004年是闰年。</comment>
+            </example>
+	   	<example>
+                <expression>DATE(2000;2;29)=DATE(2000;2;28)+1</expression> <result>True</result> <level>1</level> <comment>2000年是闰年。</comment>
+            </example>
+	   	<example>
+                <expression>DATE(2005;3;1)=DATE(2005;2;28)+1</expression> <result>True</result> <level>1</level> <comment>2005年不是闰年。</comment>
+            </example>
+	   	<example>
+                <expression>DATE(2017.5; 1; 2)=DATE(2017; 1; 2)</expression> <result>True</result> <level>1</level> <comment>年份的小数被截断</comment>
+            </example>
+	   	<example>
+                <expression>DATE(2006; 2.5; 3)=DATE(2006; 2; 3)</expression> <result>True</result> <level>1</level> <comment>月份的小数被截断</comment>
+            </example>
+	   	<example>
+                <expression>DATE(2006; 1; 3.5)=DATE(2006; 1; 3)</expression> <result>True</result> <level>1</level> <comment>日的小数被截断</comment>
+            </example>
+	   	<example>
+                <expression>DATE(2006; 13; 3)=DATE(2007; 1; 3)</expression> <result>True</result> <level>1</level> <comment>12个月以上转为一年</comment>
+            </example>
+	   	<example>
+                <expression>DATE(2006; 1; 32)=DATE(2006; 2; 1)</expression> <result>True</result> <level>1</level> <comment>超过月份限制的天数转为月份</comment>
+            </example>
+	   	<example>
+                <expression>DATE(2006; 25; 34)=DATE(2008;2;3)</expression> <result>True</result> <level>1</level> <comment>天与月的转换</comment>
+            </example>
+	   	<example>
+                <expression>DATE(2006;-1; 1)=DATE(2005;11;1)</expression> <result>True</result> <level>1</level> <comment>负月份向后滚动</comment>
+            </example>
+	   	<example>
+                <expression>DATE(2006;4;-1)=DATE(2006;3;30)</expression> <result>True</result> <level>1</level> <comment>负日向后滚动月</comment>
+            </example>
+	   	<example>
+                <expression>DATE(2006;-4;-1)=DATE(2005;7;30)</expression> <result>True</result> <level>1</level> <comment>负日和负月转换向后滚动</comment>
+            </example>
+	   	<example>
+                <expression>DATE(2003;2;29)=DATE(2003;3;1)</expression> <result>True</result> <level>1</level> <comment>非闰年向前推进</comment>
+            </example>
+	</examples>
+  </function>
+
+  <function>
+  	<category>%Category.DateTime</category>
+  	<name>DATEDIF</name>
+  	<description>返回两个日期数字之间的年数、月数或天数。</description>
+    <syntax>DATEDIF( DateParam StartDate ; DateParam EndDate ; Text Format )</syntax>
+  	<returns>Number</returns>
+  	<constraints>无</constraints>
+  	<semantics>以格式给定的单位计算StartDate和EndDate之间的差异。</semantics>
+	<examples>
+	   	<example>
+                <expression>DATEDIF(DATE(1990;2;15); DATE(1993;9;15); "y")</expression> <result/> <level>3</level> <comment/>
+            </example>
+	   	<example>
+                <expression>DATEDIF(DATE(1990;2;15); DATE(1993;9;15); "m")</expression> <result>43</result> <level>3</level> <comment>1990年2月15日至1993年9月15日之间的月数。</comment>
+            </example>
+	   	<example>
+                <expression>DATEDIF(DATE(1990;2;15); DATE(1993;9;15); "d")</expression> <result/> <level>3</level> <comment/>
+            </example>
+	   	<example>
+                <expression>DATEDIF(DATE(1990;2;15); DATE(1993;9;15); "md")</expression> <result>0</result> <level>3</level> <comment>开始日期和结束日期均为每月的第15天</comment>
+            </example>
+	   	<example>
+                <expression>DATEDIF(DATE(1990;2;15); DATE(1993;9;15); "ym")</expression> <result>7</result> <level>3</level> <comment>二月到九月之间的月数。</comment>
+            </example>
+	   	<example>
+                <expression>DATEDIF(DATE(1990;2;15); DATE(1993;9;15); "yd")</expression> <result/> <level/> <comment/>
+            </example>
+	</examples>
+  </function>
+
+  <function>
+  	<category>%Category.DateTime</category>
+  	<name>DATEVALUE</name>
+  	<description>从给定文本返回日期序列号</description>
+    <syntax>DATEVALUE( Text D )</syntax>
+  	<returns>Date</returns>
+  	<constraints>无</constraints>
+  	<semantics>这将使用当前区域设置计算文本字符串D的序列号。此函数必须接受与区域设置无关的ISO日期格式（YYYY-MM-DD）。如果日期具有日期格式，则在语义上等于值（日期），因为与日期格式匹配的文本在用作数字时会自动转换为序列号。如果D的文本具有日期和时间的组合格式，例如YYYY-MM-DD HH:MM:SS，则返回日期序列号的整数部分。如果日期文本没有日期或时间格式，则实现可能返回错误。有关日期格式的详细信息，请参见值。</semantics>
+	<examples>
+	   	<example>
+                <expression>DATEVALUE("2004-12-25")=DATE(2004;12;25)</expression> <result>True</result> <level>2</level> <comment>数据</comment>
+            </example>
+	   	<example>
+                <expression>DATEVALUE("2004-12-25 12:34:56")=DATE(2004;12;25)</expression> <result>True</result> <level>2</level> <comment>只返回整数部分</comment>
+            </example>
+	</examples>
+  </function>
+
+  <function>
+  	<category>%Category.DateTime</category>
+  	<name>DAY</name>
+  	<description>从日期中提取日期。</description>
+    <syntax>DAY( DateParam Date )</syntax>
+  	<returns>Number</returns>
+  	<constraints>无</constraints>
+  	<semantics>返回日期的日期部分。</semantics>
+	<examples>
+	   	<example>
+                <expression>DAY(DATE(2006;5;21))</expression> <result>21</result> <level>1</level> <comment>基本提取。</comment>
+            </example>
+	   	<example>
+                <expression>DAY("2006-12-15")</expression> <result>12</result> <level>1</level> <comment>文本也允许，因为它是DateParam</comment>
+            </example>
+	</examples>
+  </function>
+
+  <function>
+  	<category>%Category.DateTime</category>
+  	<name>HOUR</name>
+  	<description>从一个时间中提取小时（0到23）。</description>
+    <syntax>HOUR( TimeParam T )</syntax>
+  	<returns>Number</returns>
+  	<constraints>无</constraints>
+  	<semantics>语义：从T中提取小时值，0到23，按照24小时制。这等于：</semantics>
+	<examples>
+	   	<example>
+                <expression>HOUR(5/24)</expression> <result>5</result> <level>1</level> <comment>一天的5/24是5小时，也就是早上5点。</comment>
+            </example>
+	   	<example>
+                <expression>HOUR(5/24-1/(24*60*60))</expression> <result>4</result> <level>1</level> <comment>凌晨5点前一秒，现在是凌晨4点。</comment>
+            </example>
+	   	<example>
+                <expression>HOUR("14:00")</expression> <result>14</result> <level>1</level> <comment>TimeParam接受文本</comment>
+            </example>
+	</examples>
+  </function>
+
+  <function>
+  	<category>%Category.DateTime</category>
+  	<name>MONTH</name>
+  	<description>从日期中提取月份</description>
+    <syntax>MONTH( DateParam Date )</syntax>
+  	<returns>Number</returns>
+  	<constraints>无</constraints>
+  	<semantics>获取日期并返回月份部分。</semantics>
+	<examples>
+	   	<example>
+                <expression>MONTH([.C7])</expression> <result>1</result> <level>1</level> <comment>从单元格中的日期提取月份。</comment>
+            </example>
+	   	<example>
+                <expression>MONTH(DATE(2006;5;21))</expression> <result>5</result> <level>1</level> <comment>从日期（）值中提取月份。</comment>
+            </example>
+	</examples>
+  </function>
+
+  <function>
+  	<category>%Category.DateTime</category>
+  	<name>NOW</name>
+  	<description>返回当前日期和时间的序列号。</description>
+    <syntax>NOW()</syntax>
+  	<returns>DateTime</returns>
+  	<constraints>无</constraints>
+  	<semantics>这将使用当前区域设置返回当前日期和时间序列号。如果您只需要当天的序列号，请使用“今天”。</semantics>
+	<examples>
+	   	<example>
+                <expression>NOW()&gt;DATE(2006;1;3)</expression> <result>True</result> <level>1</level> <comment>现在不断的变化，但我们知道已经超过了这个日期。</comment>
+            </example>
+	   	<example>
+                <expression>INT(NOW())=TODAY()</expression> <result>True</result> <level>1</level> <comment>NOW（）是TODAY（）的一部分。警告：如果在计算此测试时区域设置转换到午夜，则允许此测试失败；实际上，此失败的可能性非常小。</comment>
+            </example>
+	</examples>
+  </function>
+
+  <function>
+  	<category>%Category.DateTime</category>
+  	<name>TIME</name>
+  	<description>从小时、分钟和秒构造时间。</description>
+    <syntax>TIME( Number hours ; Number minutes ; Number seconds )</syntax>
+  	<returns>Time</returns>
+  	<constraints>无</constraints>
+  	<semantics>返回给定时间消耗的一天的小数，即：</semantics>
+	<examples>
+	   	<example>
+                <expression>TIME(0;0;0)</expression> <result>0</result> <level>1</level> <comment>所有零参数变为午夜，12:00:00 AM。</comment>
+            </example>
+	   	<example>
+                <expression>TIME(23;59;59)*60*60*24</expression> <result>86399±ε</result> <level>1</level> <comment>现在是晚上11:59:59。</comment>
+            </example>
+	   	<example>
+                <expression>TIME(11;125;144)*60*60*24</expression> <result>47244±ε</result> <level>1</level> <comment>秒和分转换过来；现在是下午1:07:24。</comment>
+            </example>
+	   	<example>
+                <expression>TIME(11;0; -117)*60*60*24</expression> <result>39483±ε</result> <level>1</level> <comment>负秒向后滚动分钟，上午10:58:03</comment>
+            </example>
+	   	<example>
+                <expression>TIME(11;-117;0)*60*60*24</expression> <result>32580±ε</result> <level>1</level> <comment>负分钟向后滚动小时，上午9:03:00</comment>
+            </example>
+	   	<example>
+                <expression>TIME(11;-125;-144)*60*60*24</expression> <result>-31956±ε</result> <level>1</level> <comment>负秒和负分转换向后滚动，上午8:52:36</comment>
+            </example>
+	</examples>
+  </function>
+
+  <function>
+  	<category>%Category.DateTime</category>
+  	<name>TODAY</name>
+  	<description>返回今天的序列号</description>
+    <syntax>TODAY()</syntax>
+  	<returns>Date</returns>
+  	<constraints>无</constraints>
+  	<semantics>这将使用当前区域设置返回当前日期的序列号。这只返回日期，而不是日期时间值；如果还需要一天中的特定时间，请使用NOW（）。</semantics>
+	<examples>
+	   	<example>
+                <expression>TODAY()&gt;DATE(2006;1;3)</expression> <result>True</result> <level>1</level> <comment>今天的每个日期都会改变，但我们知道它已经超过了这个日期。</comment>
+            </example>
+	   	<example>
+                <expression>INT(TODAY())=TODAY()</expression> <result>True</result> <level>1</level> <comment>TODAY（）返回一个整数。警告：如果在计算此测试时区域设置转换到午夜，则允许此测试失败；因为TODAY（）被引用了两次，在某些实现中，这将导致竞争条件）这在实际中是不太可能发生的。</comment>
+            </example>
+	</examples>
+  </function>
+
+  <function>
+  	<category>%Category.DateTime</category>
+  	<name>WEEKDAY</name>
+  	<description>从日期中提取星期几；如果是文本，则使用当前区域设置转换为日期。</description>
+    <syntax>WEEKDAY( DateParam Date [ ; Integer Type = 1 ] )</syntax>
+  	<returns>Number</returns>
+  	<constraints>无</constraints>
+  	<semantics>返回从日期开始的一周中的某一天，以0到7之间的数字表示。确切的含义取决于类型的值：</semantics>
+	<examples>
+	   	<example>
+                <expression>WEEKDAY(DATE(2006;5;21))</expression> <result>1</result> <level>1</level> <comment>年月日格式</comment>
+            </example>
+	   	<example>
+                <expression>WEEKDAY(DATE(2005;1;1))</expression> <result>7</result> <level>1</level> <comment>星期六。</comment>
+            </example>
+	   	<example>
+                <expression>WEEKDAY(DATE(2005;1;1);1)</expression> <result>7</result> <level>1</level> <comment>星期六。</comment>
+            </example>
+	   	<example>
+                <expression>WEEKDAY(DATE(2005;1;1);2)</expression> <result>6</result> <level>1</level> <comment>星期六。</comment>
+            </example>
+	   	<example>
+                <expression>WEEKDAY(DATE(2005;1;1);3)</expression> <result>5</result> <level>1</level> <comment>星期六。</comment>
+            </example>
+	</examples>
+  </function>
+
+  <function>
+  	<category>%Category.DateTime</category>
+  	<name>YEAR</name>
+  	<description>从应用程序当前区域设置中给定的日期中提取年份。</description>
+    <syntax>YEAR( DateParam D )</syntax>
+  	<returns>Number</returns>
+  	<constraints>无</constraints>
+  	<semantics>以当前区域设置的格式分析日期格式的字符串，并返回年份部分。</semantics>
+	<examples>
+	   	<example>
+                <expression>YEAR(DATE(1904;1;1))</expression> <result>1904</result> <level>1</level> <comment>从给定日期中提取年份。</comment>
+            </example>
+	</examples>
+  </function>
+
+  <!-- Logical : this list is complete -->  
+
+  <function>
+  	<category>%Category.Logical</category>
+  	<name>AND</name>
+  	<description/>
+    <syntax/>
+  	<returns>Logical</returns>
+  	<constraints/>
+  	<semantics/>
+	<examples>
+	   	<example>
+                <expression/> <result/> <level>1</level> <comment/>
+            </example>
+	</examples>
+  </function>
+
+  <function>
+  	<category>%Category.Logical</category>
+  	<name>AND</name>
+  	<description>计算所有参数的逻辑和。</description>
+    <syntax>AND( { Logical|NumberSequenceList L }+ )</syntax>
+  	<returns>Logical</returns>
+  	<constraints>必须有一个或多个参数</constraints>
+  	<semantics>计算参数的逻辑和。如果所有参数均为True，则返回True；如果任何参数为False，则返回False。当给定一个参数时，这会将该参数转换为逻辑值。当给定零参数时，应用程序可能返回逻辑值或错误。</semantics>
+	<examples>
+	   	<example>
+                <expression>AND(FALSE();FALSE())</expression> <result>False</result> <level>1</level> <comment>简单和。</comment>
+            </example>
+	   	<example>
+                <expression>AND(FALSE();TRUE())</expression> <result>False</result> <level>1</level> <comment>简单和。</comment>
+            </example>
+	   	<example>
+                <expression>AND(TRUE();FALSE())</expression> <result>False</result> <level>1</level> <comment>简单和。</comment>
+            </example>
+	   	<example>
+                <expression>AND(TRUE();TRUE())</expression> <result>True</result> <level>1</level> <comment>简单和。</comment>
+            </example>
+	   	<example>
+                <expression>AND(TRUE();NA())</expression> <result>NA</result> <level>1</level> <comment>如果给定错误，则返回错误。</comment>
+            </example>
+	   	<example>
+                <expression>AND(1;TRUE())</expression> <result>True</result> <level>1</level> <comment>非零被认为是真的。</comment>
+            </example>
+	   	<example>
+                <expression>AND(0;TRUE())</expression> <result>False</result> <level>1</level> <comment>零被认为是错误的。</comment>
+            </example>
+	   	<example>
+                <expression>AND(TRUE();TRUE();TRUE())</expression> <result>True</result> <level>1</level> <comment>两个以上的参数可以。</comment>
+            </example>
+	   	<example>
+                <expression>AND(TRUE())</expression> <result>True</result> <level>1</level> <comment>一个参数可以-只需返回它。</comment>
+            </example>
+	</examples>
+  </function>
+
+  <function>
+  	<category>%Category.Logical</category>
+  	<name>IF</name>
+  	<description>根据条件返回两个值之一</description>
+    <syntax>IF( Logical Condition [ ; [ Any IfTrue ] [ ; [ Any IfFalse ] ] ] )</syntax>
+  	<returns>Any</returns>
+  	<constraints>没有。</constraints>
+  	<semantics>计算条件。如果是真的，则返回If TRUE，否则返回IfFalse。如果只有一个参数，则将If TRUE视为TRUE（）。如果少于3个参数，则If FALSE被视为FALSE（）。因此，1参数版本将条件转换为逻辑值。如果有2个或3个参数，但第二个参数为空（两个连续的；分号），则IfFalse被视为0。如果有3个参数，但第三个参数为空，则IfFalse被视为0。此函数只计算IfTrue或ifFalse，而不同时计算两者；也就是说，它会短路。</semantics>
+	<examples>
+	   	<example>
+                <expression>IF(FALSE();7;8)</expression> <result>8</result> <level>1</level> <comment>简单的如果。</comment>
+            </example>
+	   	<example>
+                <expression>IF(TRUE();7;8)</expression> <result>7</result> <level>1</level> <comment>简单的如果。</comment>
+            </example>
+	   	<example>
+                <expression>IF(TRUE();"HI";8)</expression> <result>"HI"</result> <level>1</level> <comment>可以返回字符串，并且两边的类型不必相等</comment>
+            </example>
+	   	<example>
+                <expression>IF(1;7;8)</expression> <result>7</result> <level>1</level> <comment>非零被认为是真的。</comment>
+            </example>
+	   	<example>
+                <expression>IF(5;7;8)</expression> <result>7</result> <level>1</level> <comment>非零被认为是真的。</comment>
+            </example>
+	   	<example>
+                <expression>IF(0;7;8)</expression> <result>8</result> <level>1</level> <comment>零被认为是错误的。</comment>
+            </example>
+	   	<example>
+                <expression>IF(TRUE();[.B4];8)</expression> <result>2</result> <level>1</level> <comment>结果可以作为参考。</comment>
+            </example>
+	   	<example>
+                <expression>IF(TRUE();[.B4]+5;8)</expression> <result>7</result> <level>1</level> <comment>结果可以是一个公式。</comment>
+            </example>
+	   	<example>
+                <expression>IF("x";7;8)</expression> <result>Error</result> <level>1</level> <comment>条件必须可转换为逻辑条件。</comment>
+            </example>
+	   	<example>
+                <expression>IF("1";7;8)</expression> <result>Error</result> <level>1</level> <comment>条件必须可转换为逻辑条件。</comment>
+            </example>
+	   	<example>
+                <expression>IF("";7;8)</expression> <result>Error</result> <level>1</level> <comment>条件必须可转换为逻辑条件；空字符串与False不同</comment>
+            </example>
+	   	<example>
+                <expression>IF(FALSE();7)</expression> <result>FALSE</result> <level>1</level> <comment>默认IfFalse为FALSE</comment>
+            </example>
+	   	<example>
+                <expression>IF(3)</expression> <result>TRUE</result> <level>1</level> <comment>默认IfTrue为TRUE</comment>
+            </example>
+	   	<example>
+                <expression>IF(FALSE();7;)</expression> <result>0</result> <level>1</level> <comment>空参数被视为0</comment>
+            </example>
+	   	<example>
+                <expression>IF(TRUE();7)</expression> <result>0</result> <level>1</level> <comment>空参数被视为0</comment>
+            </example>
+	   	<example>
+                <expression>IF(TRUE();4;1/0)</expression> <result>4</result> <level>1</level> <comment>如果条件为真，则不考虑ifFalse，即使它会产生错误。</comment>
+            </example>
+	   	<example>
+                <expression>IF(FALSE();1/0;5)</expression> <result>5</result> <level>1</level> <comment>如果条件为false，则不考虑ifTrue，即使它会产生错误。</comment>
+            </example>
+
+	</examples>
+  </function>
+
+  <function>
+  	<category>%Category.Logical</category>
+  	<name>NOT</name>
+  	<description>计算逻辑非</description>
+    <syntax>NOT( Logical L )</syntax>
+  	<returns>Logical</returns>
+  	<constraints>必须有1个参数</constraints>
+  	<semantics>计算逻辑“否”。如果给定TRUE，则返回FALSE；如果给定FALSE，则返回TRUE。</semantics>
+	<examples>
+	   	<example>
+                <expression>NOT(FALSE())</expression> <result>True</result> <level>1</level> <comment>简单不是，假设是假的。</comment>
+            </example>
+	   	<example>
+                <expression>NOT(TRUE())</expression> <result>False</result> <level>1</level> <comment>简单的不，假设是真的。</comment>
+            </example>
+	   	<example>
+                <expression>NOT(1/0)</expression> <result>Error</result> <level>1</level> <comment>如果给定错误值，则不返回错误</comment>
+            </example>
+	</examples>
+  </function>
+
+  <function>
+  	<category>%Category.Logical</category>
+  	<name>OR</name>
+  	<description>计算所有参数的逻辑或。</description>
+    <syntax>OR( { Logical|NumberSequenceList L }+ )</syntax>
+  	<returns>Logical</returns>
+  	<constraints>必须有一个或多个参数</constraints>
+  	<semantics>计算参数的逻辑或。如果所有参数都为False，则返回False；如果任何参数为True，则返回True。当给定一个参数时，这会将该参数转换为逻辑值。当给定零参数时，应用程序可能返回逻辑值或错误。</semantics>
+	<examples>
+	   	<example>
+                <expression>OR(FALSE();FALSE())</expression> <result>False</result> <level>1</level> <comment>简单的或。</comment>
+            </example>
+	   	<example>
+                <expression>OR(FALSE();TRUE())</expression> <result>True</result> <level>1</level> <comment>简单的或。</comment>
+            </example>
+	   	<example>
+                <expression>OR(TRUE();FALSE())</expression> <result>True</result> <level>1</level> <comment>简单的或。</comment>
+            </example>
+	   	<example>
+                <expression>OR(TRUE();TRUE())</expression> <result>True</result> <level>1</level> <comment>简单的或。</comment>
+            </example>
+	   	<example>
+                <expression>OR(FALSE();NA())</expression> <result>NA</result> <level>1</level> <comment>如果给定错误，则返回错误。</comment>
+            </example>
+	   	<example>
+                <expression>OR(FALSE();FALSE();TRUE())</expression> <result>True</result> <level>1</level> <comment>两个以上的参数可以。</comment>
+            </example>
+	   	<example>
+                <expression>OR(TRUE())</expression> <result>True</result> <level>1</level> <comment>一个参数好-简单地返回它</comment>
+            </example>
+	</examples>
+  </function>
+
+  <function>
+  	<category>%Category.Logical</category>
+  	<name>TRUE</name>
+  	<description>返回常量TRUE</description>
+    <syntax>TRUE()</syntax>
+  	<returns>Logical</returns>
+  	<constraints>必须有0个参数</constraints>
+  	<semantics>返回逻辑常量TRUE。虽然这在语法上是一个函数调用，但在语义上它是一个常量，而且典型的应用程序会优化它，因为它是一个常量。请注意，当使用“=”进行比较时，这可能等于或不等于1。如果在需要数字的上下文中使用（由于自动转换），则它的值始终为1，因此如果ISNUMBER（TRUE（）），则它必须具有值1。</semantics>
+	<examples>
+	   	<example>
+                <expression>TRUE()</expression> <result>True</result> <level>1</level> <comment>不变。</comment>
+            </example>
+	   	<example>
+                <expression>IF(ISNUMBER(TRUE());TRUE()=1;TRUE())</expression> <result>True</result> <level>1</level> <comment>实现逻辑值为0/1的应用程序必须将TRUE（）映射到1</comment>
+            </example>
+	   	<example>
+                <expression>2+TRUE()</expression> <result>3</result> <level>1</level> <comment>在数字上下文中，TRUE转换为1</comment>
+            </example>
+	</examples>
+  </function>
+
+  <function>
+  	<category>%Category.Logical</category>
+  	<name>XOR</name>
+  	<description>计算所有参数的逻辑异或。</description>
+    <syntax>XOR( { Logical L }+ )</syntax>
+  	<returns>Logical</returns>
+  	<constraints>必须有一个或多个参数。</constraints>
+  	<semantics>计算参数的逻辑异或，使结果为加法模2。如果偶数个参数为True，则返回False；如果奇数个参数为True，则返回True。当给定一个参数时，这会将该参数转换为逻辑值。</semantics>
+	<examples>
+	   	<example>  <expression>XOR(FALSE();FALSE())</expression>     <result>False</result>    <level>1</level>   <comment>简单XOR</comment>     </example>
+	   	<example>  <expression>XOR(FALSE();TRUE())</expression>     <result>True</result>    <level>1</level>   <comment>简单XOR</comment>     </example>
+	   	<example>  <expression>XOR(TRUE();FALSE())</expression>     <result>True</result>    <level>1</level>   <comment>简单XOR</comment>     </example>
+	   	<example>  <expression>XOR(TRUE();TRUE())</expression>     <result>False</result>    <level>1</level>   <comment>简单的异或-注意这个不同于或</comment>     </example>
+	   	<example>  <expression>XOR(FALSE();NA())</expression>     <result>NA</result>    <level>1</level>   <comment>如果给定错误，则返回错误。</comment>     </example>
+	   	<example>  <expression>XOR(FALSE();FALSE();TRUE())</expression>     <result>True</result>    <level>1</level>   <comment>两个以上的参数可以。</comment>     </example>
+	   	<example>  <expression>XOR(FALSE(); TRUE();TRUE())</expression>     <result>False</result>    <level>1</level>   <comment>两个以上的参数可以，注意这个结果不同于或</comment>     </example>
+	   	<example>  <expression>XOR(TRUE(); TRUE();TRUE())</expression>     <result>True</result>    <level>1</level>   <comment>两个以上参数好，结果是（（1 XOR 1）XOR 1），因此是奇偶校验。</comment>     </example>
+	   	<example>  <expression>XOR(TRUE())</expression>     <result>True</result>    <level>1</level>   <comment>一个参数好-简单地返回它</comment>     </example>
+	</examples>
+  </function>
+
+</libformula-functions>

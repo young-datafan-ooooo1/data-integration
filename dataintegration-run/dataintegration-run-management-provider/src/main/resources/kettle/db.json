@@ -1,0 +1,3317 @@
+{
+ "dataSources": [
+  {
+   "dasourceId": "MYSQL",
+   "label": "MySQL",
+   "connectType": [
+    {
+     "key": "Native",
+     "label": "Native(JDBC)",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "dsName",
+       "label": "数据库名称",
+       "value": ""
+      },
+       {
+       "key": "port",
+       "label": "端口",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      },
+      {
+       "key": "userResultCursor",
+       "label": "use Result  streaming  Cursor",
+       "value": true
+      }
+     ]
+    },
+    {
+     "key": "ODBC",
+     "label": "ODBC",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "key": "JNDI",
+     "label": "JNDI",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dasourceId": "CLICKHOUSE",
+   "label": "CLICKHOUSE",
+   "connectType": [
+    {
+     "key": "Native",
+     "label": "Native(JDBC)",
+     "connectParam": [
+      {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+      {
+       "key": "dsName",
+       "label": "数据库名称",
+       "value": ""
+      },
+      {
+       "key": "port",
+       "label": "端口",
+       "value": ""
+      },
+      {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+      {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      },
+      {
+       "key": "userResultCursor",
+       "label": "use Result  streaming  Cursor",
+       "value": true
+      }
+     ]
+    }
+
+   ]
+  },
+  {
+   "dasourceId": "AS/400",
+   "label": "AS/400",
+   "connectType": [
+    {
+     "key": "Native",
+     "label": "Native(JDBC)",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "dsName",
+       "label": "数据库名称",
+       "value": ""
+      },
+       {
+       "key": "port",
+       "label": "端口",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      },
+       {
+       "key": "userResultCursor",
+       "label": "use Result  streaming  Cursor",
+       "value": true
+      }
+     ]
+    },
+    {
+     "key": "ODBC",
+     "label": "ODBC",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "key": "JNDI",
+     "label": "JNDI",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dasourceId": "DERBY",
+   "label": "Apache Derby",
+   "connectType": [
+    {
+     "key": "Native",
+     "label": "Native(JDBC)",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "dsName",
+       "label": "数据库名称",
+       "value": ""
+      },
+       {
+       "key": "port",
+       "label": "端口",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      },
+       {
+       "key": "userResultCursor",
+       "label": "use Result  streaming  Cursor",
+       "value": true
+      }
+     ]
+    },
+    {
+     "key": "ODBC",
+     "label": "ODBC",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "key": "JNDI",
+     "label": "JNDI",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dasourceId": "INTERBASE",
+   "label": "BOrland interbase",
+   "connectType": [
+    {
+     "key": "Native",
+     "label": "Native(JDBC)",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "dsName",
+       "label": "数据库名称",
+       "value": ""
+      },
+       {
+       "key": "port",
+       "label": "端口",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      },
+       {
+       "key": "userResultCursor",
+       "label": "use Result  streaming  Cursor",
+       "value": true
+      }
+     ]
+    },
+    {
+     "key": "ODBC",
+     "label": "ODBC",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "key": "JNDI",
+     "label": "JNDI",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dasourceId": "INFINIDB",
+   "label": "Calpont InfiniDb",
+   "connectType": [
+    {
+     "key": "Native",
+     "label": "Native(JDBC)",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "dsName",
+       "label": "数据库名称",
+       "value": ""
+      },
+       {
+       "key": "port",
+       "label": "端口",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      },
+       {
+       "key": "userResultCursor",
+       "label": "use Result  streaming  Cursor",
+       "value": true
+      }
+     ]
+    },
+    {
+     "key": "ODBC",
+     "label": "ODBC",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "key": "JNDI",
+     "label": "JNDI",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dasourceId": "EXASOL4",
+   "label": "Exasol 4",
+   "connectType": [
+    {
+     "key": "Native",
+     "label": "Native(JDBC)",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "dsName",
+       "label": "数据库名称",
+       "value": ""
+      },
+       {
+       "key": "port",
+       "label": "端口",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      },
+       {
+       "key": "userResultCursor",
+       "label": "use Result  streaming  Cursor",
+       "value": true
+      }
+     ]
+    },
+    {
+     "key": "JNDI",
+     "label": "JNDI",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dasourceId": "EXTENDB",
+   "label": "EXTENDB",
+   "connectType": [
+    {
+     "key": "Native",
+     "label": "Native(JDBC)",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "dsName",
+       "label": "数据库名称",
+       "value": ""
+      },
+       {
+       "key": "port",
+       "label": "端口",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      },
+       {
+       "key": "userResultCursor",
+       "label": "use Result  streaming  Cursor",
+       "value": true
+      }
+     ]
+    },
+    {
+     "key": "ODBC",
+     "label": "ODBC",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "key": "JNDI",
+     "label": "JNDI",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dasourceId": "FIREBIRD",
+   "label": "Firebird SQL",
+   "connectType": [
+    {
+     "key": "Native",
+     "label": "Native(JDBC)",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "dsName",
+       "label": "数据库名称",
+       "value": ""
+      },
+       {
+       "key": "port",
+       "label": "端口",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      },
+       {
+       "key": "userResultCursor",
+       "label": "use Result  streaming  Cursor",
+       "value": true
+      }
+     ]
+    },
+    {
+     "key": "ODBC",
+     "label": "ODBC",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "key": "JNDI",
+     "label": "JNDI",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dasourceId": "GENERIC",
+   "label": "Generic dabase",
+   "connectType": [
+    {
+     "key": "Native",
+     "label": "Native(JDBC)",
+     "connectParam": [
+      {
+       "key": "DATABASE_DIALECT_ID",
+       "label": "数据库类型",
+       "value": ""
+      },
+      {
+       "key": "CUSTOM_DRIVER_CLASS",
+       "label": "驱动名",
+       "value": ""
+      },
+       {
+       "key": "CUSTOM_URL",
+       "label": "url",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "key": "ODBC",
+     "label": "ODBC",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "key": "JNDI",
+     "label": "JNDI",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dasourceId": "GREENPLUM",
+   "label": "GREENPLUM",
+   "connectType": [
+    {
+     "key": "Native",
+     "label": "Native(JDBC)",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "dsName",
+       "label": "数据库名称",
+       "value": ""
+      },
+       {
+       "key": "port",
+       "label": "端口",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      },
+       {
+       "key": "userResultCursor",
+       "label": "use Result  streaming  Cursor",
+       "value": true
+      }
+     ]
+    },
+    {
+     "key": "ODBC",
+     "label": "ODBC",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "key": "JNDI",
+     "label": "JNDI",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dasourceId": "GOOGLEBIGQUERY",
+   "label": "Google BigQuery",
+   "connectType": [
+    {
+     "key": "Native",
+     "label": "Native(JDBC)",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "dsName",
+       "label": "数据库名称",
+       "value": ""
+      },
+       {
+       "key": "port",
+       "label": "端口",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      },
+       {
+       "key": "userResultCursor",
+       "label": "use Result  streaming  Cursor",
+       "value": true
+      }
+     ]
+    },
+    {
+     "key": "JNDI",
+     "label": "JNDI",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dasourceId": "SQLBASE",
+   "label": "Gupta SQL Base",
+   "connectType": [
+    {
+     "key": "Native",
+     "label": "Native(JDBC)",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "dsName",
+       "label": "数据库名称",
+       "value": ""
+      },
+       {
+       "key": "port",
+       "label": "端口",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      },
+       {
+       "key": "userResultCursor",
+       "label": "use Result  streaming  Cursor",
+       "value": true
+      }
+     ]
+    },
+    {
+     "key": "ODBC",
+     "label": "ODBC",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "key": "JNDI",
+     "label": "JNDI",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dasourceId": "H2",
+   "label": "H2",
+   "connectType": [
+    {
+     "key": "Native",
+     "label": "Native(JDBC)",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "dsName",
+       "label": "数据库名称",
+       "value": ""
+      },
+       {
+       "key": "port",
+       "label": "端口",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      },
+       {
+       "key": "userResultCursor",
+       "label": "use Result  streaming  Cursor",
+       "value": true
+      }
+     ]
+    },
+    {
+     "key": "ODBC",
+     "label": "ODBC",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "key": "JNDI",
+     "label": "JNDI",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dasourceId": "Hadoop Hive",
+   "label": "Hadoop Hive",
+   "connectType": [
+    {
+     "key": "Native",
+     "label": "Native(JDBC)",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "dsName",
+       "label": "数据库名称",
+       "value": ""
+      },
+       {
+       "key": "port",
+       "label": "端口",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      },
+       {
+       "key": "userResultCursor",
+       "label": "use Result  streaming  Cursor",
+       "value": true
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dasourceId": "Hadoop Hive2",
+   "label": "Hadoop Hive2",
+   "connectType": [
+    {
+     "key": "Native",
+     "label": "Native(JDBC)",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "dsName",
+       "label": "数据库名称",
+       "value": ""
+      },
+       {
+       "key": "port",
+       "label": "端口",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      },
+       {
+       "key": "userResultCursor",
+       "label": "use Result  streaming  Cursor",
+       "value": true
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dasourceId": "HYPERSONIC",
+   "label": "Hypersonic",
+   "connectType": [
+    {
+     "key": "Native",
+     "label": "Native(JDBC)",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "dsName",
+       "label": "数据库名称",
+       "value": ""
+      },
+       {
+       "key": "port",
+       "label": "端口",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      },
+       {
+       "key": "userResultCursor",
+       "label": "use Result  streaming  Cursor",
+       "value": true
+      }
+     ]
+    },
+    {
+     "key": "ODBC",
+     "label": "ODBC",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "key": "JNDI",
+     "label": "JNDI",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dasourceId": "DB2",
+   "label": "IBM DB2",
+   "connectType": [
+    {
+     "key": "Native",
+     "label": "Native(JDBC)",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "dsName",
+       "label": "数据库名称",
+       "value": ""
+      },
+       {
+       "key": "port",
+       "label": "端口",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      },
+       {
+       "key": "userResultCursor",
+       "label": "use Result  streaming  Cursor",
+       "value": true
+      }
+     ]
+    },
+    {
+     "key": "ODBC",
+     "label": "ODBC",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "key": "JNDI",
+     "label": "JNDI",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dasourceId": "IMPALA",
+   "label": "impala",
+   "connectType": [
+    {
+     "key": "Native",
+     "label": "Native(JDBC)",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "dsName",
+       "label": "数据库名称",
+       "value": ""
+      },
+       {
+       "key": "port",
+       "label": "端口",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      },
+       {
+       "key": "userResultCursor",
+       "label": "use Result  streaming  Cursor",
+       "value": true
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dasourceId": "INFOBRIGHT",
+   "label": "Infobright",
+   "connectType": [
+    {
+     "key": "Native",
+     "label": "Native(JDBC)",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "dsName",
+       "label": "数据库名称",
+       "value": ""
+      },
+       {
+       "key": "port",
+       "label": "端口",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      },
+       {
+       "key": "userResultCursor",
+       "label": "use Result  streaming  Cursor",
+       "value": true
+      }
+     ]
+    },
+    {
+     "key": "ODBC",
+     "label": "ODBC",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "key": "JNDI",
+     "label": "JNDI",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dasourceId": "INFORMIX",
+   "label": "Informix",
+   "connectType": [
+    {
+     "key": "Native",
+     "label": "Native(JDBC)",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "dsName",
+       "label": "数据库名称",
+       "value": ""
+      },
+       {
+       "key": "port",
+       "label": "端口",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      },
+       {
+       "key": "userResultCursor",
+       "label": "use Result  streaming  Cursor",
+       "value": true
+      }
+     ]
+    },
+    {
+     "key": "ODBC",
+     "label": "ODBC",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "key": "JNDI",
+     "label": "JNDI",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dasourceId": "INGRES",
+   "label": "Ingres",
+   "connectType": [
+    {
+     "key": "Native",
+     "label": "Native(JDBC)",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "dsName",
+       "label": "数据库名称",
+       "value": ""
+      },
+       {
+       "key": "port",
+       "label": "端口",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      },
+       {
+       "key": "userResultCursor",
+       "label": "use Result  streaming  Cursor",
+       "value": true
+      }
+     ]
+    },
+    {
+     "key": "ODBC",
+     "label": "ODBC",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "key": "JNDI",
+     "label": "JNDI",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dasourceId": "VECTORWISE",
+   "label": "Ingres VectorWise",
+   "connectType": [
+    {
+     "key": "Native",
+     "label": "Native(JDBC)",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "dsName",
+       "label": "数据库名称",
+       "value": ""
+      },
+       {
+       "key": "port",
+       "label": "端口",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      },
+       {
+       "key": "userResultCursor",
+       "label": "use Result  streaming  Cursor",
+       "value": true
+      }
+     ]
+    },
+    {
+     "key": "ODBC",
+     "label": "ODBC",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "key": "JNDI",
+     "label": "JNDI",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dasourceId": "CACHE",
+   "label": "Intersystems Cache",
+   "connectType": [
+    {
+     "key": "Native",
+     "label": "Native(JDBC)",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "dsName",
+       "label": "数据库名称",
+       "value": ""
+      },
+       {
+       "key": "port",
+       "label": "端口",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      },
+       {
+       "key": "userResultCursor",
+       "label": "use Result  streaming  Cursor",
+       "value": true
+      }
+     ]
+    },
+    {
+     "key": "ODBC",
+     "label": "ODBC",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "key": "JNDI",
+     "label": "JNDI",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dasourceId": "KingbaseES",
+   "label": "KingbaseEs",
+   "connectType": [
+    {
+     "key": "Native",
+     "label": "Native(JDBC)",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "dsName",
+       "label": "数据库名称",
+       "value": ""
+      },
+       {
+       "key": "port",
+       "label": "端口",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      },
+       {
+       "key": "userResultCursor",
+       "label": "use Result  streaming  Cursor",
+       "value": true
+      }
+     ]
+    },
+    {
+     "key": "JNDI",
+     "label": "JNDI",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dasourceId": "LucidDB",
+   "label": "LucidDB",
+   "connectType": [
+    {
+     "key": "Native",
+     "label": "Native(JDBC)",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "dsName",
+       "label": "数据库名称",
+       "value": ""
+      },
+       {
+       "key": "port",
+       "label": "端口",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      },
+       {
+       "key": "userResultCursor",
+       "label": "use Result  streaming  Cursor",
+       "value": true
+      }
+     ]
+    },
+    {
+     "key": "JNDI",
+     "label": "JNDI",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dasourceId": "MSACCESS",
+   "label": "MS Access",
+   "connectType": [
+    {
+     "key": "Native",
+     "label": "Native(JDBC)",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "dsName",
+       "label": "数据库名称",
+       "value": ""
+      },
+       {
+       "key": "port",
+       "label": "端口",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      },
+       {
+       "key": "userResultCursor",
+       "label": "use Result  streaming  Cursor",
+       "value": true
+      }
+     ]
+    },
+    {
+     "key": "JNDI",
+     "label": "JNDI",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dasourceId": "MSSQL",
+   "label": "MS SQL Server",
+   "connectType": [
+    {
+     "key": "Native",
+     "label": "Native(JDBC)",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "dsName",
+       "label": "数据库名称",
+       "value": ""
+      },
+       {
+       "key": "port",
+       "label": "端口",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      },
+       {
+       "key": "userResultCursor",
+       "label": "use Result  streaming  Cursor",
+       "value": true
+      }
+     ]
+    },
+    {
+     "key": "ODBC",
+     "label": "ODBC",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "key": "JNDI",
+     "label": "JNDI",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dasourceId": "MSSQLNATIVE",
+   "label": "MS SQL Server(Native)",
+   "connectType": [
+    {
+     "key": "Native",
+     "label": "Native(JDBC)",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "dsName",
+       "label": "数据库名称",
+       "value": ""
+      },
+       {
+       "key": "port",
+       "label": "端口",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      },
+       {
+       "key": "userResultCursor",
+       "label": "use Result  streaming  Cursor",
+       "value": true
+      }
+     ]
+    },
+    {
+     "key": "ODBC",
+     "label": "ODBC",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "key": "JNDI",
+     "label": "JNDI",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dasourceId": "MariaDB",
+   "label": "Maria DB",
+   "connectType": [
+    {
+     "key": "Native",
+     "label": "Native(JDBC)",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "dsName",
+       "label": "数据库名称",
+       "value": ""
+      },
+       {
+       "key": "port",
+       "label": "端口",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      },
+       {
+       "key": "userResultCursor",
+       "label": "use Result  streaming  Cursor",
+       "value": true
+      }
+     ]
+    },
+    {
+     "key": "ODBC",
+     "label": "ODBC",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "key": "JNDI",
+     "label": "JNDI",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dasourceId": "SAPDB",
+   "label": "MaxDB (SAP DB)",
+   "connectType": [
+    {
+     "key": "Native",
+     "label": "Native(JDBC)",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "dsName",
+       "label": "数据库名称",
+       "value": ""
+      },
+       {
+       "key": "port",
+       "label": "端口",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      },
+       {
+       "key": "userResultCursor",
+       "label": "use Result  streaming  Cursor",
+       "value": true
+      }
+     ]
+    },
+    {
+     "key": "ODBC",
+     "label": "ODBC",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "key": "JNDI",
+     "label": "JNDI",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dasourceId": "MONDRIAN",
+   "label": "Native Mondrian",
+   "connectType": [
+    {
+     "key": "JNDI",
+     "label": "JNDI",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dasourceId": "NEOVIEW",
+   "label": "Neoview",
+   "connectType": [
+    {
+     "key": "Native",
+     "label": "Native(JDBC)",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "dsName",
+       "label": "数据库名称",
+       "value": ""
+      },
+       {
+       "key": "port",
+       "label": "端口",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      },
+       {
+       "key": "userResultCursor",
+       "label": "use Result  streaming  Cursor",
+       "value": true
+      }
+     ]
+    },
+    {
+     "key": "ODBC",
+     "label": "ODBC",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "key": "JNDI",
+     "label": "JNDI",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dasourceId": "NETEZZA",
+   "label": "Netezza",
+   "connectType": [
+    {
+     "key": "Native",
+     "label": "Native(JDBC)",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "dsName",
+       "label": "数据库名称",
+       "value": ""
+      },
+       {
+       "key": "port",
+       "label": "端口",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      },
+       {
+       "key": "userResultCursor",
+       "label": "use Result  streaming  Cursor",
+       "value": true
+      }
+     ]
+    },
+    {
+     "key": "ODBC",
+     "label": "ODBC",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "key": "JNDI",
+     "label": "JNDI",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      }
+     ]
+    }
+   ]
+  },
+
+  {
+   "dasourceId": "ORACLE",
+   "label": "Oracle",
+   "connectType": [
+    {
+     "key": "Native",
+     "label": "Native(JDBC)",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "dsName",
+       "label": "数据库名称",
+       "value": ""
+      },
+       {
+       "key": "port",
+       "label": "端口",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      },
+       {
+       "key": "userResultCursor",
+       "label": "use Result  streaming  Cursor",
+       "value": true
+      }
+     ]
+    },
+    {
+     "key": "ODBC",
+     "label": "ODBC",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "key": "OCI",
+     "label": "OCI",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "key": "JNDI",
+     "label": "JNDI",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dasourceId": "ORACLERDB",
+   "label": "Oracle RDB",
+   "connectType": [
+    {
+     "key": "Native",
+     "label": "Native(JDBC)",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "dsName",
+       "label": "数据库名称",
+       "value": ""
+      },
+       {
+       "key": "port",
+       "label": "端口",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      },
+       {
+       "key": "userResultCursor",
+       "label": "use Result  streaming  Cursor",
+       "value": true
+      }
+     ]
+    },
+    {
+     "key": "ODBC",
+     "label": "ODBC",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "key": "JNDI",
+     "label": "JNDI",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dasourceId": "PALO",
+   "label": "Palo MoLaP Server",
+   "connectType": [
+    {
+     "key": "Plugin",
+     "label": "Plugin specific access method",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "dsName",
+       "label": "数据库名称",
+       "value": ""
+      },
+       {
+       "key": "port",
+       "label": "端口",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      },
+       {
+       "key": "userResultCursor",
+       "label": "use Result  streaming  Cursor",
+       "value": true
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dasourceId": "KettleThin",
+   "label": "Pentaho Data service",
+   "connectType": [
+    {
+     "key": "Native",
+     "label": "Native(JDBC)",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "dsName",
+       "label": "数据库名称",
+       "value": ""
+      },
+       {
+       "key": "port",
+       "label": "端口",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      },
+       {
+       "key": "userResultCursor",
+       "label": "use Result  streaming  Cursor",
+       "value": true
+      }
+     ]
+    },
+    {
+     "key": "JNDI",
+     "label": "JNDI",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dasourceId": "POSTGRESQL",
+   "label": "POSTGRESQL",
+   "connectType": [
+    {
+     "key": "Native",
+     "label": "Native(JDBC)",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "dsName",
+       "label": "数据库名称",
+       "value": ""
+      },
+       {
+       "key": "port",
+       "label": "端口",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      },
+       {
+       "key": "userResultCursor",
+       "label": "use Result  streaming  Cursor",
+       "value": true
+      }
+     ]
+    },
+    {
+     "key": "ODBC",
+     "label": "ODBC",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "key": "JNDI",
+     "label": "JNDI",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dasourceId": "REDSHIFT",
+   "label": "Redshift",
+   "connectType": [
+    {
+     "key": "Native",
+     "label": "Native(JDBC)",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "dsName",
+       "label": "数据库名称",
+       "value": ""
+      },
+       {
+       "key": "port",
+       "label": "端口",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      },
+       {
+       "key": "userResultCursor",
+       "label": "use Result  streaming  Cursor",
+       "value": true
+      }
+     ]
+    },
+    {
+     "key": "ODBC",
+     "label": "ODBC",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "key": "JNDI",
+     "label": "JNDI",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dasourceId": "REMEDY-AR-SYSTEM",
+   "label": "REMEDY-AR-SYSTEM",
+   "connectType": [
+    {
+     "key": "ODBC",
+     "label": "ODBC",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "key": "JNDI",
+     "label": "JNDI",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dasourceId": "SAPR3",
+   "label": "SAP ERP System",
+   "connectType": [
+    {
+     "key": "Plugin",
+     "label": "Plugin specific access method",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "dsName",
+       "label": "数据库名称",
+       "value": ""
+      },
+       {
+       "key": "port",
+       "label": "端口",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      },
+       {
+       "key": "userResultCursor",
+       "label": "use Result  streaming  Cursor",
+       "value": true
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dasourceId": "SQLITE",
+   "label": "SQLite",
+   "connectType": [
+    {
+     "key": "Native",
+     "label": "Native(JDBC)",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "dsName",
+       "label": "数据库名称",
+       "value": ""
+      },
+       {
+       "key": "port",
+       "label": "端口",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      },
+       {
+       "key": "userResultCursor",
+       "label": "use Result  streaming  Cursor",
+       "value": true
+      }
+     ]
+    },
+    {
+     "key": "ODBC",
+     "label": "ODBC",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "key": "JNDI",
+     "label": "JNDI",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dasourceId": "SPARKSQL",
+   "label": "SparkSQL",
+   "connectType": [
+    {
+     "key": "Native",
+     "label": "Native(JDBC)",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "dsName",
+       "label": "数据库名称",
+       "value": ""
+      },
+       {
+       "key": "port",
+       "label": "端口",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      },
+       {
+       "key": "userResultCursor",
+       "label": "use Result  streaming  Cursor",
+       "value": true
+      }
+     ]
+    },
+    {
+     "key": "JNDI",
+     "label": "JNDI",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dasourceId": "SYBASE",
+   "label": "SYBASE",
+   "connectType": [
+    {
+     "key": "Native",
+     "label": "Native(JDBC)",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "dsName",
+       "label": "数据库名称",
+       "value": ""
+      },
+       {
+       "key": "port",
+       "label": "端口",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      },
+       {
+       "key": "userResultCursor",
+       "label": "use Result  streaming  Cursor",
+       "value": true
+      }
+     ]
+    },
+    {
+     "key": "ODBC",
+     "label": "ODBC",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "key": "JNDI",
+     "label": "JNDI",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dasourceId": "SYBASEIQ",
+   "label": "SYBASEIQ",
+   "connectType": [
+    {
+     "key": "Native",
+     "label": "Native(JDBC)",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "dsName",
+       "label": "数据库名称",
+       "value": ""
+      },
+       {
+       "key": "port",
+       "label": "端口",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      },
+       {
+       "key": "userResultCursor",
+       "label": "use Result  streaming  Cursor",
+       "value": true
+      }
+     ]
+    },
+    {
+     "key": "ODBC",
+     "label": "ODBC",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "key": "JNDI",
+     "label": "JNDI",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dasourceId": "TERADATA",
+   "label": "TERADATA",
+   "connectType": [
+    {
+     "key": "Native",
+     "label": "Native(JDBC)",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "dsName",
+       "label": "数据库名称",
+       "value": ""
+      },
+       {
+       "key": "port",
+       "label": "端口",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      },
+       {
+       "key": "userResultCursor",
+       "label": "use Result  streaming  Cursor",
+       "value": true
+      }
+     ]
+    },
+    {
+     "key": "ODBC",
+     "label": "ODBC",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "key": "JNDI",
+     "label": "JNDI",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dasourceId": "UNIVERSE",
+   "label": "UNIVERSE database",
+   "connectType": [
+    {
+     "key": "Native",
+     "label": "Native(JDBC)",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "dsName",
+       "label": "数据库名称",
+       "value": ""
+      },
+       {
+       "key": "port",
+       "label": "端口",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      },
+       {
+       "key": "userResultCursor",
+       "label": "use Result  streaming  Cursor",
+       "value": true
+      }
+     ]
+    },
+    {
+     "key": "ODBC",
+     "label": "ODBC",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "key": "JNDI",
+     "label": "JNDI",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dasourceId": "VERTICA",
+   "label": "VERTICA",
+   "connectType": [
+    {
+     "key": "Native",
+     "label": "Native(JDBC)",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "dsName",
+       "label": "数据库名称",
+       "value": ""
+      },
+       {
+       "key": "port",
+       "label": "端口",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      },
+       {
+       "key": "userResultCursor",
+       "label": "use Result  streaming  Cursor",
+       "value": true
+      }
+     ]
+    },
+    {
+     "key": "ODBC",
+     "label": "ODBC",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "key": "JNDI",
+     "label": "JNDI",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dasourceId": "VERTICA5",
+   "label": "VERTICA 5+",
+   "connectType": [
+    {
+     "key": "Native",
+     "label": "Native(JDBC)",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "dsName",
+       "label": "数据库名称",
+       "value": ""
+      },
+       {
+       "key": "port",
+       "label": "端口",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      },
+       {
+       "key": "userResultCursor",
+       "label": "use Result  streaming  Cursor",
+       "value": true
+      }
+     ]
+    },
+    {
+     "key": "ODBC",
+     "label": "ODBC",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "key": "JNDI",
+     "label": "JNDI",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "dasourceId": "DBASE",
+   "label": "dBase III, IV or 5",
+   "connectType": [
+    {
+     "key": "ODBC",
+     "label": "ODBC",
+     "connectParam": [
+       {
+       "key": "hostName",
+       "label": "主机名",
+       "value": ""
+      },
+       {
+       "key": "userName",
+       "label": "账号",
+       "value": ""
+      },
+       {
+       "key": "password",
+       "label": "密码",
+       "value": ""
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

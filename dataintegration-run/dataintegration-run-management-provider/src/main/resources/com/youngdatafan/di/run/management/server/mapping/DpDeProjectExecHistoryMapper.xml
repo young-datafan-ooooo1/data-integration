@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youngdatafan.di.run.management.server.mapper.DpDeProjectExecHistoryMapper">
+    <resultMap id="BaseResultMap" type="com.youngdatafan.di.run.management.server.entity.DpDeProjectExecHistory">
+        <!--@mbg.generated-->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="project_id" jdbcType="VARCHAR" property="projectId"/>
+        <result column="user_id" jdbcType="VARCHAR" property="userId"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="exec_env" jdbcType="VARCHAR" property="execEnv"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="start_time" jdbcType="TIMESTAMP" property="startTime"/>
+        <result column="end_time" jdbcType="TIMESTAMP" property="endTime"/>
+        <result column="exec_second" jdbcType="INTEGER" property="execSecond"/>
+    </resultMap>
+    <resultMap id="ProjectHistoryExecuteDTOMap" type="com.youngdatafan.di.run.management.server.dto.ProjectHistoryExecuteDTO">
+        <!--@mbg.generated-->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="project_id" jdbcType="VARCHAR" property="projectId"/>
+        <result column="project_name" jdbcType="VARCHAR" property="projectName"/>
+        <result column="user_id" jdbcType="VARCHAR" property="userId"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="start_time" jdbcType="TIMESTAMP" property="startTime"/>
+        <result column="end_time" jdbcType="TIMESTAMP" property="endTime"/>
+        <result column="exec_second" jdbcType="INTEGER" property="execSecond"/>
+    </resultMap>
+
+
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, project_id, user_id, user_name, exec_env, `status`, start_time, end_time, exec_second
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from dp_de_project_exec_history
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        <!--@mbg.generated-->
+        delete from dp_de_project_exec_history
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.youngdatafan.di.run.management.server.entity.DpDeProjectExecHistory">
+        <!--@mbg.generated-->
+        insert into dp_de_project_exec_history (id, project_id, user_id,
+        user_name, exec_env, `status`,
+        start_time, end_time, exec_second
+        )
+        values (#{id,jdbcType=BIGINT}, #{projectId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR},
+        #{userName,jdbcType=VARCHAR}, #{execEnv,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR},
+        #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{execSecond,jdbcType=INTEGER}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.youngdatafan.di.run.management.server.entity.DpDeProjectExecHistory">
+        <!--@mbg.generated-->
+        insert into dp_de_project_exec_history
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="projectId != null">
+                project_id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="userName != null">
+                user_name,
+            </if>
+            <if test="execEnv != null">
+                exec_env,
+            </if>
+            <if test="status != null">
+                `status`,
+            </if>
+            <if test="startTime != null">
+                start_time,
+            </if>
+            <if test="endTime != null">
+                end_time,
+            </if>
+            <if test="execSecond != null">
+                exec_second,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="projectId != null">
+                #{projectId,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="execEnv != null">
+                #{execEnv,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="startTime != null">
+                #{startTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null">
+                #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="execSecond != null">
+                #{execSecond,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective"
+            parameterType="com.youngdatafan.di.run.management.server.entity.DpDeProjectExecHistory">
+        <!--@mbg.generated-->
+        update dp_de_project_exec_history
+        <set>
+            <if test="projectId != null">
+                project_id = #{projectId,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="userName != null">
+                user_name = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="execEnv != null">
+                exec_env = #{execEnv,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                `status` = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="startTime != null">
+                start_time = #{startTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null">
+                end_time = #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="execSecond != null">
+                exec_second = #{execSecond,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.youngdatafan.di.run.management.server.entity.DpDeProjectExecHistory">
+        <!--@mbg.generated-->
+        update dp_de_project_exec_history
+        set project_id = #{projectId,jdbcType=VARCHAR},
+        user_id = #{userId,jdbcType=VARCHAR},
+        user_name = #{userName,jdbcType=VARCHAR},
+        exec_env = #{execEnv,jdbcType=VARCHAR},
+        `status` = #{status,jdbcType=VARCHAR},
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+        exec_second = #{execSecond,jdbcType=INTEGER}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="selectUserHistoryExecute" parameterType="com.youngdatafan.di.run.management.server.vo.ProjectHistoryExecuteVO"
+            resultMap="ProjectHistoryExecuteDTOMap">
+        <!--@mbg.generated-->
+        SELECT
+        t1.*,t2.project_name
+        FROM
+        dp_de_project_exec_history t1
+        LEFT JOIN dp_portal_project t2 ON t1.project_id = t2.project_id
+        where t1.user_id = #{userId}
+        <if test="startTime != null">
+            and t1.start_time >= #{startTime}
+        </if>
+        <if test="endTime != null">
+            and t1.start_time &lt;= #{endTime}
+        </if>
+        <if test="projectName != null ">
+            and t2.project_name like '%${projectName}%'
+        </if>
+        and exec_env = 'JCPT'
+        order by start_time desc
+    </select>
+</mapper>

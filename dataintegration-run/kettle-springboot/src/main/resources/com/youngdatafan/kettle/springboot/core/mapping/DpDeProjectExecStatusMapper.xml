@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youngdatafan.kettle.springboot.core.mapper.DpDeProjectExecStatusMapper">
+    <resultMap id="BaseResultMap" type="com.youngdatafan.kettle.springboot.core.entity.DpDeProjectExecStatus">
+        <!--@mbg.generated-->
+        <id column="project_id" jdbcType="VARCHAR" property="projectId"/>
+        <id column="user_id" jdbcType="VARCHAR" property="userId"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="step_name" jdbcType="VARCHAR" property="stepName"/>
+        <result column="temp_table_name" jdbcType="VARCHAR" property="tempTableName"/>
+        <result column="table_type" jdbcType="VARCHAR" property="tableType"/>
+        <result column="data_query_sql" jdbcType="VARCHAR" property="dataQuerySql"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="last_exec_time" jdbcType="TIMESTAMP" property="lastExecTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        project_id, user_id, user_name, step_name, temp_table_name, table_type, data_query_sql,
+        `status`, last_exec_time
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from dp_de_project_exec_status
+        where project_id = #{projectId,jdbcType=VARCHAR}
+        and user_id = #{userId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="map">
+        <!--@mbg.generated-->
+        delete from dp_de_project_exec_status
+        where project_id = #{projectId,jdbcType=VARCHAR}
+        and user_id = #{userId,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.youngdatafan.kettle.springboot.core.entity.DpDeProjectExecStatus">
+        <!--@mbg.generated-->
+        insert into dp_de_project_exec_status (project_id, user_id, user_name,
+        step_name, temp_table_name, table_type,
+        data_query_sql, `status`, last_exec_time
+        )
+        values (#{projectId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR},
+        #{stepName,jdbcType=VARCHAR}, #{tempTableName,jdbcType=VARCHAR}, #{tableType,jdbcType=VARCHAR},
+        #{dataQuerySql,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{lastExecTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.youngdatafan.kettle.springboot.core.entity.DpDeProjectExecStatus">
+        <!--@mbg.generated-->
+        insert into dp_de_project_exec_status
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="projectId != null">
+                project_id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="userName != null">
+                user_name,
+            </if>
+            <if test="stepName != null">
+                step_name,
+            </if>
+            <if test="tempTableName != null">
+                temp_table_name,
+            </if>
+            <if test="tableType != null">
+                table_type,
+            </if>
+            <if test="dataQuerySql != null">
+                data_query_sql,
+            </if>
+            <if test="status != null">
+                `status`,
+            </if>
+            <if test="lastExecTime != null">
+                last_exec_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="projectId != null">
+                #{projectId,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="stepName != null">
+                #{stepName,jdbcType=VARCHAR},
+            </if>
+            <if test="tempTableName != null">
+                #{tempTableName,jdbcType=VARCHAR},
+            </if>
+            <if test="tableType != null">
+                #{tableType,jdbcType=VARCHAR},
+            </if>
+            <if test="dataQuerySql != null">
+                #{dataQuerySql,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="lastExecTime != null">
+                #{lastExecTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.youngdatafan.kettle.springboot.core.entity.DpDeProjectExecStatus">
+        <!--@mbg.generated-->
+        update dp_de_project_exec_status
+        <set>
+            <if test="userName != null">
+                user_name = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="tempTableName != null">
+                temp_table_name = #{tempTableName,jdbcType=VARCHAR},
+            </if>
+            <if test="tableType != null">
+                table_type = #{tableType,jdbcType=VARCHAR},
+            </if>
+            <if test="dataQuerySql != null">
+                data_query_sql = #{dataQuerySql,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                `status` = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="lastExecTime != null">
+                last_exec_time = #{lastExecTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where project_id = #{projectId,jdbcType=VARCHAR}
+        and user_id = #{userId,jdbcType=VARCHAR}
+        and step_name = #{stepName,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.youngdatafan.kettle.springboot.core.entity.DpDeProjectExecStatus">
+        <!--@mbg.generated-->
+        update dp_de_project_exec_status
+        set user_name = #{userName,jdbcType=VARCHAR},
+        temp_table_name = #{tempTableName,jdbcType=VARCHAR},
+        table_type = #{tableType,jdbcType=VARCHAR},
+        data_query_sql = #{dataQuerySql,jdbcType=VARCHAR},
+        `status` = #{status,jdbcType=VARCHAR},
+        last_exec_time = #{lastExecTime,jdbcType=TIMESTAMP}
+        where project_id = #{projectId,jdbcType=VARCHAR}
+        and user_id = #{userId,jdbcType=VARCHAR}
+        and step_name = #{stepName,jdbcType=VARCHAR}
+    </update>
+    <select id="select" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from dp_de_project_exec_status
+        where project_id = #{projectId,jdbcType=VARCHAR}
+        and user_id = #{userId,jdbcType=VARCHAR} and step_name = #{stepName}
+    </select>
+</mapper>
