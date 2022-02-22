@@ -15,7 +15,7 @@ ENV JVM_XMS="2g" \
     ENCODING="UTF-8"
 
 # 添加启动jar
-COPY dataintegration-group-provider /app/run.jar
+COPY dataintegration-group-provider/target/dataintegration-group-provider*.jar /app/run.jar
 # 添加启动脚本
 ADD docker-startup.sh /app/bin/docker-startup.sh
 RUN chmod +x /app/bin/docker-startup.sh
