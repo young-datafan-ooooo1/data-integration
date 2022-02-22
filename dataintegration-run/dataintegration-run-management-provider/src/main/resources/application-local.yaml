@@ -12,7 +12,7 @@ management:
 spring:
   cloud:
     consul:
-      host: localhost
+      host: 192.168.10.160
       port: 8500
       discovery:
         service-name: ${spring.application.name}
