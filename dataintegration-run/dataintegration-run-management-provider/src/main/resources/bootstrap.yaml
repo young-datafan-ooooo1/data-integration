@@ -1,11 +1,13 @@
 spring:
-  cloud:
-    nacos:
-      config:
-        file-extension: yaml
-        server-addr: 192.168.124.166:8848
   application:
-    name: dp-di-run-management-provider
+    name: dataintegration-di-run-management-provider
+  cloud:
+    consul:
+      host: 192.168.10.160
+      port: 8500
+      discovery:
+        service-name: ${spring.application.name}
+
 management:
   endpoints:
     web:
