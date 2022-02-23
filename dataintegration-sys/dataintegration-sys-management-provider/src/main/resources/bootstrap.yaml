@@ -1,3 +1,6 @@
+server:
+  port: 10209
+
 spring:
   application:
     name: dataintegration-portal-system-management-provider
@@ -7,6 +10,70 @@ spring:
       port: 8500
       discovery:
         service-name: ${spring.application.name}
+
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.10.211:13306/dataintegration?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: 123456
+    hikari:
+      minimum-idle: 1
+      maximum-pool-size: 10
+      max-lifetime: 1800000
+      idle-timeout: 600000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  redis:
+    host: 192.168.10.211
+    port: 39121
+    password:
+    lettuce:
+      shutdown-timeout: 100
+      pool:
+        max-active: 8
+        max-idle: 8
+        max-wait: 30
+        min-idle: 0
+
+
+#配置MyBatis
+mybatis:
+  mapper-locations: classpath*:com/youngdatafan/portal/system/management/**/*Mapper.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#pagehelper
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+jwt:
+  tokenSecret: dasdjklqwjkdsdjasldkjas
+  expireTime: 86400000
+
+protal:
+  log:
+    run:
+      cron: 0 0 1 * * ?
+    retentionDays: 7
+
+vue-config:
+  baseUrl: http://cloud.vincenthsing.top:8080/cloud/api
+  ssoUrl: http://cloud.vincenthsing.top:8080/cloud/api/dp-common-sso-provider
+  systemUrl: http://cloud.vincenthsing.top:8080/cloud/api/dp-portal-system-management-provider
+  groupUrl: http://cloud.vincenthsing.top:8080/cloud/api/dp-common-group-provider
+  projectUrl: http://cloud.vincenthsing.top:8080/cloud/api/dp-common-project-provider
+  runManagerUrl: http://cloud.vincenthsing.top:8080/cloud/api/dp-de-run-management-provider
+  modelMangerUrl: http://cloud.vincenthsing.top:8080/cloud/api/dp-portal-model-management-provider
+  wsUrl: ws://cloud.vincenthsing.top:8080/cloud/ws/dp-de-run-management-provider
+  onLineUrl: http://cloud.vincenthsing.top:8080/cloud/api/dp-schedule-online-audit-provider
+  fileUrl: http://cloud.vincenthsing.top:8080/cloud/api/dp-file-management-provider
+  recordUrl: http://cloud.vincenthsing.top:8080/cloud/api/dp-portal-model-management-provider/superset/forward
+
 
 management:
   endpoints:
