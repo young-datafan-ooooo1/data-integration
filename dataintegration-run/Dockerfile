@@ -17,7 +17,7 @@ ENV JVM_XMS="2g" \
     ENCODING="UTF-8"
 
 # 添加启动jar
-COPY dataintegration-run-management-provider/target/dataintegration-run-management-provider-1.0.0-SNAPSHOT.jar /app/run.jar
+COPY dataintegration-run-management-provider/target/dataintegration-run-management-provider-1.0.0-SNAPSHOT-ark-executable.jar /app/run.jar
 # 添加启动脚本
 ADD docker-startup.sh /app/bin/docker-startup.sh
 RUN chmod +x /app/bin/docker-startup.sh

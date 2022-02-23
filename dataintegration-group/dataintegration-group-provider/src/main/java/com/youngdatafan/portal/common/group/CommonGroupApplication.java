@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
- * 分组管理启动Main
+ * 分组管理启动Main.
  *
  * @author gavin
  * @since 2020-01-09 15:59

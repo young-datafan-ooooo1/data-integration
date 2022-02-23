@@ -1,12 +1,6 @@
 server:
   port: 10201
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-
 spring:
   cloud:
     consul:
@@ -14,6 +8,8 @@ spring:
       port: 8500
       discovery:
         service-name: ${spring.application.name}
+        prefer-ip-address: true
+        instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}
 
   datasource:
     type: com.zaxxer.hikari.HikariDataSource

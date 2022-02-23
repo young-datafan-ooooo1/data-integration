@@ -1,11 +1,13 @@
 spring:
-  cloud:
-    nacos:
-      config:
-        file-extension: yaml
-        server-addr: localhost:8848
   application:
     name: dataintegration-common-sso-provider
+  cloud:
+    consul:
+      host: 192.168.10.160
+      port: 8500
+      discovery:
+        service-name: ${spring.application.name}
+
 management:
   endpoints:
     web:

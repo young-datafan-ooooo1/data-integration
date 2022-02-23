@@ -1,11 +1,13 @@
 spring:
-  cloud:
-    nacos:
-      config:
-        server-addr: 192.168.124.166:8848
-        file-extension: yaml
   application:
     name: dataintegration-portal-system-management-provider
+  cloud:
+    consul:
+      host: 192.168.10.160
+      port: 8500
+      discovery:
+        service-name: ${spring.application.name}
+
 management:
   endpoints:
     web:
