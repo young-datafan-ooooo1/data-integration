@@ -3,3 +3,4 @@ spring:
     active: local
   main:
     allow-bean-definition-overriding: true
+

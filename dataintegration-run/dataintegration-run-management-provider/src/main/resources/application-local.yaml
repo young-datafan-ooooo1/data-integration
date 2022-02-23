@@ -35,6 +35,12 @@ spring:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
 
+#配置MyBatis
+mybatis:
+  mapper-locations: classpath*:com/youngdatafan/di/run/management/server/**/*Mapper.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
   mvc:
     view:
       prefix: /

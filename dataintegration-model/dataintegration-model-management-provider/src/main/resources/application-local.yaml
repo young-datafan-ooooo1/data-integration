@@ -33,7 +33,7 @@ spring:
 
 #配置MyBatis
 mybatis:
-  mapper-locations: classpath*:com/dp/portal/model/management/**/*.xml
+  mapper-locations: classpath*:com/youngdatafan/portal/model/management/**/*.xml
 #pagehelper
 pagehelper:
   helperDialect: mysql
