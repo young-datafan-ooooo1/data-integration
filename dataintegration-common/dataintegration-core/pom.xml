@@ -96,6 +96,7 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- junit -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
