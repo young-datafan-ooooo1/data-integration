@@ -20,7 +20,7 @@
         <result column="c_name" jdbcType="VARCHAR" property="cName"/>
     </resultMap>
 
-    <resultMap id="BasicModelDTOMap" type="BasicModelDTO">
+    <resultMap id="BasicModelDTOMap" type="com.youngdatafan.portal.model.management.basicmodel.dto.BasicModelDTO">
         <id column="model_name" jdbcType="VARCHAR" property="name"/>
         <result column="c_name" jdbcType="VARCHAR" property="cName"/>
         <result column="group_name" jdbcType="VARCHAR" property="group"/>
@@ -36,7 +36,7 @@
     </resultMap>
 
     <resultMap id="BasicModelAndMetaDataDTOMap"
-               type="BasicModelAndMetaDataDTO">
+               type="com.youngdatafan.portal.model.management.basicmodel.dto.BasicModelAndMetaDataDTO">
         <id column="model_name" jdbcType="VARCHAR" property="modelName"/>
         <result column="c_name" jdbcType="VARCHAR" property="cName"/>
         <result column="model_type" jdbcType="VARCHAR" property="modelType"/>
@@ -61,7 +61,7 @@
         <result column="table_schema" jdbcType="VARCHAR" property="schemaName"/>
     </resultMap>
 
-    <resultMap id="GroupListMap" type="GroupDTO">
+    <resultMap id="GroupListMap" type="com.youngdatafan.portal.model.management.basicmodel.dto.GroupDTO">
         <id column="group_id" jdbcType="VARCHAR" property="groupId"/>
         <result column="group_name" jdbcType="VARCHAR" property="groupName"/>
     </resultMap>
@@ -335,7 +335,7 @@
 
 
     <resultMap id="BasicModelDatasourceDTOMap"
-               type="BasicModelDatasourceDTO">
+               type="com.youngdatafan.portal.model.management.basicmodel.dto.BasicModelDatasourceDTO">
         <id column="datasource_id" jdbcType="VARCHAR" property="datasourceId"/>
         <result column="ds_name" jdbcType="VARCHAR" property="datasourceName"/>
         <result column="ds_type" jdbcType="VARCHAR" property="datasourceType"/>
@@ -453,7 +453,7 @@
     </select>
 
 
-    <resultMap id="customModelDTOMap" type="CustomModelDTO">
+    <resultMap id="customModelDTOMap" type="com.youngdatafan.portal.model.management.basicmodel.dto.CustomModelDTO">
         <id column="model_name" jdbcType="VARCHAR" property="name"/>
         <result column="c_name" jdbcType="VARCHAR" property="cName"/>
         <result column="ds_name" jdbcType="VARCHAR" property="datasourceName"/>
@@ -463,7 +463,7 @@
         <result column="table_name" jdbcType="VARCHAR" property="tableName"/>
 
         <collection property="basicModelMetaDataDTOS"
-                    ofType="BasicModelMetaDataDTO">
+                    ofType="com.youngdatafan.portal.model.management.basicmodel.dto.BasicModelMetaDataDTO">
             <result column="model_name" jdbcType="VARCHAR" property="modelName"/>
             <result column="column_name" jdbcType="VARCHAR" property="columnName"/>
             <result column="column_chinese_name" jdbcType="VARCHAR" property="columnChineseName"/>
@@ -494,7 +494,7 @@
 
 
     <resultMap id="ModelDTOMap"
-               type="ModelDTO">
+               type="com.youngdatafan.portal.model.management.common.entity.ModelDTO">
         <id column="model_name" jdbcType="VARCHAR" property="name"/>
         <result column="c_name" jdbcType="VARCHAR" property="cName"/>
         <result column="ds_name" jdbcType="VARCHAR" property="datasourceName"/>
@@ -502,7 +502,7 @@
         <result column="table_schema" jdbcType="VARCHAR" property="schemaName"/>
         <result column="query_sql" jdbcType="VARCHAR" property="querySql"/>
 
-        <collection property="modelMetaDataDTOS" ofType="ModelMetaDataDTO">
+        <collection property="modelMetaDataDTOS" ofType="com.youngdatafan.portal.model.management.common.entity.ModelMetaDataDTO">
             <result column="model_name" jdbcType="VARCHAR" property="modelName"/>
             <result column="column_name" jdbcType="VARCHAR" property="columnName"/>
             <result column="column_chinese_name" jdbcType="VARCHAR" property="columnChineseName"/>

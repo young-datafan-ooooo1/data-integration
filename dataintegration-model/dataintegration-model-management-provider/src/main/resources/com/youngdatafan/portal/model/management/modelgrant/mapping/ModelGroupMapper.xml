@@ -11,7 +11,7 @@
         <result column="enabled" jdbcType="VARCHAR" property="enabled"/>
     </resultMap>
 
-    <resultMap id="modelGrantGroupDTOMap" type="ModelGrantGroupDTO">
+    <resultMap id="modelGrantGroupDTOMap" type="com.youngdatafan.portal.model.management.modelgrant.dto.ModelGrantGroupDTO">
         <result column="group_id" jdbcType="VARCHAR" property="groupId"/>
         <result column="group_name" jdbcType="VARCHAR" property="groupName"/>
         <result column="description" jdbcType="VARCHAR" property="description"/>
@@ -19,7 +19,7 @@
         <result column="user_name" jdbcType="VARCHAR" property="createUserName"/>
         <result column="enabled" jdbcType="VARCHAR" property="enabled"/>
         <collection property="businessModelListDTOS"
-                    ofType="BusinessModelListDTO">
+                    ofType="com.youngdatafan.portal.model.management.modelgrant.dto.BusinessModelListDTO">
             <id column="model_name" jdbcType="VARCHAR" property="modelName"/>
             <result column="chinese_name" jdbcType="VARCHAR" property="modelChineseName"/>
             <result column="model_grou_name" jdbcType="VARCHAR" property="modelGroupName"/>
@@ -29,7 +29,7 @@
 
 
     <resultMap id="AddUserGrantGroupListDTOMap"
-               type="AddUserGrantGroupListDTO">
+               type="com.youngdatafan.portal.model.management.modelgrant.dto.AddUserGrantGroupListDTO">
         <id column="group_id" jdbcType="VARCHAR" property="grantId"/>
         <result column="group_name" jdbcType="VARCHAR" property="grantGroupName"/>
         <collection property="businessModelName" ofType="java.lang.String">
@@ -228,10 +228,10 @@
     </select>
 
     <resultMap id="groupIdBusinessModelListDTOMap"
-               type="GroupIdBusinessModelListDTO">
+               type="com.youngdatafan.portal.model.management.modelgrant.dto.GroupIdBusinessModelListDTO">
         <result column="group_name" jdbcType="VARCHAR" property="groupid"/>
         <collection property="businessModelListDTOS"
-                    ofType="BusinessModelListDTO">
+                    ofType="com.youngdatafan.portal.model.management.modelgrant.dto.BusinessModelListDTO">
             <id column="model_name" jdbcType="VARCHAR" property="modelName"/>
             <result column="chinese_name" jdbcType="VARCHAR" property="modelChineseName"/>
             <result column="model_group_name" jdbcType="VARCHAR" property="modelGroupName"/>

@@ -239,9 +239,9 @@
     </insert>
 
     <resultMap id="ModelIdAndModelMetaDataDTOMap"
-               type="ModelIdAndModelMetaDataDTO">
+               type="com.youngdatafan.portal.model.management.outmodel.dto.ModelIdAndModelMetaDataDTO">
         <id column="model_name" jdbcType="VARCHAR" property="modelId"/>
-        <collection property="list" ofType="OutModelMetaDataDTO">
+        <collection property="list" ofType="com.youngdatafan.portal.model.management.outmodel.dto.OutModelMetaDataDTO">
             <result column="model_name" jdbcType="VARCHAR" property="modelName"/>
             <result column="column_name" jdbcType="VARCHAR" property="columnName"/>
             <result column="column_type" jdbcType="VARCHAR" property="columnType"/>
@@ -269,7 +269,7 @@
     </select>
 
     <resultMap id="OutModelProjectIdAndNamesDTOMap"
-               type="OutModelProjectIdAndNamesDTO">
+               type="com.youngdatafan.portal.model.management.outmodel.dto.OutModelProjectIdAndNamesDTO">
         <id column="project_id" jdbcType="VARCHAR" property="projectId"/>
         <result column="project_name" jdbcType="VARCHAR" property="projectName"/>
     </resultMap>

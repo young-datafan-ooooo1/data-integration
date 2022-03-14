@@ -13,7 +13,7 @@
         <result column="create_user_id" jdbcType="VARCHAR" property="createUserId"/>
     </resultMap>
 
-    <resultMap id="GroupDTOMap" type="OutinterfaceGroupDTO">
+    <resultMap id="GroupDTOMap" type="com.youngdatafan.portal.model.management.outinterfacemodel.dto.OutinterfaceGroupDTO">
         <id column="group_id" jdbcType="VARCHAR" property="groupId"/>
         <result column="group_name" jdbcType="VARCHAR" property="groupName"/>
     </resultMap>

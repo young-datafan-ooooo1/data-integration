@@ -394,9 +394,8 @@
             </if>
         </trim>
     </insert>
-    <update id="updateSelective" parameterType="UpdateOutModelVO">
+    <update id="updateSelective" parameterType="com.youngdatafan.portal.model.management.outmodel.vo.UpdateOutModelVO">
         update dp_portal_out_model
-
         <set>
             <if test="modelName != null">
                 model_name = #{modelName,jdbcType=VARCHAR},
@@ -643,7 +642,7 @@
 
     </update>
 
-    <update id="updateAllByPrimaryKey" parameterType="UpdateOutModelVO">
+    <update id="updateAllByPrimaryKey" parameterType="com.youngdatafan.portal.model.management.outmodel.vo.UpdateOutModelVO">
 
         update dp_portal_out_model
         set model_name     = #{modelName,jdbcType=VARCHAR},
@@ -687,7 +686,7 @@
 
 
     </update>
-    <resultMap id="OutModelGroupDTOMap" type="OutModelGroupDTO">
+    <resultMap id="OutModelGroupDTOMap" type="com.youngdatafan.portal.model.management.outmodel.dto.OutModelGroupDTO">
         <id column="group_id" jdbcType="VARCHAR" property="groupId"/>
         <result column="group_name" jdbcType="VARCHAR" property="groupName"/>
     </resultMap>
@@ -707,7 +706,7 @@
         </if>
     </select>
 
-    <resultMap id="OutModelAndMetaDataDTOMap" type="OutModelAndMetaDataDTO">
+    <resultMap id="OutModelAndMetaDataDTOMap" type="com.youngdatafan.portal.model.management.outmodel.dto.OutModelAndMetaDataDTO">
         <id column="model_id" jdbcType="VARCHAR" property="modelId"/>
         <result column="model_name" jdbcType="VARCHAR" property="modelName"/>
         <result column="group_name" jdbcType="VARCHAR" property="groupName"/>
@@ -815,7 +814,7 @@
 
 
     <resultMap id="OutModelAndMetaDataListDTOMap"
-               type="OutModelAndMetaDataListDTO">
+               type="com.youngdatafan.portal.model.management.outmodel.dto.OutModelAndMetaDataListDTO">
         <id column="model_id" jdbcType="VARCHAR" property="name"/>
         <result column="model_name" jdbcType="VARCHAR" property="cName"/>
         <result column="datasource_id" jdbcType="VARCHAR" property="datasourceName"/>
@@ -824,7 +823,7 @@
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
 
         <collection property="outModelMetaDataDTOS"
-                    ofType="OutModelMetaDataDTO">
+                    ofType="com.youngdatafan.portal.model.management.outmodel.dto.OutModelMetaDataDTO">
             <result column="model_name" jdbcType="VARCHAR" property="modelName"/>
             <result column="column_name" jdbcType="VARCHAR" property="columnName"/>
             <result column="column_chinese_name" jdbcType="VARCHAR" property="columnChineseName"/>
@@ -855,14 +854,14 @@
 
 
     <resultMap id="ModelDTOMap"
-               type="ModelDTO">
+               type="com.youngdatafan.portal.model.management.common.entity.ModelDTO">
         <id column="model_id" jdbcType="VARCHAR" property="name"/>
         <result column="model_name" jdbcType="VARCHAR" property="cName"/>
         <result column="datasource_id" jdbcType="VARCHAR" property="datasourceName"/>
         <result column="table_name" jdbcType="VARCHAR" property="tableName"/>
         <result column="query_sql" jdbcType="VARCHAR" property="querySql"/>
 
-        <collection property="modelMetaDataDTOS" ofType="ModelMetaDataDTO">
+        <collection property="modelMetaDataDTOS" ofType="com.youngdatafan.portal.model.management.common.entity.ModelMetaDataDTO">
             <result column="model_name" jdbcType="VARCHAR" property="modelName"/>
             <result column="column_name" jdbcType="VARCHAR" property="columnName"/>
             <result column="column_chinese_name" jdbcType="VARCHAR" property="columnChineseName"/>

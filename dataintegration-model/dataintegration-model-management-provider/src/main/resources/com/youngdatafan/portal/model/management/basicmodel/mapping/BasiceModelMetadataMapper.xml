@@ -16,10 +16,10 @@
         <result column="model_data_sort" jdbcType="VARCHAR" property="modelDataSort"/>
     </resultMap>
     <resultMap id="SelectModelNameAndColumnCountDTOMap"
-               type="SelectModelNameAndColumnCountDTO">
+               type="com.youngdatafan.portal.model.management.basicmodel.dto.SelectModelNameAndColumnCountDTO">
         <id column="model_name" jdbcType="VARCHAR" property="modelName"/>
         <collection property="basicModelMetaDataDTOS"
-                    ofType="BasicModelMetaDataDTO">
+                    ofType="com.youngdatafan.portal.model.management.basicmodel.dto.BasicModelMetaDataDTO">
             <id column="model_name" jdbcType="VARCHAR" property="modelName"/>
             <id column="column_name" jdbcType="VARCHAR" property="columnName"/>
             <result column="column_type" jdbcType="VARCHAR" property="columnType"/>

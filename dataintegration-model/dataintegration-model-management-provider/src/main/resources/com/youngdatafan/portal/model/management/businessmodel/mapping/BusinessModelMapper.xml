@@ -15,10 +15,10 @@
     </resultMap>
 
     <resultMap id="SelectModelNameAndColumnCountDTOMap"
-               type="SelectBusinessModelNameAndColumnCountDTO">
+               type="com.youngdatafan.portal.model.management.businessmodel.dto.SelectBusinessModelNameAndColumnCountDTO">
         <id column="model_name" jdbcType="VARCHAR" property="modelName"/>
         <collection property="businessModelMetaDataDTOS"
-                    ofType="BasicModelMetaDataDTO">
+                    ofType="com.youngdatafan.portal.model.management.businessmodel.dto.BusinessModelMetaDataDTO">
             <!--<id column="model_name(1)" jdbcType="VARCHAR" property="modelName"/>-->
             <id column="column_name" jdbcType="VARCHAR" property="columnName"/>
             <result column="column_type" jdbcType="VARCHAR" property="columnType"/>
@@ -35,18 +35,18 @@
     </resultMap>
 
     <resultMap id="BasicModelNameAndCnameDTOMap"
-               type="BasicModelNameAndCnameDTO">
+               type="com.youngdatafan.portal.model.management.businessmodel.dto.BasicModelNameAndCnameDTO">
         <id column="model_name" jdbcType="VARCHAR" property="modelName"/>
         <result column="c_name" jdbcType="VARCHAR" property="cName"/>
     </resultMap>
 
     <resultMap id="BasicModelGroupDTOMap"
-               type="BasicModelGroupDTO">
+               type="com.youngdatafan.portal.model.management.businessmodel.dto.BasicModelGroupDTO">
         <id column="group_id" jdbcType="VARCHAR" property="modelGroupId"/>
         <result column="group_name" jdbcType="VARCHAR" property="modelGroupName"/>
     </resultMap>
 
-    <resultMap id="BusinessModelDTOMap" type="BusinessModelDTO">
+    <resultMap id="BusinessModelDTOMap" type="com.youngdatafan.portal.model.management.businessmodel.dto.BusinessModelDTO">
         <id column="model_name" jdbcType="VARCHAR" property="modelName"/>
         <result column="chinese_name" jdbcType="VARCHAR" property="chineseName"/>
         <result column="basic_model_name" jdbcType="VARCHAR" property="basicModelName"/>
@@ -65,7 +65,7 @@
     </resultMap>
 
     <resultMap id="BusinessModelMetaDataDTOMap"
-               type="BusinessModelMetaDataDTO">
+               type="com.youngdatafan.portal.model.management.businessmodel.dto.BusinessModelMetaDataDTO">
         <result column="model_name" jdbcType="VARCHAR" property="modelName"/>
         <result column="column_name" jdbcType="VARCHAR" property="columnName"/>
         <result column="column_type" jdbcType="VARCHAR" property="columnType"/>
@@ -81,7 +81,7 @@
     </resultMap>
 
 
-    <resultMap id="ModelDatasourceDTOMap" type="ModelDatasourceDTO">
+    <resultMap id="ModelDatasourceDTOMap" type="com.youngdatafan.portal.model.management.businessmodel.dto.ModelDatasourceDTO">
         <id column="datasource_id" jdbcType="VARCHAR" property="datasourceId"/>
         <result column="ds_name" jdbcType="VARCHAR" property="dsName"/>
         <result column="describe" jdbcType="VARCHAR" property="describe"/>
@@ -96,7 +96,7 @@
         <result column="create_user_id" jdbcType="VARCHAR" property="createUserId"/>
     </resultMap>
 
-    <resultMap id="BusinessModelListDTOMap" type="BusinessModelListDTO">
+    <resultMap id="BusinessModelListDTOMap" type="com.youngdatafan.portal.model.management.modelgrant.dto.BusinessModelListDTO">
         <id column="model_name" jdbcType="VARCHAR" property="modelName"/>
         <result column="chinese_name" jdbcType="VARCHAR" property="modelChineseName"/>
         <result column="group_name" jdbcType="VARCHAR" property="modelGroupName"/>
@@ -108,9 +108,9 @@
     </resultMap>
 
     <resultMap id="BusinessModelAndGroupListMap"
-               type="BusinessModelAndGroupListDTO">
+               type="com.youngdatafan.portal.model.management.businessmodel.dto.BusinessModelAndGroupListDTO">
         <id column="group_id" jdbcType="VARCHAR" property="groupId"/>
-        <association property="groupDTO" javaType="GroupDTO">
+        <association property="groupDTO" javaType="com.youngdatafan.portal.model.management.businessmodel.dto.GroupDTO">
             <id column="group_id" jdbcType="VARCHAR" property="groupId"/>
             <result column="group_name" jdbcType="VARCHAR" property="groupName"/>
             <result column="describe" jdbcType="VARCHAR" property="describe"/>
@@ -122,7 +122,7 @@
             <result column="create_user_id" jdbcType="VARCHAR" property="createUserId"/>
         </association>
         <collection property="businessModels"
-                    ofType="BusinessModelDTO">
+                    ofType="com.youngdatafan.portal.model.management.businessmodel.dto.BusinessModelDTO">
             <id column="model_name" jdbcType="VARCHAR" property="modelName"/>
             <result column="chinese_name" jdbcType="VARCHAR" property="chineseName"/>
             <result column="basic_model_name" jdbcType="VARCHAR" property="basicModelName"/>
@@ -137,7 +137,7 @@
 
 
     <resultMap id="BusinessModelMap"
-               type="BusinessModelDTO">
+               type="com.youngdatafan.portal.model.management.businessmodel.dto.BusinessModelDTO">
         <id column="model_name" jdbcType="VARCHAR" property="modelName"/>
         <result column="chinese_name" jdbcType="VARCHAR" property="chineseName"/>
         <result column="basic_model_name" jdbcType="VARCHAR" property="basicModelName"/>
@@ -214,7 +214,7 @@
     </insert>
 
     <insert id="insertBusinessModel"
-            parameterType="BusinessModelAndBasicModelName">
+            parameterType="com.youngdatafan.portal.model.management.businessmodel.dto.BusinessModelAndBasicModelName">
 
     insert into dp_portal_business_model (model_name, chinese_name, basic_model_name,
       description, enabled,
@@ -542,9 +542,9 @@
 
 
     <resultMap id="OutModelAndGroupListMap"
-               type="BusinessModelAndGroupListDTO">
+               type="com.youngdatafan.portal.model.management.businessmodel.dto.BusinessModelAndGroupListDTO">
         <id column="group_id" jdbcType="VARCHAR" property="groupId"/>
-        <association property="groupDTO" javaType="GroupDTO">
+        <association property="groupDTO" javaType="com.youngdatafan.portal.model.management.businessmodel.dto.GroupDTO">
             <id column="group_id" jdbcType="VARCHAR" property="groupId"/>
             <result column="group_name" jdbcType="VARCHAR" property="groupName"/>
             <result column="describe" jdbcType="VARCHAR" property="describe"/>
@@ -556,7 +556,7 @@
             <result column="create_user_id" jdbcType="VARCHAR" property="createUserId"/>
         </association>
         <collection property="businessModels"
-                    ofType="BusinessModelDTO">
+                    ofType="com.youngdatafan.portal.model.management.businessmodel.dto.BusinessModelDTO">
             <id column="model_id" jdbcType="VARCHAR" property="modelName"/>
             <result column="model_name" jdbcType="VARCHAR" property="chineseName"/>
             <result column="basic_model_name" jdbcType="VARCHAR" property="basicModelName"/>
@@ -594,9 +594,9 @@
     </select>
 
     <resultMap id="CustomModelAndGroupListMap"
-               type="BusinessModelAndGroupListDTO">
+               type="com.youngdatafan.portal.model.management.businessmodel.dto.BusinessModelAndGroupListDTO">
         <id column="group_id" jdbcType="VARCHAR" property="groupId"/>
-        <association property="groupDTO" javaType="GroupDTO">
+        <association property="groupDTO" javaType="com.youngdatafan.portal.model.management.businessmodel.dto.GroupDTO">
             <id column="group_id" jdbcType="VARCHAR" property="groupId"/>
             <result column="group_name" jdbcType="VARCHAR" property="groupName"/>
             <result column="describe" jdbcType="VARCHAR" property="describe"/>
@@ -608,7 +608,7 @@
             <result column="create_user_id" jdbcType="VARCHAR" property="createUserId"/>
         </association>
         <collection property="businessModels"
-                    ofType="BusinessModelDTO">
+                    ofType="com.youngdatafan.portal.model.management.businessmodel.dto.BusinessModelDTO">
             <id column="model_name" jdbcType="VARCHAR" property="modelName"/>
             <result column="c_name" jdbcType="VARCHAR" property="chineseName"/>
             <result column="basic_model_name" jdbcType="VARCHAR" property="basicModelName"/>
@@ -861,7 +861,7 @@
     </select>
 
     <resultMap id="BatchDownloadBusinessModelDTOMap"
-               type="BatchDownloadBusinessModelDTO">
+               type="com.youngdatafan.portal.model.management.businessmodel.dto.BatchDownloadBusinessModelDTO">
         <id column="c_name" jdbcType="VARCHAR" property="basicModelName"/>
         <result column="column_name" jdbcType="VARCHAR" property="basicModelColumnName"/>
         <result column="group_name" jdbcType="VARCHAR" property="basicModelGroup"/>
@@ -956,7 +956,7 @@ FROM
     </select>
 
     <resultMap id="ModelDTOMap"
-               type="ModelDTO">
+               type="com.youngdatafan.portal.model.management.common.entity.ModelDTO">
         <id column="model_name" jdbcType="VARCHAR" property="name"/>
         <result column="chinese_name" jdbcType="VARCHAR" property="cName"/>
         <result column="ds_name" jdbcType="VARCHAR" property="datasourceName"/>
@@ -967,7 +967,7 @@ FROM
         <result column="query_sql" jdbcType="VARCHAR" property="querySql"/>
 
 
-        <collection property="modelMetaDataDTOS" ofType="ModelMetaDataDTO">
+        <collection property="modelMetaDataDTOS" ofType="com.youngdatafan.portal.model.management.common.entity.ModelMetaDataDTO">
             <result column="model_name" jdbcType="VARCHAR" property="modelName"/>
             <result column="column_name" jdbcType="VARCHAR" property="columnName"/>
             <result column="column_chinese_name" jdbcType="VARCHAR" property="columnChineseName"/>
@@ -1008,7 +1008,7 @@ FROM
     </select>
 
     <resultMap id="DatasourceAndTableNameDTOMap"
-               type="DatasourceAndTableNameDTO">
+               type="com.youngdatafan.portal.model.management.businessmodel.dto.DatasourceAndTableNameDTO">
         <id column="datasource_id" jdbcType="VARCHAR" property="datasourceId"/>
         <result column="ds_name" jdbcType="VARCHAR" property="dsName"/>
         <result column="describe" jdbcType="VARCHAR" property="describe"/>

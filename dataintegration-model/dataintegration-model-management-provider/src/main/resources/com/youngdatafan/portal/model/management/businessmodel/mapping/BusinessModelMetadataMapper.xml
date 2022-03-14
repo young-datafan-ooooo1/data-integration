@@ -10,7 +10,7 @@
     </resultMap>
 
     <resultMap id="BasicModelAndMetaDataDTOMap"
-               type="BasicModelAndMetaDataDTO">
+               type="com.youngdatafan.portal.model.management.businessmodel.dto.BasicModelAndMetaDataDTO">
         <result column="model_name" jdbcType="VARCHAR" property="modelName"/>
         <result column="column_name" jdbcType="VARCHAR" property="columnName"/>
         <result column="column_type" jdbcType="VARCHAR" property="columnType"/>
@@ -86,7 +86,7 @@
 
 
     <insert id="insertBusinessModelMetaData"
-            parameterType="BusinessModelMetaDataVO">
+            parameterType="com.youngdatafan.portal.model.management.businessmodel.entity.BusinessModelMetadata">
         insert into dp_portal_business_model_metadata (business_model_name, column_name, column_serial,
         custom_column_name, column_etl_sql)
         values

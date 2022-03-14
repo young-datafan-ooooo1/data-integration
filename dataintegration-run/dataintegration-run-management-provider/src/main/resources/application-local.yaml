@@ -35,16 +35,6 @@ spring:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
 
-#配置MyBatis
-mybatis:
-  mapper-locations: classpath*:com/youngdatafan/di/run/management/server/**/*Mapper.xml
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-
-  mvc:
-    view:
-      prefix: /
-      suffix: .html
   redis:
     host: 192.168.10.211
     port: 39121
@@ -56,6 +46,17 @@ mybatis:
         max-idle: 10 # 连接池中的最大空闲连接
         max-wait: 1000 # 连接池最大阻塞等待时间（使用负值表示没有限制）
         min-idle: 1 # 连接池中的最小空闲连接
+
+#配置MyBatis
+mybatis:
+  mapper-locations: classpath*:com/youngdatafan/di/run/management/server/**/*Mapper.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+  mvc:
+    view:
+      prefix: /
+      suffix: .html
 
 #pagehelper
 pagehelper:
