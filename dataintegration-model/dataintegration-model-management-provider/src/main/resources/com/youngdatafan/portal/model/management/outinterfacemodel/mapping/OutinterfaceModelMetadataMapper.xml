@@ -10,7 +10,7 @@
     </resultMap>
 
     <resultMap id="BasicModelAndMetaDataDTOMap"
-               type="OutinterfaceBasicModelAndMetaDataDTO">
+               type="com.youngdatafan.portal.model.management.outinterfacemodel.dto.OutinterfaceBasicModelAndMetaDataDTO">
         <result column="model_name" jdbcType="VARCHAR" property="modelName"/>
         <result column="column_name" jdbcType="VARCHAR" property="columnName"/>
         <result column="column_type" jdbcType="VARCHAR" property="columnType"/>
@@ -86,7 +86,7 @@
 
 
     <insert id="insertOutinterfaceModelMetaData"
-            parameterType="OutinterfaceModelMetaDataVO">
+            parameterType="com.youngdatafan.portal.model.management.outinterfacemodel.entity.OutinterfaceModelMetadata">
         insert into dp_portal_out_interface_model_metadata (out_interface_model_name, column_name, column_serial,
         custom_column_name, column_etl_sql)
         values

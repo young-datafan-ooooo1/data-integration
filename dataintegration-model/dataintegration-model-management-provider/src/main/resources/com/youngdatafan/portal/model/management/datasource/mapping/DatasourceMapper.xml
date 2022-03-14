@@ -271,7 +271,7 @@
         </if>
     </select>
 
-    <resultMap id="DatasourceDTOMap" type="DatasourceDTO">
+    <resultMap id="DatasourceDTOMap" type="com.youngdatafan.portal.model.management.datasource.dto.DatasourceDTO">
         <id column="datasource_id" jdbcType="VARCHAR" property="datasourceId"/>
         <result column="ds_name" jdbcType="VARCHAR" property="dsName"/>
         <result column="describe" jdbcType="VARCHAR" property="describe"/>
@@ -288,7 +288,7 @@
         <result column="source_platform" jdbcType="VARCHAR" property="sourcePlatform"/>
     </resultMap>
 
-    <resultMap id="DatasourceListDTOMap" type="DataSourceListDTO">
+    <resultMap id="DatasourceListDTOMap" type="com.youngdatafan.portal.model.management.datasource.dto.DataSourceListDTO">
         <id column="datasource_id" jdbcType="VARCHAR" property="datasourceId"/>
         <result column="ds_name" jdbcType="VARCHAR" property="dsName"/>
         <result column="describe" jdbcType="VARCHAR" property="describe"/>

@@ -20,7 +20,7 @@
         where  model_id= #{modelId}
     </select>
 
-    <resultMap type="ModelFilterVO" id="ModelFilterVOMap">
+    <resultMap type="com.youngdatafan.portal.model.management.common.entity.ModelFilterVO" id="ModelFilterVOMap">
         <result property="modelId" column="model_id" jdbcType="VARCHAR"/>
         <result property="modelColumn" column="model_column" jdbcType="VARCHAR"/>
         <result property="opertationSign" column="opertation_sign" jdbcType="VARCHAR"/>
@@ -109,7 +109,7 @@
                 relation = #{relation},
             </if>
         </set>
-        where = #{}
+        where model_id = #{modelId}
     </update>
 
     <!--通过主键删除-->
@@ -129,10 +129,10 @@
     </insert>
 
 
-    <resultMap type="ModelNameAndModelFilterDTO"
+    <resultMap type="com.youngdatafan.portal.model.management.basicmodel.dto.ModelNameAndModelFilterDTO"
                id="ModelNameAndModelFilterDTOMap">
         <id property="modelName" column="model_id" jdbcType="VARCHAR"/>
-        <collection property="modelFilterVOS" ofType="ModelFilterVO">
+        <collection property="modelFilterVOS" ofType="com.youngdatafan.portal.model.management.common.entity.ModelFilterVO">
             <result property="modelColumn" column="model_column" jdbcType="VARCHAR"/>
             <result property="opertationSign" column="opertation_sign" jdbcType="VARCHAR"/>
             <result property="fixedValue" column="fixed_value" jdbcType="VARCHAR"/>

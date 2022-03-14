@@ -9,7 +9,7 @@
     </resultMap>
 
 
-    <resultMap type="UserListDTO"
+    <resultMap type="com.youngdatafan.portal.model.management.datasource.dto.UserListDTO"
                id="userListMap">
         <result property="userId" column="user_id" jdbcType="VARCHAR"/>
         <result property="userName" column="user_name" jdbcType="VARCHAR"/>
