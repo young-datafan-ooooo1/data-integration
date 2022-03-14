@@ -20,7 +20,7 @@ import com.youngdatafan.portal.system.management.user.api.UserServiceApi;
 
 /**
  * @author gavin
- * @create 2020/2/7 12:14 下午
+ * @since 2020/2/7 12:14 下午
  */
 @FeignClient("dp-portal-system-management-provider")
 public interface UserServiceApiClient extends UserServiceApi {

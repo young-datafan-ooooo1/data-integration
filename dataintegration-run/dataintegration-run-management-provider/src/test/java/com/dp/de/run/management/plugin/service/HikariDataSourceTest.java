@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 /**
  * @author gavin
- * @create 2020/3/3 1:15 下午
+ * @since 2020/3/3 1:15 下午
  */
 public class HikariDataSourceTest {
 

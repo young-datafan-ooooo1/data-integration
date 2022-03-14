@@ -13,7 +13,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * 分组服务api声明
+ * 分组服务api声明.
  *
  * @author gavin
  * @since 2020/2/10 12:41 下午
@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 public interface GroupServiceApi {
 
     /**
-     * 查询分组是否重复
+     * 查询分组是否重复.
      *
      * @param groupUkVO ModelGroupUkVO
      * @param userId    用户id
@@ -30,11 +30,11 @@ public interface GroupServiceApi {
      */
     @ApiOperation(value = "查询分组是否重复", notes = "返回true or false", produces = "application/json")
     @PostMapping(value = "/queryGroupExists")
-    Result queryGroupExists(@Validated @RequestBody GroupUkVO groupUkVO
-            , @RequestHeader(value = "authorization-userId") String userId);
+    Result queryGroupExists(@Validated @RequestBody GroupUkVO groupUkVO,
+                            @RequestHeader(value = "authorization-userId") String userId);
 
     /**
-     * 新增分组
+     * 新增分组.
      *
      * @param groupAddVO modelGroupAddVO
      * @param userId     用户id
@@ -45,7 +45,7 @@ public interface GroupServiceApi {
     Result<DpPortalGroupDTO, Object> add(@Validated @RequestBody GroupAddVO groupAddVO, @RequestHeader(value = "authorization-userId") String userId);
 
     /**
-     * 修改分组
+     * 修改分组.
      *
      * @param groupUpdateVO modelGroupUpdateVO
      * @return 接口应答
@@ -55,7 +55,7 @@ public interface GroupServiceApi {
     Result<Boolean, Object> update(@Validated @RequestBody GroupUpdateVO groupUpdateVO);
 
     /**
-     * 修改分组
+     * 修改分组.
      *
      * @param groupUpdateVO modelGroupUpdateVO
      * @return 接口应答
@@ -65,7 +65,7 @@ public interface GroupServiceApi {
     Result<Boolean, Object> updateSelective(@Validated @RequestBody GroupUpdateVO groupUpdateVO);
 
     /**
-     * 批量删除分组
+     * 批量删除分组.
      *
      * @param groupIds 分组id
      * @return 接口应答
@@ -75,7 +75,7 @@ public interface GroupServiceApi {
     Result<Boolean, Object> deleteBatch(@RequestParam("groupIds") String[] groupIds);
 
     /**
-     * 删除分组
+     * 删除分组.
      *
      * @param groupId 分组id
      * @return 接口应答
@@ -85,8 +85,9 @@ public interface GroupServiceApi {
     Result<Boolean, Object> delete(@PathVariable("groupId") String groupId);
 
     /**
-     * 查询所有分组
+     * 查询所有分组.
      *
+     * @param userId 用户id
      * @param pageNum  页数
      * @param pageSize 每页记录数
      * @return 接口应答
@@ -94,12 +95,13 @@ public interface GroupServiceApi {
     @ApiOperation(value = "根据分组类型查询", produces = "application/json")
     @GetMapping(value = "/selectAll")
     Result<PageInfo<DpPortalGroupDTO>, Object> selectAll(
-            @RequestHeader(value = "authorization-userId") String userId
-            , @ApiParam("页数") @RequestParam int pageNum, @ApiParam("每页记录数") @RequestParam int pageSize);
+            @RequestHeader(value = "authorization-userId") String userId,
+            @ApiParam("页数") @RequestParam int pageNum, @ApiParam("每页记录数") @RequestParam int pageSize);
 
     /**
-     * 根据分组类型查询
+     * 根据分组类型查询.
      *
+     * @param userId 用户id
      * @param groupType 分组类型
      * @param pageNum   页数
      * @param pageSize  每页记录数
@@ -109,12 +111,13 @@ public interface GroupServiceApi {
     @GetMapping(value = "/selectBy/{groupType}")
     Result<PageInfo<DpPortalGroupDTO>, Object> selectByGroupType(
             @RequestHeader(value = "authorization-userId") String userId,
-            @ApiParam("分组类型，多个逗号分隔") @PathVariable("groupType") String groupType
-            , @ApiParam("页数") @RequestParam int pageNum, @ApiParam("每页记录数") @RequestParam int pageSize);
+            @ApiParam("分组类型，多个逗号分隔") @PathVariable("groupType") String groupType,
+            @ApiParam("页数") @RequestParam int pageNum, @ApiParam("每页记录数") @RequestParam int pageSize);
 
     /**
-     * 根据分组名称或备注模糊查询指定分组类型下的所有分组
+     * 根据分组名称或备注模糊查询指定分组类型下的所有分组.
      *
+     * @param userId 用户id
      * @param groupName 分组名称
      * @param groupType 分组类型
      * @param pageNum   页数
@@ -124,10 +127,10 @@ public interface GroupServiceApi {
     @ApiOperation(value = "根据分组名称或备注模糊查询指定分组类型下的所有分组", produces = "application/json")
     @GetMapping(value = "/selectLikeBy/{groupType}")
     Result<PageInfo<DpPortalGroupDTO>, Object> selectLikeByGroupType(
-            @RequestHeader(value = "authorization-userId") String userId
-            , @ApiParam("分组类型，多个逗号分隔") @PathVariable("groupType") String groupType
-            , @ApiParam("分组名称，模糊查询") @RequestParam(value = "groupName", required = false) String groupName
-            , @ApiParam("页数") @RequestParam int pageNum, @ApiParam("每页记录数") @RequestParam int pageSize);
+            @RequestHeader(value = "authorization-userId") String userId,
+            @ApiParam("分组类型，多个逗号分隔") @PathVariable("groupType") String groupType,
+            @ApiParam("分组名称，模糊查询") @RequestParam(value = "groupName", required = false) String groupName,
+            @ApiParam("页数") @RequestParam int pageNum, @ApiParam("每页记录数") @RequestParam int pageSize);
 
 }
 

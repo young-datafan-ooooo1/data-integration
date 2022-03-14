@@ -4,7 +4,7 @@ import org.jasypt.encryption.pbe.config.SimpleStringPBEConfig;
 
 /**
  * @author gavin
- * @create 2020/2/24 11:13 上午
+ * @since 2020/2/24 11:13 上午
  */
 public class EncryptConfigTest {
 

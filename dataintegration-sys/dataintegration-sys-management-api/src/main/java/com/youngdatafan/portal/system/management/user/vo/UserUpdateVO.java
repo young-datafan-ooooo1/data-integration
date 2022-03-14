@@ -13,7 +13,7 @@ import java.io.Serializable;
  * 接口输入参数
  *
  * @author gavin
- * @create 2020-01-09 16:44
+ * @since 2020-01-09 16:44
  */
 @ApiModel(description = "用户对象")
 public class UserUpdateVO implements Serializable {

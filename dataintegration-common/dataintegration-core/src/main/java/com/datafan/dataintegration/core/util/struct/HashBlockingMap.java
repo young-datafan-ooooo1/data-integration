@@ -14,7 +14,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * 如果数据在超时时间之后返回（我们put的时候不判断，数据就会永远的存在map中）.
  *
  * @author renhua.zhang
- * @create 2017-10-28 10:32
+ * @since 2017-10-28 10:32
  */
 public class HashBlockingMap<K, V> implements BlockingMap<K, V> {
     private final ReentrantLock lock = new ReentrantLock();

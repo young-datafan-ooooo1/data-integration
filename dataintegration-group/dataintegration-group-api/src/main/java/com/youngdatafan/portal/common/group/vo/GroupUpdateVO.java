@@ -9,7 +9,7 @@ import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.NotNull;
 
 /**
- * 模型分组输入参数
+ * 模型分组输入参数.
  *
  * @author gavin
  * @since 2020/2/10 12:42 下午

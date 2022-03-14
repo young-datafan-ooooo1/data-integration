@@ -4,7 +4,7 @@ package com.datafan.dataintegration.core.util;
  * 返回状态码枚举对象.
  *
  * @author gavin
- * @create 2020/5/21 10:15 上午
+ * @since 2020/5/21 10:15 上午
  */
 
 public enum StatusCode {

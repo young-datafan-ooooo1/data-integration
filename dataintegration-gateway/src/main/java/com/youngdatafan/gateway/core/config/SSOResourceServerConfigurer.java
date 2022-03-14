@@ -13,7 +13,7 @@ import java.util.Collections;
 
 /**
  * @author gavin
- * @create 2020/3/16 3:27 下午
+ * @since 2020/3/16 3:27 下午
  */
 @EnableWebFluxSecurity
 public class SSOResourceServerConfigurer {

@@ -6,7 +6,7 @@ import com.datafan.dataintegration.core.model.Result;
  * 项目执行回调
  *
  * @author gavin
- * @create 2020/2/19 5:25 下午
+ * @since 2020/2/19 5:25 下午
  */
 public interface ProjectExecuteCallback {
 

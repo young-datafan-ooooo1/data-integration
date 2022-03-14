@@ -8,7 +8,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * @author gavin
- * @create 2020/8/25 10:44 上午
+ * @since 2020/8/25 10:44 上午
  */
 public class Demo1 {
     private final static List<String> data = new ArrayList<>();

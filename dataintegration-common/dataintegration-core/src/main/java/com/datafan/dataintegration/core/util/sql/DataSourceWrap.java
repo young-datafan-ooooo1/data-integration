@@ -4,40 +4,46 @@ import java.util.Map;
 import javax.sql.DataSource;
 
 /**
+ * 数据源包装对象.
+ *
  * @author gavin
- * @create 2020/2/28 1:51 下午
+ * @since 2020/2/28 1:51 下午
  */
 public class DataSourceWrap {
 
     /**
-     * 数据库类型
+     * 数据库类型.
      */
     private DatabaseType databaseType;
 
     /**
-     * 数据源id
+     * 数据源id.
      */
     private String dataSourceId;
 
     /**
-     * 数据库连接池
+     * 数据库连接池.
      */
     private volatile DataSource dataSource;
 
     /**
-     * 最后使用时间
+     * 最后使用时间.
      */
     private volatile long lastUsedTime;
 
     /**
-     * 高级参数
+     * 高级参数.
      */
     private Map<String, String> params;
 
     private String host;
+
     private String db;
+
     private String port;
+
     private String user;
+
     private String pass;
 
     public DatabaseType getDatabaseType() {

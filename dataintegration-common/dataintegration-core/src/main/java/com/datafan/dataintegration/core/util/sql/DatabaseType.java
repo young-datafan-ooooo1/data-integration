@@ -1,9 +1,7 @@
 package com.datafan.dataintegration.core.util.sql;
 
 /**
- * 数据库类型
- * <p>
- * 和kettle-database-types.xml 保持一致
+ * 数据库类型和kettle-database-types.xml 保持一致.
  *
  * @author gavin
  */
@@ -28,8 +26,9 @@ public enum DatabaseType {
      * oracle.
      */
     ORACLE,
+
     /**
-     * td
+     * td.
      */
     TERADATA,
 
@@ -39,7 +38,7 @@ public enum DatabaseType {
     MSSQL,
 
     /**
-     * DB2
+     * DB2.
      */
     DB2,
 

@@ -13,7 +13,7 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
  * 接口数据响应对象.
  *
  * @author renhua.zhang
- * @create 2017-9-19 16:13
+ * @since 2017-9-19 16:13
  */
 @Setter
 @Getter

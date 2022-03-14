@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
  * 参数以及数据格式校验异常.
  *
  * @author renhua.zhang
- * @create 2017-10-27 16:13
+ * @since 2017-10-27 16:13
  */
 public class ValidationException extends DpException {
 

@@ -14,7 +14,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * 网关启动main.
  *
  * @author gavin
- * @create 2020/2/6 4:38 下午
+ * @since 2020/2/6 4:38 下午
  */
 @EnableDiscoveryClient
 @ComponentScan(basePackages = "com.youngdatafan.gateway")

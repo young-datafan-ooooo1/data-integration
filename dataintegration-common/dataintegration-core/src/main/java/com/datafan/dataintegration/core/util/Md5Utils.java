@@ -6,7 +6,7 @@ import java.security.MessageDigest;
  * MD5加密工具类.
  *
  * @author renhua.zhang
- * @create 2017-12-18 11:22:40
+ * @since 2017-12-18 11:22:40
  */
 public class Md5Utils {
     /**

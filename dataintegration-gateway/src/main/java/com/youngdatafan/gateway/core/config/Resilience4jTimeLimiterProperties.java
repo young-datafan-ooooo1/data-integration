@@ -1,9 +1,9 @@
 package com.youngdatafan.gateway.core.config;
 
-import com.youngdatafan.gateway.ratelimit.DpRedisRateLimiter;
 import io.github.resilience4j.core.lang.Nullable;
 import org.hibernate.validator.constraints.time.DurationMin;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.cloud.gateway.filter.ratelimit.RedisRateLimiter;
 import org.springframework.stereotype.Component;
 
 import java.time.Duration;
@@ -14,14 +14,14 @@ import java.util.Map;
  * 超时限制配置
  *
  * @author gavin
- * @create 2020/7/15 2:43 下午
+ * @since 2020/7/15 2:43 下午
  */
 @ConfigurationProperties(
         prefix = "resilience4j.timelimiter"
 )
 @Component
 public class Resilience4jTimeLimiterProperties {
-    private Map<String, Resilience4jTimeLimiterProperties.InstanceProperties> instances = new HashMap<>();
+    private Map<String, InstanceProperties> instances = new HashMap<>();
 
     /**
      * 资源限制初始化配置
@@ -80,18 +80,18 @@ public class Resilience4jTimeLimiterProperties {
         /**
          * 限流配置
          */
-        private DpRedisRateLimiter.Config rateLimitConfig;
+        private RedisRateLimiter.Config rateLimitConfig;
 
         /**
          * 超时配置
          */
         private InstanceProperties timeLimitConfig;
 
-        public DpRedisRateLimiter.Config getRateLimitConfig() {
+        public RedisRateLimiter.Config getRateLimitConfig() {
             return rateLimitConfig;
         }
 
-        public void setRateLimitConfig(DpRedisRateLimiter.Config rateLimitConfig) {
+        public void setRateLimitConfig(RedisRateLimiter.Config rateLimitConfig) {
             this.rateLimitConfig = rateLimitConfig;
         }
 

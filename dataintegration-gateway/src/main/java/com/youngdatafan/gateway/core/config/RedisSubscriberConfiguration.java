@@ -15,7 +15,7 @@ import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
  * redis消息订阅
  *
  * @author gavin
- * @create 2020/6/13 2:45 下午
+ * @since 2020/6/13 2:45 下午
  */
 @Configuration
 public class RedisSubscriberConfiguration {

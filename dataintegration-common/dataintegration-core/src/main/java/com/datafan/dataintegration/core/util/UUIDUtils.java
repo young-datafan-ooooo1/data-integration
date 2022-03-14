@@ -7,7 +7,7 @@ import java.util.UUID;
  * UUID工具类，支持生成32位uuid.
  *
  * @author renhua.zhang
- * @create 2017-10-20 10:23
+ * @since 2017-10-20 10:23
  **/
 public class UUIDUtils {
 

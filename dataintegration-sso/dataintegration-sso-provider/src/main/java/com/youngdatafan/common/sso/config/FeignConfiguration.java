@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @author gavin
- * @create 2020/6/13 5:01 下午
+ * @since 2020/6/13 5:01 下午
  */
 @Configuration
 public class FeignConfiguration {

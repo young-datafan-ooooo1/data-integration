@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  * @author gavin
- * @create 2020/2/26 11:35 上午
+ * @since 2020/2/26 11:35 上午
  */
 @ApiModel(description = "预览数据下载")
 public class PreviewDownloadVO {
