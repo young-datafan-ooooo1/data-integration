@@ -4,7 +4,7 @@ package com.youngdatafan.gateway.ratelimit.util;
  * 限流token常量
  *
  * @author gavin
- * @create 2020/7/13 1:29 下午
+ * @since 2020/7/13 1:29 下午
  */
 public interface TokenConstants {
 

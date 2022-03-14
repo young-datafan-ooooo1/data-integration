@@ -8,6 +8,6 @@ import org.springframework.cloud.openfeign.FeignClient;
  *
  * @author gavin
  */
-@FeignClient(value = "dataintegration-portal-system-management-provider", path = "/log")
+@FeignClient(value = "dataintegration-portal-system-management-provider", contextId = "portal-system-management-provider-log", path = "/log")
 public interface LogServiceApiClient extends LogServiceApi {
 }

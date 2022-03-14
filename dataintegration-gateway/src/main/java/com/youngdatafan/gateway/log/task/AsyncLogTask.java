@@ -16,10 +16,10 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 /**
- * 异步日志作业
+ * 异步日志作业.
  *
  * @author gavin
- * @create 2020-02-24 15:12:41
+ * @since 2020-02-24 15:12:41
  */
 @Component
 public class AsyncLogTask {

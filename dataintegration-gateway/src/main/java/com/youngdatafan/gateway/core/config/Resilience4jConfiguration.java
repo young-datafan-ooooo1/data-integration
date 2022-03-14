@@ -1,8 +1,5 @@
 package com.youngdatafan.gateway.core.config;
 
-import com.youngdatafan.gateway.core.filter.DynamicCircuitBreakerResilience4JFilterFactory;
-import com.youngdatafan.gateway.ratelimit.DbRateLimitRepository;
-import io.github.resilience4j.circuitbreaker.CircuitBreakerRegistry;
 import io.github.resilience4j.timelimiter.TimeLimiterConfig;
 import io.github.resilience4j.timelimiter.TimeLimiterRegistry;
 import org.springframework.cloud.gateway.filter.factory.FallbackHeadersGatewayFilterFactory;
@@ -12,8 +9,10 @@ import org.springframework.context.annotation.Configuration;
 import java.util.Map;
 
 /**
+ * Resilience4j 配置
+ *
  * @author gavin
- * @create 2020/7/13 7:48 下午
+ * @since 2020/7/13 7:48 下午
  */
 @Configuration(proxyBeanMethods = false)
 public class Resilience4jConfiguration {
@@ -37,15 +36,6 @@ public class Resilience4jConfiguration {
     @Bean
     public FallbackHeadersGatewayFilterFactory fallbackHeadersGatewayFilterFactory() {
         return new FallbackHeadersGatewayFilterFactory();
-    }
-
-    @Bean
-    public DynamicCircuitBreakerResilience4JFilterFactory springCloudCircuitBreakerResilience4JFilterFactory(
-            DbRateLimitRepository dbRateLimitRepository,
-            TimeLimiterRegistry timeLimiterRegistry,
-            CircuitBreakerRegistry circuitBreakerRegistry) {
-        return new DynamicCircuitBreakerResilience4JFilterFactory(
-                dbRateLimitRepository, timeLimiterRegistry, circuitBreakerRegistry);
     }
 
 }

@@ -8,8 +8,8 @@ import org.springframework.cloud.openfeign.FeignClient;
  * 网关限流接口客户端.
  *
  * @author gavin
- * @create 2020/6/13 3:10 下午
+ * @since 2020/6/13 3:10 下午
  */
-@FeignClient(value = "dataintegration-portal-system-management-provider", path = "/gateway/rateLimit")
+@FeignClient(name = "dataintegration-portal-system-management-provider", contextId = "portal-system-management-provider-rateLimit",path = "/gateway/rateLimit")
 public interface GatewayRateLimitServiceApiClient extends GatewayRateLimitServiceApi {
 }

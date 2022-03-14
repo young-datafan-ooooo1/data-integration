@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 
 /**
  * @author gavin
- * @create 2020/6/30 3:15 下午
+ * @since 2020/6/30 3:15 下午
  */
 public class DpServerBearerTokenAuthenticationConverter implements ServerAuthenticationConverter {
     private static final Pattern authorizationPattern = Pattern.compile(

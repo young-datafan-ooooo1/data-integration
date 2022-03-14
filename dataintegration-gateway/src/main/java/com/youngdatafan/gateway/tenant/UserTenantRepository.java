@@ -14,7 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * 用户租户仓库信息
  *
  * @author gavin
- * @create 2020/6/12 5:41 下午
+ * @since 2020/6/12 5:41 下午
  */
 @Component
 public class UserTenantRepository {

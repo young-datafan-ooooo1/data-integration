@@ -4,7 +4,7 @@ package com.youngdatafan.gateway.route.bean;
  * 网关规则状态
  *
  * @author gavin
- * @create 2020/6/13 3:39 下午
+ * @since 2020/6/13 3:39 下午
  */
 public class GatewayRouteStatus {
 

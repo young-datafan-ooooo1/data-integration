@@ -29,7 +29,7 @@ import org.springframework.stereotype.Component;
  * 网关限流规则同步作业
  *
  * @author gavin
- * @create 2020/6/13 3:12 下午
+ * @since 2020/6/13 3:12 下午
  */
 @Component
 public class GatewayRateLimitSyncTask {

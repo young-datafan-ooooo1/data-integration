@@ -10,7 +10,7 @@ import org.springframework.web.reactive.socket.server.upgrade.ReactorNettyReques
 
 /**
  * @author gavin
- * @create 2020/7/23 4:12 下午
+ * @since 2020/7/23 4:12 下午
  */
 @Configuration
 public class WebsocketFluxGatewayConfigurer {

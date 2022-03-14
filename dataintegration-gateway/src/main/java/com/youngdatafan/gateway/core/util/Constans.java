@@ -4,7 +4,7 @@ package com.youngdatafan.gateway.core.util;
  * 常量
  *
  * @author gavin
- * @create 2020/8/28 4:10 下午
+ * @since 2020/8/28 4:10 下午
  */
 public interface Constans {
 

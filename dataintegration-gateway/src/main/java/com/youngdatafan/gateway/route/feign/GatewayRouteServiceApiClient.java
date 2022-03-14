@@ -7,7 +7,7 @@ import org.springframework.cloud.openfeign.FeignClient;
  * 网关路由接口客户端.
  *
  * @author gavin
- * @create 2020/6/13 3:10 下午
+ * @since 2020/6/13 3:10 下午
  */
 @FeignClient(value = "dataintegration-portal-system-management-provider", path = "/gateway/route")
 public interface GatewayRouteServiceApiClient extends GatewayRouteServiceApi {

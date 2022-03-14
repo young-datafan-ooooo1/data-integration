@@ -31,7 +31,7 @@ import static org.springframework.cloud.gateway.support.GatewayToStringStyler.fi
  * 动态的resilience4j熔断器
  *
  * @author gavin
- * @create 2020/7/14 6:41 下午
+ * @since 2020/7/14 6:41 下午
  */
 public class DynamicCircuitBreakerResilience4JFilterFactory extends
         AbstractGatewayFilterFactory<SpringCloudCircuitBreakerFilterFactory.Config> {

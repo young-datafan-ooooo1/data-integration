@@ -9,7 +9,7 @@ import org.springframework.cloud.gateway.handler.predicate.PredicateDefinition;
 
 /**
  * @author gavin
- * @create 2020/6/13 4:59 下午
+ * @since 2020/6/13 4:59 下午
  */
 public class GatewayConfigTest {
 

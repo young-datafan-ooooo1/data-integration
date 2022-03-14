@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author gavin
- * @create 2020/3/16 4:58 下午
+ * @since 2020/3/16 4:58 下午
  */
 @Component
 @ConfigurationProperties(prefix = "sso.resource")
