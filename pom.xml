@@ -231,6 +231,8 @@
         <module>dataintegration-sys</module>
         <module>dataintegration-model</module>
         <module>dataintegration-run</module>
+        <module>dataintegration-gateway</module>
+
     </modules>
 
 </project>

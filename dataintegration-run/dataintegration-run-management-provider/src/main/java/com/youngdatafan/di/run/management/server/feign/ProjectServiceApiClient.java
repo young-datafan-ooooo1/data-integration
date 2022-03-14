@@ -9,7 +9,7 @@ import org.springframework.cloud.openfeign.FeignClient;
  * @author gavin
  * @create 2020-02-19 16:33:31
  */
-@FeignClient(value = "dp-common-project-provider", path = "/project")
+@FeignClient(value = "dataintegration-common-project-provider", path = "/project")
 public interface ProjectServiceApiClient extends ProjectServiceApi {
 
 }

@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: dataintegration-common-sso-provider
   profiles:
     active: local
   main:

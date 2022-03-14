@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: dataintegration-portal-system-management-provider
   profiles:
     active: local
   main:
