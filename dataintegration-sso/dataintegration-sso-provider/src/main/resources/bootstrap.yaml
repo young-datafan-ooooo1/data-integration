@@ -10,62 +10,12 @@ spring:
       port: 8500
       discovery:
         service-name: ${spring.application.name}
-
-  datasource:
-    type: com.zaxxer.hikari.HikariDataSource
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url:  jdbc:mysql://192.168.10.211:13306/dataintegration?useUnicode=true&characterEncoding=utf-8&useSSL=false
-    username: stelladp
-    password: 123456
-    hikari:
-      minimum-idle: 1
-      maximum-pool-size: 10
-      max-lifetime: 1800000
-      idle-timeout: 600000
-      connection-timeout: 30000
-      connection-test-query: SELECT 1
-  jackson:
-    time-zone: GMT+8
-    date-format: yyyy-MM-dd HH:mm:ss
-  redis:
-    host: 192.168.10.211
-    port: 39121
-    password:
-    lettuce:
-      shutdown-timeout: 100
-      pool:
-        max-active: 8
-        max-idle: 8
-        max-wait: 30
-        min-idle: 0
-jwt:
-  tokenSecret: dasdjklqwjkdsdjasldkjas
-  expireTime: 86400000
-login:
-  status:
-    expireTime: 1800000
-  lock:
-    expireTime: 86400000
-
-feign:
-  httpclient:
-    connection-timeout: 5000
-    connection-timer-repeat: 10000
-dp:
-  oauth2:
-    withClient: dataintegration
-    clientSecret: dataintegration
-    grantTypes: ["refresh_token", "password","authorization_code"]
-    scopes: default-scope
-    redirectUris: ["http://tencent.vincenthsing.top:51808/de-vue/#/genneralView","http://cloud.vincenthsing.top:8080/de-report-dev/#/genneralView","http://cloud.vincenthsing.top:8080/jupyterhub/hub/loginByCode","http://127.0.0.1:8089/#/login_banner"]
-    accessTokenValiditySeconds: 864000
-    refreshTokenValiditySeconds: 864000
-    keyStoreKeyLocation: jwt.jks
-    keyStorepass: dataintegration
-    keyPairAlias: jwt
-    keyPairPassword: dataintegration
+        instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}
+        health-check-path: /actuator/health
+        health-check-interval: 10s
 
 
+ 
 management:
   endpoints:
     web:

@@ -10,80 +10,10 @@ spring:
       port: 8500
       discovery:
         service-name: ${spring.application.name}
-
-  datasource:
-    type: com.zaxxer.hikari.HikariDataSource
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.10.211:13306/dataintegration?useUnicode=true&characterEncoding=utf-8&useSSL=false
-    #    url: jdbc:mysql://localhost:3306/dp_dev?useUnicode=true&characterEncoding=utf-8&useSSL=false
-    username: stelladp
-    password: 123456
-    hikari:
-      minimum-idle: 1
-      maximum-pool-size: 10
-      max-lifetime: 1800000
-      idle-timeout: 600000
-      connection-timeout: 30000
-      connection-test-query: SELECT 1
-  jackson:
-    time-zone: GMT+8
-    date-format: yyyy-MM-dd HH:mm:ss
-
-#配置MyBatis
-mybatis:
-  mapper-locations: classpath*:com/youngdatafan/portal/model/management/**/*.xml
-#pagehelper
-pagehelper:
-  helperDialect: mysql
-  reasonable: true
-  supportMethodsArguments: true
-  params: count=countSql
-
-#数据源驱动配置信息
-datasource:
-  types: "{MYSQL: 'com.mysql.jdbc.Driver', ORACLE: 'oracle.jdbc.driver.OracleDriver',SQLSERVER: 'com.microsoft.sqlserver.jdbc.SQLServerDriver',POSTGRESQL: 'org.postgresql.Driver',TERADATA: 'com.ncr.teradata.TeraDriver',
-  DB2: 'com.ibm.db2.jcc.DB2Driver',CLICKHOUSE:'ru.yandex.clickhouse.ClickHouseDriver'}"
-
-mysql:
-  data:
-    type: "{'bit','tinyint','smallint','mediumini','int','integer','bigint','decimal','numeric','float','double'}"
-
-#默认数据源
-default:
-  clickhouse:
-    dsName: ENGINE_CLICKHOUSE
-    describe: 默认的clickhouse
-    dsType: CLICKHOUSE
-    dsUrl: jdbc:clickhouse://tencent.vincenthsing.top:50812/default
-    driverClassName: ru.yandex.clickhouse.ClickHouseDriver
-    dsUserName: default
-    dsPassword: jRtXD8F8
-    createUserId: '00000000'
-    enabled: T
-    sourcePlatform: EXECUTIENGINE
-    dsConectorSetting: '{"minimumIdle": 10,"maximumPoolSize": 100,"maxLifetime": 1800000,"idleTimeout": 600000,"connectionTimeout": 30000,"connectionTestQuery": "SELECT 1"}'
-
-##superset相关参数
-#superset:
-#  sqllabUrl: http://nt.hmshzx2403.top:28088/superset/sqllab_viz/
-#  getAllDataSources: http://nt.hmshzx2403.top:28088/databaseasync/api/read?_flt_0_expose_in_sqllab=1&_oc_DatabaseAsync=database_name&_od_DatabaseAsync=asc
-#  forwardUrl: http://nt.hmshzx2403.top:28088/superset/explore/table/
-#  sqlForwardUrl: http://nt.hmshzx2403.top:28088/superset/explore/?form_data=
-
-#superset相关参数
-superset:
-  sqllabUrl: http://10.242.10.172:8088/superset/sqllab_viz/
-  getAllDataSources: http://10.242.10.172:8088/databaseasync/api/read?_flt_0_expose_in_sqllab=1&_oc_DatabaseAsync=database_name&_od_DatabaseAsync=asc
-  forwardUrl: http://10.242.10.172:8088/superset/explore/table/
-  sqlForwardUrl: http://cloud.vincenthsing.top:8082/superset/explore/?form_data=
-
-restTemplate:
-  poolSize: 200
-  perRouteSize: 50
-  connectTimeout: 3
-  readTimeut: 3
-  waitTimeout: 3
-
+        instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}
+        health-check-path: /actuator/health
+        health-check-interval: 10s
+        
 management:
   endpoints:
     web:
