@@ -17,7 +17,7 @@ import java.util.UUID;
 
 /**
  * @author gavin
- * @create 2020/2/29 12:02 下午
+ * @since 2020/2/29 12:02 下午
  */
 public class ClickHouseJdbcTest {
 

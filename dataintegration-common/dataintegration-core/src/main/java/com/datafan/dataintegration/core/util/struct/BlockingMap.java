@@ -5,7 +5,7 @@ package com.datafan.dataintegration.core.util.struct;
  * 开发逻辑主要参考：http://songsong.iteye.com/blog/802881
  *
  * @author renhua.zhang
- * @create 2017-10-28 10:32
+ * @since 2017-10-28 10:32
  */
 public interface BlockingMap<K, V> {
 

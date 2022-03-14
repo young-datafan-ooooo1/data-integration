@@ -11,7 +11,7 @@ import java.util.List;
  * 用户返回对象
  *
  * @author gavin
- * @create 2020/2/4 5:04 下午
+ * @since 2020/2/4 5:04 下午
  */
 @ApiModel(description = "用户返回对象")
 public class UserDTO implements Serializable {

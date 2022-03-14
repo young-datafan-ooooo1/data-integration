@@ -115,7 +115,7 @@
         </module>
 
         <!-- Imports -->
-        <module name="AvoidStarImport"/>
+<!--        <module name="AvoidStarImport"/>-->
         <module name="IllegalImport"/>
         <module name="RedundantImport"/>
         <module name="UnusedImports"/>

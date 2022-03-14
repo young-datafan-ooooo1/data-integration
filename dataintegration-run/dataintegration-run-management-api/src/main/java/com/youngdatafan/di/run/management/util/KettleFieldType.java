@@ -4,7 +4,7 @@ package com.youngdatafan.di.run.management.util;
  * 字段类型
  *
  * @author gavin
- * @create 2020/2/21 2:44 下午
+ * @since 2020/2/21 2:44 下午
  */
 public enum KettleFieldType {
     /**

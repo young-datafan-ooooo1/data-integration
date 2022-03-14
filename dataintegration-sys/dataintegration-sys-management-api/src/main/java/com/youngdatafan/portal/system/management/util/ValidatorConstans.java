@@ -4,7 +4,7 @@ package com.youngdatafan.portal.system.management.util;
  * 注解常量类
  *
  * @author gavin
- * @create 2018-01-16 20:37
+ * @since 2018-01-16 20:37
  **/
 public interface ValidatorConstans {
 

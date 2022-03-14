@@ -8,7 +8,7 @@ import org.springframework.security.oauth2.provider.token.store.redis.RedisToken
 
 /**
  * @author gavin
- * @create 2020/3/17 9:59 上午
+ * @since 2020/3/17 9:59 上午
  */
 @Configuration
 public class TokenStoreConfiguration {

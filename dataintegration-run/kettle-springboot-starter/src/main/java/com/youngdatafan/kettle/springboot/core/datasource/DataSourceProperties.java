@@ -7,7 +7,7 @@ import javax.sql.DataSource;
 
 /**
  * @author gavin
- * @create 2020-02-17 11:41:18
+ * @since 2020-02-17 11:41:18
  */
 public class DataSourceProperties {
 

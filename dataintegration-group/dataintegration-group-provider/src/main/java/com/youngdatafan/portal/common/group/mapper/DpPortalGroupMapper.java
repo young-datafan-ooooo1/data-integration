@@ -20,7 +20,7 @@ public interface DpPortalGroupMapper {
     int updateByPrimaryKey(DpPortalGroup record);
 
     /**
-     * 查询分组是否存在
+     * 查询分组是否存在.
      *
      * @param record DpPortalGroup
      * @return 记录数

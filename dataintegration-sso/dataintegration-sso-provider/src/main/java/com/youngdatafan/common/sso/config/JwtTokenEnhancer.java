@@ -12,7 +12,7 @@ import java.util.Map;
 
 /**
  * @author gavin
- * @create 2020/3/16 7:08 下午
+ * @since 2020/3/16 7:08 下午
  */
 public class JwtTokenEnhancer implements TokenEnhancer {
     public static final String TOKEN_LAST_ACCESS_TIME = "LastAccess_";

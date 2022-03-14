@@ -16,7 +16,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * 分组接口控制器
+ * 分组接口控制器.
  *
  * @author gavin
  * @since 2020/2/10 1:13 下午
@@ -33,8 +33,8 @@ public class GroupServiceApiController implements GroupServiceApi {
     }
 
     @Override
-    public Result<Boolean, Object> queryGroupExists(@Validated @RequestBody GroupUkVO groupUkVO
-            , @RequestHeader(value = "authorization-userId") String userId) {
+    public Result<Boolean, Object> queryGroupExists(@Validated @RequestBody GroupUkVO groupUkVO,
+                                                    @RequestHeader(value = "authorization-userId") String userId) {
         DpPortalGroup dpPortalGroup = new DpPortalGroup();
         // 创建数据库实体对象
         BeanUtils.copyProperties(groupUkVO, dpPortalGroup);
@@ -45,8 +45,8 @@ public class GroupServiceApiController implements GroupServiceApi {
     }
 
     @Override
-    public Result<DpPortalGroupDTO, Object> add(@Validated @RequestBody GroupAddVO groupAddVO
-            , @RequestHeader(value = "authorization-userId") String userId) {
+    public Result<DpPortalGroupDTO, Object> add(@Validated @RequestBody GroupAddVO groupAddVO,
+                                                @RequestHeader(value = "authorization-userId") String userId) {
         // 添加组
         return Result.success(groupService.addModelGroup(groupAddVO, userId));
     }
@@ -87,9 +87,9 @@ public class GroupServiceApiController implements GroupServiceApi {
     }
 
     @Override
-    public Result<PageInfo<DpPortalGroupDTO>, Object> selectByGroupType(@RequestHeader(value = "authorization-userId") String userId
-            , @PathVariable("groupType") String groupType
-            , @RequestParam int pageNum, @RequestParam int pageSize) {
+    public Result<PageInfo<DpPortalGroupDTO>, Object> selectByGroupType(@RequestHeader(value = "authorization-userId") String userId,
+                                                                        @PathVariable("groupType") String groupType,
+                                                                        @RequestParam int pageNum, @RequestParam int pageSize) {
         // 设置分页规则
         PageHelper.startPage(pageNum, pageSize);
         // 返回所有分页信息参数为查询所有记录的信息
@@ -99,9 +99,9 @@ public class GroupServiceApiController implements GroupServiceApi {
     }
 
     @Override
-    public Result<PageInfo<DpPortalGroupDTO>, Object> selectLikeByGroupType(@RequestHeader(value = "authorization-userId") String userId
-            , @PathVariable("groupType") String groupType, @RequestParam(value = "groupName", required = false) String groupName
-            , @RequestParam int pageNum, @RequestParam int pageSize) {
+    public Result<PageInfo<DpPortalGroupDTO>, Object> selectLikeByGroupType(@RequestHeader(value = "authorization-userId") String userId,
+                                                                            @PathVariable("groupType") String groupType, @RequestParam(value = "groupName", required = false) String groupName,
+                                                                            @RequestParam int pageNum, @RequestParam int pageSize) {
         // 设置分页规则
         PageHelper.startPage(pageNum, pageSize);
         // 返回所有分页信息参数为查询所有记录的信息

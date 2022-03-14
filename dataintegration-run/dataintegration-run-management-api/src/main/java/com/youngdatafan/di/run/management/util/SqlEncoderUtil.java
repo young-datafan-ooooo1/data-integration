@@ -6,7 +6,7 @@ import org.pentaho.di.core.encryption.KettleTwoWayPasswordEncoder;
  * sql编码处理
  *
  * @author gavin
- * @create 2020/5/7 5:03 下午
+ * @since 2020/5/7 5:03 下午
  */
 public class SqlEncoderUtil {
     public static final KettleTwoWayPasswordEncoder PASSWORD_ENCODER = new KettleTwoWayPasswordEncoder();

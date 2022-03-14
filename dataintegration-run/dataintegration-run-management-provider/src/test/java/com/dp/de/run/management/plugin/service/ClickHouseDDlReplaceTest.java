@@ -2,7 +2,7 @@ package com.dp.de.run.management.plugin.service;
 
 /**
  * @author gavin
- * @create 2020/4/28 5:45 下午
+ * @since 2020/4/28 5:45 下午
  */
 public class ClickHouseDDlReplaceTest {
     public static void main(String[] args) {

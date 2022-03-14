@@ -9,7 +9,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
  * redis消息发布配置
  *
  * @author gavin
- * @create 2020/6/13 2:17 下午
+ * @since 2020/6/13 2:17 下午
  */
 @Configuration
 public class PublisherConfig {

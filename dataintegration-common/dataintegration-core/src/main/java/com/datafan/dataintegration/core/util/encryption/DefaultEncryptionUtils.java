@@ -1,13 +1,12 @@
 package com.datafan.dataintegration.core.util.encryption;
 
-
 import com.datafan.dataintegration.core.util.encryption.sm.Sm4Utils;
 
 /**
  * 默认加密工具类.
  *
  * @author gavin
- * @create 2020/9/3 5:34 下午
+ * @since 2020/9/3 5:34 下午
  */
 public class DefaultEncryptionUtils {
 

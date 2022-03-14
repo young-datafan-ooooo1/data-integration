@@ -2,7 +2,8 @@ package com.datafan.dataintegration.core.util.encryption;
 
 import com.datafan.dataintegration.core.util.Base64Utils;
 import org.junit.Test;
-import sun.misc.BASE64Encoder;
+
+import java.util.Arrays;
 
 /**
  * {@link RsaCoderUtils} 测试代码
@@ -59,7 +60,7 @@ public class RsaCoderUtilsTest {
     @Test
     public void base64() {
         System.out.println(Base64Utils.encodeToString("YInDlIKQ0M+OzDRfmEL/Scl6dl4uXaxfZANxhvppsMo9BopUuh82sU5LQf8BoXWdIkBy25IRlEWlyctzsLx4XaUsGCd+4hwoaeMSJ9Wh/ZBP5ZgfRFtS0WOgebSTXq4+BAXMNx81saZ4CICMlmH4bwLX3pc1UrqGo3aarPWn6wk=".getBytes()));
-        System.out.println(new BASE64Encoder().encode("YInDlIKQ0M+OzDRfmEL/Scl6dl4uXaxfZANxhvppsMo9BopUuh82sU5LQf8BoXWdIkBy25IRlEWlyctzsLx4XaUsGCd+4hwoaeMSJ9Wh/ZBP5ZgfRFtS0WOgebSTXq4+BAXMNx81saZ4CICMlmH4bwLX3pc1UrqGo3aarPWn6wk=".getBytes()));
+        System.out.println(Arrays.toString(Base64Utils.encode("YInDlIKQ0M+OzDRfmEL/Scl6dl4uXaxfZANxhvppsMo9BopUuh82sU5LQf8BoXWdIkBy25IRlEWlyctzsLx4XaUsGCd+4hwoaeMSJ9Wh/ZBP5ZgfRFtS0WOgebSTXq4+BAXMNx81saZ4CICMlmH4bwLX3pc1UrqGo3aarPWn6wk=".getBytes())));
     }
 
     @Test

@@ -7,7 +7,7 @@ import org.junit.Test;
  * sm3测试
  *
  * @author renhua.zhang
- * @create 2017-12-06 14:43
+ * @since 2017-12-06 14:43
  **/
 public class Sm3DigestUtils {
 

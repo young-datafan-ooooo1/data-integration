@@ -1,7 +1,6 @@
 package com.youngdatafan.portal.common.group.service;
 
 import com.datafan.dataintegration.core.util.StatusCode;
-import com.datafan.dataintegration.core.exception.DpException;
 import com.datafan.dataintegration.core.exception.FormValidationException;
 import com.datafan.dataintegration.core.exception.ValidationException;
 import com.datafan.dataintegration.core.util.UUIDUtils;
@@ -19,7 +18,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * 分组管理
+ * 分组管理.
  *
  * @author gavin
  * @since 2020/2/10 1:29 下午
@@ -35,7 +34,7 @@ public class GroupService {
     }
 
     /**
-     * 查询联合主键是否重复
+     * 查询联合主键是否重复.
      *
      * @param dpPortalGroup DpPortalGroup
      * @return true or false
@@ -46,11 +45,13 @@ public class GroupService {
     }
 
     /**
-     * 添加组
+     * 添加组.
      *
      * @param groupAddVO ModelGroupAddVO
+     * @param userId     用户id
+     * @return 新增的分组信息.
      */
-    public DpPortalGroupDTO addModelGroup(GroupAddVO groupAddVO, String userId) throws DpException {
+    public DpPortalGroupDTO addModelGroup(GroupAddVO groupAddVO, String userId) {
         DpPortalGroup dpPortalGroup = new DpPortalGroup();
         // 创建数据库实体对象
         BeanUtils.copyProperties(groupAddVO, dpPortalGroup);
@@ -75,11 +76,12 @@ public class GroupService {
     }
 
     /**
-     * 修改组
+     * 修改组.
      *
      * @param groupUpdateVO ModelGroupUpdateVO
+     * @return 受影响的记录数.
      */
-    public int updateModelGroup(GroupUpdateVO groupUpdateVO) throws DpException {
+    public int updateModelGroup(GroupUpdateVO groupUpdateVO) {
         DpPortalGroup dpPortalGroup = new DpPortalGroup();
         // 创建数据库实体对象
         BeanUtils.copyProperties(groupUpdateVO, dpPortalGroup);
@@ -90,11 +92,12 @@ public class GroupService {
     }
 
     /**
-     * 修改组，选择性的
+     * 修改组，选择性的.
      *
      * @param groupUpdateVO ModelGroupUpdateVO
+     * @return 受影响的记录数.
      */
-    public int updateModelGroupSelective(GroupUpdateVO groupUpdateVO) throws DpException {
+    public int updateModelGroupSelective(GroupUpdateVO groupUpdateVO) {
         DpPortalGroup dpPortalGroup = new DpPortalGroup();
         // 创建数据库实体对象
         BeanUtils.copyProperties(groupUpdateVO, dpPortalGroup);
@@ -105,35 +108,37 @@ public class GroupService {
     }
 
     /**
-     * 删除组
+     * 删除组.
      *
      * @param groupId 分组id
+     * @return 删除的记录数.
      */
-    public int delete(String groupId) throws DpException {
+    public int delete(String groupId) {
         return groupMapper.deleteByPrimaryKey(groupId);
     }
 
     /**
-     * 批量删除组
+     * 批量删除组.
      *
      * @param groupIds 分组id
      */
-    public void deleteBath(String[] groupIds) throws DpException {
+    public void deleteBath(String[] groupIds) {
         if (ArrayUtils.isEmpty(groupIds)) {
             return;
         }
-        for(String str : groupIds){
-            DpPortalGroupDTO dpPortalGroupDTO= groupMapper.selectByGroupId(str);
-            if (dpPortalGroupDTO!=null){
-                throw new ValidationException(StatusCode.CODE_10010.getCode(),dpPortalGroupDTO.getGroupName()+"有项目，不可删除");
+        for (String str : groupIds) {
+            DpPortalGroupDTO dpPortalGroupDTO = groupMapper.selectByGroupId(str);
+            if (dpPortalGroupDTO != null) {
+                throw new ValidationException(StatusCode.CODE_10010.getCode(), dpPortalGroupDTO.getGroupName() + "有项目，不可删除");
             }
         }
         groupMapper.deleteByGrouIds(groupIds);
     }
 
     /**
-     * 查询所有
+     * 查询所有.
      *
+     * @param userId 用户id
      * @return 分组明细集合
      */
     public List<DpPortalGroupDTO> selectAll(String userId) {
@@ -141,7 +146,7 @@ public class GroupService {
     }
 
     /**
-     * 根据分组名称模糊查询
+     * 根据分组名称模糊查询.
      *
      * @param groupName 分组名称
      * @return 分组明细集合
@@ -151,8 +156,9 @@ public class GroupService {
     }
 
     /**
-     * 查询分组类型下的分组明细
+     * 查询分组类型下的分组明细.
      *
+     * @param userId    用户id
      * @param groupType 分组类型，多个逗号分隔
      * @return 分组明细集合
      */
@@ -166,8 +172,9 @@ public class GroupService {
     }
 
     /**
-     * 根据分组名称和分组备注模糊查询，查询分组类型下的分组明细
+     * 根据分组名称和分组备注模糊查询，查询分组类型下的分组明细.
      *
+     * @param userId    用户id
      * @param groupType 分组类型，多个逗号分隔
      * @param groupName 分组名称
      * @return 分组明细集合

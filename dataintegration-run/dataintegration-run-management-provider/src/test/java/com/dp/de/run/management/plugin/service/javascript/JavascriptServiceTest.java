@@ -42,7 +42,7 @@ import static org.pentaho.di.trans.steps.scriptvalues_mod.ScriptValuesMod.SKIP_T
 
 /**
  * @author gavin
- * @create 2020/1/16 7:21 下午
+ * @since 2020/1/16 7:21 下午
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = {DiRunManagementApplication.class, JavascriptServiceTest.class}

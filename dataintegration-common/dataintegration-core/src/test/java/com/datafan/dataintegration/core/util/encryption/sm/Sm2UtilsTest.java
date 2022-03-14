@@ -7,7 +7,7 @@ import org.junit.Test;
  * sm2测试
  *
  * @author renhua.zhang
- * @create 2017-12-06 14:07
+ * @since 2017-12-06 14:07
  **/
 public class Sm2UtilsTest {
 

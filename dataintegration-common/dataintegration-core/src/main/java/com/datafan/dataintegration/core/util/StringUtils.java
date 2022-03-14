@@ -4,7 +4,7 @@ package com.datafan.dataintegration.core.util;
  * string工具类.
  *
  * @author renhua.zhang
- * @create 2017-12-25 13:40
+ * @since 2017-12-25 13:40
  **/
 public class StringUtils {
 

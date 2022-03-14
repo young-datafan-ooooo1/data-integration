@@ -6,15 +6,19 @@ import org.springframework.stereotype.Component;
 import java.util.StringJoiner;
 
 /**
+ * 动态配置测试.
+ *
  * @author gavin
- * @create 2020/4/30 2:52 下午
+ * @since 2020/4/30 2:52 下午
  */
 @Component
 @ConfigurationProperties(prefix = "dynamic")
 public class DynamicTestConfig {
 
     private String name;
+
     private int age;
+
     private String sex;
 
     public String getName() {

@@ -12,7 +12,7 @@ import java.security.KeyPair;
 
 /**
  * @author gavin
- * @create 2020/3/17 10:09 上午
+ * @since 2020/3/17 10:09 上午
  */
 @Configuration
 public class AuthorizationBeanConfiguration {

@@ -14,7 +14,7 @@ import java.util.Map;
 
 /**
  * @author gavin
- * @create 2020-02-26 12:23:17
+ * @since 2020-02-26 12:23:17
  */
 @Api(tags = "数据预览API接口")
 public interface DataPreviewServiceApi {

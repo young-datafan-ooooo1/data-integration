@@ -21,7 +21,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * 系统管理启动Main
  *
  * @author gavin
- * @create 2020-01-09 15:59
+ * @since 2020-01-09 15:59
  */
 @EnableDiscoveryClient
 @EnableAutoConfiguration
