@@ -15,7 +15,7 @@ spring:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://192.168.10.211:13306/dataintegration?useUnicode=true&characterEncoding=utf-8&useSSL=false
-    username: root
+    username: stelladp
     password: 123456
     hikari:
       minimum-idle: 1
@@ -89,7 +89,7 @@ kettle:
         type: com.zaxxer.hikari.HikariDataSource
         driver-class-name: com.mysql.jdbc.Driver
         url: jdbc:mysql://192.168.10.211:13306/dataintegration?useUnicode=true&characterEncoding=utf-8&useSSL=false
-        username: root
+        username: stelladp
         password: 123456
         hikari:
           minimum-idle: 1
