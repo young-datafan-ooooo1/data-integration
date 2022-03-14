@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: dataintegration-project-provider
   profiles:
     active: local
   main:

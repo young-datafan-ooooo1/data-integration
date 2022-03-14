@@ -108,6 +108,23 @@ public class Result<T, A> implements Serializable {
      * 失败.
      *
      * @param code    状态码
+     * @param content 返回内容对象
+     * @param message 提示信息
+     * @param <T>     content type
+     * @return 返回PrimeResponse对象
+     */
+    public static <T> Result fail(final StatusCode code, final T content, final String message) {
+        Result<T, Object> result = new Result<>();
+        result.setContent(content);
+        result.setMsg(message);
+        result.setCode(code.getCode());
+        return result;
+    }
+
+    /**
+     * 失败.
+     *
+     * @param code    状态码
      * @param message 提示信息
      * @param <T>     content type
      * @return 返回PrimeResponse对象

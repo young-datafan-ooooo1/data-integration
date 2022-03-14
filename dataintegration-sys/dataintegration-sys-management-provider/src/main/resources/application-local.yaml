@@ -67,13 +67,13 @@ protal:
 
 vue-config:
   baseUrl: http://cloud.vincenthsing.top:8080/cloud/api
-  ssoUrl: http://cloud.vincenthsing.top:8080/cloud/api/dp-common-sso-provider
-  systemUrl: http://cloud.vincenthsing.top:8080/cloud/api/dp-portal-system-management-provider
-  groupUrl: http://cloud.vincenthsing.top:8080/cloud/api/dp-common-group-provider
-  projectUrl: http://cloud.vincenthsing.top:8080/cloud/api/dp-common-project-provider
-  runManagerUrl: http://cloud.vincenthsing.top:8080/cloud/api/dp-de-run-management-provider
-  modelMangerUrl: http://cloud.vincenthsing.top:8080/cloud/api/dp-portal-model-management-provider
-  wsUrl: ws://cloud.vincenthsing.top:8080/cloud/ws/dp-de-run-management-provider
-  onLineUrl: http://cloud.vincenthsing.top:8080/cloud/api/dp-schedule-online-audit-provider
-  fileUrl: http://cloud.vincenthsing.top:8080/cloud/api/dp-file-management-provider
-  recordUrl: http://cloud.vincenthsing.top:8080/cloud/api/dp-portal-model-management-provider/superset/forward
+  ssoUrl: http://cloud.vincenthsing.top:8080/cloud/api/dataintegration-common-sso-provider
+  systemUrl: http://cloud.vincenthsing.top:8080/cloud/api/dataintegration-portal-system-management-provider
+  groupUrl: http://cloud.vincenthsing.top:8080/cloud/api/dataintegration-common-group-provider
+  projectUrl: http://cloud.vincenthsing.top:8080/cloud/api/dataintegration-common-project-provider
+  runManagerUrl: http://cloud.vincenthsing.top:8080/cloud/api/dataintegration-de-run-management-provider
+  modelMangerUrl: http://cloud.vincenthsing.top:8080/cloud/api/dataintegration-portal-model-management-provider
+  wsUrl: ws://cloud.vincenthsing.top:8080/cloud/ws/dataintegration-de-run-management-provider
+  onLineUrl: http://cloud.vincenthsing.top:8080/cloud/api/dataintegration-schedule-online-audit-provider
+  fileUrl: http://cloud.vincenthsing.top:8080/cloud/api/dataintegration-file-management-provider
+  recordUrl: http://cloud.vincenthsing.top:8080/cloud/api/dataintegration-portal-model-management-provider/superset/forward

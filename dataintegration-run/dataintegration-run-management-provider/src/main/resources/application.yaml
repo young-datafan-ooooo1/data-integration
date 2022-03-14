@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: dataintegration-di-run-management-provider
   profiles:
     active: local
   main:

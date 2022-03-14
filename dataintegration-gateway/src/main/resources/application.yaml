@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    active: local
+  application:
+    name: dataintegration-gateway
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    circuitbreaker:
+      hystrix:
+        enabled: false
+      resilience4j:
+        enabled: true

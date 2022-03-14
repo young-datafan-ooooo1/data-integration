@@ -1,0 +1,16 @@
+.project
+.classpath
+.settings
+build
+target
+release.properties
+pom.xml.releaseBackup
+*.iml
+.idea
+bin
+*.class
+*.war
+*.ear
+.DS_Store
+routes.yml
+logs
