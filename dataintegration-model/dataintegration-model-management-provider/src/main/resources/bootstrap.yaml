@@ -10,7 +10,10 @@ spring:
       port: 8500
       discovery:
         service-name: ${spring.application.name}
-
+        instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}
+        health-check-path: /actuator/health
+        health-check-interval: 10s
+        
 management:
   endpoints:
     web:
