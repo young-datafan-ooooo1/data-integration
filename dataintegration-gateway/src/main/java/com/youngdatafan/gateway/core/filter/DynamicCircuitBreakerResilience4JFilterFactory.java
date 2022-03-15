@@ -16,6 +16,7 @@ import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFac
 import org.springframework.cloud.gateway.filter.factory.SpringCloudCircuitBreakerFilterFactory;
 import org.springframework.cloud.gateway.support.ServiceUnavailableException;
 import org.springframework.cloud.gateway.support.TimeoutException;
+import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.DispatcherHandler;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
@@ -28,11 +29,12 @@ import static java.util.Collections.singletonList;
 import static org.springframework.cloud.gateway.support.GatewayToStringStyler.filterToStringCreator;
 
 /**
- * 动态的resilience4j熔断器
+ * 动态的resilience4j熔断器.
  *
  * @author gavin
  * @since 2020/7/14 6:41 下午
  */
+@Component
 public class DynamicCircuitBreakerResilience4JFilterFactory extends
         AbstractGatewayFilterFactory<SpringCloudCircuitBreakerFilterFactory.Config> {
     /**

@@ -3,7 +3,7 @@ server:
 
 
 spring:
-  security.oauth2.resourceserver.jwt.jwk-set-uri: 'http://localhost:10217/api/dataintegration-common-sso-provider/oauth/.well-known/jwks.json'
+  security.oauth2.resourceserver.jwt.public-key-location: classpath:jwt.pub
   jackson:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
@@ -234,9 +234,9 @@ spring:
             # 允许跨域的method， 默认为GET和OPTIONS，设置*为全部
             # 跨域允许的有效期
             allow-credentials: true
-            allowed-origins: "*"
             allowed-headers: "*"
             allowed-methods: "*"
+            allowedOriginPatterns: "*"
             max-age: 3600
             # 允许response的head信息，默认仅允许如下6个：Cache-Control,Content-Language,Content-Type,Expires,Last-Modified,Pragma
             #exposed-headers:
@@ -257,7 +257,6 @@ jasypt:
     password: fdasjfldjskfkf787fda9r321
 sso.resource.whiteListPatterns:
   - /api/dataintegration-common-sso-provider/oauth/token
-  - /api/dataintegration-common-sso-provider/oauth/.well-known/*
   - /api/dataintegration-de-run-management-provider-schedule/scheduleExecute/executeById
   - /api/dataintegration-de-run-management-provider-schedule/scheduleExecute/stop
   - /api/dataintegration-di-run-management-provider-schedule/scheduleExecute/executeById
