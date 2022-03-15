@@ -29,7 +29,7 @@ var createServerConfig = function(compilation) {
       boardUrl : "http://cloud.vincenthsing.top:8080/de-report-dev/#/newReport",
     },
     test: {
-      baseUrl: "http://prime.shuzhaninfo.com:8088/cloud-dev/api",
+      baseUrl: "http://192.168.10.160:10200/api",
       ssoUrl: 'http://10.242.10.173:10200/api/dp-common-sso-provider', //登录模块
       systemUrl: 'http://10.242.10.173:10200/api/dp-portal-system-management-provider', //系统管理模块
       groupUrl: 'http://10.242.10.173:10200/api/dp-common-group-provider', //分组管理

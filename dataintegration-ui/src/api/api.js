@@ -86,7 +86,7 @@ if (process.env.NODE_ENV === "production") {
     }
   })
 } else {
-  base = 'http://prime.shuzhaninfo.com:8088/cloud-dev/api';
+  base = 'http://192.168.10.160:10200/api';
   // base = 'http://www.hmshzx2403.top:10200/api';
   // base = 'http://10.242.10.173:10200/api';
   boardUrl = "http://cloud.vincenthsing.top:8080/de-report-dev/#/newReport";
