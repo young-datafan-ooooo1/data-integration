@@ -1,5 +1,4 @@
 spring:
-  
   profiles:
     active: local
   main:
