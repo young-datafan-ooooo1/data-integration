@@ -16,44 +16,44 @@ var createServerConfig = function(compilation) {
   let configJson = {
     prod: {
       baseUrl: "http://cloud.vincenthsing.top:8080/cloud/api",
-      ssoUrl: 'http://cloud.vincenthsing.top:8080/cloud/api/dp-common-sso-provider', //登录模块
-      systemUrl: 'http://cloud.vincenthsing.top:8080/cloud/api/dp-portal-system-management-provider', //系统管理模块
-      groupUrl: 'http://cloud.vincenthsing.top:8080/cloud/api/dp-common-group-provider', //分组管理
-      projectUrl: 'http://cloud.vincenthsing.top:8080/cloud/api/dp-common-project-provider', //项目管理模块
-      runManagerUrl: 'http://cloud.vincenthsing.top:8080/cloud/api/dp-de-run-management-provider', //运行管理模块
-      modelMangerUrl: 'http://cloud.vincenthsing.top:8080/cloud/api/dp-portal-model-management-provider', //模型管理模块
-      wsUrl: 'ws://prime.shuzhaninfo.com:8088/cloud/ws/dp-di-run-management-provider', //websocket连接地址
+      ssoUrl: 'http://cloud.vincenthsing.top:8080/cloud/api/dataintegration-common-sso-provider', //登录模块
+      systemUrl: 'http://cloud.vincenthsing.top:8080/cloud/api/dataintegration-portal-system-management-provider', //系统管理模块
+      groupUrl: 'http://cloud.vincenthsing.top:8080/cloud/api/dataintegration-group-provider', //分组管理
+      projectUrl: 'http://cloud.vincenthsing.top:8080/cloud/api/dataintegration-project-provider', //项目管理模块
+      runManagerUrl: 'http://cloud.vincenthsing.top:8080/cloud/api/dataintegration-run-provider', //运行管理模块
+      modelMangerUrl: 'http://cloud.vincenthsing.top:8080/cloud/api/dataintegration-model-provider', //模型管理模块
+      wsUrl: 'ws://prime.shuzhaninfo.com:8088/cloud/ws/dataintegration-di-run-management-provider', //websocket连接地址
       onLineUrl: 'http://cloud.vincenthsing.top:8080/cloud/api/dp-schedule-online-audit-provider', //上线管理模块
       fileUrl: 'http://cloud.vincenthsing.top:8080/cloud/api/dp-file-management-provider',
-      recordUrl: 'http://cloud.vincenthsing.top:8080/cloud/api/dp-portal-model-management-provider/superset/forward', //报表跳转
+      recordUrl: 'http://cloud.vincenthsing.top:8080/cloud/api/dataintegration-model-provider/superset/forward', //报表跳转
       boardUrl : "http://cloud.vincenthsing.top:8080/de-report-dev/#/newReport",
     },
     test: {
       baseUrl: "http://192.168.10.160:10200/api",
-      ssoUrl: 'http://10.242.10.173:10200/api/dp-common-sso-provider', //登录模块
-      systemUrl: 'http://10.242.10.173:10200/api/dp-portal-system-management-provider', //系统管理模块
-      groupUrl: 'http://10.242.10.173:10200/api/dp-common-group-provider', //分组管理
-      projectUrl: 'http://10.242.10.173:10200/api/dp-common-project-provider', //项目管理模块
-      runManagerUrl: 'http://10.242.10.173:10200/api/dp-di-run-management-provider', //运行管理模块
-      modelMangerUrl: 'http://10.242.10.173:10200/api/dp-portal-model-management-provider', //模型管理模块
-      wsUrl: 'ws://prime.shuzhaninfo.com:8088/cloud-dev/ws/dp-di-run-management-provider', //websocket连接地址
+      ssoUrl: 'http://10.242.10.173:10200/api/dataintegration-common-sso-provider', //登录模块
+      systemUrl: 'http://10.242.10.173:10200/api/dataintegration-portal-system-management-provider', //系统管理模块
+      groupUrl: 'http://10.242.10.173:10200/api/dataintegration-group-provider', //分组管理
+      projectUrl: 'http://10.242.10.173:10200/api/dataintegration-project-provider', //项目管理模块
+      runManagerUrl: 'http://10.242.10.173:10200/api/dataintegration-di-run-management-provider', //运行管理模块
+      modelMangerUrl: 'http://10.242.10.173:10200/api/dataintegration-model-provider', //模型管理模块
+      wsUrl: 'ws://prime.shuzhaninfo.com:8088/cloud-dev/ws/dataintegration-di-run-management-provider', //websocket连接地址
       onLineUrl: 'http://10.242.10.173:10200/api/dp-schedule-online-audit-provider', //上线管理模块
       fileUrl: 'http://10.242.10.173:10200/api/dp-file-management-provider',
-      recordUrl: 'http://10.242.10.173:10200/api/dp-portal-model-management-provider/superset/forward', //报表跳转
+      recordUrl: 'http://10.242.10.173:10200/api/dataintegration-model-provider/superset/forward', //报表跳转
       boardUrl :"http://prime.shuzhaninfo.com:8088/de-report-dev/#/newReport",
     },
     uat: {
       baseUrl: "http://prime.shuzhaninfo.com:8088/cloud-uat/api",
-      ssoUrl: 'http://10.242.10.173:10200/api/dp-common-sso-provider', //登录模块
-      systemUrl: 'http://10.242.10.173:10200/api/dp-portal-system-management-provider', //系统管理模块
-      groupUrl: 'http://10.242.10.173:10200/api/dp-common-group-provider', //分组管理
-      projectUrl: 'http://10.242.10.173:10200/api/dp-common-project-provider', //项目管理模块
-      runManagerUrl: 'http://10.242.10.173:10200/api/dp-de-run-management-provider', //运行管理模块
-      modelMangerUrl: 'http://10.242.10.173:10200/api/dp-portal-model-management-provider', //模型管理模块
-      wsUrl: 'ws://prime.shuzhaninfo.com:8088/cloud-uat/ws/dp-di-run-management-provider', //websocket连接地址
+      ssoUrl: 'http://10.242.10.173:10200/api/dataintegration-common-sso-provider', //登录模块
+      systemUrl: 'http://10.242.10.173:10200/api/dataintegration-portal-system-management-provider', //系统管理模块
+      groupUrl: 'http://10.242.10.173:10200/api/dataintegration-group-provider', //分组管理
+      projectUrl: 'http://10.242.10.173:10200/api/dataintegration-project-provider', //项目管理模块
+      runManagerUrl: 'http://10.242.10.173:10200/api/dataintegration-run-provider', //运行管理模块
+      modelMangerUrl: 'http://10.242.10.173:10200/api/dataintegration-model-provider', //模型管理模块
+      wsUrl: 'ws://prime.shuzhaninfo.com:8088/cloud-uat/ws/dataintegration-di-run-management-provider', //websocket连接地址
       onLineUrl: 'http://10.242.10.173:10200/api/dp-schedule-online-audit-provider', //上线管理模块
       fileUrl: 'http://10.242.10.173:10200/api/dp-file-management-provider',
-      recordUrl: 'http://10.242.10.173:10200/api/dp-portal-model-management-provider/superset/forward', //报表跳转
+      recordUrl: 'http://10.242.10.173:10200/api/dataintegration-model-provider/superset/forward', //报表跳转
       boardUrl :"http://prime.shuzhaninfo.com:8088/de-report-dev/#/newReport",
     }
 

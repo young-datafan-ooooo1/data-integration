@@ -86,8 +86,8 @@
               username: this.ruleForm.userName,
               password: this.ruleForm.password,
               grant_type: 'password',
-              client_id: 'dp-client',
-              client_secret: 'dp-secret',
+              client_id: 'dataintegration',
+              client_secret: 'dataintegration',
             };
 
             sessionStorage.clear();

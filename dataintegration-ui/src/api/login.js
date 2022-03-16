@@ -51,7 +51,7 @@ if (process.env.NODE_ENV === "production") {
   })
 } else {
   base = 'http://192.168.10.160:10200/api';
-  wsUrl = 'ws://prime.shuzhaninfo.com:8088/cloud-dev/ws/dp-di-run-management-provider';
+  wsUrl = 'ws://prime.shuzhaninfo.com:8088/cloud-dev/ws/dataintegration-di-run-management-provider';
   // base = 'http://10.242.10.173:10200/api';
 }
 
@@ -128,28 +128,28 @@ axios.interceptors.response.use(
 
 //获取前端配置
 export const getVueConfig = params => {
-  return axios.get(`${base}/dp-portal-system-management-provider/configure/getVueConfig`)
+  return axios.get(`${base}/dataintegration-portal-system-management-provider/configure/getVueConfig`)
 }
 
 //登录接口
 export const login = params => {
-  return axios.post(`${base}/dp-common-sso-provider/oauth/token`, qs.stringify(params)).then(res =>
+  return axios.post(`${base}/dataintegration-common-sso-provider/oauth/token`, qs.stringify(params)).then(res =>
     res.data);
 }
 
 // 获取用户已授权菜单
 export const getPlatResource = params => {
-  return axios.get(`${base}/dp-portal-system-management-provider/resource/selectResourceTreeForSubPlatform`, {params: params})
+  return axios.get(`${base}/dataintegration-portal-system-management-provider/resource/selectResourceTreeForSubPlatform`, {params: params})
 }
 
 // 获取项目文件信息
 export const getProjectVo = params => {
-  return axios.get(`${base}/dp-common-project-provider/project/getProjectFile/` + params)
+  return axios.get(`${base}/dataintegration-project-provider/project/getProjectFile/` + params)
 }
 
 // 获取token
 export const getToken = params => {
-  return axios.post(`${base}/dp-common-sso-provider/oauth/token`, qs.stringify(params)).then(res =>
+  return axios.post(`${base}/dataintegration-common-sso-provider/oauth/token`, qs.stringify(params)).then(res =>
     res.data);
 }
 
@@ -159,7 +159,7 @@ export const getToken = params => {
  * @returns {Promise<AxiosResponse<any>>}
  */
 export const checkToken = params => {
-  return axios.get(`${base}/dp-common-sso-provider/oauth/check_token`, {params: params}).catch(e => {
+  return axios.get(`${base}/dataintegration-common-sso-provider/oauth/check_token`, {params: params}).catch(e => {
   })
 }
 

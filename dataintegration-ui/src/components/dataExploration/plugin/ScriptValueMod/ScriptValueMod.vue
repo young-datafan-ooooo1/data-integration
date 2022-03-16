@@ -1,10 +1,6 @@
 <!--
  * @Author: your name
  * @Date: 2020-07-15 18:46:41
- * @LastEditTime: 2020-08-04 15:47:35
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: /company project/dp-di-vue/src/components/dataExploration/plugin/ScriptValueMod/ScriptValueMod.vue
 -->
 <template>
   <div class="plugin_body">

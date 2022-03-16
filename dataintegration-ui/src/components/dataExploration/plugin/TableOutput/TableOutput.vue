@@ -1,10 +1,6 @@
 <!--
  * @Author: your name
  * @Date: 2020-07-15 11:38:21
- * @LastEditTime: 2020-08-05 14:52:27
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: /company project/dp-di-vue/src/components/dataExploration/plugin/step/step.vue
 -->
 <template>
   <div class="plugin_body">
