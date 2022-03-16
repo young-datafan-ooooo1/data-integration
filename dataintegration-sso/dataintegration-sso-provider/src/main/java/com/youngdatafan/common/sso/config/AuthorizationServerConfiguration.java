@@ -44,11 +44,6 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     private DataSource dataSource;
 
 
-    @Bean
-    public JdbcClientDetailsService jdbcClientDetailsService() {
-        return new JdbcClientDetailsService(dataSource);
-    }
-
     @Autowired
     public AuthorizationServerConfiguration(AuthenticationManager authenticationManagerBean, PasswordEncoder passwordEncoder, JwtTokenEnhancer tokenEnhancer, TokenStore tokenStore, JwtAccessTokenConverter jwtAccessTokenConverter, JwtAuthorizationProperties jwtAuthorizationProperties, UserDetailsService userDetailsService, AuthorizationCodeServices authorizationCodeServices) {
         this.authenticationManagerBean = authenticationManagerBean;
@@ -61,9 +56,21 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         this.authorizationCodeServices = authorizationCodeServices;
     }
 
+    @Bean
+    public JdbcClientDetailsService jdbcClientDetailsService() {
+        return new JdbcClientDetailsService(dataSource);
+    }
+
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.withClientDetails(jdbcClientDetailsService());  //设置客户端的配置从数据库中读取，存储在oauth_client_details表
+        clients.inMemory()
+                .withClient(jwtAuthorizationProperties.getWithClient())
+                .secret(passwordEncoder.encode(jwtAuthorizationProperties.getClientSecret()))
+                .authorizedGrantTypes(jwtAuthorizationProperties.getGrantTypes())
+                .scopes(jwtAuthorizationProperties.getScopes())
+                .accessTokenValiditySeconds(jwtAuthorizationProperties.getAccessTokenValiditySeconds())
+                .refreshTokenValiditySeconds(jwtAuthorizationProperties.getRefreshTokenValiditySeconds())
+                .redirectUris(jwtAuthorizationProperties.getRedirectUris());
     }
 
     @Override
