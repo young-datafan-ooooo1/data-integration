@@ -2041,7 +2041,7 @@
         subfrom.style = "display:none;";
         subfrom.method = 'get';
         subfrom.target = "_blank";
-        subfrom.action = base + '/dp-common-sso-provider/oauth/authorize';
+        subfrom.action = base + '/dataintegration-common-sso-provider/oauth/authorize';
         // ?Authorization='+this.$store.getters.getToken+'&response_type=code&redirect_uri='+'http://prime.shuzhaninfo.com:51808/de-vue'+'&client_id=dp-client';
 
         let Authorization = document.createElement('input');

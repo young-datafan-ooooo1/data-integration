@@ -1,10 +1,6 @@
 <!--
  * @Author: your name
  * @Date: 2020-07-14 14:25:50
- * @LastEditTime: 2020-08-06 19:17:31
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: /company project/dp-di-vue/src/components/dataExploration/plugin/TextFileOutput/TextFileOutput.vue
 -->
 <template>
   <div class="plugin_body">

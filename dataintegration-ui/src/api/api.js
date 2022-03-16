@@ -27,21 +27,21 @@ let baseAuditURI = store.getters.getUrlConfig === null ? '' : item.scheduleUrl;
 
 //文件管理 dp-file-management-provider
 let fileUrl = store.getters.getUrlConfig === null ? '' : item.fileUrl;
-//模型管理 dp-portal-model-management-provider
+//模型管理 dataintegration-model-provider
 let modelManageUrl = store.getters.getUrlConfig === null ? '' : item.modelManageUrl;
-//系统管理 dp-portal-system-management-provider
+//系统管理 dataintegration-portal-system-management-provider
 let systemUrl = store.getters.getUrlConfig === null ? '' : item.systemUrl;
-//分组管理 dp-common-group-provider
+//分组管理 dataintegration-group-provider
 let groupUrl = store.getters.getUrlConfig === null ? '' : item.groupUrl;
-//项目管理 dp-common-project-provider
+//项目管理 dataintegration-project-provider
 let projectUrl = store.getters.getUrlConfig === null ? '' : item.projectUrl;
-//sso dp-common-sso-provider
+//sso dataintegration-common-sso-provider
 let ssoUrl = store.getters.getUrlConfig === null ? '' : item.ssoUrl;
 
 //数据集成平台地址
 let explorUrl = store.getters.getUrlConfig === null ? '' : item.basePlat;
 
-//集成平台管理地址 dp-di-run-management-provider
+//集成平台管理地址 dataintegration-di-run-management-provider
 let dataDiscoveryUrl = store.getters.getUrlConfig === null ? '' : item.dataIntegrationUrl;
 
 
@@ -90,7 +90,7 @@ if (process.env.NODE_ENV === "production") {
   // base = 'http://www.hmshzx2403.top:10200/api';
   // base = 'http://10.242.10.173:10200/api';
   boardUrl = "http://cloud.vincenthsing.top:8080/de-report-dev/#/newReport";
-  wsUrl = 'ws://prime.shuzhaninfo.com:8088/cloud-dev/ws/dp-di-run-management-provider'
+  wsUrl = 'ws://prime.shuzhaninfo.com:8088/cloud-dev/ws/dataintegration-di-run-management-provider'
 }
 let recordUrl ='';
 exceldownloadUrl = `${dataDiscoveryUrl}/preview/excelDownload?access_token=`
@@ -433,41 +433,41 @@ export const selectNotGrantUser = params => {
 
 // 获取基本插件
 export const getBasicPlugin = params => {
-  return axios.get(`${base}/dp-di-run-management-provider/pluginManage/getAllBasicPluginInfoByUserId`);
+  return axios.get(`${base}/dataintegration-di-run-management-provider/pluginManage/getAllBasicPluginInfoByUserId`);
 }
 export const getBusinessPlugin = params => {
-  return axios.get(`${base}/dp-di-run-management-provider/pluginManage/getAllBasicPluginInfoByUserId`,{params:params})
+  return axios.get(`${base}/dataintegration-di-run-management-provider/pluginManage/getAllBasicPluginInfoByUserId`,{params:params})
 }
 // 获取数据模型
 export const getAllBusinessModelPluginInfoByUserId = params =>{
-  return axios.get(`${base}/dp-di-run-management-provider/pluginManage/getAllBusinessModelPluginInfoByUserId`)
+  return axios.get(`${base}/dataintegration-di-run-management-provider/pluginManage/getAllBusinessModelPluginInfoByUserId`)
 }
 
 export const getCreateTableDDL = params => {
-  return axios.post(`${base}/dp-di-run-management-provider/pluginManage/getCreateTableDDL`, params)
+  return axios.post(`${base}/dataintegration-di-run-management-provider/pluginManage/getCreateTableDDL`, params)
 }
 
 export const executeCreateDDL = params => {
-  return axios.post(`${base}/dp-di-run-management-provider/pluginManage/executeCreateDDL`, params)
+  return axios.post(`${base}/dataintegration-di-run-management-provider/pluginManage/executeCreateDDL`, params)
 }
 
 export const getFieldSumInfo = params => {
-  return axios.post(`${base}/dp-di-run-management-provider/pluginManage/getFieldSumInfo`, params)
+  return axios.post(`${base}/dataintegration-di-run-management-provider/pluginManage/getFieldSumInfo`, params)
 }
 
 // 获取执行sql
 export const getPreStepSql = params => {
-  return axios.post(`${base}/dp-di-run-management-provider/pluginManage/getPreStepSql`, params);
+  return axios.post(`${base}/dataintegration-di-run-management-provider/pluginManage/getPreStepSql`, params);
 }
 
 //获取最大最小值
 export const getFieldMaxMinInfo = params => {
-  return axios.post(`${base}/dp-di-run-management-provider/pluginManage/getFieldMaxMinInfo`, params);
+  return axios.post(`${base}/dataintegration-di-run-management-provider/pluginManage/getFieldMaxMinInfo`, params);
 }
 
 // 获取公式信息
 export const getFuncDescribe = params => {
-  return axios.get(`${base}/dp-di-run-management-provider/pluginManage/getFuncDescribe`);
+  return axios.get(`${base}/dataintegration-di-run-management-provider/pluginManage/getFuncDescribe`);
 }
 
 export const selectBusinessModel = params => {
@@ -517,24 +517,24 @@ export const selectDatasource = params => {
 
 // 数据预览
 export const previewData = params => {
-  return axios.post(`${base}/dp-di-run-management-provider/preview/previewData`, params);
+  return axios.post(`${base}/dataintegration-di-run-management-provider/preview/previewData`, params);
 }
 
 // 字段统计
 export const fieldStats = params => {
-  return axios.post(`${base}/dp-di-run-management-provider/stats/fieldStats`, params);
+  return axios.post(`${base}/dataintegration-di-run-management-provider/stats/fieldStats`, params);
 }
 //字段重复性检查
 
 export const repeatedStats = params => {
-  return axios.post(`${base}/dp-di-run-management-provider/stats/repeatedStats`, params);
+  return axios.post(`${base}/dataintegration-di-run-management-provider/stats/repeatedStats`, params);
 }
 
 export const repeatedQuery = params => {
-  return axios.post(`${base}/dp-di-run-management-provider/stats/repeatedQuery`, params);
+  return axios.post(`${base}/dataintegration-di-run-management-provider/stats/repeatedQuery`, params);
 }
 export const downloadFile = params => {
-  axios.post(`${base}/dp-di-run-management-provider/preview/excelDownload`, params, {
+  axios.post(`${base}/dataintegration-di-run-management-provider/preview/excelDownload`, params, {
       responseType: 'blob' // 设置响应数据类型
     })
     .then(res => {
@@ -552,26 +552,26 @@ export const downloadFile = params => {
 
 //查询正在运行的项目
 export const getStatus = params => {
-  return axios.get(`${base}/dp-di-run-management-provider/status/selectRunningProject`, params)
+  return axios.get(`${base}/dataintegration-di-run-management-provider/status/selectRunningProject`, params)
 }
 //查询运行历史
 
 export const getStatusHistory = params => {
-  return axios.post(`${base}/dp-di-run-management-provider/status/selectUserHistoryExecute?pageNum=` + params.pageNum +
+  return axios.post(`${base}/dataintegration-di-run-management-provider/status/selectUserHistoryExecute?pageNum=` + params.pageNum +
     "&pageSize=" + params.pageSize, params.projectHistoryExecuteVO)
 }
 
 // 保存为模型
 export const saveModel = params => {
-  return axios.post(`${base}/dp-di-run-management-provider/saveModel/save`, params);
+  return axios.post(`${base}/dataintegration-di-run-management-provider/saveModel/save`, params);
 }
 // 查询正在保存的模型
 export const savingModel = params => {
-  return axios.get(`${base}/dp-di-run-management-provider/saveModel/selectRunning`, params);
+  return axios.get(`${base}/dataintegration-di-run-management-provider/saveModel/selectRunning`, params);
 }
 // 查询保存模型的历史
 export const modelHistory = params => {
-  return axios.post(`${base}/dp-di-run-management-provider/saveModel/selectHistory?pageNum=` + params.pageNum +
+  return axios.post(`${base}/dataintegration-di-run-management-provider/saveModel/selectHistory?pageNum=` + params.pageNum +
     "&pageSize=" + params.pageSize, params.saveModelVO);
 }
 // 查询自定义模型
