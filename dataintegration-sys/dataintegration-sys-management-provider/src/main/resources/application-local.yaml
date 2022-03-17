@@ -69,7 +69,7 @@ vue-config:
   baseUrl: http://cloud.vincenthsing.top:8080/cloud/api
   ssoUrl: http://cloud.vincenthsing.top:8080/cloud/api/dataintegration-common-sso-provider
   systemUrl: http://cloud.vincenthsing.top:8080/cloud/api/dataintegration-portal-system-management-provider
-  groupUrl: http://cloud.vincenthsing.top:8080/cloud/api/dataintegration-common-group-provider
+  groupUrl: http://cloud.vincenthsing.top:8080/cloud/api/dataintegration-group-provider
   projectUrl: http://cloud.vincenthsing.top:8080/cloud/api/dataintegration-common-project-provider
   runManagerUrl: http://cloud.vincenthsing.top:8080/cloud/api/dataintegration-de-run-management-provider
   modelMangerUrl: http://cloud.vincenthsing.top:8080/cloud/api/dataintegration-portal-model-management-provider
