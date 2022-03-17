@@ -38,7 +38,7 @@ public class WebSocketConfiguration implements WebSocketMessageBrokerConfigurer 
                 .addInterceptors(sessionDeAuthHandshakeInterceptor)
                 .setHandshakeHandler(myDefaultHandshakeHandler)
                 //允许跨域访问
-                .setAllowedOrigins("*");
+                .setAllowedOriginPatterns("*");
         //使用sockJS，注意开启sockJS，使用websocket就会报错
 //                .withSockJS();
 
