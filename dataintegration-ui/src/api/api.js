@@ -1,18 +1,21 @@
 import axios from 'axios';
 import store from '../vuex/store';
 import router from '../router';
-import globalWs from '../common/webSocket.js'
 import cookies from 'vue-cookies'
 
-let flag = true;
-import {
-  getRefreshToken
-} from './index.js';
-import {
-  Message
-} from 'element-ui';
 import $ from 'jquery';
 import qs from 'qs'
+
+let BASE = location.origin + '/api'
+if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === undefined) {
+  BASE = 'http://192.168.10.160:10200/api'
+}
+
+let projectUrl = `${BASE}/dataintegration-project-provider`;
+//模型管理 dataintegration-model-provider
+let modelManageUrl = `${BASE}/dataintegration-portal-model-management-provider`
+//分组管理 dataintegration-group-provider
+let groupUrl = `${BASE}/dataintegration-group-provider`
 
 let base = '';
 let boardUrl = "";
@@ -27,14 +30,8 @@ let baseAuditURI = store.getters.getUrlConfig === null ? '' : item.scheduleUrl;
 
 //文件管理 dp-file-management-provider
 let fileUrl = store.getters.getUrlConfig === null ? '' : item.fileUrl;
-//模型管理 dataintegration-model-provider
-let modelManageUrl = store.getters.getUrlConfig === null ? '' : item.modelManageUrl;
 //系统管理 dataintegration-portal-system-management-provider
 let systemUrl = store.getters.getUrlConfig === null ? '' : item.systemUrl;
-//分组管理 dataintegration-group-provider
-let groupUrl = store.getters.getUrlConfig === null ? '' : item.groupUrl;
-//项目管理 dataintegration-project-provider
-let projectUrl = store.getters.getUrlConfig === null ? '' : item.projectUrl;
 //sso dataintegration-common-sso-provider
 let ssoUrl = store.getters.getUrlConfig === null ? '' : item.ssoUrl;
 
@@ -90,7 +87,7 @@ if (process.env.NODE_ENV === "production") {
   // base = 'http://www.hmshzx2403.top:10200/api';
   // base = 'http://10.242.10.173:10200/api';
   boardUrl = "http://cloud.vincenthsing.top:8080/de-report-dev/#/newReport";
-  wsUrl = 'ws://prime.shuzhaninfo.com:8088/cloud-dev/ws/dataintegration-di-run-management-provider'
+  wsUrl = 'ws://192.168.10.160:10200/ws/dataintegration-di-run-management-provider'
 }
 let recordUrl ='';
 exceldownloadUrl = `${dataDiscoveryUrl}/preview/excelDownload?access_token=`

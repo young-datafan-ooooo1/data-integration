@@ -51,7 +51,7 @@ if (process.env.NODE_ENV === "production") {
   })
 } else {
   base = 'http://192.168.10.160:10200/api';
-  wsUrl = 'ws://prime.shuzhaninfo.com:8088/cloud-dev/ws/dataintegration-di-run-management-provider';
+  wsUrl = 'ws://192.168.10.160:10200/ws/dataintegration-di-run-management-provider';
   // base = 'http://10.242.10.173:10200/api';
 }
 
