@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author gavin
  * @since 2020/2/21 3:00 下午
  */
-@FeignClient(value = "dataintegration-model-management-provider", path = "/datasource")
+@FeignClient(value = "dataintegration-portal-model-management-provider", path = "/datasource")
 public interface DatasourceServiceApiClient {
 
     @GetMapping({"/datasourceName/{datasourceName}"})
