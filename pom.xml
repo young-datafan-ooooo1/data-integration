@@ -142,9 +142,18 @@
                 <version>${pagehelper-spring-boot-starter.version}</version>
             </dependency>
         </dependencies>
-
-
     </dependencyManagement>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url> https://s01.oss.sonatype.org/content/repositories/releases/</url>
+        </repository>
+    </distributionManagement>
 
     <!-- kettle中央仓库 -->
     <repositories>
