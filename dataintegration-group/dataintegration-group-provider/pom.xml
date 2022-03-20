@@ -99,6 +99,13 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
             <!--打包可运行 mvn package spring-boot:repackage-->
             <plugin>
                 <groupId>org.springframework.boot</groupId>

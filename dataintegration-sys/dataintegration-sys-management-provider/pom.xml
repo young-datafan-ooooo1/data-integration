@@ -137,15 +137,13 @@
 
     <build>
         <plugins>
-            <!--            <plugin>-->
-            <!--                <groupId>org.apache.maven.plugins</groupId>-->
-            <!--                <artifactId>maven-deploy-plugin</artifactId>-->
-            <!--                <version>${maven-deploy-plugin.version}</version>-->
-            <!--                <configuration>-->
-            <!--                    &lt;!&ndash;deploy 时忽略此model&ndash;&gt;-->
-            <!--                    <skip>true</skip>-->
-            <!--                </configuration>-->
-            <!--            </plugin>-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
             <!--打包可运行 mvn package spring-boot:repackage-->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
