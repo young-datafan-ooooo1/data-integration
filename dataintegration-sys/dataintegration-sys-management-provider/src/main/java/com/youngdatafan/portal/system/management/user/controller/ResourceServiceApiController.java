@@ -1,7 +1,7 @@
 package com.youngdatafan.portal.system.management.user.controller;
 
-import com.datafan.dataintegration.core.model.Result;
-import com.datafan.dataintegration.core.util.StatusCode;
+import com.youngdatafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.util.StatusCode;
 import com.youngdatafan.portal.system.management.common.utils.BaseController;
 import com.youngdatafan.portal.system.management.user.api.ResourceServiceApi;
 import com.youngdatafan.portal.system.management.user.dto.ResourceDTO;
@@ -188,7 +188,7 @@ public class ResourceServiceApiController extends BaseController<ResourceDTO> im
     @Override
     public Result<Boolean, Object> updateResourceOrder(List<ResouceUpdateOrderVO> resouceUpdateOrderVOS) {
         if (resouceUpdateOrderVOS == null) {
-            return Result.fail(com.datafan.dataintegration.core.util.StatusCode.CODE_10010.getCode(), false, "参数不能为空");
+            return Result.fail(StatusCode.CODE_10010.getCode(), false, "参数不能为空");
         }
         dpPortalResourceService.updateResourceOrder(resouceUpdateOrderVOS);
         return Result.success(true);

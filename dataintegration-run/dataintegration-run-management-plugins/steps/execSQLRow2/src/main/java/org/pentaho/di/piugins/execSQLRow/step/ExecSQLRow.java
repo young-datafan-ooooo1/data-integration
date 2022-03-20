@@ -22,7 +22,7 @@
 
 package org.pentaho.di.piugins.execSQLRow.step;
 
-import com.datafan.dataintegration.core.util.encryption.DefaultEncryptionUtils;
+import com.youngdatafan.dataintegration.core.util.encryption.DefaultEncryptionUtils;
 import com.github.vfss3.FileServerConfig;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.vfs2.FileObject;

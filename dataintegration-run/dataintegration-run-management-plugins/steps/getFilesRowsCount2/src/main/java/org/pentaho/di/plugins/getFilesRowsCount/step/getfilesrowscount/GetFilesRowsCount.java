@@ -22,8 +22,7 @@
 
 package org.pentaho.di.plugins.getFilesRowsCount.step.getfilesrowscount;
 
-import com.amazonaws.util.StringUtils;
-import com.datafan.dataintegration.core.util.encryption.DefaultEncryptionUtils;
+import com.youngdatafan.dataintegration.core.util.encryption.DefaultEncryptionUtils;
 import com.github.vfss3.FileServerConfig;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.ArrayUtils;
@@ -50,7 +49,6 @@ import org.pentaho.di.trans.step.StepMeta;
 import org.pentaho.di.trans.step.StepMetaInterface;
 
 import java.io.*;
-import java.util.Arrays;
 
 /**
  * Read all files, count rows number

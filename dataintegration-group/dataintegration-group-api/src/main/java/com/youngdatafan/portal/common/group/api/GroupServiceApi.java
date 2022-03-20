@@ -1,6 +1,6 @@
 package com.youngdatafan.portal.common.group.api;
 
-import com.datafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.portal.common.group.dto.DpPortalGroupDTO;
 import com.youngdatafan.portal.common.group.vo.GroupAddVO;
 import com.youngdatafan.portal.common.group.vo.GroupUkVO;

@@ -1,6 +1,6 @@
 package com.youngdatafan.portal.model.management.outinterfacemodel.service;
 
-import com.datafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.portal.model.management.common.entity.ModelDTO;
 import com.youngdatafan.portal.model.management.outinterfacemodel.dto.*;
 import com.youngdatafan.portal.model.management.outinterfacemodel.vo.AddOutinterfaceModelVO;

@@ -1,14 +1,14 @@
 package com.youngdatafan.di.run.management.server.controller;
 
-import com.datafan.dataintegration.core.model.Result;
-import com.datafan.dataintegration.core.util.JsonUtils;
+import com.youngdatafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.util.JsonUtils;
 import com.youngdatafan.di.run.management.datasource.PluginRunDataSourceRepository;
 import com.youngdatafan.di.run.management.server.api.DataPreviewServiceApi;
 import com.youngdatafan.di.run.management.server.service.DataDownloadService;
 import com.youngdatafan.di.run.management.server.service.DataPreviewService;
 import com.youngdatafan.di.run.management.server.vo.PreviewDataVO;
 import com.youngdatafan.di.run.management.server.vo.PreviewDownloadVO;
-import com.datafan.dataintegration.core.util.sql.DataSourceWrap;
+import com.youngdatafan.dataintegration.core.util.sql.DataSourceWrap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

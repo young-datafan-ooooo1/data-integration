@@ -1,6 +1,6 @@
 package com.youngdatafan.portal.system.management.summary.controller;
 
-import com.datafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.portal.system.management.summary.api.IndexSummaryApi;
 import com.youngdatafan.portal.system.management.summary.dto.*;
 import com.youngdatafan.portal.system.management.summary.model.FileSummary;

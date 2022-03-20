@@ -1,7 +1,7 @@
 package com.youngdatafan.common.sso.config;
 
 import com.youngdatafan.common.sso.service.UserRedisService;
-import com.datafan.dataintegration.core.util.UUIDUtils;
+import com.youngdatafan.dataintegration.core.util.UUIDUtils;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;

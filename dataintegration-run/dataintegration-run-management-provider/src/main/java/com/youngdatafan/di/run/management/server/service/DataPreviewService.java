@@ -1,14 +1,14 @@
 package com.youngdatafan.di.run.management.server.service;
 
-import com.datafan.dataintegration.core.util.StatusCode;
-import com.datafan.dataintegration.core.exception.DpException;
+import com.youngdatafan.dataintegration.core.util.StatusCode;
+import com.youngdatafan.dataintegration.core.exception.DpException;
 import com.youngdatafan.di.run.management.server.vo.PreviewDataVO;
 import lombok.extern.slf4j.Slf4j;
 import org.pentaho.di.core.database.Database;
 import org.pentaho.di.core.database.DatabaseMeta;
 import org.pentaho.di.core.row.RowMeta;
-import com.datafan.dataintegration.core.util.sql.DataSourceWrap;
-import com.datafan.dataintegration.core.util.sql.DatabaseType;
+import com.youngdatafan.dataintegration.core.util.sql.DataSourceWrap;
+import com.youngdatafan.dataintegration.core.util.sql.DatabaseType;
 import org.springframework.stereotype.Service;
 
 import java.sql.Connection;

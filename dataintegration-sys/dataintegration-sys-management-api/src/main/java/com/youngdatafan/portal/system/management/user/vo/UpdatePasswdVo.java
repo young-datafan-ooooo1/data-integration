@@ -1,6 +1,6 @@
 package com.youngdatafan.portal.system.management.user.vo;
 
-import com.datafan.dataintegration.core.validation.FieldMatch;
+import com.youngdatafan.dataintegration.core.validation.FieldMatch;
 import com.youngdatafan.portal.system.management.util.ValidatorConstans;
 import io.swagger.annotations.ApiModelProperty;
 

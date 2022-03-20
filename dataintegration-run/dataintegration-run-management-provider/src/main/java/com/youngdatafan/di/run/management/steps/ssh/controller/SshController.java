@@ -1,8 +1,8 @@
 package com.youngdatafan.di.run.management.steps.ssh.controller;
 
 
-import com.datafan.dataintegration.core.util.StatusCode;
-import com.datafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.util.StatusCode;
+import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.di.run.management.steps.ssh.api.SSHServiceApi;
 import com.youngdatafan.di.run.management.steps.ssh.vo.SSHVO;
 import com.trilead.ssh2.Connection;

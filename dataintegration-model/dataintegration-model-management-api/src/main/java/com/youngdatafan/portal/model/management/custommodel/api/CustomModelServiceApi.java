@@ -1,7 +1,5 @@
 package com.youngdatafan.portal.model.management.custommodel.api;
 
-import com.datafan.dataintegration.core.model.Result;
-
 /**
  * <p>****************************************************************************</p>
  * <ul style="margin:15px;">

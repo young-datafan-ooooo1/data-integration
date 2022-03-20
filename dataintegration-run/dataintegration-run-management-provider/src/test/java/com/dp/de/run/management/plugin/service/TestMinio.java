@@ -2,11 +2,9 @@ package com.dp.de.run.management.plugin.service;
 
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
-import com.datafan.dataintegration.core.util.UUIDUtils;
+import com.youngdatafan.dataintegration.core.util.UUIDUtils;
 import com.github.vfss3.S3FileSystemConfigBuilder;
-import com.github.vfss3.S3FileSystemOptions;
 import org.apache.commons.vfs2.*;
-import org.pentaho.di.core.exception.KettleFileException;
 import org.pentaho.di.core.vfs.KettleVFS;
 
 import java.io.IOException;

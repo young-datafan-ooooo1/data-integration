@@ -1,7 +1,7 @@
 package com.youngdatafan.di.run.management.steps.javascript.api;
 
 
-import com.datafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.di.run.management.steps.javascript.vo.JavascriptVO;
 import com.youngdatafan.di.run.management.steps.javascript.vo.ScriptFieldVO;
 import io.swagger.annotations.Api;

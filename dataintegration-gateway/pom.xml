@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <groupId>com.datafan.dataintegration</groupId>
+        <groupId>com.young-datafan</groupId>
         <artifactId>dataintegration</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
@@ -23,14 +23,14 @@
     <dependencies>
         <!--核心依赖包，provider模块必须引入-->
         <dependency>
-            <groupId>com.datafan.dataintegration</groupId>
+            <groupId>com.young-datafan</groupId>
             <artifactId>dataintegration-core</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
         <!--系统管理-->
         <dependency>
-            <groupId>com.datafan.dataintegration</groupId>
+            <groupId>com.young-datafan</groupId>
             <artifactId>dataintegration-sys-management-api</artifactId>
             <version>${project.version}</version>
         </dependency>

@@ -1,8 +1,8 @@
 package com.youngdatafan.portal.system.management.user.controller;
 
-import com.datafan.dataintegration.core.util.StatusCode;
-import com.datafan.dataintegration.core.model.Result;
-import com.datafan.dataintegration.core.util.UUIDUtils;
+import com.youngdatafan.dataintegration.core.util.StatusCode;
+import com.youngdatafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.util.UUIDUtils;
 import com.youngdatafan.portal.system.management.common.utils.BaseController;
 import com.youngdatafan.portal.system.management.common.utils.JwtUtil;
 import com.youngdatafan.portal.system.management.common.utils.SM3Utils;

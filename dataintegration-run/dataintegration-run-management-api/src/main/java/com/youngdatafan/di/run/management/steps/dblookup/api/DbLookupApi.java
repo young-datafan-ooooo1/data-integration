@@ -1,6 +1,6 @@
 package com.youngdatafan.di.run.management.steps.dblookup.api;
 
-import com.datafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.di.run.management.steps.dblookup.vo.TableFieldVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

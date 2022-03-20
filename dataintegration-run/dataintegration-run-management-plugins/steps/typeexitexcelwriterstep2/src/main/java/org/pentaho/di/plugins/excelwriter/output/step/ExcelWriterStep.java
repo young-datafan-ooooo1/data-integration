@@ -22,7 +22,7 @@
 
 package org.pentaho.di.plugins.excelwriter.output.step;
 
-import com.datafan.dataintegration.core.util.encryption.DefaultEncryptionUtils;
+import com.youngdatafan.dataintegration.core.util.encryption.DefaultEncryptionUtils;
 import com.github.vfss3.FileServerConfig;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

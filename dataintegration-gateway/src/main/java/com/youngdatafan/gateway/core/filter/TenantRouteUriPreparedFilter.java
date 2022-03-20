@@ -1,6 +1,6 @@
 package com.youngdatafan.gateway.core.filter;
 
-import com.datafan.dataintegration.core.util.Constans;
+import com.youngdatafan.dataintegration.core.util.Constans;
 import com.youngdatafan.gateway.tenant.UserTenantRepository;
 import java.net.URI;
 import java.util.List;

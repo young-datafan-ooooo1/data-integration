@@ -22,7 +22,7 @@
 
 package org.pentaho.di.plugins.excel.output.step;
 
-import com.datafan.dataintegration.core.util.encryption.DefaultEncryptionUtils;
+import com.youngdatafan.dataintegration.core.util.encryption.DefaultEncryptionUtils;
 import com.github.vfss3.FileServerConfig;
 import org.apache.commons.vfs2.FileObject;
 import org.pentaho.di.core.CheckResult;

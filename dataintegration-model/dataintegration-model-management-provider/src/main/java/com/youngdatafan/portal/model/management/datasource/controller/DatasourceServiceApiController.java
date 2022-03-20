@@ -1,8 +1,8 @@
 package com.youngdatafan.portal.model.management.datasource.controller;
 
-import com.datafan.dataintegration.core.util.JsonUtils;
-import com.datafan.dataintegration.core.util.StatusCode;
-import com.datafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.util.JsonUtils;
+import com.youngdatafan.dataintegration.core.util.StatusCode;
+import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.portal.model.management.basicmodel.service.BasiceModelService;
 import com.youngdatafan.portal.model.management.datasource.api.DatasourceServiceApi;
 import com.youngdatafan.portal.model.management.datasource.dto.*;

@@ -22,7 +22,7 @@
 
 package org.pentaho.di.plugins.textfile.input.step;
 
-import com.datafan.dataintegration.core.util.encryption.DefaultEncryptionUtils;
+import com.youngdatafan.dataintegration.core.util.encryption.DefaultEncryptionUtils;
 import com.github.vfss3.FileServerConfig;
 import com.google.common.annotations.VisibleForTesting;
 import org.apache.commons.codec.binary.Base64;

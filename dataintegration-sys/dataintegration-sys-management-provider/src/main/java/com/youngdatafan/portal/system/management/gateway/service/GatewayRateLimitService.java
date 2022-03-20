@@ -1,6 +1,6 @@
 package com.youngdatafan.portal.system.management.gateway.service;
 
-import com.datafan.dataintegration.core.util.JsonUtils;
+import com.youngdatafan.dataintegration.core.util.JsonUtils;
 import com.youngdatafan.portal.system.management.gateway.MsgType;
 import com.youngdatafan.portal.system.management.gateway.dto.DpGatewayRateLimitDTO;
 import com.youngdatafan.portal.system.management.gateway.dto.DpGatewayRateLimitMsgDTO;

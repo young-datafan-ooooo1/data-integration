@@ -1,9 +1,9 @@
 package com.youngdatafan.gateway.core.filter;
 
 
-import com.datafan.dataintegration.core.model.Result;
-import com.datafan.dataintegration.core.util.Constans;
-import com.datafan.dataintegration.core.util.StatusCode;
+import com.youngdatafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.util.Constans;
+import com.youngdatafan.dataintegration.core.util.StatusCode;
 import com.youngdatafan.gateway.core.config.RepeatRequestProperties;
 import java.net.URI;
 import java.time.Duration;

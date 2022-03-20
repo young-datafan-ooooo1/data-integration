@@ -6,7 +6,7 @@ import org.pentaho.di.core.database.Database;
 import org.pentaho.di.core.database.DatabaseMeta;
 import org.pentaho.di.core.row.RowMetaInterface;
 import org.pentaho.di.core.row.ValueMetaInterface;
-import com.datafan.dataintegration.core.util.sql.DatabaseType;
+import com.youngdatafan.dataintegration.core.util.sql.DatabaseType;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

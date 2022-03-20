@@ -1,7 +1,6 @@
 package com.youngdatafan.portal.model.management.businessmodel.api;
 
-import com.datafan.dataintegration.core.model.Result;
-import com.youngdatafan.portal.model.management.businessmodel.dto.*;
+import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.portal.model.management.businessmodel.dto.BasicModelAndMetaDataDTO;
 import com.youngdatafan.portal.model.management.businessmodel.dto.BasicModelGroupDTO;
 import com.youngdatafan.portal.model.management.businessmodel.dto.BasicModelNameAndCnameDTO;

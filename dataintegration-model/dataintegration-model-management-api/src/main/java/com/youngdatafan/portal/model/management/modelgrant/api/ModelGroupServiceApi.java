@@ -1,6 +1,6 @@
 package com.youngdatafan.portal.model.management.modelgrant.api;
 
-import com.datafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.portal.model.management.modelgrant.dto.ModelNameAndGroupNameAndTypes;
 import com.youngdatafan.portal.model.management.modelgrant.vo.AddModelGroupVO;
 import com.youngdatafan.portal.model.management.modelgrant.vo.UpdateModelGroupVO;

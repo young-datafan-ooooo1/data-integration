@@ -1,6 +1,6 @@
 package com.youngdatafan.portal.model.management.util.excel;
 
-import com.datafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.portal.model.management.basicmodel.dto.BasicModelAndMetaDataDTO;
 import com.youngdatafan.portal.model.management.basicmodel.dto.BasicModelAndMetaDataListDTO;
 import com.youngdatafan.portal.model.management.basicmodel.dto.BasicModelCopyDTO;

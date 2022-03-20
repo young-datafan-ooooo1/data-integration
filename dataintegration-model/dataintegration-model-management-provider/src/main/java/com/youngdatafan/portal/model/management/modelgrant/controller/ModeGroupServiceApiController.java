@@ -1,7 +1,7 @@
 package com.youngdatafan.portal.model.management.modelgrant.controller;
 
-import com.datafan.dataintegration.core.util.StatusCode;
-import com.datafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.util.StatusCode;
+import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.portal.model.management.modelgrant.api.ModelGroupServiceApi;
 import com.youngdatafan.portal.model.management.modelgrant.dto.ModelGrantGroupDTO;
 import com.youngdatafan.portal.model.management.modelgrant.dto.ModelNameAndGroupNameAndTypes;

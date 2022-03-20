@@ -1,7 +1,7 @@
 package com.youngdatafan.portal.system.management.log.controller;
 
-import com.datafan.dataintegration.core.model.Result;
-import com.datafan.dataintegration.core.util.UUIDUtils;
+import com.youngdatafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.util.UUIDUtils;
 import com.youngdatafan.portal.system.management.common.utils.BaseController;
 import com.youngdatafan.portal.system.management.log.api.LogServiceApi;
 import com.youngdatafan.portal.system.management.log.dto.LogDTO;

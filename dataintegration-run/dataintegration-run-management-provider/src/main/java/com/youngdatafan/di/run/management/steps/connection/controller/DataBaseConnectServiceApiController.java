@@ -1,7 +1,7 @@
 package com.youngdatafan.di.run.management.steps.connection.controller;
 
-import com.datafan.dataintegration.core.util.StatusCode;
-import com.datafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.util.StatusCode;
+import com.youngdatafan.dataintegration.core.model.Result;
 
 import com.youngdatafan.di.run.management.datasource.feign.DatasourceServiceApiClient;
 import com.youngdatafan.di.run.management.steps.connect.api.DBConnectServiceApi;

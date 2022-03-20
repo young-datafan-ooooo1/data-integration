@@ -1,6 +1,6 @@
 package com.youngdatafan.portal.system.management.user.api;
 
-import com.datafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.portal.system.management.user.dto.ResourceDTO;
 import com.youngdatafan.portal.system.management.user.vo.ResouceUpdateOrderVO;
 import com.youngdatafan.portal.system.management.user.vo.ResourceAddVO;

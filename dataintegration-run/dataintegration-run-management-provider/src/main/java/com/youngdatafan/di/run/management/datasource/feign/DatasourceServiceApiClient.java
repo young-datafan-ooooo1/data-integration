@@ -1,6 +1,6 @@
 package com.youngdatafan.di.run.management.datasource.feign;
 
-import com.datafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.portal.model.management.datasource.dto.DatasourceDTO;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
