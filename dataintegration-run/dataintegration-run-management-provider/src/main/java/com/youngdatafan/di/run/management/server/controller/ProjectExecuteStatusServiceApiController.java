@@ -1,6 +1,6 @@
 package com.youngdatafan.di.run.management.server.controller;
 
-import com.datafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.di.run.management.server.api.ProjectExecuteStatusServiceApi;
 import com.youngdatafan.di.run.management.server.dto.ProjectHistoryExecuteDTO;
 import com.youngdatafan.di.run.management.server.service.ProjectExecutorService;

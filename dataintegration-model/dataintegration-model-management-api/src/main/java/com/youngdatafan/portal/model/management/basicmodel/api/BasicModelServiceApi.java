@@ -1,6 +1,6 @@
 package com.youngdatafan.portal.model.management.basicmodel.api;
 
-import com.datafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.portal.model.management.basicmodel.dto.AllColumnDTO;
 import com.youngdatafan.portal.model.management.basicmodel.dto.BasicModelAndMetaDataDTO;
 import com.youngdatafan.portal.model.management.basicmodel.dto.BasicModelDatasourceDTO;

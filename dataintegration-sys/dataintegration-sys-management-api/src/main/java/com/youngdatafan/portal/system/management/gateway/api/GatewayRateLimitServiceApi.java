@@ -1,6 +1,6 @@
 package com.youngdatafan.portal.system.management.gateway.api;
 
-import com.datafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.portal.system.management.gateway.dto.DpGatewayRateLimitDTO;
 import com.youngdatafan.portal.system.management.gateway.vo.DpGatewayRateLimitVO;
 import io.swagger.annotations.Api;

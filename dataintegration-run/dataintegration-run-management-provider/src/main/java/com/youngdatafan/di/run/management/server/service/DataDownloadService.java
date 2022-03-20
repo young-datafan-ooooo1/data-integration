@@ -1,7 +1,7 @@
 package com.youngdatafan.di.run.management.server.service;
 
-import com.datafan.dataintegration.core.util.StatusCode;
-import com.datafan.dataintegration.core.exception.DpException;
+import com.youngdatafan.dataintegration.core.util.StatusCode;
+import com.youngdatafan.dataintegration.core.exception.DpException;
 import com.youngdatafan.di.run.management.datasource.PluginRunDataSourceRepository;
 import com.youngdatafan.di.run.management.server.vo.PreviewDownloadVO;
 import com.youngdatafan.di.run.management.server.vo.StepFieldVO;
@@ -17,7 +17,7 @@ import org.pentaho.di.core.database.DatabaseMeta;
 import org.pentaho.di.core.exception.KettleValueException;
 import org.pentaho.di.core.row.RowMetaInterface;
 import org.pentaho.di.core.row.ValueMetaInterface;
-import com.datafan.dataintegration.core.util.sql.DataSourceWrap;
+import com.youngdatafan.dataintegration.core.util.sql.DataSourceWrap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

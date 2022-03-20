@@ -1,6 +1,6 @@
 package com.youngdatafan.portal.system.management.config.controller;
 
-import com.datafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.portal.system.management.config.api.PortalSysconfApi;
 import com.youngdatafan.portal.system.management.config.dto.PortalSysconfDTO;
 import com.youngdatafan.portal.system.management.config.entity.DpPortalSysconf;

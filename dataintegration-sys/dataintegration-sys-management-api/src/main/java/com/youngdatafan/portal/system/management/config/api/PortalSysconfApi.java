@@ -1,6 +1,6 @@
 package com.youngdatafan.portal.system.management.config.api;
 
-import com.datafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.portal.system.management.config.dto.PortalSysconfDTO;
 import io.swagger.annotations.ApiOperation;
 import org.apache.ibatis.annotations.Param;

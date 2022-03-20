@@ -1,8 +1,8 @@
 package com.youngdatafan.gateway.ratelimit;
 
-import com.datafan.dataintegration.core.lock.CacheLock;
-import com.datafan.dataintegration.core.model.Result;
-import com.datafan.dataintegration.core.util.StatusCode;
+import com.youngdatafan.dataintegration.core.lock.CacheLock;
+import com.youngdatafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.util.StatusCode;
 import com.youngdatafan.gateway.core.util.Constans;
 import com.youngdatafan.gateway.ratelimit.bean.EnvironmentEnum;
 import com.youngdatafan.gateway.ratelimit.bean.GatewayRateLimitStatus;

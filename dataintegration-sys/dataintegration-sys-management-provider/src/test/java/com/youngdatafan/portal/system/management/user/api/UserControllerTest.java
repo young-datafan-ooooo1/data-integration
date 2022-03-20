@@ -1,6 +1,6 @@
 package com.youngdatafan.portal.system.management.user.api;
 
-import com.datafan.dataintegration.core.util.JsonUtils;
+import com.youngdatafan.dataintegration.core.util.JsonUtils;
 import com.youngdatafan.portal.system.management.SystemManagerApplication;
 import com.youngdatafan.portal.system.management.user.vo.UserAddVO;
 import org.junit.Assert;

@@ -1,6 +1,6 @@
 package com.youngdatafan.portal.system.management.log.api;
 
-import com.datafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.portal.system.management.log.vo.SystemOptsMessageVo;
 import com.youngdatafan.portal.system.management.summary.dto.SystemOptsMessageDTO;
 import io.swagger.annotations.Api;

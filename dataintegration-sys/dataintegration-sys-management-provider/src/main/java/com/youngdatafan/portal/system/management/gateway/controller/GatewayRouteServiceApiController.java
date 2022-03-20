@@ -1,6 +1,6 @@
 package com.youngdatafan.portal.system.management.gateway.controller;
 
-import com.datafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.portal.system.management.gateway.api.GatewayRouteServiceApi;
 import com.youngdatafan.portal.system.management.gateway.dto.DpGatewayRouteDTO;
 import com.youngdatafan.portal.system.management.gateway.service.GatewayRouteService;

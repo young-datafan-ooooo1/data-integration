@@ -22,7 +22,7 @@
 
 package org.pentaho.di.plugins.csv.input.step;
 
-import com.datafan.dataintegration.core.util.encryption.DefaultEncryptionUtils;
+import com.youngdatafan.dataintegration.core.util.encryption.DefaultEncryptionUtils;
 import com.github.vfss3.FileServerConfig;
 import org.apache.commons.io.ByteOrderMark;
 import org.apache.commons.io.IOUtils;

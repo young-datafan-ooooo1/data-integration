@@ -1,9 +1,9 @@
 package com.youngdatafan.portal.common.group.service;
 
-import com.datafan.dataintegration.core.util.StatusCode;
-import com.datafan.dataintegration.core.exception.FormValidationException;
-import com.datafan.dataintegration.core.exception.ValidationException;
-import com.datafan.dataintegration.core.util.UUIDUtils;
+import com.youngdatafan.dataintegration.core.util.StatusCode;
+import com.youngdatafan.dataintegration.core.exception.FormValidationException;
+import com.youngdatafan.dataintegration.core.exception.ValidationException;
+import com.youngdatafan.dataintegration.core.util.UUIDUtils;
 import com.youngdatafan.portal.common.group.dto.DpPortalGroupDTO;
 import com.youngdatafan.portal.common.group.entity.DpPortalGroup;
 import com.youngdatafan.portal.common.group.mapper.DpPortalGroupMapper;

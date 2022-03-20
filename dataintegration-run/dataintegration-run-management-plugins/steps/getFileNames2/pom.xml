@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>steps</artifactId>
-        <groupId>com.datafan.dataintegration</groupId>
+        <groupId>com.young-datafan</groupId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -20,7 +20,7 @@
     <dependencies>
         <!--核心依赖包-->
         <dependency>
-            <groupId>com.datafan.dataintegration</groupId>
+            <groupId>com.young-datafan</groupId>
             <artifactId>dataintegration-core</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
@@ -47,7 +47,7 @@
         </dependency>
 
         <dependency>
-            <groupId>com.datafan.dataintegration</groupId>
+            <groupId>com.young-datafan</groupId>
             <artifactId>s3-connector</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
@@ -55,6 +55,13 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>com.alipay.sofa</groupId>
                 <artifactId>sofa-ark-plugin-maven-plugin</artifactId>

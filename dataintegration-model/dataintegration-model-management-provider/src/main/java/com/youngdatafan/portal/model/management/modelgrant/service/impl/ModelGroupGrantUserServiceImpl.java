@@ -1,12 +1,11 @@
 package com.youngdatafan.portal.model.management.modelgrant.service.impl;
 
-import com.datafan.dataintegration.core.util.StatusCode;
-import com.datafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.util.StatusCode;
+import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.portal.model.management.modelgrant.dto.*;
 import com.youngdatafan.portal.model.management.modelgrant.entity.ModelGroupUserGrant;
 import com.youngdatafan.portal.model.management.modelgrant.entity.ModelUserGrant;
 import com.youngdatafan.portal.model.management.modelgrant.entity.UserGrant;
-import com.youngdatafan.portal.model.management.modelgrant.mapper.*;
 import com.youngdatafan.portal.model.management.modelgrant.mapper.ModelGroupMapper;
 import com.youngdatafan.portal.model.management.modelgrant.mapper.ModelUserGrantMapper;
 import com.youngdatafan.portal.model.management.modelgrant.mapper.UserGrantMapper;

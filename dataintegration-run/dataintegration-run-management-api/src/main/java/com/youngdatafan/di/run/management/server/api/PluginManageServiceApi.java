@@ -1,6 +1,6 @@
 package com.youngdatafan.di.run.management.server.api;
 
-import com.datafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.di.run.management.server.dto.FunctionCategoryDTO;
 import com.youngdatafan.di.run.management.server.dto.PluginCategoryDTO;
 import com.youngdatafan.di.run.management.server.dto.PluginInfoDTO;

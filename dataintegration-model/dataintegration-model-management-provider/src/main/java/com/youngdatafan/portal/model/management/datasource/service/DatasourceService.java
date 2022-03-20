@@ -1,6 +1,6 @@
 package com.youngdatafan.portal.model.management.datasource.service;
 
-import com.datafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.portal.model.management.datasource.dto.*;
 import com.youngdatafan.portal.model.management.datasource.entity.Datasource;
 import com.youngdatafan.portal.model.management.datasource.vo.DatasourceConnectorVO;

@@ -12,9 +12,9 @@
  */
 package com.youngdatafan.common.sso.controller;
 
-import com.datafan.dataintegration.core.exception.DpException;
-import com.datafan.dataintegration.core.model.Result;
-import com.datafan.dataintegration.core.util.StatusCode;
+import com.youngdatafan.dataintegration.core.exception.DpException;
+import com.youngdatafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.util.StatusCode;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

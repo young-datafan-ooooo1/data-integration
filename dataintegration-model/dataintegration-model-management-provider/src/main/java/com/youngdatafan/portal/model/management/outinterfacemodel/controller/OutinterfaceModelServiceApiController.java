@@ -1,8 +1,8 @@
 package com.youngdatafan.portal.model.management.outinterfacemodel.controller;
 
 // import com.datafan.dataintegration.core.util.StatusCode;
-import com.datafan.dataintegration.core.model.Result;
-import com.datafan.dataintegration.core.util.StatusCode;
+import com.youngdatafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.util.StatusCode;
 import com.youngdatafan.portal.model.management.datasource.dto.DatasourceDTO;
 import com.youngdatafan.portal.model.management.outinterfacemodel.api.OutinterfaceModelServiceApi;
 import com.youngdatafan.portal.model.management.outinterfacemodel.dto.*;

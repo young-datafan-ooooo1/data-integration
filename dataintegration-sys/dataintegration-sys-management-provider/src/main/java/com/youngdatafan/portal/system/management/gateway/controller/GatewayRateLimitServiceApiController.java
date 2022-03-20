@@ -1,6 +1,6 @@
 package com.youngdatafan.portal.system.management.gateway.controller;
 
-import com.datafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.portal.system.management.gateway.api.GatewayRateLimitServiceApi;
 import com.youngdatafan.portal.system.management.gateway.dto.DpGatewayRateLimitDTO;
 import com.youngdatafan.portal.system.management.gateway.service.GatewayRateLimitService;

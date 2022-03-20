@@ -1,8 +1,8 @@
 package com.youngdatafan.gateway.ratelimit;
 
 
-import com.datafan.dataintegration.core.lock.CacheLock;
-import com.datafan.dataintegration.core.util.JsonUtils;
+import com.youngdatafan.dataintegration.core.lock.CacheLock;
+import com.youngdatafan.dataintegration.core.util.JsonUtils;
 import com.youngdatafan.gateway.core.util.Constans;
 import com.youngdatafan.portal.system.management.gateway.dto.DpGatewayRateLimitDTO;
 import com.youngdatafan.portal.system.management.gateway.dto.DpGatewayRateLimitMsgDTO;

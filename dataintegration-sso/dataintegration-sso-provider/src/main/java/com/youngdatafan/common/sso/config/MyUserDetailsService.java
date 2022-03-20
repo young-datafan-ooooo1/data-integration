@@ -1,8 +1,8 @@
 package com.youngdatafan.common.sso.config;
 
-import com.datafan.dataintegration.core.util.StatusCode;
+import com.youngdatafan.dataintegration.core.util.StatusCode;
 import com.youngdatafan.common.sso.feign.UserServiceApiClient;
-import com.datafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.portal.system.management.user.dto.UserDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;

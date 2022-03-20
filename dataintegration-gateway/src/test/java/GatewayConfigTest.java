@@ -1,4 +1,4 @@
-import com.datafan.dataintegration.core.util.JsonUtils;
+import com.youngdatafan.dataintegration.core.util.JsonUtils;
 import com.youngdatafan.portal.system.management.gateway.vo.DpGatewayRouteVO;
 import java.util.ArrayList;
 import java.util.HashMap;

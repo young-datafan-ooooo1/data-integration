@@ -1,6 +1,6 @@
 package com.youngdatafan.gateway;
 
-import com.datafan.dataintegration.core.lock.CacheLockAspect;
+import com.youngdatafan.dataintegration.core.lock.CacheLockAspect;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;

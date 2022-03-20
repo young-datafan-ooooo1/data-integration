@@ -1,6 +1,6 @@
 package com.youngdatafan.portal.system.management.user.api;
 
-import com.datafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.portal.system.management.user.dto.RoleDTO;
 import com.youngdatafan.portal.system.management.user.dto.UserDTO;
 import com.youngdatafan.portal.system.management.user.dto.UserRoleDTO;

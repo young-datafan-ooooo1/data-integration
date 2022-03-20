@@ -1,12 +1,12 @@
 package com.youngdatafan.di.run.management.steps.connection.service;
 
 import com.alibaba.fastjson.JSONObject;
-import com.datafan.dataintegration.core.util.StatusCode;
-import com.datafan.dataintegration.core.exception.DpException;
-import com.datafan.dataintegration.core.model.Result;
-import com.datafan.dataintegration.core.util.JsonUtils;
-import com.datafan.dataintegration.core.util.json.JSONLinkedObject;
-import com.datafan.dataintegration.core.util.json.XML;
+import com.youngdatafan.dataintegration.core.util.StatusCode;
+import com.youngdatafan.dataintegration.core.exception.DpException;
+import com.youngdatafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.util.JsonUtils;
+import com.youngdatafan.dataintegration.core.util.json.JSONLinkedObject;
+import com.youngdatafan.dataintegration.core.util.json.XML;
 import com.youngdatafan.di.run.management.steps.connect.dto.FieldDTO;
 import com.youngdatafan.di.run.management.steps.connect.dto.PreviewDataInfoDTO;
 import com.youngdatafan.di.run.management.steps.connect.vo.ConnectionDetailVO;

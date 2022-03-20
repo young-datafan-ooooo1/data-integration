@@ -1,7 +1,7 @@
 package com.youngdatafan.portal.model.management.businessmodel.controller;
 
-import com.datafan.dataintegration.core.model.Result;
-import com.datafan.dataintegration.core.util.StatusCode;
+import com.youngdatafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.util.StatusCode;
 import com.youngdatafan.portal.model.management.businessmodel.api.BusinessModelServiceApi;
 import com.youngdatafan.portal.model.management.businessmodel.dto.*;
 import com.youngdatafan.portal.model.management.businessmodel.service.BusinessModelService;

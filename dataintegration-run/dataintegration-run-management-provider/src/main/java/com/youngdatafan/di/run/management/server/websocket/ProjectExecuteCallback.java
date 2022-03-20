@@ -1,6 +1,6 @@
 package com.youngdatafan.di.run.management.server.websocket;
 
-import com.datafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.model.Result;
 
 /**
  * 项目执行回调

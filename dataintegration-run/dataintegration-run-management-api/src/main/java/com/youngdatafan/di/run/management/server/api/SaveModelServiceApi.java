@@ -1,6 +1,6 @@
 package com.youngdatafan.di.run.management.server.api;
 
-import com.datafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.di.run.management.server.dto.SavemodelHistoryDTO;
 import com.youngdatafan.di.run.management.server.vo.SaveModelVO;
 import com.youngdatafan.di.run.management.server.vo.SaveToModelVO;

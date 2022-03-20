@@ -1,7 +1,7 @@
 package com.youngdatafan.portal.model.management.basicmodel.service.impl;
 
-import com.datafan.dataintegration.core.model.Result;
-import com.datafan.dataintegration.core.util.StatusCode;
+import com.youngdatafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.util.StatusCode;
 import com.youngdatafan.portal.model.management.basicmodel.dto.*;
 import com.youngdatafan.portal.model.management.basicmodel.entity.BasiceModel;
 import com.youngdatafan.portal.model.management.basicmodel.entity.DpPortalBasicModelQuerysql;
