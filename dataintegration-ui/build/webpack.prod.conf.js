@@ -25,8 +25,6 @@ var createServerConfig = function(compilation) {
       wsUrl: 'ws://prime.shuzhaninfo.com:8088/cloud/ws/dataintegration-di-run-management-provider', //websocket连接地址
       onLineUrl: 'http://cloud.vincenthsing.top:8080/cloud/api/dp-schedule-online-audit-provider', //上线管理模块
       fileUrl: 'http://cloud.vincenthsing.top:8080/cloud/api/dp-file-management-provider',
-      recordUrl: 'http://cloud.vincenthsing.top:8080/cloud/api/dataintegration-model-provider/superset/forward', //报表跳转
-      boardUrl : "http://cloud.vincenthsing.top:8080/de-report-dev/#/newReport",
     },
     test: {
       baseUrl: "http://192.168.10.160:10200/api",
@@ -39,8 +37,6 @@ var createServerConfig = function(compilation) {
       wsUrl: 'ws://192.168.10.160:10200/ws/dataintegration-di-run-management-provider', //websocket连接地址
       onLineUrl: 'http://10.242.10.173:10200/api/dp-schedule-online-audit-provider', //上线管理模块
       fileUrl: 'http://10.242.10.173:10200/api/dp-file-management-provider',
-      recordUrl: 'http://10.242.10.173:10200/api/dataintegration-model-provider/superset/forward', //报表跳转
-      boardUrl :"http://prime.shuzhaninfo.com:8088/de-report-dev/#/newReport",
     },
     uat: {
       baseUrl: "http://prime.shuzhaninfo.com:8088/cloud-uat/api",
@@ -53,8 +49,6 @@ var createServerConfig = function(compilation) {
       wsUrl: 'ws://prime.shuzhaninfo.com:8088/cloud-uat/ws/dataintegration-di-run-management-provider', //websocket连接地址
       onLineUrl: 'http://10.242.10.173:10200/api/dp-schedule-online-audit-provider', //上线管理模块
       fileUrl: 'http://10.242.10.173:10200/api/dp-file-management-provider',
-      recordUrl: 'http://10.242.10.173:10200/api/dataintegration-model-provider/superset/forward', //报表跳转
-      boardUrl :"http://prime.shuzhaninfo.com:8088/de-report-dev/#/newReport",
     }
 
   };

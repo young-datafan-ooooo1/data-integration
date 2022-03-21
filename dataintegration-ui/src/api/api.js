@@ -5,8 +5,11 @@ import cookies from 'vue-cookies'
 
 import $ from 'jquery';
 import qs from 'qs'
-let BASEOUTAPI = location.origin
-let BASE = location.origin + '/api'
+// let BASEOUTAPI = location.origin
+// let BASE = location.origin + '/api'
+let BASEOUTAPI = `http://192.168.10.160:10200`
+let BASE = `http://192.168.10.160:10200/api`
+
 if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === undefined) {
   BASE = 'http://192.168.10.160:10200/api'
   BASEOUTAPI = 'http://192.168.10.160:10200'
@@ -25,76 +28,16 @@ let ssoUrl = `${BASE}/dataintegration-common-sso-provider`
 let fileUrl = `${BASE}/dataintegration-file-management-provider`
 //集成平台管理地址 dataintegration-di-run-management-provider
 let dataDiscoveryUrl = `${BASE}/dataintegration-di-run-management-provider`
-
 //websocket连接地址
 let wsUrl = `${BASEOUTAPI}/ws/dataintegration-di-run-management-provider`
-let base = '';
-let boardUrl = "";
-let exceldownloadUrl = "";
-
-
-let item = JSON.parse(store.getters.getUrlConfig);
-//获取前端配置地址
-
-// //sso dataintegration-common-sso-provider
-// let ssoUrl = store.getters.getUrlConfig === null ? '' : item.ssoUrl;
-
-//数据集成平台地址
-let explorUrl = store.getters.getUrlConfig === null ? '' : item.basePlat;
-
-if (process.env.NODE_ENV === "production") {
-  //读取配置文件
-  $.ajax({
-    url: 'config.json',
-    type: 'GET',
-    async: false,
-    dataType: 'json',
-    success: function(result) {
-      base = result.prod.baseUrl;
-      boardUrl = result.prod.boardUrl;
-    }
-  })
-
-} else if(process.env.NODE_ENV === "uat"){
-//读取配置文件
-  $.ajax({
-    url: 'config.json',
-    type: 'GET',
-    async: false,
-    dataType: 'json',
-    success: function(result) {
-      base = result.uat.baseUrl;
-      boardUrl = result.uat.boardUrl;
-    }
-  })
-}else if (process.env.NODE_ENV === "testing") {
-  //读取配置文件
-  $.ajax({
-    url: 'config.json',
-    type: 'GET',
-    async: false,
-    dataType: 'json',
-    success: function(result) {
-      base = result.test.baseUrl;
-      boardUrl = result.test.boardUrl;
-    }
-  })
-} else {
-  base = 'http://192.168.10.160:10200/api';
-  // base = 'http://www.hmshzx2403.top:10200/api';
-  // base = 'http://10.242.10.173:10200/api';
-  boardUrl = "http://cloud.vincenthsing.top:8080/de-report-dev/#/newReport";
-  wsUrl = 'ws://192.168.10.160:10200/ws/dataintegration-di-run-management-provider'
-}
-let recordUrl ='';
-exceldownloadUrl = `${dataDiscoveryUrl}/preview/excelDownload?access_token=`
+let base = BASE;
+const exceldownloadUrl = `${dataDiscoveryUrl}/preview/excelDownload?access_token=`
 let downloadPro = `${projectUrl}/project/download?access_token=`
+
 export {
-  boardUrl,
   base,
   exceldownloadUrl,
   downloadPro,
-  recordUrl
 }
 let temp = 'http://10.242.10.109:10208'
 axios.interceptors.request.use(

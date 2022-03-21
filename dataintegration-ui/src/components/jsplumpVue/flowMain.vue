@@ -466,11 +466,9 @@
     addGroup,
     addProject,
     base,
-    boardUrl,
     checkGroupName,
     getGroup,
     getModelInfo,
-    recordUrl,
     saveAnalyzeData,
     updateSelectProject,
   } from '../../api/api.js'
