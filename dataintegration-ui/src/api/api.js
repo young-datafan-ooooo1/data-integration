@@ -16,7 +16,10 @@ let projectUrl = `${BASE}/dataintegration-project-provider`;
 let modelManageUrl = `${BASE}/dataintegration-portal-model-management-provider`
 //分组管理 dataintegration-group-provider
 let groupUrl = `${BASE}/dataintegration-group-provider`
-
+//系统管理 dataintegration-portal-system-management-provider
+let systemUrl = `${BASE}/dataintegration-portal-system-management-provider`
+//sso dataintegration-common-sso-provider
+let ssoUrl = `${BASE}/dataintegration-common-sso-provider`
 let base = '';
 let boardUrl = "";
 let exceldownloadUrl = "";
@@ -25,15 +28,10 @@ let exceldownloadUrl = "";
 let item = JSON.parse(store.getters.getUrlConfig);
 //获取前端配置地址
 
-//上线运行管理
-let baseAuditURI = store.getters.getUrlConfig === null ? '' : item.scheduleUrl;
-
 //文件管理 dp-file-management-provider
 let fileUrl = store.getters.getUrlConfig === null ? '' : item.fileUrl;
-//系统管理 dataintegration-portal-system-management-provider
-let systemUrl = store.getters.getUrlConfig === null ? '' : item.systemUrl;
-//sso dataintegration-common-sso-provider
-let ssoUrl = store.getters.getUrlConfig === null ? '' : item.ssoUrl;
+// //sso dataintegration-common-sso-provider
+// let ssoUrl = store.getters.getUrlConfig === null ? '' : item.ssoUrl;
 
 //数据集成平台地址
 let explorUrl = store.getters.getUrlConfig === null ? '' : item.basePlat;
