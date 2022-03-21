@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.youngdatafan.dataintegration.file.management.mapper.DpPortalFileUserGrantMapper">
+
+	<!-- 结果集映射 -->
+    <resultMap id="dpPortalFileUserGrantMap" type="com.youngdatafan.dataintegration.file.management.dto.DpPortalFileUserGrantDTO" >
+        <result property="id" column="id"/>
+        <result property="fileId" column="file_id"/>
+        <result property="pid" column="pid"/>
+        <result property="userId" column="user_id"/>
+        <result property="grantType" column="grant_type"/>
+        <result property="createUser" column="create_user"/>
+        <result property="updateUser" column="update_user"/>
+        <result property="createTime" column="create_time"/>
+        <result property="uploadTime" column="upload_time"/>
+    </resultMap>
+
+    <!-- 字段分片 -->
+    <sql id="Base_Column_List">
+        id,
+        file_id,
+        pid,
+        user_id,
+        grant_type,
+        create_user,
+        update_user,
+        create_time,
+        upload_time
+    </sql>
+
+    <!-- 分页字段分片 -->
+    <sql id="Base_Column_Page">
+        id AS id,
+        file_id AS fileId,
+        pid AS pid,
+        user_id AS userId,
+        grant_type AS grantType,
+        create_user AS createUser,
+        update_user AS updateUser,
+        create_time AS createTime,
+        upload_time AS uploadTime
+    </sql>
+
+    <!-- 新增 -->
+    <insert id="insert" parameterType="com.youngdatafan.dataintegration.file.management.model.DpPortalFileUserGrant">
+        insert into dp_portal_file_user_grant
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="null != fileId and '' != fileId">
+                file_id,
+            </if>
+            <if test="null != pid and '' != pid">
+                pid,
+            </if>
+            <if test="null != userId">
+                user_id,
+            </if>
+            <if test="null != grantType">
+                grant_type,
+            </if>
+            <if test="null != createUser">
+                create_user,
+            </if>
+            <if test="null != updateUser">
+                update_user,
+            </if>
+            <if test="null != createTime">
+                create_time,
+            </if>
+            <if test="null != uploadTime">
+                upload_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="null != fileId and '' != fileId">
+                #{fileId,jdbcType=VARCHAR},
+            </if>
+            <if test="null != pid and '' != pid">
+                #{pid,jdbcType=VARCHAR},
+            </if>
+            <if test="null != userId">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="null != grantType">
+                #{grantType,jdbcType=INTEGER},
+            </if>
+            <if test="null != createUser">
+                #{createUser,jdbcType=INTEGER},
+            </if>
+            <if test="null != updateUser">
+                #{updateUser,jdbcType=INTEGER},
+            </if>
+            <if test="null != createTime">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="null != uploadTime">
+                #{uploadTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <insert id="batchInsert" parameterType="list">
+        insert into dp_portal_file_user_grant (
+
+        file_id,
+
+        pid,
+
+        user_id,
+
+        grant_type,
+
+        create_user,
+
+        update_user,
+
+        create_time,
+
+        upload_time
+        )
+        values
+        <foreach collection ="list" item="item" index= "index" separator =",">
+        (
+            #{item.fileId,jdbcType=VARCHAR},
+
+            #{item.pid,jdbcType=VARCHAR},
+
+            #{item.userId,jdbcType=INTEGER},
+
+            #{item.grantType,jdbcType=INTEGER},
+
+            #{item.createUser,jdbcType=INTEGER},
+
+            #{item.updateUser,jdbcType=INTEGER},
+
+            #{item.createTime,jdbcType=TIMESTAMP},
+
+            #{item.uploadTime,jdbcType=TIMESTAMP}
+            )
+        </foreach>
+    </insert>
+    <!-- 删除 -->
+    <delete id="delete">
+        delete from dp_portal_file_user_grant
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <!-- 删除 -->
+    <delete id="batchDel">
+        delete from dp_portal_file_user_grant
+        where id in
+        <foreach collection="collection" item="item" open="(" close=")" separator=",">
+            #{item,jdbcType=INTEGER}
+        </foreach>
+    </delete>
+
+    <delete id="deleteByUserId">
+        delete from dp_portal_file_user_grant
+        where user_id = #{userId,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByFolderId">
+        delete from dp_portal_file_user_grant
+        where pid = #{folderId,jdbcType=INTEGER}
+    </delete>
+
+    <!-- 修改 -->
+    <update id="update" parameterType="com.youngdatafan.dataintegration.file.management.model.DpPortalFileUserGrant">
+        update dp_portal_file_user_grant
+        <set>
+            <if test="null != fileId and '' != fileId">
+                file_id = #{fileId,jdbcType=VARCHAR},
+            </if>
+            <if test="null != pid and '' != pid">
+                pid = #{pid,jdbcType=VARCHAR},
+            </if>
+            <if test="null != userId">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="null != grantType">
+                grant_type = #{grantType,jdbcType=INTEGER},
+            </if>
+            <if test="null != createUser">
+                create_user = #{createUser,jdbcType=INTEGER},
+            </if>
+            <if test="null != updateUser">
+                update_user = #{updateUser,jdbcType=INTEGER},
+            </if>
+            <if test="null != createTime">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="null != uploadTime">
+                upload_time = #{uploadTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <!-- 根据条件查询 queryVo,映射为dto -->
+    <select id="queryListByWrapper" parameterType="com.youngdatafan.dataintegration.file.management.vo.DpPortalFileUserGrantQueryVO"
+            resultMap="dpPortalFileUserGrantMap">
+
+        select <include refid="Base_Column_List" />
+        from dp_portal_file_user_grant
+        <where>
+            <if test="null != id">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="null != fileId and '' != fileId">
+                and file_id = #{fileId,jdbcType=VARCHAR}
+            </if>
+            <if test="null != pid and '' != pid">
+                and pid = #{pid,jdbcType=VARCHAR}
+            </if>
+            <if test="null != userId">
+                and user_id = #{userId,jdbcType=INTEGER}
+            </if>
+            <if test="null != grantType">
+                and grant_type = #{grantType,jdbcType=INTEGER}
+            </if>
+            <if test="null != createUser">
+                and create_user = #{createUser,jdbcType=INTEGER}
+            </if>
+            <if test="null != updateUser">
+                and update_user = #{updateUser,jdbcType=INTEGER}
+            </if>
+            <if test="null != createTime">
+                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="null != uploadTime">
+                and upload_time = #{uploadTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+
+    <!-- 根据主键查询 -->
+    <select id="getDetail" resultMap="dpPortalFileUserGrantMap">
+        select <include refid="Base_Column_List" />
+                    from dp_portal_file_user_grant
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <!-- 根据条件查询 queryVo,映射为dto -->
+    <select id="queryPageByWrapper" parameterType="com.youngdatafan.dataintegration.file.management.vo.DpPortalFileUserGrantQueryVO"
+            resultType="com.youngdatafan.dataintegration.file.management.dto.DpPortalFileUserGrantDTO">
+
+        select <include refid="Base_Column_Page" />
+        from dp_portal_file_user_grant
+        <where>
+            <if test="null != id">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="null != fileId and '' != fileId">
+                and file_id = #{fileId,jdbcType=VARCHAR}
+            </if>
+            <if test="null != pid and '' != pid">
+                and pid = #{pid,jdbcType=VARCHAR}
+            </if>
+            <if test="null != userId">
+                and user_id = #{userId,jdbcType=INTEGER}
+            </if>
+            <if test="null != grantType">
+                and grant_type = #{grantType,jdbcType=INTEGER}
+            </if>
+            <if test="null != createUser">
+                and create_user = #{createUser,jdbcType=INTEGER}
+            </if>
+            <if test="null != updateUser">
+                and update_user = #{updateUser,jdbcType=INTEGER}
+            </if>
+            <if test="null != createTime">
+                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="null != uploadTime">
+                and upload_time = #{uploadTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryUserGrant" parameterType="com.youngdatafan.dataintegration.file.management.vo.UserGrantQueryVO"
+    resultType="com.youngdatafan.dataintegration.file.management.dto.UserGrantDTO">
+
+        select
+        sysUser.id userId,
+        sysUser.account,
+        sysUser.user_name userName,
+        dept.name deptName,
+        sum(case when userGrant.grant_Type == 0  then 1 else 0 end) fileNum,
+        sum(case when userGrant.grant_type == 1  then 1 else 0 end) folderNum
+        from dp_portal_file_user_grant userGrant
+        inner join sys_user sysUser on userGrant.user_id = sysUser.id
+        left join sys_user_dept_relation deptRelation on userGrant.user_id = deptRelation.user_id
+        left join sys_dept dept on deptRelation.dept_id = dept.id
+        <where>
+            <if test="userName != null and userName!=''">
+                and sysUser.user_name like concat('%', #{userName}, '%')
+            </if>
+            <if test="deptId!=null">
+                and dept.id = #{deptId}
+            </if>
+        </where>
+        group by sysUser.id, dept.name
+    </select>
+
+    <select id="queryFolderGrantByUserId" parameterType="int" resultType="com.youngdatafan.dataintegration.file.management.dto.FolderGrantDTO">
+        select
+        userGrant.pid pid,
+        folder.file_name folderName
+        from dp_portal_file_user_grant userGrant
+        left join dp_portal_file_manager folder on userGrant.pid = folder.file_id
+        <where>
+            userGrant.grant_type = 1
+            and userGrant.user_id = #{userId}
+        </where>
+    </select>
+
+    <select id="queryFileGrantByUserId" parameterType="int" resultType="com.youngdatafan.dataintegration.file.management.dto.FileGrantDTO">
+        select
+        fileManager.file_id fileId,
+        fileManager.file_name fileName,
+        folder.file_id pid,
+        folder.file_name folderName
+        from dp_portal_file_user_grant userGrant
+        left join dp_portal_file_manager fileManager on userGrant.file_id = fileManager.file_id
+        left join dp_portal_file_manager folder on fileManager.pid = folder.file_id
+        <where>
+            userGrant.grant_type = 0
+            and fileMaager.is_valid='Y'
+            and userGrant.user_id = #{userId}
+        </where>
+    </select>
+
+    <select id="queryGrantFolder" resultType="com.youngdatafan.dataintegration.file.management.dto.FolderInfoDTO">
+        select
+     file.create_user_id userId,
+     sysUser.account,
+     sysUser.user_name userName,
+     dept.name deptName,
+     dept.id deptId,
+     file.file_id folderId,
+     file.file_name folderName,
+     file.user_name accountOld
+     from dp_portal_file_user_grant user_grant
+     INNER  join dp_portal_file_manager file on file.file_id = user_grant.pid
+     left join sys_user sysUser on file.create_user_id = sysUser.id
+     left join sys_user_dept_relation deptRelation on sysUser.id = deptRelation.user_id
+     left join sys_dept dept on deptRelation.dept_id = dept.id
+     where  user_grant.grant_type = 1
+     and file.is_valid='Y'
+     and user_grant.user_id = #{userId}
+     order by file.order asc, file.last_modified_time desc
+    </select>
+
+    <select id="queryGrantUser" resultType="com.youngdatafan.dataintegration.file.management.dto.GrantUserDTO">
+          select
+     sysUser.id userId,
+     sysUser.account,
+     sysUser.user_name userName
+     from dp_portal_file_user_grant user_grant
+
+     inner join sys_user sysUser on user_grant.user_id = sysUser.id
+     where  user_grant.grant_type = 1
+     and user_grant.pid = #{folderId}
+    </select>
+
+    <select id="queryAllUser" resultType="com.youngdatafan.dataintegration.file.management.dto.GrantUserDTO">
+     select
+     sysUser.id userId,
+     sysUser.account,
+     sysUser.user_name userName
+     from sys_user sysUser
+    </select>
+</mapper>

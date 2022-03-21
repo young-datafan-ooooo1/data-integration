@@ -1,5 +1,6 @@
 package com.youngdatafan.dataintegration.core.exception;
 
+import com.youngdatafan.dataintegration.core.util.StatusCode;
 import org.springframework.http.HttpStatus;
 
 /**
@@ -27,6 +28,12 @@ public class DpException extends RuntimeException {
      */
     private HttpStatus httpStatus = HttpStatus.OK;
 
+    public DpException(final StatusCode statusCode, final String message) {
+        this.statusCode = statusCode.getCode();
+        this.message = message;
+    }
+
+
     public DpException(final String statusCode, final String message) {
         this.statusCode = statusCode;
         this.message = message;
@@ -41,6 +48,12 @@ public class DpException extends RuntimeException {
     public DpException(final String statusCode, final String message, final Throwable cause) {
         super(message, cause);
         this.statusCode = statusCode;
+        this.message = message;
+    }
+
+    public DpException(final StatusCode statusCode, final String message, final Throwable cause) {
+        super(message, cause);
+        this.statusCode = statusCode.getCode();
         this.message = message;
     }
 

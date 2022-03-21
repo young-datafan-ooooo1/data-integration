@@ -241,6 +241,7 @@
         <module>dataintegration-model</module>
         <module>dataintegration-run</module>
         <module>dataintegration-gateway</module>
+        <module>dataintegration-file-management</module>
 
     </modules>
 
