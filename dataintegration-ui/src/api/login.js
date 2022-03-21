@@ -10,50 +10,8 @@ import $ from 'jquery';
 import qs from 'qs'
 import globalWs from "../common/webSocket";
 
-let base = '';
-let wsUrl = '';
-
-if (process.env.NODE_ENV === "production") {
-  //读取配置文件
-  $.ajax({
-    url: 'config.json',
-    type: 'GET',
-    async: false,
-    dataType: 'json',
-    success: function (result) {
-      base = result.prod.baseUrl;
-      wsUrl = result.prod.wsUrl;
-    }
-  })
-
-} else if (process.env.NODE_ENV === "testing") {
-  $.ajax({
-    url: 'config.json',
-    type: 'GET',
-    async: false,
-    dataType: 'json',
-    success: function (result) {
-      base = result.test.baseUrl;
-      wsUrl = result.test.wsUrl;
-    }
-  })
-} else if (process.env.NODE_ENV === "uat") {
-  $.ajax({
-    url: 'config.json',
-    type: 'GET',
-    async: false,
-
-    dataType: 'json',
-    success: function (result) {
-      base = result.uat.baseUrl;
-      wsUrl = result.uat.wsUrl;
-    }
-  })
-} else {
-  base = 'http://192.168.10.160:10200/api';
-  wsUrl = 'ws://192.168.10.160:10200/ws/dataintegration-di-run-management-provider';
-  // base = 'http://10.242.10.173:10200/api';
-}
+let base = 'http://192.168.10.160:10200/api';
+let wsUrl = 'ws://192.168.10.160:10200/ws/dataintegration-di-run-management-provider';
 
 export {
   base,
