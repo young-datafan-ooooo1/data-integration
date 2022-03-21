@@ -1,8 +1,8 @@
 package com.dp.de.run.management.plugin.service;
 
 import com.alibaba.fastjson.JSONArray;
-import com.datafan.dataintegration.core.util.json.JSONLinkedObject;
-import com.datafan.dataintegration.core.util.json.XML;
+import com.youngdatafan.dataintegration.core.util.json.JSONLinkedObject;
+import com.youngdatafan.dataintegration.core.util.json.XML;
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 

@@ -1,6 +1,6 @@
 package com.youngdatafan.di.run.management.steps.connect.api;
 
-import com.datafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.di.run.management.steps.connect.dto.FieldDTO;
 import com.youngdatafan.di.run.management.steps.connect.dto.PreviewDataInfoDTO;
 import com.youngdatafan.di.run.management.steps.connect.dto.ProcedureDTO;

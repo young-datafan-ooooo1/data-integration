@@ -1,6 +1,6 @@
 package com.youngdatafan.portal.common.project.controller;
 
-import com.datafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.portal.common.project.api.ProjectUserGrantServiceApi;
 import com.youngdatafan.portal.common.project.dto.ProjectUserGrantDTO;
 import com.youngdatafan.portal.common.project.dto.UserInfoDTO;

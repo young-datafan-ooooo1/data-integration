@@ -1,7 +1,7 @@
 package com.youngdatafan.portal.model.management.outmodel.controller;
 
-import com.datafan.dataintegration.core.util.StatusCode;
-import com.datafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.util.StatusCode;
+import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.portal.model.management.outmodel.api.OutModelServiceApi;
 import com.youngdatafan.portal.model.management.outmodel.dto.OutModelAndMetaDataListDTO;
 import com.youngdatafan.portal.model.management.outmodel.dto.OutModelAndMetaDataWithPageDTO;
@@ -90,10 +90,10 @@ public class OutModelServiceApiController implements OutModelServiceApi {
             if (aBoolean) {
                 return Result.success(aBoolean, "修改成功");
             } else {
-                return Result.fail(com.datafan.dataintegration.core.util.StatusCode.CODE_10010.getCode(), aBoolean, "修改失败");
+                return Result.fail(StatusCode.CODE_10010.getCode(), aBoolean, "修改失败");
             }
         } catch (Exception e) {
-            return Result.fail(com.datafan.dataintegration.core.util.StatusCode.CODE_10010.getCode(), false, "修改失败");
+            return Result.fail(StatusCode.CODE_10010.getCode(), false, "修改失败");
         }
     }
 
@@ -103,7 +103,7 @@ public class OutModelServiceApiController implements OutModelServiceApi {
         if (aBoolean) {
             return Result.success(aBoolean, "修改成功");
         } else {
-            return Result.fail(com.datafan.dataintegration.core.util.StatusCode.CODE_10010.getCode(), aBoolean, "修改失败");
+            return Result.fail(StatusCode.CODE_10010.getCode(), aBoolean, "修改失败");
         }
     }
 

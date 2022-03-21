@@ -1,6 +1,6 @@
 package com.dp.de.run.management.plugin.service;
 
-import com.datafan.dataintegration.core.util.JsonUtils;
+import com.youngdatafan.dataintegration.core.util.JsonUtils;
 import com.youngdatafan.di.run.management.DiRunManagementApplication;
 import com.youngdatafan.di.run.management.server.service.ProjectExecutorService;
 import com.youngdatafan.di.run.management.server.vo.ProjectExecutorParam;

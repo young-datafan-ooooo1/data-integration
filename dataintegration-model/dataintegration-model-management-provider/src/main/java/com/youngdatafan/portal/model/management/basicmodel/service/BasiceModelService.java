@@ -1,6 +1,6 @@
 package com.youngdatafan.portal.model.management.basicmodel.service;
 
-import com.datafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.portal.model.management.basicmodel.dto.*;
 import com.youngdatafan.portal.model.management.basicmodel.vo.AddBasicModelVO;
 import com.youngdatafan.portal.model.management.basicmodel.vo.BatchInserModelVO;

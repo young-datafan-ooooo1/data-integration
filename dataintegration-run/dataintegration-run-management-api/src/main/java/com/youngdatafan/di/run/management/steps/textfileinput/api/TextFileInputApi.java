@@ -1,7 +1,7 @@
 package com.youngdatafan.di.run.management.steps.textfileinput.api;
 
 
-import com.datafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.di.run.management.steps.csvinput.vo.FieldVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

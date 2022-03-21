@@ -1,6 +1,6 @@
 package com.youngdatafan.gateway.route.controller;
 
-import com.datafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.gateway.route.DbRouteDefinitionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

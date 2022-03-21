@@ -1,7 +1,7 @@
 package com.youngdatafan.gateway.tenant.controller;
 
-import com.datafan.dataintegration.core.model.Result;
-import com.datafan.dataintegration.core.util.Pair;
+import com.youngdatafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.util.Pair;
 import com.youngdatafan.gateway.tenant.UserTenantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

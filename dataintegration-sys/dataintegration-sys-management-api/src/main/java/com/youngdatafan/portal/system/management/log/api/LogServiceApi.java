@@ -1,6 +1,6 @@
 package com.youngdatafan.portal.system.management.log.api;
 
-import com.datafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.portal.system.management.log.dto.LogDTO;
 import com.youngdatafan.portal.system.management.log.vo.LogVO;
 import com.github.pagehelper.PageInfo;

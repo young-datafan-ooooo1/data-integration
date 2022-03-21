@@ -1,7 +1,7 @@
 package com.youngdatafan.common.sso.entity;
 
 
-import com.datafan.dataintegration.core.util.JsonUtils;
+import com.youngdatafan.dataintegration.core.util.JsonUtils;
 
 /**
  * @Author: jeremychen

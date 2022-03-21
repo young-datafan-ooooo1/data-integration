@@ -1,6 +1,6 @@
 package com.youngdatafan.di.run.management.datasource.feign;
 
-import com.datafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.portal.model.management.datasource.dto.DatasourceDTO;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author gavin
  * @since 2020/2/21 3:00 下午
  */
-@FeignClient(value = "dataintegration-model-management-provider", path = "/datasource")
+@FeignClient(value = "dataintegration-portal-model-management-provider", path = "/datasource")
 public interface DatasourceServiceApiClient {
 
     @GetMapping({"/datasourceName/{datasourceName}"})

@@ -36,18 +36,18 @@ spring:
             ## 去掉/api/dpxxx 两层转发路径
             - StripPrefix=2
         #分组管理
-        - id: dataintegration-common-group-provider
-          uri: lb://dataintegration-common-group-provider
+        - id: dataintegration-group-provider
+          uri: lb://dataintegration-group-provider
           predicates:
-            - Path=/api/dataintegration-common-group-provider/**
+            - Path=/api/dataintegration-group-provider/**
           filters:
             ## 去掉/api/dpxxx 两层转发路径
             - StripPrefix=2
         #项目管理
-        - id: dataintegration-common-project-provider
-          uri: lb://dataintegration-common-project-provider
+        - id: dataintegration-project-provider
+          uri: lb://dataintegration-project-provider
           predicates:
-            - Path=/api/dataintegration-common-project-provider/**
+            - Path=/api/dataintegration-project-provider/**
           filters:
             ## 去掉/api/dpxxx 两层转发路径
             - StripPrefix=2
@@ -265,7 +265,7 @@ sso.resource.whiteListPatterns:
   - /api/dataintegration-portal-system-management-provider/user/login
   - /api/dataintegration-portal-model-management-provider/superset/forward
   - /api/dataintegration-portal-system-management-provider/gateway/rateLimit/selectAll
-  - /api/dataintegration-common-group-provider/description
+  - /api/dataintegration-group-provider/description
 
 resilience4j.circuitbreaker:
   configs:

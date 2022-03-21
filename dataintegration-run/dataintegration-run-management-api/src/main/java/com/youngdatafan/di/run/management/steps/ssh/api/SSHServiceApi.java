@@ -1,6 +1,6 @@
 package com.youngdatafan.di.run.management.steps.ssh.api;
 
-import com.datafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.di.run.management.steps.ssh.vo.SSHVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

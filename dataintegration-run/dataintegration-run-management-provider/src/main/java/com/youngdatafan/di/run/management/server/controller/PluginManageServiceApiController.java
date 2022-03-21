@@ -1,12 +1,12 @@
 package com.youngdatafan.di.run.management.server.controller;
 
-import com.datafan.dataintegration.core.exception.DpException;
-import com.datafan.dataintegration.core.exception.ValidationException;
-import com.datafan.dataintegration.core.model.Result;
-import com.datafan.dataintegration.core.util.JsonUtils;
-import com.datafan.dataintegration.core.util.StatusCode;
-import com.datafan.dataintegration.core.util.UUIDUtils;
-import com.datafan.dataintegration.core.util.sql.DataSourceWrap;
+import com.youngdatafan.dataintegration.core.exception.DpException;
+import com.youngdatafan.dataintegration.core.exception.ValidationException;
+import com.youngdatafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.util.JsonUtils;
+import com.youngdatafan.dataintegration.core.util.StatusCode;
+import com.youngdatafan.dataintegration.core.util.UUIDUtils;
+import com.youngdatafan.dataintegration.core.util.sql.DataSourceWrap;
 import com.youngdatafan.di.run.management.datasource.PluginRunDataSourceRepository;
 import com.youngdatafan.di.run.management.server.api.PluginManageServiceApi;
 import com.youngdatafan.di.run.management.server.dto.FieldMaxMinDTO;

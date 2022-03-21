@@ -1,6 +1,6 @@
 package com.youngdatafan.portal.model.management.businessmodel.service;
 
-import com.datafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.portal.model.management.businessmodel.dto.*;
 import com.youngdatafan.portal.model.management.businessmodel.vo.AddBusinessModelVO;
 import com.youngdatafan.portal.model.management.businessmodel.vo.BusinessPreviewDataVO;

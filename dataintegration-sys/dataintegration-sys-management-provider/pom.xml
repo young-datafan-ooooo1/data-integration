@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>dataintegration-sys</artifactId>
-        <groupId>com.datafan.dataintegration</groupId>
+        <groupId>com.young-datafan</groupId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -19,13 +19,13 @@
     <dependencies>
         <!--核心依赖包，provider模块必须引入-->
         <dependency>
-            <groupId>com.datafan.dataintegration</groupId>
+            <groupId>com.young-datafan</groupId>
             <artifactId>dataintegration-core</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
         <!--接口-->
         <dependency>
-            <groupId>com.datafan.dataintegration</groupId>
+            <groupId>com.young-datafan</groupId>
             <artifactId>dataintegration-sys-management-api</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -137,15 +137,13 @@
 
     <build>
         <plugins>
-            <!--            <plugin>-->
-            <!--                <groupId>org.apache.maven.plugins</groupId>-->
-            <!--                <artifactId>maven-deploy-plugin</artifactId>-->
-            <!--                <version>${maven-deploy-plugin.version}</version>-->
-            <!--                <configuration>-->
-            <!--                    &lt;!&ndash;deploy 时忽略此model&ndash;&gt;-->
-            <!--                    <skip>true</skip>-->
-            <!--                </configuration>-->
-            <!--            </plugin>-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
             <!--打包可运行 mvn package spring-boot:repackage-->
             <plugin>
                 <groupId>org.springframework.boot</groupId>

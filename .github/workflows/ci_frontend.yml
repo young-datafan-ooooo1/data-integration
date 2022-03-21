@@ -18,10 +18,6 @@
 name: Frontend
 
 on:
-  push:
-    paths:
-      - '.github/workflows/ci_frontend.yml'
-      - 'dataintegration-ui/**'
   pull_request:
     paths:
       - '.github/workflows/ci_frontend.yml'
@@ -32,7 +28,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-latest]
     steps:
       - uses: actions/checkout@v2
         with:

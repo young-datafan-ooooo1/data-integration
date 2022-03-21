@@ -1,6 +1,6 @@
 package com.youngdatafan.portal.model.management.outmodel.api;
 
-import com.datafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.portal.model.management.outmodel.dto.OutModelAndMetaDataListDTO;
 import com.youngdatafan.portal.model.management.outmodel.dto.OutModelAndMetaDataWithPageDTO;
 import com.youngdatafan.portal.model.management.outmodel.dto.OutModelGroupDTO;

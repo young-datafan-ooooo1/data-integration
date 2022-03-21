@@ -1,6 +1,6 @@
 package com.youngdatafan.portal.model.management.modelgrant.service.impl;
 
-import com.datafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.portal.model.management.businessmodel.mapper.BusinessModelMapper;
 import com.youngdatafan.portal.model.management.modelgrant.dto.BusinessModelListDTO;
 import com.youngdatafan.portal.model.management.modelgrant.dto.GroupIdBusinessModelListDTO;

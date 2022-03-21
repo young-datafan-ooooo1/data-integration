@@ -1,8 +1,8 @@
 package com.youngdatafan.di.run.management.steps.dblookup.controller;
 
 import com.alipay.sofa.common.utils.StringUtil;
-import com.datafan.dataintegration.core.model.Result;
-import com.datafan.dataintegration.core.util.UUIDUtils;
+import com.youngdatafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.util.UUIDUtils;
 import com.youngdatafan.di.run.management.steps.dblookup.api.DbLookupApi;
 import com.youngdatafan.di.run.management.steps.dblookup.vo.TableFieldVO;
 import com.youngdatafan.di.run.management.server.service.ProjectExecutorService;

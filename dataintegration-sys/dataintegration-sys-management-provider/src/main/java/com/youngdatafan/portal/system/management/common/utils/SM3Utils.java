@@ -1,6 +1,6 @@
 package com.youngdatafan.portal.system.management.common.utils;
 
-import com.datafan.dataintegration.core.util.encryption.sm.Sm3Digest;
+import com.youngdatafan.dataintegration.core.util.encryption.sm.Sm3Digest;
 import org.bouncycastle.util.encoders.Hex;
 
 /**

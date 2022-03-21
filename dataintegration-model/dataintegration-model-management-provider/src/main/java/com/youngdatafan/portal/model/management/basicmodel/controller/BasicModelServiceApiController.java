@@ -1,7 +1,7 @@
 package com.youngdatafan.portal.model.management.basicmodel.controller;
 
-import com.datafan.dataintegration.core.model.Result;
-import com.datafan.dataintegration.core.util.StatusCode;
+import com.youngdatafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.util.StatusCode;
 import com.github.pagehelper.PageInfo;
 import com.youngdatafan.portal.model.management.basicmodel.api.BasicModelServiceApi;
 import com.youngdatafan.portal.model.management.basicmodel.dto.AllColumnDTO;
@@ -123,7 +123,7 @@ public class BasicModelServiceApiController implements BasicModelServiceApi {
             List<AllColumnDTO> allColumnsBySql = basiceModelService.getAllColumnsBySql(userId, getColumnsVO.getDataSourceName(), getColumnsVO.getSql());
             return Result.success(allColumnsBySql);
         } catch (Exception e) {
-            return Result.fail(com.datafan.dataintegration.core.util.StatusCode.CODE_10010.getCode(), false, "获取字段失败");
+            return Result.fail(StatusCode.CODE_10010.getCode(), false, "获取字段失败");
         }
     }
 

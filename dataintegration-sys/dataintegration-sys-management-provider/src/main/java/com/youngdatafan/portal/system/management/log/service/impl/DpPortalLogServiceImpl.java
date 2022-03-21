@@ -1,6 +1,6 @@
 package com.youngdatafan.portal.system.management.log.service.impl;
 
-import com.datafan.dataintegration.core.util.UUIDUtils;
+import com.youngdatafan.dataintegration.core.util.UUIDUtils;
 import com.youngdatafan.portal.system.management.log.dto.LogDTO;
 import com.youngdatafan.portal.system.management.log.entity.DpPortalLog;
 import com.youngdatafan.portal.system.management.log.mapper.DpPortalLogMapper;
@@ -9,7 +9,6 @@ import com.youngdatafan.portal.system.management.log.vo.LogVO;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 

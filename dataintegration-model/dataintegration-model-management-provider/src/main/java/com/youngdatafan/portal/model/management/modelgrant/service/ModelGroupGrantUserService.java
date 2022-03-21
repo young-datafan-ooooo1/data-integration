@@ -1,8 +1,7 @@
 package com.youngdatafan.portal.model.management.modelgrant.service;
 
-import com.datafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.portal.model.management.modelgrant.dto.AddUserGrantGroupListDTO;
-import com.youngdatafan.portal.model.management.modelgrant.dto.GrantGroupListDTO;
 import com.youngdatafan.portal.model.management.modelgrant.dto.ModelGroupGrantUserDTO;
 import com.youngdatafan.portal.model.management.modelgrant.dto.UserIdAndNamesDTO;
 import com.youngdatafan.portal.model.management.modelgrant.vo.AddModelGroupGrantUserVO;

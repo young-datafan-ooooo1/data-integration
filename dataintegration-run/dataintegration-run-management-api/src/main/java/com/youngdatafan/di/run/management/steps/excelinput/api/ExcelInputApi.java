@@ -1,6 +1,6 @@
 package com.youngdatafan.di.run.management.steps.excelinput.api;
 
-import com.datafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.di.run.management.steps.excelinput.vo.SheetFieldVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

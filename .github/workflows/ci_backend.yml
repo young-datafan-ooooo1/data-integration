@@ -18,17 +18,6 @@
 name: Backend
 
 on:
-  push:
-    paths:
-      - '.github/workflows/ci_backend.yml'
-      - 'package.xml'
-      - 'pom.xml'
-      - 'dataintegration-common/**'
-      - 'dataintegration-group/**'
-      - 'dataintegration-project/**'
-      - 'dataintegration-run/**'
-      - 'dataintegration-sso/**'
-      - 'dataintegration-sys/**'
   pull_request:
     paths:
       - '.github/workflows/ci_backend.yml'

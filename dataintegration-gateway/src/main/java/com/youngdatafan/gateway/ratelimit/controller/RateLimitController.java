@@ -1,6 +1,6 @@
 package com.youngdatafan.gateway.ratelimit.controller;
 
-import com.datafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.gateway.ratelimit.DbRateLimitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

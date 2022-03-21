@@ -1,9 +1,9 @@
 package com.youngdatafan.portal.common.project.service;
 
-import com.datafan.dataintegration.core.util.StatusCode;
-import com.datafan.dataintegration.core.exception.FormValidationException;
-import com.datafan.dataintegration.core.util.Md5Utils;
-import com.datafan.dataintegration.core.util.UUIDUtils;
+import com.youngdatafan.dataintegration.core.util.StatusCode;
+import com.youngdatafan.dataintegration.core.exception.FormValidationException;
+import com.youngdatafan.dataintegration.core.util.Md5Utils;
+import com.youngdatafan.dataintegration.core.util.UUIDUtils;
 import com.youngdatafan.portal.common.project.entity.DpPortalProject;
 import com.youngdatafan.portal.common.project.mapper.DpPortalProjectFileMapper;
 import com.youngdatafan.portal.common.project.mapper.DpPortalProjectMapper;

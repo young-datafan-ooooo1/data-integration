@@ -1,6 +1,6 @@
 package com.youngdatafan.portal.common.project.conf;
 
-import com.datafan.dataintegration.core.util.MdcThreadPoolTaskExecutor;
+import com.youngdatafan.dataintegration.core.util.MdcThreadPoolTaskExecutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;

@@ -1,7 +1,7 @@
 package com.youngdatafan.portal.model.management.util.excel;
 
 
-import com.datafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.portal.model.management.util.model.ExcelColumns;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 

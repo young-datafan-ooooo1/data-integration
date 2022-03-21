@@ -1,7 +1,7 @@
 package com.youngdatafan.gateway.core.global;
 
 
-import com.datafan.dataintegration.core.util.StatusCode;
+import com.youngdatafan.dataintegration.core.util.StatusCode;
 import java.util.HashMap;
 import java.util.Map;
 import org.slf4j.Logger;

@@ -7,7 +7,7 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.youngdatafan.common.sso.config.JwtTokenEnhancer;
 import com.youngdatafan.common.sso.entity.LoginInfo;
 import com.youngdatafan.common.sso.service.UserRedisService;
-import com.datafan.dataintegration.core.util.Md5Utils;
+import com.youngdatafan.dataintegration.core.util.Md5Utils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
