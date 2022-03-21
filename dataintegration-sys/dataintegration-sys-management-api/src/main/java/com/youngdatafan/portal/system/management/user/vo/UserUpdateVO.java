@@ -3,6 +3,7 @@ package com.youngdatafan.portal.system.management.user.vo;
 import com.youngdatafan.portal.system.management.util.ValidatorConstans;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
@@ -13,8 +14,9 @@ import java.io.Serializable;
  * 接口输入参数.
  *
  * @author gavin
- * @since 2020-01-09 16:44
- */
+    * @since 2020-01-09 16:44
+   */
+@Data
 @ApiModel(description = "用户对象")
 public class UserUpdateVO implements Serializable {
 

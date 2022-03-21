@@ -5,10 +5,12 @@ import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotNull;
 import java.util.StringJoiner;
+import lombok.Data;
 
 /**
  * 限流规则对象.
  */
+@Data
 @ApiModel(description = "限流规则对象")
 public class DpGatewayRateLimitVO {
 
