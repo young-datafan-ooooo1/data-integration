@@ -7,9 +7,7 @@ import lombok.Data;
 import java.util.List;
 
 /**
- * @Author: jeremychen
- * @Descripition:
- * @Date:2020/4/18 5:26 下午
+ * 文件汇总.
  */
 @Data
 @ApiModel("文件汇总")

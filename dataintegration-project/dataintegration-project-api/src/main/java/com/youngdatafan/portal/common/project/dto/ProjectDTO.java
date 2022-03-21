@@ -2,12 +2,13 @@ package com.youngdatafan.portal.common.project.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.util.Date;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
 /**
+ * 项目信息.
+ *
  * @author gavin
  * @since 2020/2/11 12:06 下午
  */
@@ -58,7 +59,7 @@ public class ProjectDTO {
     @ApiModelProperty(value = "分组描述")
     private String groupDescribe;
 
-     @ApiModelProperty(value = "上线审核信息")
+    @ApiModelProperty(value = "上线审核信息")
     private ProjectOnlineDTO projectOnlineDTO;
 
     @ApiModelProperty(value = "操作模式")

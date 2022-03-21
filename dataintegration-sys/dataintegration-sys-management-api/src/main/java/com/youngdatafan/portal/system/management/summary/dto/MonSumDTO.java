@@ -7,9 +7,7 @@ import lombok.Data;
 import java.util.Map;
 
 /**
- * @Author: jeremychen
- * @Descripition:
- * @Date:2020/5/27 2:05 下午
+ * 月均总数统计.
  */
 @ApiModel("月均总数统计")
 @Data

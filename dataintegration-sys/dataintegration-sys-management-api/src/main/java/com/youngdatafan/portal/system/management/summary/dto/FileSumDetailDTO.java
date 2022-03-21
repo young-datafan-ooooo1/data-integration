@@ -5,13 +5,12 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
- * @Author: jeremychen
- * @Descripition:
- * @Date:2020/5/28 10:33 上午
+ * 文件类型统计明细.
  */
 @Data
 @ApiModel("文件类型统计明细")
 public class FileSumDetailDTO {
+
     @ApiModelProperty("文件类型")
     private String fileType;
 

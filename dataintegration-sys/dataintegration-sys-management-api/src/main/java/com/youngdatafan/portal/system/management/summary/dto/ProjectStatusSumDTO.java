@@ -5,9 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
- * @Author: jeremychen
- * @Descripition:
- * @Date:2020/4/18 6:17 下午
+ * 项目状态汇总.
  */
 @Data
 @ApiModel("项目状态汇总")
@@ -17,25 +15,24 @@ public class ProjectStatusSumDTO {
     private String projecType;
 
     @ApiModelProperty("上线")
-    private int ONLINE;
+    private int onLine;
 
     @ApiModelProperty("下线")
-    private int OFFLINE;
+    private int offline;
 
     @ApiModelProperty("审核中")
-    private int CHECKING;
+    private int checking;
 
     @ApiModelProperty("驳回")
-    private int REFUSE;
+    private int refuse;
 
     @ApiModelProperty("已撤销")
-    private int CANCEL;
+    private int cancel;
 
     @ApiModelProperty("撤销申请中")
-    private int CANCELING;
+    private int canceling;
 
     @ApiModelProperty("未发布")
     private int wfb;
-
 
 }

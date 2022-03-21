@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotNull;
 
 /**
- * 用户授权
+ * 用户授权.
  *
  * @author gavin
  * @since 2020/2/12 1:02 下午

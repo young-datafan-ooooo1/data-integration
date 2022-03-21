@@ -1,7 +1,9 @@
 package com.youngdatafan.portal.common.project.controller;
 
-import com.youngdatafan.dataintegration.core.util.StatusCode;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.youngdatafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.util.StatusCode;
 import com.youngdatafan.portal.common.project.api.ProjectServiceApi;
 import com.youngdatafan.portal.common.project.dto.GroupDTO;
 import com.youngdatafan.portal.common.project.dto.ProjectDTO;
@@ -13,26 +15,34 @@ import com.youngdatafan.portal.common.project.service.ProjectService;
 import com.youngdatafan.portal.common.project.vo.ProjectAddVO;
 import com.youngdatafan.portal.common.project.vo.ProjectFileVO;
 import com.youngdatafan.portal.common.project.vo.ProjectUpdateVO;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.ApiOperation;
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.*;
-import java.net.URLEncoder;
-import java.util.Map;
-
 /**
- * 项目接口控制器
+ * 项目接口控制器.
  *
  * @author gavin
  * @since 2020/2/12 11:00 上午
@@ -43,7 +53,6 @@ public class ProjectServiceApiController implements ProjectServiceApi {
 
     private final ProjectService projectService;
 
-
     private DpPortalProjectOnlineService dpPortalProjectOnlineService;
 
     @Autowired
@@ -53,21 +62,21 @@ public class ProjectServiceApiController implements ProjectServiceApi {
     }
 
     @Override
-    public Result<String, Object> add(@Validated @RequestBody ProjectAddVO projectAddVO
-            , @RequestHeader(value = "authorization-userId") String userId, @RequestHeader(value = "authorization-userName") String userName) {
+    public Result<String, Object> add(@Validated @RequestBody ProjectAddVO projectAddVO, @RequestHeader(value = "authorization-userId") String userId,
+                                      @RequestHeader(value = "authorization-userName") String userName) {
         return Result.success(projectService.add(projectAddVO, userId, userName));
     }
 
     /**
-     * 上传项目
+     * 上传项目.
      *
      * @param projectAddVO modelGroupAddVO
      * @return 接口应答
      */
     @ApiOperation(value = "上传项目", notes = "content返回的是项目id", produces = "application/json")
     @PostMapping(value = "/upload")
-    Result<String, Object> upload(@Validated ProjectAddVO projectAddVO
-            , @RequestHeader(value = "authorization-userId") String userId, @RequestHeader(value = "authorization-userName") String userName, HttpServletRequest request) {
+    Result<String, Object> upload(@Validated ProjectAddVO projectAddVO, @RequestHeader(value = "authorization-userId") String userId,
+                                  @RequestHeader(value = "authorization-userName") String userName, HttpServletRequest request) {
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
         Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
         if (fileMap.isEmpty()) {
@@ -112,7 +121,7 @@ public class ProjectServiceApiController implements ProjectServiceApi {
                 in = new ByteArrayInputStream(bytes);
                 response.setContentType(MediaType.APPLICATION_JSON_VALUE);
                 response.setHeader("Content-Disposition", "attachment;filename="
-                        .concat(String.valueOf(URLEncoder.encode(project.getProjectName() + ".json", "UTF-8"))));
+                    .concat(String.valueOf(URLEncoder.encode(project.getProjectName() + ".json", "UTF-8"))));
                 outputSream = response.getOutputStream();
                 int len;
                 byte[] buf = new byte[1024];
@@ -136,14 +145,14 @@ public class ProjectServiceApiController implements ProjectServiceApi {
     }
 
     @Override
-    public Result<Boolean, Object> update(@Validated @RequestBody ProjectUpdateVO projectUpdateVO
-            , @RequestHeader(value = "authorization-userId") String userId, @RequestHeader(value = "authorization-userName") String userName) {
+    public Result<Boolean, Object> update(@Validated @RequestBody ProjectUpdateVO projectUpdateVO, @RequestHeader(value = "authorization-userId") String userId,
+                                          @RequestHeader(value = "authorization-userName") String userName) {
         return Result.success(projectService.update(projectUpdateVO, userId, userName) > 0);
     }
 
     @Override
-    public Result<String, Object> updateSelective(@Validated @RequestBody ProjectUpdateVO projectUpdateVO
-            , @RequestHeader(value = "authorization-userId") String userId, @RequestHeader(value = "authorization-userName") String userName) {
+    public Result<String, Object> updateSelective(@Validated @RequestBody ProjectUpdateVO projectUpdateVO, @RequestHeader(value = "authorization-userId") String userId,
+                                                  @RequestHeader(value = "authorization-userName") String userName) {
         return Result.success(projectService.updateSelective(projectUpdateVO, userId, userName));
     }
 
@@ -177,11 +186,9 @@ public class ProjectServiceApiController implements ProjectServiceApi {
     }
 
     @Override
-    public Result<PageInfo<ProjectDTO>, Object> selectLikeByProjectName(@RequestParam(value = "projectName", required = false) String projectName
-            , @RequestParam(value = "projectType") String projectType
-            , @RequestHeader(value = "authorization-userId") String userId
-            , @RequestParam int pageNum
-            , @RequestParam int pageSize) {
+    public Result<PageInfo<ProjectDTO>, Object> selectLikeByProjectName(@RequestParam(value = "projectName", required = false) String projectName,
+                                                                        @RequestParam(value = "projectType") String projectType, @RequestHeader(value = "authorization-userId") String userId,
+                                                                        @RequestParam int pageNum, @RequestParam int pageSize) {
         // 设置分页规则
         PageHelper.startPage(pageNum, pageSize);
         // 返回所有分页信息参数为查询所有记录的信息
@@ -191,11 +198,10 @@ public class ProjectServiceApiController implements ProjectServiceApi {
     }
 
     @Override
-    public Result<PageInfo<ProjectDTO>, Object> selectLikeByGroupId(@RequestParam(value = "projectName", required = false) String projectName
-            , @PathVariable("groupId") String groupId
-            , @RequestParam(value = "projectType") String projectType
-            , @RequestHeader(value = "authorization-userId") String userId
-            , @RequestParam int pageNum, @RequestParam int pageSize) {
+    public Result<PageInfo<ProjectDTO>, Object> selectLikeByGroupId(@RequestParam(value = "projectName", required = false) String projectName,
+                                                                    @PathVariable("groupId") String groupId, @RequestParam(value = "projectType") String projectType,
+                                                                    @RequestHeader(value = "authorization-userId") String userId,
+                                                                    @RequestParam int pageNum, @RequestParam int pageSize) {
         // 设置分页规则
         PageHelper.startPage(pageNum, pageSize);
         // 返回所有分页信息参数为查询所有记录的信息
@@ -205,11 +211,9 @@ public class ProjectServiceApiController implements ProjectServiceApi {
     }
 
     @Override
-    public Result<PageInfo<GroupDTO>, Object> selectMyProject(@RequestParam(value = "projectName", required = false) String projectName
-            , @RequestParam(value = "groupName", required = false) String groupName
-            , @RequestHeader(value = "authorization-userId") String userId
-            , @RequestParam(value = "projectType") String projectType
-            , @RequestParam int pageNum, @RequestParam int pageSize) {
+    public Result<PageInfo<GroupDTO>, Object> selectMyProject(@RequestParam(value = "projectName", required = false) String projectName,
+                                                              @RequestParam(value = "groupName", required = false) String groupName, @RequestHeader(value = "authorization-userId") String userId,
+                                                              @RequestParam(value = "projectType") String projectType, @RequestParam int pageNum, @RequestParam int pageSize) {
         // 设置分页规则
         PageHelper.startPage(pageNum, pageSize);
         // 返回所有分页信息参数为查询所有记录的信息
@@ -219,10 +223,8 @@ public class ProjectServiceApiController implements ProjectServiceApi {
     }
 
     @Override
-    public Result<PageInfo<GroupDTO>, Object> selectAllProject(@RequestParam(value = "projectName", required = false) String projectName
-            , @RequestHeader(value = "authorization-userId") String userId
-            , @RequestParam(value = "projectType") String projectType
-            , @RequestParam int pageNum, @RequestParam int pageSize) {
+    public Result<PageInfo<GroupDTO>, Object> selectAllProject(@RequestParam(value = "projectName", required = false) String projectName, @RequestHeader(value = "authorization-userId") String userId,
+                                                               @RequestParam(value = "projectType") String projectType, @RequestParam int pageNum, @RequestParam int pageSize) {
         // 设置分页规则
         PageHelper.startPage(pageNum, pageSize);
         // 返回所有分页信息参数为查询所有记录的信息
@@ -232,10 +234,10 @@ public class ProjectServiceApiController implements ProjectServiceApi {
     }
 
     @Override
-    public Result<PageInfo<UserGroupDTO>, Object> selectGrantMyProject(@RequestParam(value = "projectName", required = false) String projectName
-            , @RequestHeader(value = "authorization-userId") String userId
-            , @RequestParam(value = "projectType") String projectType
-            , @RequestParam int pageNum, @RequestParam int pageSize) {
+    public Result<PageInfo<UserGroupDTO>, Object> selectGrantMyProject(@RequestParam(value = "projectName", required = false) String projectName,
+                                                                       @RequestHeader(value = "authorization-userId") String userId,
+                                                                       @RequestParam(value = "projectType") String projectType,
+                                                                       @RequestParam int pageNum, @RequestParam int pageSize) {
         // 设置分页规则
         PageHelper.startPage(pageNum, pageSize);
         // 返回所有分页信息参数为查询所有记录的信息

@@ -6,15 +6,14 @@ import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import lombok.Data;
 
 /**
- * @Author: jeremychen
- * @Descripition:
- * @Date:2020/2/11 1:44 下午
+ * UpdatePasswdVo.
  */
+@Data
 @FieldMatch.List({
-        @FieldMatch(first = "password", second = "confirmPassword"
-                , message = "{user.password.fieldMatch}")})
+        @FieldMatch(first = "password", second = "confirmPassword", message = "{user.password.fieldMatch}")})
 public class UpdatePasswdVo {
     @ApiModelProperty("原密码")
     @NotBlank
@@ -29,28 +28,4 @@ public class UpdatePasswdVo {
     @ApiModelProperty("确认密码")
     @NotBlank
     private String confirmPassword;
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
-
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
-    }
-
-    public String getOldPassword() {
-        return oldPassword;
-    }
-
-    public void setOldPassword(String oldPassword) {
-        this.oldPassword = oldPassword;
-    }
 }

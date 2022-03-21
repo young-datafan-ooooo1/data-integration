@@ -11,19 +11,19 @@ import lombok.Data;
 */
 
 /**
- * 前端地址信息配置表
+ * 前端地址信息配置表.
  */
 @ApiModel(value = "com-dp-portal-system-management-config-entity-DpPortalWebConfig")
 @Data
 public class PortalWebConfigDTO {
     /**
-     * key
+     * key.
      */
     @ApiModelProperty(value = "key")
     private String key;
 
     /**
-     * value
+     * value.
      */
     @ApiModelProperty(value = "value")
     private String value;

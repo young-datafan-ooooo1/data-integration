@@ -1,14 +1,7 @@
 package com.youngdatafan.portal.system.management.summary.dto;
 
 /**
- * <p>****************************************************************************</p>
- * <ul style="margin:15px;">
- * <li>Description : description</li>
- * <li>Version     : 1.0</li>
- * <li>Creation    : 2020/3/24 2:34 PM</li>
- * <li>Author      : ksice_xt</li>
- * </ul>
- * <p>****************************************************************************</p>
+ * OperationStatusEnum.
  */
 public enum OperationStatusEnum {
     E("error", "报错"),
@@ -30,6 +23,7 @@ public enum OperationStatusEnum {
     SI("successWithIgnore", "成功(忽略)");
 
     private final String code;
+
     private final String desc;
 
     OperationStatusEnum(String code, String desc) {
@@ -47,10 +41,20 @@ public enum OperationStatusEnum {
         return null;
     }
 
+    /**
+     * getCode.
+     *
+     * @return code
+     */
     public String getCode() {
         return code;
     }
 
+    /**
+     * getDesc.
+     *
+     * @return desc
+     */
     public String getDesc() {
         return desc;
     }

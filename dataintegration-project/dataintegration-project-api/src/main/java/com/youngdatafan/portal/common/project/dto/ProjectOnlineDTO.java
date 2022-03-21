@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 
 /**
- * 上线审核信息
+ * 上线审核信息.
  *
  * @author gavin
  * @since 2020/2/11 12:06 下午

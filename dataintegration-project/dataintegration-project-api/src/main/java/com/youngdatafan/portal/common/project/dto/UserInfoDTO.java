@@ -2,14 +2,11 @@ package com.youngdatafan.portal.common.project.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.util.List;
 import lombok.Data;
 
-import java.util.List;
-
 /**
- * @Author: jeremychen
- * @Descripition:
- * @Date:2020/2/19 12:01 下午
+ * 用户信息.
  */
 @Data
 @ApiModel(description = "用户信息")

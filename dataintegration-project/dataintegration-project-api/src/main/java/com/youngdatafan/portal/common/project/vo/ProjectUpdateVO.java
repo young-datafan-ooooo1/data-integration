@@ -9,7 +9,7 @@ import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.NotNull;
 
 /**
- * 项目修改对象
+ * 项目修改对象.
  *
  * @author gavin
  * @since 2020/2/11 10:32 上午

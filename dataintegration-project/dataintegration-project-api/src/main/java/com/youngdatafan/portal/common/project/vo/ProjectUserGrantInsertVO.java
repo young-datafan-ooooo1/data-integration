@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
- * 用户授权
+ * 用户授权.
  *
  * @author gavin
  * @since 2020/2/12 1:02 下午

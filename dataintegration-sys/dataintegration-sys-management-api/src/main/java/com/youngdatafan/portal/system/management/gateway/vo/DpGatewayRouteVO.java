@@ -4,7 +4,14 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.util.StringJoiner;
+import lombok.Getter;
+import lombok.Setter;
 
+/**
+ * 路由规则对象.
+ */
+@Setter
+@Getter
 @ApiModel(description = "路由规则对象")
 public class DpGatewayRouteVO {
 
@@ -25,54 +32,6 @@ public class DpGatewayRouteVO {
 
     @ApiModelProperty(value = "元数据，超时等")
     private String metadata;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getUri() {
-        return uri;
-    }
-
-    public void setUri(String uri) {
-        this.uri = uri;
-    }
-
-    public Integer getOrder() {
-        return order;
-    }
-
-    public void setOrder(Integer order) {
-        this.order = order;
-    }
-
-    public String getPredicates() {
-        return predicates;
-    }
-
-    public void setPredicates(String predicates) {
-        this.predicates = predicates;
-    }
-
-    public String getFilters() {
-        return filters;
-    }
-
-    public void setFilters(String filters) {
-        this.filters = filters;
-    }
-
-    public String getMetadata() {
-        return metadata;
-    }
-
-    public void setMetadata(String metadata) {
-        this.metadata = metadata;
-    }
 
     @Override
     public String toString() {

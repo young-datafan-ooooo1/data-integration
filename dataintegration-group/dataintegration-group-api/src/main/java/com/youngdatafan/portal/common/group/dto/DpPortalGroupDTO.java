@@ -1,9 +1,8 @@
 package com.youngdatafan.portal.common.group.dto;
 
+import java.util.Date;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.Date;
 
 @Data
 @NoArgsConstructor

@@ -20,6 +20,11 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @ComponentScan(value = "com.youngdatafan.portal.common.group")
 public class CommonGroupApplication {
 
+    /**
+     * 启动.
+     *
+     * @param args args
+     */
     public static void main(String[] args) {
         new SpringApplicationBuilder(CommonGroupApplication.class).run(args);
     }

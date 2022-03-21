@@ -1,5 +1,7 @@
 package com.youngdatafan.portal.common.group.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.portal.common.group.api.GroupServiceApi;
 import com.youngdatafan.portal.common.group.dto.DpPortalGroupDTO;
@@ -8,12 +10,15 @@ import com.youngdatafan.portal.common.group.service.GroupService;
 import com.youngdatafan.portal.common.group.vo.GroupAddVO;
 import com.youngdatafan.portal.common.group.vo.GroupUkVO;
 import com.youngdatafan.portal.common.group.vo.GroupUpdateVO;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 分组接口控制器.

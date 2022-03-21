@@ -1,16 +1,23 @@
 package com.youngdatafan.portal.common.group.api;
 
+import com.github.pagehelper.PageInfo;
 import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.portal.common.group.dto.DpPortalGroupDTO;
 import com.youngdatafan.portal.common.group.vo.GroupAddVO;
 import com.youngdatafan.portal.common.group.vo.GroupUkVO;
 import com.youngdatafan.portal.common.group.vo.GroupUpdateVO;
-import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * 分组服务api声明.
@@ -87,7 +94,7 @@ public interface GroupServiceApi {
     /**
      * 查询所有分组.
      *
-     * @param userId 用户id
+     * @param userId   用户id
      * @param pageNum  页数
      * @param pageSize 每页记录数
      * @return 接口应答
@@ -95,13 +102,13 @@ public interface GroupServiceApi {
     @ApiOperation(value = "根据分组类型查询", produces = "application/json")
     @GetMapping(value = "/selectAll")
     Result<PageInfo<DpPortalGroupDTO>, Object> selectAll(
-            @RequestHeader(value = "authorization-userId") String userId,
-            @ApiParam("页数") @RequestParam int pageNum, @ApiParam("每页记录数") @RequestParam int pageSize);
+        @RequestHeader(value = "authorization-userId") String userId,
+        @ApiParam("页数") @RequestParam int pageNum, @ApiParam("每页记录数") @RequestParam int pageSize);
 
     /**
      * 根据分组类型查询.
      *
-     * @param userId 用户id
+     * @param userId    用户id
      * @param groupType 分组类型
      * @param pageNum   页数
      * @param pageSize  每页记录数
@@ -110,14 +117,14 @@ public interface GroupServiceApi {
     @ApiOperation(value = "根据分组类型查询", produces = "application/json")
     @GetMapping(value = "/selectBy/{groupType}")
     Result<PageInfo<DpPortalGroupDTO>, Object> selectByGroupType(
-            @RequestHeader(value = "authorization-userId") String userId,
-            @ApiParam("分组类型，多个逗号分隔") @PathVariable("groupType") String groupType,
-            @ApiParam("页数") @RequestParam int pageNum, @ApiParam("每页记录数") @RequestParam int pageSize);
+        @RequestHeader(value = "authorization-userId") String userId,
+        @ApiParam("分组类型，多个逗号分隔") @PathVariable("groupType") String groupType,
+        @ApiParam("页数") @RequestParam int pageNum, @ApiParam("每页记录数") @RequestParam int pageSize);
 
     /**
      * 根据分组名称或备注模糊查询指定分组类型下的所有分组.
      *
-     * @param userId 用户id
+     * @param userId    用户id
      * @param groupName 分组名称
      * @param groupType 分组类型
      * @param pageNum   页数
@@ -127,10 +134,10 @@ public interface GroupServiceApi {
     @ApiOperation(value = "根据分组名称或备注模糊查询指定分组类型下的所有分组", produces = "application/json")
     @GetMapping(value = "/selectLikeBy/{groupType}")
     Result<PageInfo<DpPortalGroupDTO>, Object> selectLikeByGroupType(
-            @RequestHeader(value = "authorization-userId") String userId,
-            @ApiParam("分组类型，多个逗号分隔") @PathVariable("groupType") String groupType,
-            @ApiParam("分组名称，模糊查询") @RequestParam(value = "groupName", required = false) String groupName,
-            @ApiParam("页数") @RequestParam int pageNum, @ApiParam("每页记录数") @RequestParam int pageSize);
+        @RequestHeader(value = "authorization-userId") String userId,
+        @ApiParam("分组类型，多个逗号分隔") @PathVariable("groupType") String groupType,
+        @ApiParam("分组名称，模糊查询") @RequestParam(value = "groupName", required = false) String groupName,
+        @ApiParam("页数") @RequestParam int pageNum, @ApiParam("每页记录数") @RequestParam int pageSize);
 
 }
 
