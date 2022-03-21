@@ -1,0 +1,28 @@
+server:
+  port: 10210
+
+spring:
+  application:
+    name: dataintegration-file-management-provider
+  cloud:
+    consul:
+      host: 192.168.10.160
+      port: 8500
+      discovery:
+        service-name: ${spring.application.name}
+        instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}
+        health-check-path: /actuator/health
+        health-check-interval: 10s
+
+management:
+  endpoints:
+    web:
+      exposure:
+        # 开放所有端点
+        include: "*"
+logging:
+  file:
+    # 配置日志目录，logbak.xml使用
+    path: ./logs/${spring.application.name}
+    # springboot admin获取日志使用
+    name: ${logging.file.path}/all/${spring.application.name}.log

@@ -1,0 +1,746 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youngdatafan.dataintegration.file.management.mapper.DpPortalFileManagerMapper">
+    <resultMap id="BaseResultMap" type="com.youngdatafan.dataintegration.file.management.model.DpPortalFileManager">
+        <!--@mbg.generated-->
+        <!--@Table dp_portal_file_manager-->
+        <id column="file_id" jdbcType="VARCHAR" property="fileId"/>
+        <result column="pid" jdbcType="VARCHAR" property="pid"/>
+        <result column="file_name" jdbcType="VARCHAR" property="fileName"/>
+        <result column="file_real_name" jdbcType="VARCHAR" property="fileRealName"/>
+        <result column="file_type" jdbcType="VARCHAR" property="fileType"/>
+        <result column="order" jdbcType="INTEGER" property="order"/>
+        <result column="notes" jdbcType="VARCHAR" property="notes"/>
+        <result column="is_valid" jdbcType="VARCHAR" property="isValid"/>
+        <result column="upload_time" jdbcType="TIMESTAMP" property="uploadTime"/>
+        <result column="last_modified_time" jdbcType="TIMESTAMP" property="lastModifiedTime"/>
+        <result column="create_user_id" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="describe" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="is_folder" jdbcType="VARCHAR" property="isFolder"/>
+        <result column="create_channel" jdbcType="VARCHAR" property="createChannel"/>
+        <result column="file_server_type" jdbcType="VARCHAR" property="fileServerType"/>
+        <result column="file_path" jdbcType="VARCHAR" property="filePath"/>
+        <result column="file_size" jdbcType="VARCHAR" property="fileSize"/>
+        <result column="source_system" jdbcType="VARCHAR" property="sourceSystem"/>
+        <result column="source_way" jdbcType="VARCHAR" property="sourceWay"/>
+        <result column="source_project" jdbcType="VARCHAR" property="sourceProject"/>
+        <result column="effective_days" jdbcType="INTEGER" property="effectiveDays"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        file_id,pid, file_name, file_type, `order`, notes, is_valid, upload_time,last_modified_time, create_user_id,
+        is_folder,file_server_type,file_path,file_size,effective_days,user_name
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+
+        <include refid="Base_Column_List"/>
+
+        from dp_portal_file_manager
+        where file_id = #{fileId,jdbcType=VARCHAR}
+
+    </select>
+    <delete id="deleteByPrimaryKey">
+        <!--@mbg.generated-->
+        delete from dp_portal_file_manager
+        where file_id = #{fileId,jdbcType=VARCHAR} or pid= #{fileId,jdbcType=VARCHAR}
+
+    </delete>
+    <insert id="insert" parameterType="com.youngdatafan.dataintegration.file.management.model.DpPortalFileManager">
+        <!--@mbg.generated-->
+        insert into dp_portal_file_manager (file_id,pid, file_name, file_type,
+        `order`, notes, is_valid,
+        upload_time,last_modified_time, create_user_id,
+        is_folder,create_channel,file_server_type,file_path,file_size,source_system,source_way,source_project,effective_days,user_name)
+        values (#{fileId,jdbcType=VARCHAR}, #{pid,jdbcType=VARCHAR}, #{fileName,jdbcType=VARCHAR},
+        #{fileType,jdbcType=VARCHAR},
+        #{order,jdbcType=INTEGER}, #{notes,jdbcType=VARCHAR}, #{isValid,jdbcType=VARCHAR},
+        #{uploadTime,jdbcType=TIMESTAMP},#{lastModifiedTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=VARCHAR},
+        #{isFolder,jdbcType=VARCHAR},#{createChannel,jdbcType=VARCHAR},#{fileServerType,jdbcType=VARCHAR},#{filePath,jdbcType=VARCHAR},#{fileSize,jdbcType=VARCHAR},#{sourceSystem,jdbcType=VARCHAR},#{sourceWay,jdbcType=VARCHAR},
+        #{sourceProject,jdbcType=VARCHAR},  #{effectiveDays,jdbcType=INTEGER},  #{userName,jdbcType=VARCHAR})
+
+    </insert>
+    <insert id="insertSelective" parameterType="com.youngdatafan.dataintegration.file.management.model.DpPortalFileManager">
+        <!--@mbg.generated-->
+        insert into dp_portal_file_manager
+
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fileId != null">
+                file_id,
+
+            </if>
+            <if test="pid != null">
+
+                pid,
+
+            </if>
+            <if test="fileName != null">
+
+                file_name,
+
+            </if>
+            <if test="fileType != null">
+
+                file_type,
+
+            </if>
+            <if test="order != null">
+
+                `order`,
+
+            </if>
+            <if test="notes != null">
+
+                notes,
+
+            </if>
+            <if test="isValid != null">
+
+                is_valid,
+
+            </if>
+            <if test="uploadTime != null">
+
+                upload_time,
+
+            </if>
+            <if test="lastModifiedTime != null">
+
+                last_modified_time,
+
+            </if>
+            <if test="createUserId != null">
+
+                create_user_id,
+
+            </if>
+            <if test="isFolder != null">
+
+                is_folder,
+
+            </if>
+            <if test="createChannel != null">
+
+                create_channel,
+
+            </if>
+            <if test="fileServerType != null">
+
+                file_server_type,
+
+            </if>
+            <if test="filePath != null">
+
+                file_path,
+
+            </if>
+            <if test="fileSize != null">
+
+                file_size,
+            </if>
+            <if test="sourceSystem != null">
+
+                source_system,
+            </if>
+            <if test="sourceWay != null">
+
+                source_way,
+            </if>
+            <if test="sourceProject != null">
+
+                source_project,
+            </if>
+              <if test="effectiveDays != null">
+
+                effective_days,
+            </if>
+                  <if test="userName != null">
+
+                user_name,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fileId != null">
+                #{fileId,jdbcType=VARCHAR},
+
+            </if>
+            <if test="pid != null">
+
+                #{pid,jdbcType=VARCHAR},
+
+            </if>
+            <if test="fileName != null">
+
+                #{fileName,jdbcType=VARCHAR},
+
+            </if>
+            <if test="fileType != null">
+
+                #{fileType,jdbcType=VARCHAR},
+
+            </if>
+            <if test="order != null">
+
+                #{order,jdbcType=INTEGER},
+
+            </if>
+            <if test="notes != null">
+
+                #{notes,jdbcType=VARCHAR},
+
+            </if>
+            <if test="isValid != null">
+
+                #{isValid,jdbcType=VARCHAR},
+
+            </if>
+            <if test="uploadTime != null">
+
+                #{uploadTime,jdbcType=TIMESTAMP},
+
+            </if>
+            <if test="lastModifiedTime != null">
+
+                #{lastModifiedTime,jdbcType=TIMESTAMP},
+
+            </if>
+            <if test="createUserId != null">
+
+                #{createUserId,jdbcType=VARCHAR},
+
+            </if>
+            <if test="isFolder != null">
+
+                #{isFolder,jdbcType=VARCHAR},
+
+            </if>
+            <if test="createChannel != null">
+
+                #{createChannel,jdbcType=VARCHAR},
+
+            </if>
+            <if test="fileServerType != null">
+
+                #{fileServerType,jdbcType=VARCHAR},
+
+            </if>
+            <if test="filePath != null">
+
+                #{filePath,jdbcType=VARCHAR},
+
+            </if>
+            <if test="fileSize != null">
+
+                #{fileSize,jdbcType=VARCHAR},
+            </if>
+            <if test="sourceSystem != null">
+
+                #{sourceSystem,jdbcType=VARCHAR},
+            </if>
+            <if test="sourceWay != null">
+
+                #{sourceWay,jdbcType=VARCHAR},
+            </if>
+            <if test="sourceProject != null">
+
+                #{sourceProject,jdbcType=VARCHAR},
+            </if>
+            <if test="effectiveDays != null">
+                #{effectiveDays,jdbcType=INTEGER},
+            </if>
+             <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective"
+            parameterType="com.youngdatafan.dataintegration.file.management.model.DpPortalFileManager">
+        <!--@mbg.generated-->
+        update dp_portal_file_manager
+
+        <set>
+            <if test="pid != null">
+                pid = #{pid,jdbcType=VARCHAR},
+
+            </if>
+            <if test="fileName != null">
+
+                file_name = #{fileName,jdbcType=VARCHAR},
+
+            </if>
+            <if test="fileType != null">
+
+                file_type = #{fileType,jdbcType=VARCHAR},
+
+            </if>
+            <if test="order != null">
+
+                `order` = #{order,jdbcType=INTEGER},
+
+            </if>
+            <if test="notes != null">
+
+                notes = #{notes,jdbcType=VARCHAR},
+
+            </if>
+            <if test="isValid != null">
+
+                is_valid = #{isValid,jdbcType=VARCHAR},
+
+            </if>
+            <if test="uploadTime != null">
+
+                upload_time = #{uploadTime,jdbcType=TIMESTAMP},
+
+            </if>
+            <if test="lastModifiedTime != null">
+
+                last_modified_time = #{lastModifiedTime,jdbcType=TIMESTAMP},
+
+            </if>
+            <if test="isFolder != null">
+
+                is_folder = #{isFolder,jdbcType=VARCHAR},
+
+            </if>
+            <if test="fileServerType != null">
+
+                file_server_type = #{fileServerType,jdbcType=VARCHAR},
+
+            </if>
+            <if test="filePath != null">
+
+                file_path = #{filePath,jdbcType=VARCHAR},
+
+            </if>
+            <if test="fileSize != null">
+
+                file_size = #{fileSize,jdbcType=VARCHAR},
+            </if>
+
+              <if test="effectiveDays != null">
+
+                effective_days = #{effectiveDays,jdbcType=INTEGER},
+            </if>
+
+                <if test="userName != null">
+
+                user_name = #{userName,jdbcType=INTEGER}
+            </if>
+        </set>
+
+        where file_id = #{fileId,jdbcType=VARCHAR}
+        and create_user_id = #{createUserId,jdbcType=VARCHAR}
+
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.youngdatafan.dataintegration.file.management.model.DpPortalFileManager">
+        <!--@mbg.generated-->
+        update dp_portal_file_manager
+        set file_name = #{fileName,jdbcType=VARCHAR},
+        pid = #{pid,jdbcType=VARCHAR},
+        file_type = #{fileType,jdbcType=VARCHAR},
+        `order` = #{order,jdbcType=INTEGER},
+        notes = #{notes,jdbcType=VARCHAR},
+        is_valid = #{isValid,jdbcType=VARCHAR},
+        upload_time = #{uploadTime,jdbcType=TIMESTAMP},
+        last_modified_time = #{lastModifiedTime,jdbcType=TIMESTAMP},
+        is_folder = #{isFolder,jdbcType=VARCHAR},
+        file_server_type = #{fileServerType,jdbcType=VARCHAR},
+        file_path = #{filePath,jdbcType=VARCHAR},
+        file_size = #{fileSize,jdbcType=VARCHAR},
+        where file_id = #{fileId,jdbcType=VARCHAR}
+        and create_user_id = #{createUserId,jdbcType=VARCHAR}
+
+    </update>
+    <update id="batchUpdate" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" separator=";">
+            update dp_portal_file_manager
+
+            <set>
+                last_modified_time = #{item.lastModifiedTime}
+            </set>
+            <where>
+                file_id = #{item.fileId}
+            </where>
+        </foreach>
+    </update>
+    <update id="refreshOldData">
+        update dp_portal_file_manager  set last_modified_time = upload_time where last_modified_time is NULL
+     </update>
+
+     <update id="refreshUserName">
+        update dp_portal_file_manager t1 ,sys_user t2 set t1.user_name=t2.account where t1.create_user_id=t2.id and t1.user_name is null
+     </update>
+    <select id="selectByFileId" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/> from dp_portal_file_manager
+        where file_id = #{fileId,jdbcType=VARCHAR}
+        <if test="roleCode != 'superadmin'">
+            and create_user_id= #{userId,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+
+    <select id="selectByParam" resultMap="BaseResultMap" parameterType="java.util.Map">
+
+        select
+        a.file_id, a.pid, a.file_name,a.source_system,a.source_way,a.source_project, case when a.is_folder = '1' then
+        '文件夹' else a.file_type end as file_type, a.`order`,
+        a.notes, a.is_valid, a.upload_time, a.last_modified_time, a.create_user_id,a.file_server_type,a.file_path,a.file_size,
+        a.is_folder,concat(a.file_id,'.',a.file_type) file_real_name,a.create_channel,
+        b.user_name as `describe`
+        from dp_portal_file_manager a
+        left join sys_user b
+        on a.create_user_id=b.id
+        where a.is_folder = '1'
+        and (a.pid is null or a.pid = "")
+        <if test="roleCode != 'superadmin'">
+            and a.create_user_id= #{userId,jdbcType=VARCHAR}
+        </if>
+        <if test="fileType != null and fileType != ''">
+
+            and a.file_type = #{fileType,jdbcType=VARCHAR}
+
+        </if>
+        <if test="fileName != null and fileName != ''">
+
+            and upper(a.file_name) like concat(concat('%', #{fileName,jdbcType=VARCHAR} ),'%')
+
+        </if>
+
+        order by a.last_modified_time desc
+
+    </select>
+    <select id="selectByFileIds" resultMap="BaseResultMap">
+
+        select
+
+        <include refid="Base_Column_List"/>
+
+        from dp_portal_file_manager
+        where file_id in
+
+        <foreach collection="fileIds" item="item" index="index" open="(" close=")" separator=",">
+            #{item,jdbcType=VARCHAR}
+        </foreach>
+
+    </select>
+
+    <select id="selectByFileIdList"  resultMap="BaseResultMap">
+        select
+
+        <include refid="Base_Column_List"/>
+
+        from dp_portal_file_manager
+        where 1=1
+        <foreach collection="fileIdList" item="item" index="index" open="  and file_id in (" close=")" separator=",">
+            #{item,jdbcType=VARCHAR}
+        </foreach>
+
+    </select>
+    <delete id="deleteByFileIds">
+
+        delete
+        from dp_portal_file_manager
+        where file_id in
+
+        <foreach collection="fileIds" item="item" index="index" open="(" close=")" separator=",">
+            #{item,jdbcType=VARCHAR}
+        </foreach>
+        <if test="roleCode != 'superadmin'">
+            and create_user_id= #{userId,jdbcType=VARCHAR}
+        </if>
+
+
+    </delete>
+    <delete id="deleteSonByPrimaryKey">
+
+        delete from dp_portal_file_manager
+        where pid= #{fileId,jdbcType=VARCHAR}
+        and file_name = #{fileName,jdbcType=VARCHAR}
+
+    </delete>
+    <delete id="deleteSonFromFolder">
+
+        delete from dp_portal_file_manager
+        where pid= #{fileId,jdbcType=VARCHAR}
+
+    </delete>
+    <select id="checkeFileName" resultType="java.lang.String">
+
+        select file_id from dp_portal_file_manager
+        where file_name = #{fileName,jdbcType=VARCHAR}
+        and create_user_id= #{userId,jdbcType=VARCHAR}
+
+        <if test="pid != null and pid != ''">
+
+            and pid= #{pid,jdbcType=VARCHAR}
+
+        </if>
+    </select>
+
+    <select id="findDemandTaskName" resultType="java.lang.String" parameterType="java.lang.Integer">
+
+        select task_name from dm_project_demand_task where id =#{taskId,jdbcType=INTEGER}
+
+    </select>
+
+    <select id="checkeDirName" resultType="java.lang.String">
+        select file_id from dp_portal_file_manager
+        where file_name = #{fileName,jdbcType=VARCHAR}
+        and create_user_id= #{userId,jdbcType=VARCHAR}
+        and is_folder = "1"
+    </select>
+    <select id="selectFileListByType" resultMap="BaseResultMap">
+
+        select
+        a.*,
+        b.user_name as `describe`
+        from dp_portal_file_manager a
+        left join sys_user b
+        on a.create_user_id=b.id
+        where a.pid = #{pid,jdbcType=VARCHAR}
+        and a.file_type in
+
+        <foreach collection="fileTypes" item="item" index="index" open="(" close=")" separator=",">
+            #{item,jdbcType=VARCHAR}
+        </foreach>
+        <if test="roleCode != 'superadmin'">
+            and a.create_user_id= #{userId,jdbcType=VARCHAR}
+        </if>
+        and a.is_valid='Y'
+        ORDER BY a.upload_time DESC
+
+    </select>
+    <select id="selectByPid" resultMap="BaseResultMap">
+
+         select
+        a.*,
+        b.user_name as `describe`
+        from dp_portal_file_manager a
+        left join sys_user b
+        on a.create_user_id=b.id
+        where a.pid = #{fileId,jdbcType=VARCHAR}
+
+    </select>
+    <select id="selectFileFolderList" resultMap="BaseResultMap">
+
+        select
+        a.*,
+        b.user_name as `describe`
+        from dp_portal_file_manager a
+        left join sys_user b
+        on a.create_user_id=b.id
+        where a.is_folder = #{isFolder,jdbcType=VARCHAR}
+        and a.is_valid='Y'
+        and a.create_user_id= #{userId,jdbcType=VARCHAR}
+        order by a.order asc, a.last_modified_time desc
+    </select>
+    <select id="selectFileList" resultMap="BaseResultMap">
+
+        select
+        a.*,
+        b.user_name as `describe`
+        from dp_portal_file_manager a
+        left join sys_user b
+        on a.create_user_id=b.id
+        where a.pid = #{pid,jdbcType=VARCHAR}
+        <if test="roleCode != 'superadmin'">
+        and a.create_user_id= #{userId,jdbcType=VARCHAR}
+        </if>
+        and a.is_valid='Y'
+        ORDER BY a.upload_time DESC
+
+    </select>
+    <select id="selectItemByFileId" resultMap="BaseResultMap">
+
+        select
+
+        <include refid="Base_Column_List"/>
+
+        from dp_portal_file_manager
+        where file_id = #{fileId,jdbcType=VARCHAR}
+
+    </select>
+    <select id="selectByFileNames" resultMap="BaseResultMap">
+        select
+        *
+        from dp_portal_file_manager
+        where pid = #{fileId,jdbcType=VARCHAR}
+        and file_name in
+        <foreach collection="fileNames" item="item" index="index" open="(" close=")" separator=",">
+            #{item,jdbcType=VARCHAR}
+        </foreach>
+    </select>
+    <select id="selectFileNamesByFileIds" resultType="java.lang.String">
+        select
+        file_name
+        from dp_portal_file_manager
+        where 1=1
+        and file_id in
+        <foreach collection="ids" item="item" index="index" open="(" close=")" separator=",">
+            #{item,jdbcType=VARCHAR}
+        </foreach>
+    </select>
+
+    <select id="queryFolder" resultType="com.youngdatafan.dataintegration.file.management.dto.FolderInfoDTO">
+     select
+     sysUser.id userId,
+     sysUser.account,
+     sysUser.user_name userName,
+     dept.name deptName,
+     file.file_id folderId,
+     file.file_name folderName,
+     file.notes,
+     file.order,
+     file.source_system sourceSystem,
+     file.source_way sourceWay,
+     file.source_project sourceProject,
+     file.upload_time uploadTime,
+     file.last_modified_time lastModifiedTime
+     from dp_portal_file_manager file
+     left join sys_user sysUser on file.create_user_id = sysUser.id
+     left join sys_user_dept_relation deptRelation on sysUser.id = deptRelation.user_id
+     left join sys_dept dept on deptRelation.dept_id = dept.id
+     where  file.is_folder = 1
+     and file.is_valid='Y'
+     and file.create_user_id = #{userId}
+     order by file.order asc, file.last_modified_time desc
+    </select>
+
+    <select id="queryFileByParam" parameterType="com.youngdatafan.dataintegration.file.management.vo.FileQueryVO"
+    resultType="com.youngdatafan.dataintegration.file.management.dto.FileInfoDTO">
+        select
+        file.file_id fileId,
+        file.file_name fileName,
+        file.file_type fileType,
+        file.file_path fileRelativPath,
+        sysUser.user_name userName,
+        file.is_folder isFolder,
+        file.file_server_type fileServerType,
+        file.file_size fileSize,
+        file.source_system sourceSystem,
+        file.source_way sourceWay,
+        file.source_project sourceProject,
+        file.upload_time uploadTime,
+        file.last_modified_time lastModifiedTime,
+        dept.id deptId,
+        dept.name deptName,
+        file.effective_days effectiveDays,
+        folder.file_id folderId,
+        folder.file_name folderName,
+        file.user_name accountOld
+        from dp_portal_file_manager file
+        left join sys_user sysUser on file.create_user_id = sysUser.id
+        left join dp_portal_file_manager folder on file.pid = folder.file_id
+        left join sys_user_dept_relation deptRelation on sysUser.id = deptRelation.user_id
+        left join sys_dept dept on deptRelation.dept_id = dept.id
+        <where>
+            file.is_folder &lt;&gt; 1
+            and file.is_valid='Y'
+            <if test="isAdmin != 1">
+                and (file.create_user_id = #{myUserId}
+                or EXISTS (
+                SELECT
+                id
+                FROM
+                dp_portal_file_user_grant userGrant
+                WHERE
+                userGrant.user_id = #{myUserId}
+                AND userGrant.pid = file.pid))
+                 </if>
+            <if test="keyword != null and keyword !=''">
+                and (sysUser.user_name like concat('%',#{keyword},'%')
+                or folder.file_name like concat('%',#{keyword},'%')
+                or file.file_name like concat('%',#{keyword},'%')
+                )
+            </if>
+            <if test="fileSizeMin!=null">
+                and file.file_size >= #{fileSizeMin}
+            </if>
+            <if test="fileSizeMax!=null ">
+                and file.file_size &lt;#{fileSizeMax}
+            </if>
+            <if test="startDate!=null">
+                and file.last_modified_time >= #{startDate}
+            </if>
+            <if test="endDate!=null">
+                and file.last_modified_time &lt; DATE_ADD(#{endDate},INTERVAL 1 DAY)
+            </if>
+            <if test="folderId!=null and folderId!=''">
+                and file.pid =#{folderId}
+            </if>
+            <if test="userId!=null">
+                and file.create_user_id = #{userId}
+            </if>
+            <if test="deptId!=null">
+            <choose>
+                <when test="deptId!= -1">
+                    and dept.id = #{deptId}
+                </when>
+                <otherwise>
+                    and dept.id is null
+                </otherwise>
+            </choose>
+            </if>
+            <if test="fileType!=null and fileType!=''">
+                <choose>
+                    <when test="fileType == 'my'">
+                        and file.create_user_id = #{myUserId}
+                    </when>
+                    <when test="fileType =='grant'">
+                        and file.create_user_id &lt;&gt; #{myUserId}
+                    </when>
+                </choose>
+            </if>
+        </where>
+        order by  file.last_modified_time desc
+    </select>
+
+    <select id="queryFolderByParam" parameterType="com.youngdatafan.dataintegration.file.management.vo.FolderQueryVO"
+            resultType="com.youngdatafan.dataintegration.file.management.dto.FolderInfoDTO">
+        select
+        file.create_user_id userId,
+        sysUser.account,
+        sysUser.user_name userName,
+        dept.id deptId,
+        dept.name deptName,
+        file.file_id folderId,
+        file.file_name folderName,
+        file.notes,
+        file.order,
+        file.source_system sourceSystem,
+        file.source_way sourceWay,
+        file.source_project sourceProject,
+        file.file_path filePath,
+        file.user_name accountOld,
+        file.upload_time uploadTime,
+        file.last_modified_time lastModifiedTime
+        from dp_portal_file_manager file
+        left join sys_user sysUser on file.create_user_id = sysUser.id
+        left join sys_user_dept_relation deptRelation on sysUser.id = deptRelation.user_id
+        left join sys_dept dept on deptRelation.dept_id = dept.id
+        where  file.is_folder = "1"
+        and file.is_valid='Y'
+        <if test="folderId!= null and folderId!=''">
+            and file.file_id = #{folderId}
+        </if>
+        order by file.order asc, file.last_modified_time desc
+    </select>
+    <select id="getAllFileNotDir" resultMap="BaseResultMap">
+                select
+
+        <include refid="Base_Column_List"/>
+
+        from dp_portal_file_manager
+        where is_folder =0
+    </select>
+
+    <delete id="deleteFileByIds">
+       delete from dp_portal_file_manager where file_id  in
+         <foreach collection="fileIds" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </delete>
+</mapper>
