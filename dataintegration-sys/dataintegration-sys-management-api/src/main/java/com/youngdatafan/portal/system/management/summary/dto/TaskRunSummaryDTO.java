@@ -5,9 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
- * @Author: jeremychen
- * @Descripition:
- * @Date:2020/4/18 2:43 下午
+ * 任务运行状态汇总.
  */
 @Data
 @ApiModel("任务运行状态汇总")

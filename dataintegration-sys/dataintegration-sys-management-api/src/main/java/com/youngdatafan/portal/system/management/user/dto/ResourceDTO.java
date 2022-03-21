@@ -8,75 +8,73 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @Author: jeremychen
- * @Descripition:
- * @Date:2020/2/11 5:24 下午
+ * 资源返回对象.
  */
 @Data
 @ApiModel(description = "资源返回对象")
 public class ResourceDTO {
     /**
-     * 资源编号(PK)
+     * 资源编号(PK).
      */
     @ApiModelProperty("资源编号(PK)")
     private String resId;
 
     /**
-     * 资源名称
+     * 资源名称.
      */
     @ApiModelProperty("资源名称")
     private String resName;
 
     /**
-     * 资源描述
+     * 资源描述.
      */
     @ApiModelProperty("资源描述")
     private String describe;
 
     /**
-     * 资源url地址
+     * 资源url地址.
      */
     @ApiModelProperty("资源url地址")
     private String resUrl;
 
     /**
-     * 资源父id
+     * 资源父id.
      */
     @ApiModelProperty("资源父id")
     private String resPid;
 
     /**
-     * 资源级别
+     * 资源级别/.
      */
     @ApiModelProperty("资源级别")
     private Integer resLevel;
 
     /**
-     * 资源类型
+     * 资源类型.
      */
     @ApiModelProperty("资源类型 0-菜单 1-按钮 2-控件 3-跳转地址")
     private String resType;
 
     /**
-     * 资源排序
+     * 资源排序.
      */
     @ApiModelProperty("资源排序")
     private Integer resOrder;
 
     /**
-     * 资源状态
+     * 资源状态.
      */
     @ApiModelProperty("资源状态")
     private String status;
 
     /**
-     * 创建时间
+     * 创建时间.
      */
     @ApiModelProperty("创建时间")
     private Date createTime;
 
     /**
-     * 修改时间
+     * 修改时间.
      */
     @ApiModelProperty("修改时间")
     private Date updateTime;

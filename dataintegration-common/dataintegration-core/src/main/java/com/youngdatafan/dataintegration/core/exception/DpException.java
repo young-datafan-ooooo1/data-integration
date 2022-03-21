@@ -33,7 +33,6 @@ public class DpException extends RuntimeException {
         this.message = message;
     }
 
-
     public DpException(final String statusCode, final String message) {
         this.statusCode = statusCode;
         this.message = message;

@@ -5,9 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
- * @Author: jeremychen
- * @Descripition:
- * @Date:2020/4/18 4:41 下午
+ * 代办审核.
  */
 @Data
 @ApiModel("代办审核")

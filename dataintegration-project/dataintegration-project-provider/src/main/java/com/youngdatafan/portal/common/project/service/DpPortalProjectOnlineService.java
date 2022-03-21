@@ -1,14 +1,11 @@
 package com.youngdatafan.portal.common.project.service;
 
 import com.youngdatafan.portal.common.project.mapper.DpPortalProjectOnlineMapper;
+import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
-
 /**
- * @Author: jeremychen
- * @Descripition:
- * @Date:2020/4/10 10:40 上午
+ * DpPortalProjectOnlineService.
  */
 @Service
 public class DpPortalProjectOnlineService {
@@ -16,14 +13,24 @@ public class DpPortalProjectOnlineService {
     @Resource
     private DpPortalProjectOnlineMapper dpPortalProjectOnlineMapper;
 
-
+    /**
+     * 通过项目ID删除.
+     *
+     * @param projectId 项目Id
+     * @return int
+     */
     public int deleteByPrimaryKey(String projectId) {
         return dpPortalProjectOnlineMapper.deleteByPrimaryKey(projectId);
     }
 
+    /**
+     * 通过项目id批量删除.
+     *
+     * @param projectIds 项目ids
+     * @return int
+     */
     public int batchDelete(String[] projectIds) {
         return dpPortalProjectOnlineMapper.batchDelete(projectIds);
     }
-
 
 }

@@ -5,9 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
- * @Author; jeremychen
- * @Descripition;
- * @Date;2020/5/14 5;27 下午
+ * 前端地址配置.
  */
 @Data
 @ApiModel(description = "前端地址配置")
@@ -23,6 +21,7 @@ public class VueConfigDTO {
 
     @ApiModelProperty("id")
     private String groupUrl;
+
     @ApiModelProperty("id")
     private String projectUrl;
 

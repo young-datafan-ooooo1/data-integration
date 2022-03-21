@@ -22,6 +22,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @ComponentScan(value = "com.youngdatafan.portal.common.project")
 public class CommonProjectApplication {
 
+    /**
+     * main.
+     * @param args args
+     */
     public static void main(String[] args) {
         new SpringApplicationBuilder(CommonProjectApplication.class).run(args);
     }

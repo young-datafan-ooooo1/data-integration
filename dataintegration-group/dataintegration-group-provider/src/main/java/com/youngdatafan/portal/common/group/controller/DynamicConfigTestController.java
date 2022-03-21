@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
+ * DynamicConfigTest.
+ *
  * @author gavin
  * @since 2020/4/30 2:29 下午
  */
@@ -25,11 +27,21 @@ public class DynamicConfigTestController {
         this.dynamicTestConfig = dynamicTestConfig;
     }
 
+    /**
+     * 获取描述.
+     *
+     * @return String
+     */
     @RequestMapping("/description")
     public String testDescription() {
         return description;
     }
 
+    /**
+     * 获取配置 .
+     *
+     * @return String
+     */
     @RequestMapping("/config")
     public String testConfig() {
         return dynamicTestConfig.toString();

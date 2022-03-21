@@ -2,12 +2,13 @@ package com.youngdatafan.portal.common.project.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.util.Date;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
 /**
+ * 项目附件对象.
+ *
  * @author gavin
  * @since 2020/2/11 10:32 上午
  */

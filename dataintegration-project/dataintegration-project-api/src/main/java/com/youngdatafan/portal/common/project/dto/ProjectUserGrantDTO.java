@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
+ * 项目用户授权.
+ *
  * @author gavin
  * @since 2020/2/12 1:08 下午
  */

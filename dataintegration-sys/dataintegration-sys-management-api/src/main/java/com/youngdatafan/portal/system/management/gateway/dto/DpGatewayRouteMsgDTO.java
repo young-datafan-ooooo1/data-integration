@@ -1,10 +1,14 @@
 package com.youngdatafan.portal.system.management.gateway.dto;
 
 import com.youngdatafan.portal.system.management.gateway.MsgType;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
- * 网关路由消息对象
+ * 网关路由消息对象.
  */
+@Setter
+@Getter
 public class DpGatewayRouteMsgDTO {
 
     private MsgType msgType;
@@ -19,19 +23,4 @@ public class DpGatewayRouteMsgDTO {
         this.dpGatewayRouteDTO = dpGatewayRouteDTO;
     }
 
-    public MsgType getMsgType() {
-        return msgType;
-    }
-
-    public void setMsgType(MsgType msgType) {
-        this.msgType = msgType;
-    }
-
-    public DpGatewayRouteDTO getDpGatewayRouteDTO() {
-        return dpGatewayRouteDTO;
-    }
-
-    public void setDpGatewayRouteDTO(DpGatewayRouteDTO dpGatewayRouteDTO) {
-        this.dpGatewayRouteDTO = dpGatewayRouteDTO;
-    }
 }

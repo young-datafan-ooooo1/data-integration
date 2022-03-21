@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 项目附件对象
+ * 项目附件对象.
  *
  * @author gavin
  * @since 2020/2/11 10:32 上午

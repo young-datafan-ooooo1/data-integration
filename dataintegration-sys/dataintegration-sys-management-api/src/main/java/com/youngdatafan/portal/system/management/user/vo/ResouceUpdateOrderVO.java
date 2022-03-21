@@ -7,30 +7,28 @@ import lombok.Data;
 import javax.validation.constraints.NotBlank;
 
 /**
- * @Author: jeremychen
- * @Descripition:
- * @Date:2020/7/17 4:18 下午
+ * 资源层级顺序.
  */
 @Data
 @ApiModel(description = "资源层级顺序")
 public class ResouceUpdateOrderVO {
 
     /**
-     * 资源id
+     * 资源id.
      */
     @ApiModelProperty(value = "资源id", required = true)
     @NotBlank
     private String resId;
 
     /**
-     * 资源顺序
+     * 资源顺序.
      */
     @ApiModelProperty(value = "父资源名称", required = true)
     @NotBlank
     private Integer order;
 
     /**
-     * 父资源名称
+     * 父资源名称.
      */
     @ApiModelProperty(value = "父资源名称", required = true)
     @NotBlank
@@ -38,7 +36,7 @@ public class ResouceUpdateOrderVO {
 
 
     /**
-     * 资源级别
+     * 资源级别.
      */
     @ApiModelProperty(value = "资源级别", required = true)
     @NotBlank
