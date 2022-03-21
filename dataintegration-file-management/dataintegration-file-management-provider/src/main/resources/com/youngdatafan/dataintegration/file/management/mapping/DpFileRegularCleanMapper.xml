@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.youngdatafan.dataintegration.file.management.mapper.DpFileRegularCleanMapper">
+    <!-- 结果集映射 -->
+    <resultMap id="dpFileRegularCleanMap" type="com.youngdatafan.dataintegration.file.management.dto.DpFileRegularCleanDTO">
+        <result property="fileRegularCleanId" column="id"/>
+        <result property="effectiveDays" column="effective_days"/>
+        <result property="isUseBusiness" column="is_use_business"/>
+        <result property="createUserId" column="create_user_id"/>
+        <result property="updateUserId" column="update_user_id"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <!-- 字段分片 -->
+    <sql id="Base_Column_List">
+
+        id,
+        effective_days,
+        is_use_business,
+        create_user_id,
+        update_user_id,
+        create_time,
+        update_time
+
+    </sql>
+
+    <!-- 分页字段分片 -->
+    <sql id="Base_Column_Page">
+
+        id AS id,
+        effective_days AS effectiveDays,
+        is_use_business AS isUseBusiness,
+        create_user_id AS createUserId,
+        update_user_id AS updateUserId,
+        create_time AS createTime,
+        update_time AS updateTime
+
+    </sql>
+
+    <!-- 新增 -->
+    <insert id="insert" parameterType="com.youngdatafan.dataintegration.file.management.model.DpFileRegularClean">
+
+        insert into dp_file_regular_clean
+
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="null != effectiveDays">
+                effective_days,
+
+            </if>
+            <if test="null != isUseBusiness">
+
+                is_use_business,
+
+            </if>
+            <if test="null != createUserId">
+
+                create_user_id,
+
+            </if>
+            <if test="null != updateUserId">
+
+                update_user_id,
+
+            </if>
+            <if test="null != createTime">
+
+                create_time,
+
+            </if>
+            <if test="null != updateTime">
+
+                update_time,
+            </if>
+               <if test="null != fileRegularCleanId">
+
+                id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="null != effectiveDays">
+                #{effectiveDays,jdbcType=INTEGER},
+
+            </if>
+            <if test="null != isUseBusiness">
+
+                #{isUseBusiness,jdbcType=INTEGER},
+
+            </if>
+            <if test="null != createUserId">
+
+                #{createUserId,jdbcType=INTEGER},
+
+            </if>
+            <if test="null != updateUserId">
+
+                #{updateUserId,jdbcType=INTEGER},
+
+            </if>
+            <if test="null != createTime">
+
+                #{createTime,jdbcType=TIMESTAMP},
+
+            </if>
+            <if test="null != updateTime">
+
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+
+              <if test="null != fileRegularCleanId">
+
+                #{fileRegularCleanId,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <!-- 修改 -->
+    <update id="update" parameterType="com.youngdatafan.dataintegration.file.management.model.DpFileRegularClean">
+
+        update dp_file_regular_clean
+
+        <set>
+            <if test="null != effectiveDays">
+                effective_days = #{effectiveDays,jdbcType=INTEGER},
+
+            </if>
+            <if test="null != isUseBusiness">
+
+                is_use_business = #{isUseBusiness,jdbcType=INTEGER},
+
+            </if>
+            <if test="null != createUserId">
+
+                create_user_id = #{createUserId,jdbcType=INTEGER},
+
+            </if>
+            <if test="null != updateUserId">
+
+                update_user_id = #{updateUserId,jdbcType=INTEGER},
+
+            </if>
+            <if test="null != createTime">
+
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+
+            </if>
+            <if test="null != updateTime">
+
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+
+        where id = #{fileRegularCleanId,jdbcType=INTEGER}
+
+    </update>
+
+    <!-- 根据主键查询 -->
+    <select id="getDetail" resultMap="dpFileRegularCleanMap">
+
+        select
+        <include refid="Base_Column_List"/>
+
+                    from dp_file_regular_clean
+        where id = #{id,jdbcType=INTEGER}
+
+    </select>
+
+</mapper>

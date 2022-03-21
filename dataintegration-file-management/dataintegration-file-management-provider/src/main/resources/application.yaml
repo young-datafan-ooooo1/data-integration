@@ -1,0 +1,9 @@
+server:
+  port: 10218
+spring:
+  application:
+    name: dataintegration-file-management-provider
+  profiles:
+    active: local
+  main:
+    allow-bean-definition-overriding: true
