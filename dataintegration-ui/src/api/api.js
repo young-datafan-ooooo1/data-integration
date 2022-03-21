@@ -5,10 +5,11 @@ import cookies from 'vue-cookies'
 
 import $ from 'jquery';
 import qs from 'qs'
-
+let BASEOUTAPI = location.origin
 let BASE = location.origin + '/api'
 if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === undefined) {
   BASE = 'http://192.168.10.160:10200/api'
+  BASEOUTAPI = 'http://192.168.10.160:10200'
 }
 
 let projectUrl = `${BASE}/dataintegration-project-provider`;
@@ -20,6 +21,13 @@ let groupUrl = `${BASE}/dataintegration-group-provider`
 let systemUrl = `${BASE}/dataintegration-portal-system-management-provider`
 //sso dataintegration-common-sso-provider
 let ssoUrl = `${BASE}/dataintegration-common-sso-provider`
+//文件管理 dataintegration-file-management-provider
+let fileUrl = `${BASE}/dataintegration-file-management-provider`
+//集成平台管理地址 dataintegration-di-run-management-provider
+let dataDiscoveryUrl = `${BASE}/dataintegration-di-run-management-provider`
+
+//websocket连接地址
+let wsUrl = `${BASEOUTAPI}/ws/dataintegration-di-run-management-provider`
 let base = '';
 let boardUrl = "";
 let exceldownloadUrl = "";
@@ -28,20 +36,11 @@ let exceldownloadUrl = "";
 let item = JSON.parse(store.getters.getUrlConfig);
 //获取前端配置地址
 
-//文件管理 dp-file-management-provider
-let fileUrl = store.getters.getUrlConfig === null ? '' : item.fileUrl;
 // //sso dataintegration-common-sso-provider
 // let ssoUrl = store.getters.getUrlConfig === null ? '' : item.ssoUrl;
 
 //数据集成平台地址
 let explorUrl = store.getters.getUrlConfig === null ? '' : item.basePlat;
-
-//集成平台管理地址 dataintegration-di-run-management-provider
-let dataDiscoveryUrl = store.getters.getUrlConfig === null ? '' : item.dataIntegrationUrl;
-
-
-//websocket连接地址
-let wsUrl = store.getters.getUrlConfig === null ? '' : item.dataIntegrationwsUrl;
 
 if (process.env.NODE_ENV === "production") {
   //读取配置文件

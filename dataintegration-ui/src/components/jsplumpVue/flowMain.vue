@@ -50,49 +50,6 @@
             <img src="../../../static/img/setup.png"/>
           </div>
         </el-tooltip>
-
-
-        <!--        <ul>-->
-        <!--          &lt;!&ndash;          <li>{{transFinished}}</li>&ndash;&gt;-->
-        <!--          <el-tooltip content="运行" placement="bottom" effect="dark">-->
-        <!--            <li @click="!projectInfo.isExecuted && preExecute()">-->
-        <!--              <img src="../../../static/img/run.png" v-if="!projectInfo.isExecuted" alt="text"/>-->
-        <!--              <img src="../../../static/img/run_dis.png" v-else/>-->
-        <!--            </li>-->
-
-        <!--          </el-tooltip>-->
-        <!--          <el-tooltip content="停止" placement="bottom" effect="dark">-->
-        <!--            <li @click=" !projectInfo.isPause && pause()">-->
-        <!--              <img src="../../../static/img/stop.png" v-if="!projectInfo.isPause"/>-->
-        <!--              <img src="../../../static/img/stop_dis.png" v-else/>-->
-        <!--            </li>-->
-        <!--          </el-tooltip>-->
-        <!--          <el-tooltip content="保存" placement="bottom" effect="dark">-->
-        <!--            <li @click="!projectInfo.isSave && addProject()">-->
-        <!--              <img src="../../../static/img/add.png" v-if="!projectInfo.isSave"/>-->
-        <!--              <img src="../../../static/img/add_dis.png" v-else/>-->
-        <!--            </li>-->
-        <!--          </el-tooltip>-->
-        <!--          <el-tooltip content="另存" placement="bottom" key="8" effect="dark">-->
-        <!--            <li @click="!projectInfo.isSave && saveAs()">-->
-        <!--              <img src="../../../static/img/saevAs.png" v-if="!projectInfo.isSave"/>-->
-        <!--              <img src="../../../static/img/saveAs_dis.png" v-else/>-->
-        <!--            </li>-->
-        <!--          </el-tooltip>-->
-        <!--          &lt;!&ndash;          <el-tooltip content="缩小画布" placement="bottom" effect="dark">&ndash;&gt;-->
-        <!--          &lt;!&ndash;            <li @click="disRedues && addFlowSize('redues')">&ndash;&gt;-->
-        <!--          &lt;!&ndash;              <img src="../../../static/img/redues.png"/>&ndash;&gt;-->
-        <!--          &lt;!&ndash;              &lt;!&ndash;            <img src="../../../static/img/reduse_dis.png" v-if="!isRedues"/>&ndash;&gt;&ndash;&gt;-->
-        <!--          &lt;!&ndash;            </li>&ndash;&gt;-->
-
-        <!--          &lt;!&ndash;          </el-tooltip>&ndash;&gt;-->
-        <!--          &lt;!&ndash;          {{canvasNumber}}%&ndash;&gt;-->
-        <!--          &lt;!&ndash;          <el-tooltip content="放大画布" placement="bottom" effect="dark">&ndash;&gt;-->
-        <!--          &lt;!&ndash;            <li @click="addFlowSize('add')">&ndash;&gt;-->
-        <!--          &lt;!&ndash;              <img src="../../../static/img/increase.png"/>&ndash;&gt;-->
-        <!--          &lt;!&ndash;            </li>&ndash;&gt;-->
-        <!--          &lt;!&ndash;          </el-tooltip>&ndash;&gt;-->
-        <!--        </ul>-->
       </div>
 
       <!-- 状态显示开关 -->

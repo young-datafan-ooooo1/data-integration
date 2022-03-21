@@ -36,7 +36,7 @@ var createServerConfig = function(compilation) {
       projectUrl: 'http://10.242.10.173:10200/api/dataintegration-project-provider', //项目管理模块
       runManagerUrl: 'http://10.242.10.173:10200/api/dataintegration-di-run-management-provider', //运行管理模块
       modelMangerUrl: 'http://10.242.10.173:10200/api/dataintegration-model-provider', //模型管理模块
-      wsUrl: 'ws://192.168.10.160:10200/api/ws/dataintegration-di-run-management-provider', //websocket连接地址
+      wsUrl: 'ws://192.168.10.160:10200/ws/dataintegration-di-run-management-provider', //websocket连接地址
       onLineUrl: 'http://10.242.10.173:10200/api/dp-schedule-online-audit-provider', //上线管理模块
       fileUrl: 'http://10.242.10.173:10200/api/dp-file-management-provider',
       recordUrl: 'http://10.242.10.173:10200/api/dataintegration-model-provider/superset/forward', //报表跳转
