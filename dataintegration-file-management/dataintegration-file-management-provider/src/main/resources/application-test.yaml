@@ -1,0 +1,106 @@
+server:
+  port: 10210
+
+spring:
+  cloud:
+    consul:
+      host: 192.168.10.160
+      port: 8500
+      discovery:
+        service-name: ${spring.application.name}
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.10.211:13306/dataintegration?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: stelladp
+    password: 123456
+    hikari:
+      minimum-idle: 1
+      maximum-pool-size: 10
+      max-lifetime: 1800000
+      idle-timeout: 600000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  servlet:
+    multipart:
+      max-file-size: 1GB
+      max-request-size: 1GB
+  redis:
+    host: 192.168.10.211
+    port: 39121
+    password:
+    lettuce:
+      shutdown-timeout: 100 # 关闭超时时间
+      pool:
+        max-active: 100 # 连接池最大连接数（使用负值表示没有限制）
+        max-idle: 10 # 连接池中的最大空闲连接
+        max-wait: 1000 # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        min-idle: 1 # 连接池中的最小空闲连接
+  cache:
+    type: redis
+
+#配置MyBatis
+mybatis:
+  mapper-locations: classpath*:com/youngdatafan/dataintegration/file/management/mapping/*Mapper.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+
+#pagehelper
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
+#ftp:
+#  server: 127.0.0.1
+#  port: 20021
+#  userName: prime
+#  password: prime@2020
+#  passiveMode: true
+#  ftpEncoding: utf-8
+#10.242.10.170:30021
+
+
+#文件存储类型
+file:
+  server:
+    useServer: s3
+    ftp:
+      server: 192.168.124.166
+      port: 20021
+      userName: prime
+      password: prime@2020
+      passiveMode: true
+      ftpEncoding: utf-8
+      rootPath: ftp://
+      createDir: true
+    s3:
+      server: 192.168.10.211
+      port: 8080
+      userName: BMXG3WP8JA9D1GSD2AJJ
+      password: vl32x2t0sBxy0BEgcY9Iz442HK2HobPTNw4T99yK
+      rootPath: s3://
+      bucket: escat-s3
+      createDir: true
+
+
+logging:
+  file:
+    # 配置日志目录，logbak.xml使用
+    path: ./logs/${spring.application.name}
+    # springboot admin获取日志使用
+    name: ${logging.file.path}/all/${spring.application.name}.log
+
+##################################################
+# JodConverter Configuration
+
+jodconverter:
+  local:
+    enabled: true
+    office-home: /Applications/OpenOffice.app/Contents/
+    max-tasks-per-process: 10
+    port-numbers: 8123

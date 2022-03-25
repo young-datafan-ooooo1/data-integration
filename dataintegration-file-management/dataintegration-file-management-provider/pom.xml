@@ -18,6 +18,7 @@
         <openoffice.version>4.2.2</openoffice.version>
         <poi.version>3.17</poi.version>
         <mysql.version>5.1.47</mysql.version>
+        <swagger2.version>3.0.0</swagger2.version>
     </properties>
     <dependencies>
 
@@ -81,10 +82,11 @@
         </dependency>
 
         <!-- swagger-ui -->
-       <!-- <dependency>
+        <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-boot-starter</artifactId>
-        </dependency>-->
+            <version>${swagger2.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>com.auth0</groupId>
