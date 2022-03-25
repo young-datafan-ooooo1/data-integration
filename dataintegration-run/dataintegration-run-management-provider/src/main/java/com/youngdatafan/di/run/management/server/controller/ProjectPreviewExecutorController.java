@@ -2,22 +2,22 @@ package com.youngdatafan.di.run.management.server.controller;
 
 import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.di.run.management.server.api.ProjectPreviewServiceApi;
+import com.youngdatafan.di.run.management.server.dto.ProjectPreviewExecutorDTO;
 import com.youngdatafan.di.run.management.server.service.ProjectPreviewExecutorService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.youngdatafan.di.run.management.server.vo.ProjectFilePreviewExecutorVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
+ * previewExecutor.
+ *
  * @author gavin
  * @since 2020/2/13 10:27 上午
  */
 @RestController
 @RequestMapping("/previewExecutor")
 public class ProjectPreviewExecutorController implements ProjectPreviewServiceApi {
-
-    private static final Logger logger = LoggerFactory.getLogger(com.dp.di.run.management.plugin.controller.ProjectPreviewExecutorController.class);
 
     private final ProjectPreviewExecutorService previewExecutorService;
 
