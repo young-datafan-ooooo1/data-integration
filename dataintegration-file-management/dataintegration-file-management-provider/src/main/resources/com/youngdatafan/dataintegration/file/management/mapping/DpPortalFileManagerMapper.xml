@@ -371,7 +371,7 @@
      </update>
 
      <update id="refreshUserName">
-        update dp_portal_file_manager t1 ,sys_user t2 set t1.user_name=t2.account where t1.create_user_id=t2.id and t1.user_name is null
+        update dp_portal_file_manager t1 ,dp_portal_user t2 set t1.user_name=t2.user_name where t1.create_user_id=t2.user_id and t1.user_name is null
      </update>
     <select id="selectByFileId" resultMap="BaseResultMap">
         select <include refid="Base_Column_List"/> from dp_portal_file_manager
@@ -391,8 +391,8 @@
         a.is_folder,concat(a.file_id,'.',a.file_type) file_real_name,a.create_channel,
         b.user_name as `describe`
         from dp_portal_file_manager a
-        left join sys_user b
-        on a.create_user_id=b.id
+        left join dp_portal_user b
+        on a.create_user_id=b.user_id
         where a.is_folder = '1'
         and (a.pid is null or a.pid = "")
         <if test="roleCode != 'superadmin'">
@@ -498,8 +498,8 @@
         a.*,
         b.user_name as `describe`
         from dp_portal_file_manager a
-        left join sys_user b
-        on a.create_user_id=b.id
+        left join dp_portal_user b
+        on a.create_user_id=b.user_id
         where a.pid = #{pid,jdbcType=VARCHAR}
         and a.file_type in
 
@@ -586,10 +586,9 @@
 
     <select id="queryFolder" resultType="com.youngdatafan.dataintegration.file.management.dto.FolderInfoDTO">
      select
-     sysUser.id userId,
-     sysUser.account,
+     sysUser.user_id userId,
+     sysUser.describe as account,
      sysUser.user_name userName,
-     dept.name deptName,
      file.file_id folderId,
      file.file_name folderName,
      file.notes,
@@ -600,9 +599,7 @@
      file.upload_time uploadTime,
      file.last_modified_time lastModifiedTime
      from dp_portal_file_manager file
-     left join sys_user sysUser on file.create_user_id = sysUser.id
-     left join sys_user_dept_relation deptRelation on sysUser.id = deptRelation.user_id
-     left join sys_dept dept on deptRelation.dept_id = dept.id
+     left join dp_portal_user sysUser on file.create_user_id = sysUser.user_id
      where  file.is_folder = 1
      and file.is_valid='Y'
      and file.create_user_id = #{userId}
@@ -625,17 +622,14 @@
         file.source_project sourceProject,
         file.upload_time uploadTime,
         file.last_modified_time lastModifiedTime,
-        dept.id deptId,
-        dept.name deptName,
         file.effective_days effectiveDays,
         folder.file_id folderId,
         folder.file_name folderName,
         file.user_name accountOld
         from dp_portal_file_manager file
-        left join sys_user sysUser on file.create_user_id = sysUser.id
+        left join dp_portal_user sysUser on file.create_user_id = sysUser.user_id
         left join dp_portal_file_manager folder on file.pid = folder.file_id
-        left join sys_user_dept_relation deptRelation on sysUser.id = deptRelation.user_id
-        left join sys_dept dept on deptRelation.dept_id = dept.id
+
         <where>
             file.is_folder &lt;&gt; 1
             and file.is_valid='Y'
@@ -674,16 +668,6 @@
             <if test="userId!=null">
                 and file.create_user_id = #{userId}
             </if>
-            <if test="deptId!=null">
-            <choose>
-                <when test="deptId!= -1">
-                    and dept.id = #{deptId}
-                </when>
-                <otherwise>
-                    and dept.id is null
-                </otherwise>
-            </choose>
-            </if>
             <if test="fileType!=null and fileType!=''">
                 <choose>
                     <when test="fileType == 'my'">
@@ -702,10 +686,8 @@
             resultType="com.youngdatafan.dataintegration.file.management.dto.FolderInfoDTO">
         select
         file.create_user_id userId,
-        sysUser.account,
+        sysUser.describe as account,
         sysUser.user_name userName,
-        dept.id deptId,
-        dept.name deptName,
         file.file_id folderId,
         file.file_name folderName,
         file.notes,
@@ -718,9 +700,7 @@
         file.upload_time uploadTime,
         file.last_modified_time lastModifiedTime
         from dp_portal_file_manager file
-        left join sys_user sysUser on file.create_user_id = sysUser.id
-        left join sys_user_dept_relation deptRelation on sysUser.id = deptRelation.user_id
-        left join sys_dept dept on deptRelation.dept_id = dept.id
+        left join dp_portal_user sysUser on file.create_user_id = sysUser.user_id
         where  file.is_folder = "1"
         and file.is_valid='Y'
         <if test="folderId!= null and folderId!=''">

@@ -281,25 +281,21 @@
     resultType="com.youngdatafan.dataintegration.file.management.dto.UserGrantDTO">
 
         select
-        sysUser.id userId,
-        sysUser.account,
+        sysUser.user_id userId,
+        sysUser.describe as account,
         sysUser.user_name userName,
-        dept.name deptName,
         sum(case when userGrant.grant_Type == 0  then 1 else 0 end) fileNum,
         sum(case when userGrant.grant_type == 1  then 1 else 0 end) folderNum
         from dp_portal_file_user_grant userGrant
-        inner join sys_user sysUser on userGrant.user_id = sysUser.id
-        left join sys_user_dept_relation deptRelation on userGrant.user_id = deptRelation.user_id
-        left join sys_dept dept on deptRelation.dept_id = dept.id
+        inner join dp_portal_user sysUser on userGrant.user_id = sysUser.user_id
+
         <where>
             <if test="userName != null and userName!=''">
                 and sysUser.user_name like concat('%', #{userName}, '%')
             </if>
-            <if test="deptId!=null">
-                and dept.id = #{deptId}
-            </if>
+
         </where>
-        group by sysUser.id, dept.name
+        group by sysUser.user_id
     </select>
 
     <select id="queryFolderGrantByUserId" parameterType="int" resultType="com.youngdatafan.dataintegration.file.management.dto.FolderGrantDTO">
@@ -333,18 +329,14 @@
     <select id="queryGrantFolder" resultType="com.youngdatafan.dataintegration.file.management.dto.FolderInfoDTO">
         select
      file.create_user_id userId,
-     sysUser.account,
+     sysUser.describe as account,
      sysUser.user_name userName,
-     dept.name deptName,
-     dept.id deptId,
      file.file_id folderId,
      file.file_name folderName,
      file.user_name accountOld
      from dp_portal_file_user_grant user_grant
      INNER  join dp_portal_file_manager file on file.file_id = user_grant.pid
-     left join sys_user sysUser on file.create_user_id = sysUser.id
-     left join sys_user_dept_relation deptRelation on sysUser.id = deptRelation.user_id
-     left join sys_dept dept on deptRelation.dept_id = dept.id
+     left join dp_portal_user sysUser on file.create_user_id = sysUser.user_id
      where  user_grant.grant_type = 1
      and file.is_valid='Y'
      and user_grant.user_id = #{userId}
@@ -353,21 +345,20 @@
 
     <select id="queryGrantUser" resultType="com.youngdatafan.dataintegration.file.management.dto.GrantUserDTO">
           select
-     sysUser.id userId,
-     sysUser.account,
+     sysUser.user_id userId,
+     sysUser.describe as account,
      sysUser.user_name userName
      from dp_portal_file_user_grant user_grant
-
-     inner join sys_user sysUser on user_grant.user_id = sysUser.id
+     inner join dp_portal_user sysUser on user_grant.user_id = sysUser.user_id
      where  user_grant.grant_type = 1
      and user_grant.pid = #{folderId}
     </select>
 
     <select id="queryAllUser" resultType="com.youngdatafan.dataintegration.file.management.dto.GrantUserDTO">
      select
-     sysUser.id userId,
-     sysUser.account,
-     sysUser.user_name userName
-     from sys_user sysUser
+     sysUser.user_id userId,
+     sysUser.user_name   account,
+     sysUser.describe userName
+     from dp_portal_user sysUser
     </select>
 </mapper>
