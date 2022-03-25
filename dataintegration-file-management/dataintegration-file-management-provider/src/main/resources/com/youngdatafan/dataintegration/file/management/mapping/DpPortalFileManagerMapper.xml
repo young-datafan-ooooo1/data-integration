@@ -519,8 +519,8 @@
         a.*,
         b.user_name as `describe`
         from dp_portal_file_manager a
-        left join sys_user b
-        on a.create_user_id=b.id
+        left join dp_portal_user b
+        on a.create_user_id=b.user_id
         where a.pid = #{fileId,jdbcType=VARCHAR}
 
     </select>
@@ -530,8 +530,8 @@
         a.*,
         b.user_name as `describe`
         from dp_portal_file_manager a
-        left join sys_user b
-        on a.create_user_id=b.id
+        left join dp_portal_user b
+        on a.create_user_id=b.user_id
         where a.is_folder = #{isFolder,jdbcType=VARCHAR}
         and a.is_valid='Y'
         and a.create_user_id= #{userId,jdbcType=VARCHAR}
@@ -543,8 +543,8 @@
         a.*,
         b.user_name as `describe`
         from dp_portal_file_manager a
-        left join sys_user b
-        on a.create_user_id=b.id
+        left join dp_portal_user b
+        on a.create_user_id=b.user_id
         where a.pid = #{pid,jdbcType=VARCHAR}
         <if test="roleCode != 'superadmin'">
         and a.create_user_id= #{userId,jdbcType=VARCHAR}
