@@ -19,8 +19,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableAutoConfiguration
 @EnableSwagger2
 @EnableCaching
-@MapperScan(value = "com.sensesai.escat.file.management.mapper")
-@ComponentScan(value = "com.sensesai.escat.file.management")
+@MapperScan(value = "com.youngdatafan.dataintegration.file.management.mapper")
+@ComponentScan(value = "com.youngdatafan.dataintegration.file.management")
 public class FileManagerApplication {
 
     /**

@@ -52,7 +52,7 @@ public interface FileContentDetailGetterApi {
      */
     @ApiOperation(value = "测试用接口", notes = "测试用接口", produces = "application/json")
     @GetMapping(value = "/fileHeader")
-    Result<List<FieldInfoDTO>, Object> fileHeader(@ApiParam("最高权限编码") @RequestHeader(value = "authorization-highestLevelRoleCode") String roleCode,
+    Result<List<FieldInfoDTO>, Object> fileHeader(@ApiParam("最高权限编码") @RequestHeader(value = "authorization-highestLevelRoleCode", required = false) String roleCode,
                                                   @ApiParam("操作用户Id") @RequestHeader("authorization-userId") String userId,
                                                   @ApiParam("文件路径") @RequestParam("fileId") String fileId,
                                                   @ApiParam("sheet页名称") @RequestParam("sheetName") String sheetName,
@@ -69,7 +69,7 @@ public interface FileContentDetailGetterApi {
      */
     @ApiOperation(value = "获取多个文件的sheet名称", notes = "获取多个文件的sheet名称", produces = "application/json")
     @PostMapping(value = "/getMoreSheetList")
-    Result<Set<String>, Object> getMoreSheetList(@ApiParam("最高权限编码") @RequestHeader(value = "authorization-highestLevelRoleCode") String roleCode,
+    Result<Set<String>, Object> getMoreSheetList(@ApiParam("最高权限编码") @RequestHeader(value = "authorization-highestLevelRoleCode", required = false) String roleCode,
                                                  @ApiParam("操作用户Id") @RequestHeader("authorization-userId") String userId,
                                                  @RequestBody FileSheetVO fileSheetVO);
 
