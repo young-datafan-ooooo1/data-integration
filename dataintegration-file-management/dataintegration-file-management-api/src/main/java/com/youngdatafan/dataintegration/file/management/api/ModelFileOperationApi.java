@@ -34,7 +34,7 @@ public interface ModelFileOperationApi {
      */
     @ApiOperation(value = "下载文件", notes = "下载文件")
     @GetMapping(value = "/downLoadFile")
-    void downLoadFile(@ApiParam("最高权限编码") @RequestHeader(value = "authorization-highestLevelRoleCode") String roleCode,
+    void downLoadFile(@ApiParam("最高权限编码") @RequestHeader(value = "authorization-highestLevelRoleCode", required = false) String roleCode,
                       @ApiParam("操作用户Id") @RequestHeader(value = "authorization-userId") String userId,
                       @RequestParam("fileId") String fileId,
                       @RequestParam("fileNames") @ApiParam("需要下载的文件名清单") String fileNames,
@@ -51,7 +51,7 @@ public interface ModelFileOperationApi {
      */
     @ApiOperation(value = "更新文件信息", notes = "更新文件信息")
     @PostMapping(value = "/update", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    Result update(@ApiParam("最高权限编码") @RequestHeader(value = "authorization-highestLevelRoleCode") String roleCode,
+    Result update(@ApiParam("最高权限编码") @RequestHeader(value = "authorization-highestLevelRoleCode", required = false) String roleCode,
                   @ApiParam("操作用户Id") @RequestHeader("authorization-userId") String userId,
                   @ApiParam("操作用户Id") @RequestHeader("authorization-userName") String userName,
                   @RequestParam("fileId") String fileId,
@@ -68,7 +68,7 @@ public interface ModelFileOperationApi {
      */
     @ApiOperation(value = "删除文件信息", notes = "删除文件信息")
     @DeleteMapping(value = "/delete")
-    Result delete(@ApiParam("最高权限编码") @RequestHeader(value = "authorization-highestLevelRoleCode") String roleCode,
+    Result delete(@ApiParam("最高权限编码") @RequestHeader(value = "authorization-highestLevelRoleCode", required = false) String roleCode,
                   @ApiParam("操作用户Id") @RequestHeader("authorization-userId") String userId,
                   @ApiParam("删除的文件id") @RequestParam("fileId") String fileId);
 }
