@@ -99,6 +99,6 @@ logging:
 jodconverter:
   local:
     enabled: true
-    office-home: /Applications/OpenOffice.app/Contents/
+    office-home: /opt/openoffice4/
     max-tasks-per-process: 10
-    port-numbers: 8123
+    port-numbers: 8100
