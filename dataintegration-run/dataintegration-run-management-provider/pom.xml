@@ -417,6 +417,12 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- swagger-ui -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-boot-starter</artifactId>
+            <version>${swagger2.version}</version>
+        </dependency>
     </dependencies>
 
     <build>

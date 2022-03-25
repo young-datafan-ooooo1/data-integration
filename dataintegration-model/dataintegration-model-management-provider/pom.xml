@@ -158,6 +158,14 @@
             <artifactId>jakarta.servlet-api</artifactId>
             <version>4.0.3</version>
         </dependency>
+
+        <!-- swagger-ui -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-boot-starter</artifactId>
+            <version>${swagger2.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>

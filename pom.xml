@@ -41,8 +41,9 @@
         <bouncycastle.version>1.55</bouncycastle.version>
         <commons-beanutils.version>1.9.4</commons-beanutils.version>
         <lombok.version>1.18.8</lombok.version>
-        <swagger2.version>2.9.2</swagger2.version>
+        <swagger2.version>3.0.0</swagger2.version>
         <json.version>20180813</json.version>
+        <knife4j.version>3.0.3</knife4j.version>
 
 
         <!-- mybatis -->
