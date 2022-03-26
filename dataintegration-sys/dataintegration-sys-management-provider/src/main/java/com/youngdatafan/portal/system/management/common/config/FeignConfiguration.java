@@ -2,19 +2,19 @@ package com.youngdatafan.portal.system.management.common.config;
 
 import feign.Request;
 import feign.Retryer;
+import java.util.concurrent.TimeUnit;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.ConfigurableEnvironment;
 
-import java.util.concurrent.TimeUnit;
-
 /**
+ * FeignConfiguration.
+ *
  * @author gavin
  * @since 2020/6/13 5:01 下午
  */
 @Configuration
 public class FeignConfiguration {
-
 
     @Bean
     Request.Options requestOptions(ConfigurableEnvironment env) {
@@ -24,6 +24,12 @@ public class FeignConfiguration {
         return new Request.Options(ribbonConnectionTimeout, ribbonReadTimeout);
     }
 
+    /**
+     * feignRetryer.
+     *
+     * @param env env
+     * @return Retryer
+     */
     @Bean
     public Retryer feignRetryer(ConfigurableEnvironment env) {
         // 重试配置

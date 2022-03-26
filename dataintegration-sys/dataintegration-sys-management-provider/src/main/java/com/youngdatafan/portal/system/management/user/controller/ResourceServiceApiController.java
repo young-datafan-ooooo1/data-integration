@@ -1,5 +1,7 @@
 package com.youngdatafan.portal.system.management.user.controller;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageInfo;
 import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.dataintegration.core.util.StatusCode;
 import com.youngdatafan.portal.system.management.common.utils.BaseController;
@@ -13,36 +15,35 @@ import com.youngdatafan.portal.system.management.user.service.DpPortalUserRoleSe
 import com.youngdatafan.portal.system.management.user.vo.ResouceUpdateOrderVO;
 import com.youngdatafan.portal.system.management.user.vo.ResourceAddVO;
 import com.youngdatafan.portal.system.management.user.vo.ResourceUpdateVO;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageInfo;
+import java.util.Date;
+import java.util.List;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Date;
-import java.util.List;
-
 /**
- * @Author: jeremychen
- * @Descripition:
- * @Date:2020/2/11 6:15 下午
+ * ResourceServiceApiController.
  */
 @RestController
 @RequestMapping("/resource")
 public class ResourceServiceApiController extends BaseController<ResourceDTO> implements ResourceServiceApi {
 
-    @Autowired
-    private DpPortalResourceService dpPortalResourceService;
+    private final DpPortalResourceService dpPortalResourceService;
+
+    private final DpPortalRoleResourceService dpPortalRoleResourceService;
+
+    private final DpPortalUserRoleService dpPortalUserRoleService;
 
     @Autowired
-    private DpPortalRoleResourceService dpPortalRoleResourceService;
-
-
-    @Autowired
-    private DpPortalUserRoleService dpPortalUserRoleService;
-
+    public ResourceServiceApiController(DpPortalResourceService dpPortalResourceService,
+                                        DpPortalRoleResourceService dpPortalRoleResourceService,
+                                        DpPortalUserRoleService dpPortalUserRoleService) {
+        this.dpPortalResourceService = dpPortalResourceService;
+        this.dpPortalRoleResourceService = dpPortalRoleResourceService;
+        this.dpPortalUserRoleService = dpPortalUserRoleService;
+    }
 
     @Override
     public Result<List<ResourceDTO>, Object> selectAllResource(String optUserId) {
@@ -117,12 +118,8 @@ public class ResourceServiceApiController extends BaseController<ResourceDTO> im
         dpPortalResource.setRouteUrl(resourceUpdateDTO.getRouteUrl());
         dpPortalResource.setUpdateTime(new Date());
         dpPortalResourceService.updateByPrimaryKeySelective(dpPortalResource);
-//        if (resourceUpdateDTO.getStatus() != "0") {
-//            dpPortalRoleResourceService.deleteByResId(resourceUpdateDTO.getResId());
-//        }
         ResourceDTO resourceDTO = new ResourceDTO();
         BeanUtils.copyProperties(dpPortalResource, resourceDTO);
-
 
         return Result.success(resourceDTO);
 
@@ -131,9 +128,6 @@ public class ResourceServiceApiController extends BaseController<ResourceDTO> im
     @Override
     @Transactional
     public Result<Boolean, Object> deleteResource(String resId, String optUserId) {
-//        if (optUserId == null || optUserId.equals("") || !optUserId.equals("00000000")) {
-//            return Result.fail(StatusCode.CODE_10010.getCode(), null, "只有超级管理员能操作菜单");
-//        }
         int check = dpPortalResourceService.checkIsHavingChild(resId);
         if (check > 0) {
             return Result.fail(StatusCode.CODE_10010.getCode(), null, "此资源菜单已经关联子菜单资源，请先删除子菜单资源");

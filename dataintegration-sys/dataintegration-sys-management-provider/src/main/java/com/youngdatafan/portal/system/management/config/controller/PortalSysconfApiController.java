@@ -5,18 +5,15 @@ import com.youngdatafan.portal.system.management.config.api.PortalSysconfApi;
 import com.youngdatafan.portal.system.management.config.dto.PortalSysconfDTO;
 import com.youngdatafan.portal.system.management.config.entity.DpPortalSysconf;
 import com.youngdatafan.portal.system.management.config.service.DpPortalSysconfService;
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.Resource;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * @Author: jeremychen
- * @Descripition:
- * @Date:2020/7/24 5:40 下午
+ * PortalSysconfApiController.
  */
 @RestController
 @RequestMapping("/portalSysconf")

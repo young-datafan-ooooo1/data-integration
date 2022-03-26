@@ -2,25 +2,33 @@ package com.youngdatafan.portal.system.management.summary.controller;
 
 import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.portal.system.management.summary.api.IndexSummaryApi;
-import com.youngdatafan.portal.system.management.summary.dto.*;
+import com.youngdatafan.portal.system.management.summary.dto.FileSumDetailDTO;
+import com.youngdatafan.portal.system.management.summary.dto.FileSummaryDTO;
+import com.youngdatafan.portal.system.management.summary.dto.LastSixItemDTO;
+import com.youngdatafan.portal.system.management.summary.dto.MonSumDTO;
+import com.youngdatafan.portal.system.management.summary.dto.OperationStatusEnum;
+import com.youngdatafan.portal.system.management.summary.dto.ProjectOnlineDTO;
+import com.youngdatafan.portal.system.management.summary.dto.ProjectStatusSumDTO;
+import com.youngdatafan.portal.system.management.summary.dto.TaskRunSummaryDTO;
 import com.youngdatafan.portal.system.management.summary.model.FileSummary;
 import com.youngdatafan.portal.system.management.summary.model.ProjectOnline;
 import com.youngdatafan.portal.system.management.summary.model.ProjectStatusSum;
 import com.youngdatafan.portal.system.management.summary.model.TaskRunSummary;
 import com.youngdatafan.portal.system.management.summary.service.IndexSummaryService;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.*;
-import java.util.stream.Collectors;
-
 /**
- * @Author: jeremychen
- * @Descripition:
- * @Date:2020/4/18 2:38 下午
+ * IndexSummaryApiController.
  */
 @Slf4j
 @RestController
@@ -117,6 +125,8 @@ public class IndexSummaryApiController implements IndexSummaryApi {
                             case "successWithIgnore":
                                 taskRunSummaryDTO.setSuccessWithIgnore(o.getCnt());
                                 break;
+                            default:
+                                break;
                         }
                     });
                 }
@@ -155,12 +165,11 @@ public class IndexSummaryApiController implements IndexSummaryApi {
     public Result<Map<String, FileSummaryDTO>, Object> selectFileSummary(String userId) {
         List<FileSummary> fileSummaries = indexSummaryService.selectFileSummary(userId);
         Map<String, List<FileSummary>> map = fileSummaries
-                .stream()
-                .collect(Collectors.groupingBy(o -> o.getCreateChannel()));
+            .stream()
+            .collect(Collectors.groupingBy(o -> o.getCreateChannel()));
         Map<String, FileSummaryDTO> map1 = new HashMap<>();
 
         for (Map.Entry<String, List<FileSummary>> entry : map.entrySet()) {
-            FileSummaryDTO fileSummaryDTO = new FileSummaryDTO();
             List<FileSummary> list = entry.getValue();
             List<FileSumDetailDTO> fileSumDetailDTOS = new ArrayList<>();
             int total = 0;
@@ -175,6 +184,7 @@ public class IndexSummaryApiController implements IndexSummaryApi {
                 fileSumDetailDTO.setCnt(entry1.getValue());
                 fileSumDetailDTOS.add(fileSumDetailDTO);
             }
+            FileSummaryDTO fileSummaryDTO = new FileSummaryDTO();
             monAvg = list.size() == 0 ? 0 : total / list.size();
             fileSummaryDTO.setFileSumDetailDTOS(fileSumDetailDTOS);
             fileSummaryDTO.setAvg(monAvg);
@@ -265,6 +275,5 @@ public class IndexSummaryApiController implements IndexSummaryApi {
     public Result<List<LastSixItemDTO>, Object> selectLastSixReportRecord(String userId) {
         return Result.success(indexSummaryService.selectLastSixReportRecord(userId));
     }
-
 
 }

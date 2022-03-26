@@ -1,5 +1,9 @@
 package com.youngdatafan.common.sso.config;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.Resource;
+import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,12 +22,8 @@ import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
-import javax.annotation.Resource;
-import javax.sql.DataSource;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
+ * AuthorizationServerConfiguration.
  * Created by Steven on 2019/10/26.
  */
 @EnableAuthorizationServer
@@ -31,21 +31,28 @@ import java.util.List;
 public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
 
     private final AuthenticationManager authenticationManagerBean;
-    private final PasswordEncoder passwordEncoder;
-    private final JwtTokenEnhancer tokenEnhancer;
-    private final TokenStore tokenStore;
-    private final JwtAccessTokenConverter jwtAccessTokenConverter;
-    private final JwtAuthorizationProperties jwtAuthorizationProperties;
-    private final UserDetailsService userDetailsService;
-    private final AuthorizationCodeServices authorizationCodeServices;
 
+    private final PasswordEncoder passwordEncoder;
+
+    private final JwtTokenEnhancer tokenEnhancer;
+
+    private final TokenStore tokenStore;
+
+    private final JwtAccessTokenConverter jwtAccessTokenConverter;
+
+    private final JwtAuthorizationProperties jwtAuthorizationProperties;
+
+    private final UserDetailsService userDetailsService;
+
+    private final AuthorizationCodeServices authorizationCodeServices;
 
     @Resource
     private DataSource dataSource;
 
-
     @Autowired
-    public AuthorizationServerConfiguration(AuthenticationManager authenticationManagerBean, PasswordEncoder passwordEncoder, JwtTokenEnhancer tokenEnhancer, TokenStore tokenStore, JwtAccessTokenConverter jwtAccessTokenConverter, JwtAuthorizationProperties jwtAuthorizationProperties, UserDetailsService userDetailsService, AuthorizationCodeServices authorizationCodeServices) {
+    public AuthorizationServerConfiguration(AuthenticationManager authenticationManagerBean, PasswordEncoder passwordEncoder, JwtTokenEnhancer tokenEnhancer, TokenStore tokenStore,
+                                            JwtAccessTokenConverter jwtAccessTokenConverter, JwtAuthorizationProperties jwtAuthorizationProperties, UserDetailsService userDetailsService,
+                                            AuthorizationCodeServices authorizationCodeServices) {
         this.authenticationManagerBean = authenticationManagerBean;
         this.passwordEncoder = passwordEncoder;
         this.tokenEnhancer = tokenEnhancer;
@@ -56,6 +63,11 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         this.authorizationCodeServices = authorizationCodeServices;
     }
 
+    /**
+     * jdbcClientDetailsService.
+     *
+     * @return JdbcClientDetailsService
+     */
     @Bean
     public JdbcClientDetailsService jdbcClientDetailsService() {
         return new JdbcClientDetailsService(dataSource);
@@ -64,13 +76,13 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
-                .withClient(jwtAuthorizationProperties.getWithClient())
-                .secret(passwordEncoder.encode(jwtAuthorizationProperties.getClientSecret()))
-                .authorizedGrantTypes(jwtAuthorizationProperties.getGrantTypes())
-                .scopes(jwtAuthorizationProperties.getScopes())
-                .accessTokenValiditySeconds(jwtAuthorizationProperties.getAccessTokenValiditySeconds())
-                .refreshTokenValiditySeconds(jwtAuthorizationProperties.getRefreshTokenValiditySeconds())
-                .redirectUris(jwtAuthorizationProperties.getRedirectUris());
+            .withClient(jwtAuthorizationProperties.getWithClient())
+            .secret(passwordEncoder.encode(jwtAuthorizationProperties.getClientSecret()))
+            .authorizedGrantTypes(jwtAuthorizationProperties.getGrantTypes())
+            .scopes(jwtAuthorizationProperties.getScopes())
+            .accessTokenValiditySeconds(jwtAuthorizationProperties.getAccessTokenValiditySeconds())
+            .refreshTokenValiditySeconds(jwtAuthorizationProperties.getRefreshTokenValiditySeconds())
+            .redirectUris(jwtAuthorizationProperties.getRedirectUris());
     }
 
     @Override
@@ -82,12 +94,12 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         enhancerChain.setTokenEnhancers(enhancers);
 
         endpoints.tokenStore(tokenStore)
-                .accessTokenConverter(jwtAccessTokenConverter)
-                .tokenEnhancer(enhancerChain)
-                .authenticationManager(authenticationManagerBean)
-                .accessTokenConverter(jwtAccessTokenConverter).tokenStore(tokenStore).authorizationCodeServices(authorizationCodeServices)
-                .reuseRefreshTokens(false)
-                .userDetailsService(userDetailsService);
+            .accessTokenConverter(jwtAccessTokenConverter)
+            .tokenEnhancer(enhancerChain)
+            .authenticationManager(authenticationManagerBean)
+            .accessTokenConverter(jwtAccessTokenConverter).tokenStore(tokenStore).authorizationCodeServices(authorizationCodeServices)
+            .reuseRefreshTokens(false)
+            .userDetailsService(userDetailsService);
     }
 
     @Override

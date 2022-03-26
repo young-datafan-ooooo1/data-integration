@@ -6,6 +6,11 @@ import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.youngdatafan.common.sso.config.JwtTokenEnhancer;
 import com.youngdatafan.dataintegration.core.model.Result;
+import java.util.Map;
+import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -15,16 +20,14 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.Map;
-
+/**
+ * RevokeTokenEndpoint.
+ */
 @RestController
 public class RevokeTokenEndpoint {
 
     private final StringRedisTemplate redisTemplate;
+
     @Resource
     private ConsumerTokenServices consumerTokenServices;
 
@@ -33,6 +36,14 @@ public class RevokeTokenEndpoint {
         this.redisTemplate = redisTemplate;
     }
 
+    /**
+     * revokeToken.
+     *
+     * @param token    token
+     * @param request  HttpServletRequest
+     * @param response HttpServletResponse
+     * @return Result
+     */
     @GetMapping("/oauth/logout")
     @ResponseBody
     public Result<Boolean, Object> revokeToken(@RequestHeader("Authorization") String token, HttpServletRequest request, HttpServletResponse response) {
@@ -55,7 +66,9 @@ public class RevokeTokenEndpoint {
     }
 
     /**
-     * 删除token uid缓存
+     * 删除token uid缓存.
+     *
+     * @param token token
      */
     private void deleteTokenUidCache(String token) {
         final DecodedJWT decode = JWT.decode(token);

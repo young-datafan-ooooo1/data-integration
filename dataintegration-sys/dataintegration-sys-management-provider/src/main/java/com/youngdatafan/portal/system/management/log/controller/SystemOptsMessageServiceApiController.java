@@ -7,24 +7,25 @@ import com.youngdatafan.portal.system.management.log.entity.DpSystemOptsMessage;
 import com.youngdatafan.portal.system.management.log.service.DpSystemOptsMessageService;
 import com.youngdatafan.portal.system.management.log.vo.SystemOptsMessageVo;
 import com.youngdatafan.portal.system.management.summary.dto.SystemOptsMessageDTO;
+import java.util.Date;
+import java.util.List;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Date;
-import java.util.List;
-
 /**
- * @Author: jeremychen
- * @Descripition:
- * @Date:2020/5/28 4:39 下午
+ * SystemOptsMessageServiceApiController.
  */
 @RestController
 @RequestMapping("/systemOptsMessage")
 public class SystemOptsMessageServiceApiController implements SystemOptsMessageServiceApi {
+    private final DpSystemOptsMessageService systemOptsMessageService;
+
     @Autowired
-    private DpSystemOptsMessageService systemOptsMessageService;
+    public SystemOptsMessageServiceApiController(DpSystemOptsMessageService systemOptsMessageService) {
+        this.systemOptsMessageService = systemOptsMessageService;
+    }
 
     @Override
     public Result<SystemOptsMessageDTO, Object> add(SystemOptsMessageVo systemOptsMessageVo) {

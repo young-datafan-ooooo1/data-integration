@@ -1,7 +1,9 @@
 package com.youngdatafan.portal.system.management.user.controller;
 
-import com.youngdatafan.dataintegration.core.util.StatusCode;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageInfo;
 import com.youngdatafan.dataintegration.core.model.Result;
+import com.youngdatafan.dataintegration.core.util.StatusCode;
 import com.youngdatafan.dataintegration.core.util.UUIDUtils;
 import com.youngdatafan.portal.system.management.common.utils.BaseController;
 import com.youngdatafan.portal.system.management.common.utils.JwtUtil;
@@ -21,27 +23,26 @@ import com.youngdatafan.portal.system.management.user.vo.LoginVo;
 import com.youngdatafan.portal.system.management.user.vo.UpdatePasswdVo;
 import com.youngdatafan.portal.system.management.user.vo.UserAddVO;
 import com.youngdatafan.portal.system.management.user.vo.UserUpdateVO;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.ApiParam;
-
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
-
-
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 用户管理api接口实现
+ * 用户管理api接口实现.
  *
  * @author gavin
  * @since 2020-01-09 17:37
@@ -49,7 +50,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/user")
 public class UserServiceApiController extends BaseController<UserDTO> implements UserServiceApi {
-
 
     @Value("${jwt.expireTime}")
     private Long expireTime;
@@ -60,18 +60,15 @@ public class UserServiceApiController extends BaseController<UserDTO> implements
     @Autowired
     private DpPortalUserService dpPortalUserService;
 
-
     @Autowired
     private DpPortalUserRoleService dpPortalUserRoleService;
 
     @Autowired
     private DpPortalRoleService dpPortalRoleService;
 
-
     @Override
     @Transactional
     public Result<String, Object> login(@Validated @RequestBody LoginVo loginVo) {
-
 
         DpPortalUser dpPortalUser = dpPortalUserService.selectByUserName(loginVo.getUserName());
 
@@ -82,14 +79,14 @@ public class UserServiceApiController extends BaseController<UserDTO> implements
         List<String> roles = dpPortalUserRoleService.selectRoleIdsByUserId(dpPortalUser.getUserId());
 
         if (dpPortalUser != null && loginVo.getPassword() != null && SM3Utils.encode(loginVo.getPassword()).equals(dpPortalUser.getUserPasswd())) {
-            String jwt = JwtUtil.sign(tokenSecret, expireTime, dpPortalUser.getUserName(), dpPortalUser.getUserId(), roles);
             dpPortalUser.setLastLoginTime(new Date());
             dpPortalUserService.updateByPrimaryKey(dpPortalUser);
-            Result result = Result.success(jwt);
             UserDTO userDTO = new UserDTO();
             userDTO.setUserId(dpPortalUser.getUserId());
             userDTO.setUserName(dpPortalUser.getUserName());
             userDTO.setDescribe(dpPortalUser.getDescribe());
+            String jwt = JwtUtil.sign(tokenSecret, expireTime, dpPortalUser.getUserName(), dpPortalUser.getUserId(), roles);
+            Result result = Result.success(jwt);
             result.setAttachment(userDTO);
             dpPortalUserService.resetPasswordErrLongTime(loginVo.getUserName());
             return result;
@@ -178,7 +175,8 @@ public class UserServiceApiController extends BaseController<UserDTO> implements
     }
 
     @Override
-    public Result<PageInfo<UserDTO>, Object> selectUsersPage(@RequestParam("pageSize") String pageSize, @RequestParam("curPage") String curPage, @RequestParam("keyWord") String keyWord, @ApiParam("操作用户id") @RequestHeader(value = "authorization-userId", required = true) String optUserId) {
+    public Result<PageInfo<UserDTO>, Object> selectUsersPage(@RequestParam("pageSize") String pageSize, @RequestParam("curPage") String curPage, @RequestParam("keyWord") String keyWord,
+                                                             @ApiParam("操作用户id") @RequestHeader(value = "authorization-userId", required = true) String optUserId) {
         Page page = this.initPage(pageSize, curPage);
         PageInfo<UserDTO> dpPortalUserPageInfo = dpPortalUserService.selectUsers(keyWord, page, optUserId);
 
@@ -189,7 +187,7 @@ public class UserServiceApiController extends BaseController<UserDTO> implements
     @Transactional
     public Result<Boolean, Object> grantRoleToUser(@RequestParam("userId") String userId, @RequestParam("roleIds") String roleIds) {
 
-        if (userId.equals("00000000")) {
+        if ("00000000".equals(userId)) {
             return Result.fail(StatusCode.CODE_10010.getCode(), null, "管理员不能授权");
 
         }
@@ -208,8 +206,10 @@ public class UserServiceApiController extends BaseController<UserDTO> implements
     }
 
     /**
-     * @param userId
-     * @return
+     * selectGrantedRoleIds.
+     *
+     * @param userId userId
+     * @return Result
      */
     @Override
     public Result<List<String>, Object> selectGrantedRoleIds(String userId) {
@@ -241,7 +241,8 @@ public class UserServiceApiController extends BaseController<UserDTO> implements
     }
 
     @Override
-    public Result<Boolean, Object> updatePassword(@RequestBody UpdatePasswdVo updatePasswdVo, @RequestHeader(value = "authorization-userId", required = true) String optUserId, @RequestHeader(value = "authorization-userName", required = true) String optUserName) {
+    public Result<Boolean, Object> updatePassword(@RequestBody UpdatePasswdVo updatePasswdVo, @RequestHeader(value = "authorization-userId", required = true) String optUserId,
+                                                  @RequestHeader(value = "authorization-userName", required = true) String optUserName) {
         DpPortalUser dpPortalUser1 = dpPortalUserService.selectByUserName(optUserName);
         if (dpPortalUser1.getUserPasswd().equals(SM3Utils.encode(updatePasswdVo.getOldPassword()))) {
             DpPortalUser dpPortalUser = new DpPortalUser();
@@ -256,9 +257,9 @@ public class UserServiceApiController extends BaseController<UserDTO> implements
     }
 
     /**
-     * 根据用户名查询用户
+     * 根据用户名查询用户.
      *
-     * @param userName
+     * @param userName userName
      * @return 用户信息
      */
     @Override
@@ -273,9 +274,9 @@ public class UserServiceApiController extends BaseController<UserDTO> implements
     }
 
     /**
-     * 根据用户名查询用户
+     * 根据用户名查询用户.
      *
-     * @param userName
+     * @param userName userName
      * @return 用户信息
      */
     @Override
@@ -290,10 +291,10 @@ public class UserServiceApiController extends BaseController<UserDTO> implements
     }
 
     /**
-     * 锁定用户接口
+     * 锁定用户接口.
      *
-     * @param userId
-     * @return
+     * @param userId userId
+     * @return Result
      */
     @Override
     public Result<Boolean, Object> lockUser(String userId) {
@@ -302,10 +303,10 @@ public class UserServiceApiController extends BaseController<UserDTO> implements
     }
 
     /**
-     * 解锁用户
+     * 解锁用户.
      *
-     * @param userId
-     * @return
+     * @param userId userId
+     * @return Result
      */
     @Override
     public Result<Boolean, Object> unLockUser(String userId) {
@@ -318,15 +319,13 @@ public class UserServiceApiController extends BaseController<UserDTO> implements
         int i = 0;
 
         try {
-            i = dpPortalUserService.updateLastLoginTime(userId, DateUtils.parseDate(loginTime,"yyyy-MM-dd HH:mm:ss"));
+            i = dpPortalUserService.updateLastLoginTime(userId, DateUtils.parseDate(loginTime, "yyyy-MM-dd HH:mm:ss"));
         } catch (ParseException e) {
             e.printStackTrace();
             return Result.fail(StatusCode.CODE_10010.getCode(), "", "parseDate  error");
         }
         return Result.success(i > 0);
     }
-
-
 
     @Override
     public Result<List<UserRoleDTO>, Object> selectUserRoleByUserName(String userName) {
@@ -361,6 +360,5 @@ public class UserServiceApiController extends BaseController<UserDTO> implements
         }
         return Result.success(false);
     }
-
 
 }

@@ -2,15 +2,16 @@ package com.youngdatafan.common.sso.config;
 
 import com.youngdatafan.common.sso.service.UserRedisService;
 import com.youngdatafan.dataintegration.core.util.UUIDUtils;
+import java.util.HashMap;
+import java.util.Map;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
+ * JwtTokenEnhancer.
+ *
  * @author gavin
  * @since 2020/3/16 7:08 下午
  */
@@ -18,6 +19,7 @@ public class JwtTokenEnhancer implements TokenEnhancer {
     public static final String TOKEN_LAST_ACCESS_TIME = "LastAccess_";
 
     private final UserRedisService userRedisService;
+
     private final long tokenUidCacheTimeoutSeconds;
 
     public JwtTokenEnhancer(UserRedisService userRedisService, long tokenUidCacheTimeoutSeconds) {

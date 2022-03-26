@@ -2,6 +2,12 @@ package com.youngdatafan.portal.system.management.log.task;
 
 import com.youngdatafan.portal.system.management.log.entity.DpPortalLog;
 import com.youngdatafan.portal.system.management.log.service.DpPortalLogService;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import javax.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,21 +15,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 /**
- * @Author: jeremychen
- * @Descripition:
- * @Date:2018/11/22 9:42 AM
+ * AsyncLog.
  */
 @Component
 public class AsyncLog {
-    private static final Logger logger = LoggerFactory.getLogger(AsyncLog.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AsyncLog.class);
+
     @Value("${ruleflow.async.log.queueSize:30000}")
     private int queueSize;
 
@@ -36,24 +34,31 @@ public class AsyncLog {
     @Value("${ruleflow.async.log.allowOverflow:false}")
     private boolean allowOverflow;
 
-
     private ArrayBlockingQueue<DpPortalLog> blockingQueue;
-    private volatile boolean runBatch = false;
+
+    private volatile boolean runBatch;
+
     private ExecutorService threadPool;
 
     @Autowired
     private DpPortalLogService dpPortalLogService;
 
+    /**
+     * init.
+     */
     @PostConstruct
     public void init() {
         blockingQueue = new ArrayBlockingQueue<>(queueSize);
         threadPool = Executors.newFixedThreadPool(threadPoolSize);
     }
 
+    /**
+     * runBatch.
+     */
     @Scheduled(cron = "${ruleflow.async.log.cron:0/5 * * * * ?}")
     public void runBatch() {
         if (runBatch) {
-            logger.info("batchSave Is already running.");
+            LOGGER.info("batchSave Is already running.");
             return;
         }
 
@@ -71,7 +76,7 @@ public class AsyncLog {
     }
 
     /**
-     * 添加到异步日志队列中
+     * 添加到异步日志队列中.
      *
      * @param dpPortalLog 调用日志
      */
@@ -80,7 +85,7 @@ public class AsyncLog {
         if (blockingQueue.size() >= queueSize) {
             // 允许溢出
             if (allowOverflow) {
-                logger.debug("skip the record , allowOverflow.");
+                LOGGER.debug("skip the record , allowOverflow.");
                 return;
 
             } else {
@@ -92,12 +97,12 @@ public class AsyncLog {
         try {
             blockingQueue.put(dpPortalLog);
         } catch (InterruptedException e) {
-            logger.warn("Interrupted!", e);
+            LOGGER.warn("Interrupted!", e);
         }
     }
 
     /**
-     * 批量保存日志
+     * 批量保存日志.
      */
     private void batchSave() {
         List<DpPortalLog> buffer = new ArrayList<>(batchSize);
@@ -122,7 +127,6 @@ public class AsyncLog {
         // 保存日志
         save(buffer);
     }
-
 
     private void save(final List<DpPortalLog> buffer) {
         if (buffer.size() > 0) {

@@ -6,22 +6,27 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.apache.commons.lang3.StringUtils;
 
+/**
+ * JwtUtil.
+ */
 public class JwtUtil {
 
 
     /**
-     * 生成签名,15分钟后过期
+     * 生成签名,15分钟后过期.
      *
-     * @param username
-     * @param userId
-     * @return
+     * @param tokenSecret tokenSecret
+     * @param expireTime  expireTime
+     * @param username    username
+     * @param userId      userId
+     * @param roles       roles
+     * @return String
      */
     public static String sign(String tokenSecret, Long expireTime, String username, String userId, List<String> roles) {
         //过期时间
@@ -29,15 +34,21 @@ public class JwtUtil {
         //私钥及加密算法
         Algorithm algorithm = Algorithm.HMAC256(tokenSecret);
         //设置头信息
-        HashMap<String, Object> header = new HashMap<>(2);
+        Map<String, Object> header = new HashMap<>(2);
         header.put("typ", "JWT");
         header.put("alg", "HS256");
         //附带username和userID生成签名
         return JWT.create().withHeader(header).withClaim("loginName", username)
-                .withClaim("userId", userId).withClaim("roles", org.springframework.util.StringUtils.collectionToDelimitedString(roles, ",")).withExpiresAt(date).sign(algorithm);
+            .withClaim("userId", userId).withClaim("roles", org.springframework.util.StringUtils.collectionToDelimitedString(roles, ",")).withExpiresAt(date).sign(algorithm);
     }
 
-
+    /**
+     * verity.
+     *
+     * @param token       token
+     * @param tokenSecret tokenSecret
+     * @return boolean
+     */
     public static boolean verity(String token, String tokenSecret) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(tokenSecret);
@@ -53,7 +64,7 @@ public class JwtUtil {
     }
 
     /**
-     * 验证JWt并且获取Chaim
+     * 验证JWt并且获取Chaim.
      *
      * @param jwtSecret 秘钥
      * @param token     jwt密文
@@ -70,21 +81,29 @@ public class JwtUtil {
         return jwt.getClaims();
     }
 
+    /**
+     * getRolesFromToken.
+     *
+     * @param secret getRolesFromToken
+     * @param token  token
+     * @return String
+     */
     public static String getRolesFromToken(String secret, String token) {
         Map<String, Claim> map = verityAndGetChaim(secret, token);
         return map.get("roles").asString();
     }
 
+    /**
+     * getUserNameFromToken.
+     *
+     * @param secret secret
+     * @param token  token
+     * @return String
+     */
     public static String getUserNameFromToken(String secret, String token) {
         Map<String, Claim> map = verityAndGetChaim(secret, token);
         return map.get("loginName").asString();
 
     }
 
-    public static void main(String[] args) {
-        Map<String, Claim> map = verityAndGetChaim("dasdjklqwjkdsdjasldkjas", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpbk5hbWUiOiJhZG1pbiIsInJvbGVzIjoiMCwxLDIiLCJleHAiOjE1ODQ0MjIwNjcsInVzZXJJZCI6IjAwMDAwMDAwIn0.DRtO185PKRZRrQF5WAax02J8RsDSQip5ktgeoP7wFJs");
-        for (Map.Entry<String, Claim> entry : map.entrySet()) {
-            System.out.println(entry.getKey() + ":" + entry.getValue().asString());
-        }
-    }
 }

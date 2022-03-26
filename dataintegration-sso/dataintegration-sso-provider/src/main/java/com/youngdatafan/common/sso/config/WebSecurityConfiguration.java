@@ -1,5 +1,6 @@
 package com.youngdatafan.common.sso.config;
 
+import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.context.annotation.Bean;
@@ -14,9 +15,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 
-import javax.annotation.Resource;
-
 /**
+ * WebSecurityConfiguration.
  * Created by Steven on 2019/10/26.
  */
 @Configuration
@@ -36,13 +36,12 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
-                .antMatchers("/oauth/.well-known/jwks.json", "/oauth/logout","/oauth/getCode").permitAll()
-                .antMatchers("/error").permitAll()
-                .antMatchers("/actuator/**").permitAll()
-                .anyRequest().authenticated().and()
-                .addFilterBefore(new JWTAuthenticationFilter(tokenStore), OAuth2LoginAuthenticationFilter.class);
-
+            .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
+            .antMatchers("/oauth/.well-known/jwks.json", "/oauth/logout", "/oauth/getCode").permitAll()
+            .antMatchers("/error").permitAll()
+            .antMatchers("/actuator/**").permitAll()
+            .anyRequest().authenticated().and()
+            .addFilterBefore(new JWTAuthenticationFilter(tokenStore), OAuth2LoginAuthenticationFilter.class);
 
     }
 
@@ -57,6 +56,11 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
+    /**
+     * passwordEncoder.
+     *
+     * @return PasswordEncoder
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

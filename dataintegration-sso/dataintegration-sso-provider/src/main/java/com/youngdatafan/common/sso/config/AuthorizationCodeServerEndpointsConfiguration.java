@@ -1,6 +1,10 @@
 package com.youngdatafan.common.sso.config;
 
 import com.youngdatafan.common.sso.controller.OauthCodeController;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+import javax.annotation.PostConstruct;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.BeanFactoryUtils;
@@ -29,15 +33,8 @@ import org.springframework.security.oauth2.provider.error.WebResponseExceptionTr
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
-
 /**
- * @Author: jeremychen
- * @Descripition:
- * @Date:2020/6/3 10:32 上午
+ * AuthorizationCodeServerEndpointsConfiguration.
  */
 @Configuration
 @Import(AuthorizationCodeServerEndpointsConfiguration.TokenKeyEndpointRegistrar.class)
@@ -45,14 +42,15 @@ public class AuthorizationCodeServerEndpointsConfiguration {
 
     private AuthorizationServerEndpointsConfigurer endpoints = new AuthorizationServerEndpointsConfigurer();
 
-
     @Autowired
     private ClientDetailsService clientDetailsService;
 
     @Autowired
     private List<AuthorizationServerConfigurer> configurers = Collections.emptyList();
 
-
+    /**
+     * init.
+     */
     @PostConstruct
     public void init() {
         for (AuthorizationServerConfigurer configurer : configurers) {
@@ -65,6 +63,12 @@ public class AuthorizationCodeServerEndpointsConfiguration {
         endpoints.setClientDetailsService(clientDetailsService);
     }
 
+    /**
+     * oauthCodeController.
+     *
+     * @return OauthCodeController
+     * @throws Exception Exception
+     */
     @Bean
     public OauthCodeController oauthCodeController() throws Exception {
         OauthCodeController oauthCodeController = new OauthCodeController();
@@ -90,6 +94,11 @@ public class AuthorizationCodeServerEndpointsConfiguration {
         return "forward:" + path;
     }
 
+    /**
+     * getEndpointsConfigurer.
+     *
+     * @return AuthorizationServerEndpointsConfigurer.
+     */
     public AuthorizationServerEndpointsConfigurer getEndpointsConfigurer() {
         if (!endpoints.isTokenServicesOverride()) {
             try {
@@ -141,7 +150,7 @@ public class AuthorizationCodeServerEndpointsConfiguration {
         @Override
         public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
             String[] names = BeanFactoryUtils.beanNamesForTypeIncludingAncestors(beanFactory,
-                    JwtAccessTokenConverter.class, false, false);
+                JwtAccessTokenConverter.class, false, false);
             if (names.length > 0) {
                 BeanDefinitionBuilder builder = BeanDefinitionBuilder.rootBeanDefinition(TokenKeyEndpoint.class);
                 builder.addConstructorArgReference(names[0]);

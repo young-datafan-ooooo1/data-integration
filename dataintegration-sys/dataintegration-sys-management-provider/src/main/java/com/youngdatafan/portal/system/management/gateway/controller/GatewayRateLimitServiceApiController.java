@@ -5,13 +5,14 @@ import com.youngdatafan.portal.system.management.gateway.api.GatewayRateLimitSer
 import com.youngdatafan.portal.system.management.gateway.dto.DpGatewayRateLimitDTO;
 import com.youngdatafan.portal.system.management.gateway.service.GatewayRateLimitService;
 import com.youngdatafan.portal.system.management.gateway.vo.DpGatewayRateLimitVO;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 /**
+ * GatewayRateLimitServiceApiController.
+ *
  * @author gavin
  * @since 2020/6/13 1:45 下午
  */

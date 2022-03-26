@@ -1,11 +1,19 @@
 package com.youngdatafan.common.sso.config;
 
-import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.common.sso.feign.UserServiceApiClient;
 import com.youngdatafan.common.sso.service.UserRedisService;
 import com.youngdatafan.common.sso.utils.SM3Utils;
+import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.dataintegration.core.util.StatusCode;
 import com.youngdatafan.portal.system.management.user.dto.UserDTO;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
@@ -20,12 +28,8 @@ import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import java.util.*;
-
 /**
- * 自定义认证器
+ * 自定义认证器.
  *
  * @author gavin
  */
@@ -39,8 +43,7 @@ public class DpAuthenticationProvider extends AbstractUserDetailsAuthenticationP
 
     @Value("${login.lock.expireTime}")
     private long lockExpireTime;
-
-
+    
     @Resource
     private HttpServletRequest request;
 
@@ -49,7 +52,6 @@ public class DpAuthenticationProvider extends AbstractUserDetailsAuthenticationP
 
     @Resource
     private TokenStore tokenStore;
-
 
     @Override
     protected void additionalAuthenticationChecks(UserDetails userDetails, UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken) throws AuthenticationException {
@@ -80,7 +82,6 @@ public class DpAuthenticationProvider extends AbstractUserDetailsAuthenticationP
                 throw new UsernameNotFoundException("用户已失效");
             }
 
-
             Map<Object, Object> object = (Map<Object, Object>) usernamePasswordAuthenticationToken.getDetails();
 
             //登录前，先注销
@@ -94,9 +95,7 @@ public class DpAuthenticationProvider extends AbstractUserDetailsAuthenticationP
                 tokenStore.removeAccessToken(oAuth2AccessToken);
             }
 
-
-           userServiceApiClient.updateLastLoginTime(userDTO.getUserId(), DateFormatUtils.format(new Date(),"yyyy-MM-dd HH:mm:ss"));
-
+            userServiceApiClient.updateLastLoginTime(userDTO.getUserId(), DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
 
             userRedisService.resetPasswordErrLongTime(username);
 
@@ -114,11 +113,8 @@ public class DpAuthenticationProvider extends AbstractUserDetailsAuthenticationP
         }
     }
 
-
     @Override
     protected UserDetails retrieveUser(String username, UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken) throws AuthenticationException {
-        String reqIp = request.getHeader("authorization-reqIp");
-
         String password = (String) usernamePasswordAuthenticationToken.getCredentials();
         Result<UserDTO, Object> result = userServiceApiClient.selectLoginInfoByUserName(username);
         if (!result.getCode().equals(StatusCode.CODE_10000.getCode())) {
@@ -136,9 +132,9 @@ public class DpAuthenticationProvider extends AbstractUserDetailsAuthenticationP
         for (String id : roleIds) {
             authorities.add(new SimpleGrantedAuthority(id));
         }
+        String reqIp = request.getHeader("authorization-reqIp");
         return new DpUser(userDTO.getUserId(), username, password, reqIp, userDTO.getDescribe(), StringUtils.join(tenantIds, ","), userDTO, authorities);
     }
-
 
     @Override
     public boolean supports(Class<?> aClass) {

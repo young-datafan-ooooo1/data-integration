@@ -4,17 +4,14 @@ import com.youngdatafan.portal.system.management.log.entity.DpSystemOptsMessage;
 import com.youngdatafan.portal.system.management.log.mapper.DpSystemOptsMessageMapper;
 import com.youngdatafan.portal.system.management.log.service.DpSystemOptsMessageService;
 import com.youngdatafan.portal.system.management.summary.dto.SystemOptsMessageDTO;
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.Resource;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * @Author: jeremychen
- * @Descripition:
- * @Date:2020/5/28 4:08 下午
+ * DpSystemOptsMessageService.
  */
 @Service
 public class DpSystemOptsMessageServiceImpl implements DpSystemOptsMessageService {

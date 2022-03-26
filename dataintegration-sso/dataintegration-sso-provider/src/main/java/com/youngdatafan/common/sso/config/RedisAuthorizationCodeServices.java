@@ -10,18 +10,15 @@ import org.springframework.security.oauth2.provider.token.store.redis.RedisToken
 import org.springframework.util.Assert;
 
 /**
- * @Author: jeremychen
- * @Descripition:
- * @Date:2020/3/23 3:04 下午
+ * RedisAuthorizationCodeServices.
  */
 public class RedisAuthorizationCodeServices extends RandomValueAuthorizationCodeServices {
 
-    private static final String prefix = "authorization_code";
+    private static final String PREFIX = "authorization_code";
 
     private final RedisConnectionFactory redisConnectionFactory;
 
     private RedisTokenStoreSerializationStrategy serializationStrategy = new JdkSerializationStrategy();
-
 
     public RedisAuthorizationCodeServices(RedisConnectionFactory redisConnectionFactory) {
         Assert.notNull(redisConnectionFactory, "RedisConnection required");
@@ -42,11 +39,10 @@ public class RedisAuthorizationCodeServices extends RandomValueAuthorizationCode
             conn.close();
         }
 
-
     }
 
     private byte[] serializeKey(String object) {
-        return this.serialize(prefix + object);
+        return this.serialize(PREFIX + object);
     }
 
     @Override
@@ -61,7 +57,7 @@ public class RedisAuthorizationCodeServices extends RandomValueAuthorizationCode
         }
 
         if (authentication != null) {
-            conn.del(new byte[][]{code});
+            conn.del(new byte[][] {code});
         }
 
         return authentication;
