@@ -144,7 +144,7 @@ public class BasiceModelserviceImpl implements BasiceModelService {
 
         basiceModel.setModelSort(addBasicModelVO.getSortNum());
         basiceModel.setModelName(UUID.randomUUID().toString());
-        basiceModel.setcName(addBasicModelVO.getcName());
+        basiceModel.setcName(addBasicModelVO.getCName());
         basiceModel.setTableName(addBasicModelVO.getTableName());
         basiceModel.setCreateUserId(userId);
         basiceModel.setUpdateTime(new Date());
@@ -231,7 +231,7 @@ public class BasiceModelserviceImpl implements BasiceModelService {
         basiceModel.setDescription(updateBasicModelVO.getDescription());
         basiceModel.setDsName(updateBasicModelVO.getDatasourceName());
         basiceModel.setModelSort(updateBasicModelVO.getSortNum());
-        basiceModel.setcName(updateBasicModelVO.getcName());
+        basiceModel.setcName(updateBasicModelVO.getCName());
         basiceModel.setTableName(updateBasicModelVO.getTableName());
         basiceModel.setUpdateTime(new Date());
         basiceModel.setModelName(updateBasicModelVO.getName());
@@ -541,7 +541,7 @@ public class BasiceModelserviceImpl implements BasiceModelService {
 
                 basiceModel.setModelName(UUID.randomUUID().toString());
 
-                basiceModel.setcName(tableNameAndModelNameVO.getModelName());
+                basiceModel.setCName(tableNameAndModelNameVO.getModelName());
 
                 basiceModel.setDsName(batchInserModelVO.getDataSourceName());
 

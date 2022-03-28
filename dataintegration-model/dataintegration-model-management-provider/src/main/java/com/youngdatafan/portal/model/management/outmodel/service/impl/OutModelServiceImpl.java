@@ -166,7 +166,6 @@ public class OutModelServiceImpl implements OutModelService {
             List<ModelIdAndModelMetaDataDTO> modelIdAndModelMetaDataDTOS = outModelMetaDataMapper.selectModelMeataDataList(modelNames);
             System.out.println(modelIdAndModelMetaDataDTOS.size());
             for (OutModelAndMetaDataDTO outModelAndMetaDataDTO : list) {
-                System.out.println(1111111 + outModelAndMetaDataDTO.getProjectId());
 
                 for (ModelIdAndModelMetaDataDTO m : modelIdAndModelMetaDataDTOS) {
                     if (outModelAndMetaDataDTO.getModelId().equals(m.getModelId())) {

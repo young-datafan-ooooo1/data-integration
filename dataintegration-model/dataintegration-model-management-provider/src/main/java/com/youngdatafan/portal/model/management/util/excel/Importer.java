@@ -118,9 +118,9 @@ public class Importer implements IImporter {
         for (BasicModelAndMetaDataDTO basicModelAndMetaDataDTO : basicModelExcels
         ) {
 
-            if (!list.contains(basicModelAndMetaDataDTO.getcName())) {
+            if (!list.contains(basicModelAndMetaDataDTO.getCName())) {
 
-                list.add(basicModelAndMetaDataDTO.getcName());
+                list.add(basicModelAndMetaDataDTO.getCName());
 
                 BasicModelCopyDTO basiceModel = new BasicModelCopyDTO();
 
@@ -128,7 +128,7 @@ public class Importer implements IImporter {
 
                 basiceModel.setGroupType(basicModelAndMetaDataDTO.getModelType());
 
-                basiceModel.setcName(basicModelAndMetaDataDTO.getcName());
+                basiceModel.setCName(basicModelAndMetaDataDTO.getCName());
 
                 basiceModel.setDsName(basicModelAndMetaDataDTO.getDsName());
 
@@ -149,7 +149,7 @@ public class Importer implements IImporter {
 
                 basiceModel.setTableName(basicModelAndMetaDataDTO.getTableName());
 
-                basiceModel.setcName(basicModelAndMetaDataDTO.getcName());
+                basiceModel.setCName(basicModelAndMetaDataDTO.getCName());
 
                 basiceModel.setEnabled(TrueFalse.T.code().equals(basicModelAndMetaDataDTO.getEnabled()) ? TrueFalse.T.code() : TrueFalse.F.code());
 
@@ -171,7 +171,7 @@ public class Importer implements IImporter {
             for (BasicModelAndMetaDataDTO basicModelAndMetaDataDTO : basicModelExcels
             ) {
                 BasicModelMetaDataDTO basicModelMetaDataDTO = new BasicModelMetaDataDTO();
-                if (b.getcName().equals(basicModelAndMetaDataDTO.getcName())) {
+                if (b.getCName().equals(basicModelAndMetaDataDTO.getCName())) {
                     basicModelMetaDataDTO.setColumnChineseName(basicModelAndMetaDataDTO.getColumnChineseName());
 
                     basicModelMetaDataDTO.setColumnDescription(basicModelAndMetaDataDTO.getColumnDescription());
@@ -237,7 +237,7 @@ public class Importer implements IImporter {
             if (org.apache.commons.lang.StringUtils.isEmpty(groupId)) {
                 throw new RuntimeException(basicModelCopyDTO.getGroupType() + "分组类型不存在");
             }
-            String modelName = basiceModelMapper.selectModelNameByUserIdAndCname(userId, basicModelCopyDTO.getcName(), type, groupId);
+            String modelName = basiceModelMapper.selectModelNameByUserIdAndCname(userId, basicModelCopyDTO.getCName(), type, groupId);
             if (!StringUtils.isEmpty(modelName)) {
                 if (basiceModelMapper.deleteByPrimaryKey(modelName, userId) > 0) {
 

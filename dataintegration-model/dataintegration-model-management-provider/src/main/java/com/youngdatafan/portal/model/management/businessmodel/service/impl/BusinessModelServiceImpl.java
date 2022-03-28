@@ -226,7 +226,7 @@ public class BusinessModelServiceImpl implements BusinessModelService {
 
                 businessModelMetadata.setColumnName(s.getColumnName());
 
-                businessModelMetadata.setCustomColumnName(StringUtils.isEmpty(s.getcName()) ? null : s.getcName());
+                businessModelMetadata.setCustomColumnName(StringUtils.isEmpty(s.getCName()) ? null : s.getCName());
 
                 businessModelMetadata.setColumnSerial(s.getModelDataSort());
 
