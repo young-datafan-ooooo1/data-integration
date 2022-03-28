@@ -20,5 +20,8 @@
      "http://www.puppycrawl.com/dtds/suppressions_1_0.dtd">
  
 <suppressions>
-
+    <!--后续优化因kettle json 转XML的部分json参数问题-->
+    <suppress checks=".*" files="[/\\]dataintegration-model[/\\]dataintegration-model-management-api[/\\]src[/\\]main[/\\]java[/\\]com[/\\]youngdatafan[/\\]portal[/\\]model[/\\]management[/\\]datasource[/\\]dto[/\\]JCDataSourceDTO.java"/>
+    <suppress checks=".*" files="[/\\]dataintegration-model[/\\]dataintegration-model-management-api[/\\]src[/\\]main[/\\]java[/\\]com[/\\]youngdatafan[/\\]portal[/\\]model[/\\]management[/\\]datasource[/\\]vo[/\\]ConnectionDetailVO.java"/>
+    <suppress checks=".*" files="[/\\]dataintegration-model[/\\]dataintegration-model-management-api[/\\]src[/\\]main[/\\]java[/\\]com[/\\]youngdatafan[/\\]portal[/\\]model[/\\]management[/\\]datasource[/\\]dto[/\\]DatasourceDTO.java"/>
 </suppressions>

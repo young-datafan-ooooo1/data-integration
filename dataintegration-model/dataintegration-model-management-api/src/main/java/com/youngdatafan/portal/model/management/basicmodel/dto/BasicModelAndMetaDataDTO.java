@@ -2,18 +2,13 @@ package com.youngdatafan.portal.model.management.basicmodel.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 /**
- * <p>****************************************************************************</p>
- * <ul style="margin:15px;">
- * <li>Description : description</li>
- * <li>Version     : 1.0</li>
- * <li>Creation    : 2020/2/22 9:50 PM</li>
- * <li>Author      : ksice_xt</li>
- * </ul>
- * <p>****************************************************************************</p>
+ * 模型信息和所关联模型元数据.
  */
 @ApiModel(description = "模型信息和所关联模型元数据")
+@Data
 public class BasicModelAndMetaDataDTO {
 
     @ApiModelProperty(value = "模型中文名")
@@ -44,15 +39,19 @@ public class BasicModelAndMetaDataDTO {
     @ApiModelProperty(value = "表名")
 
     private String tableName;
+
     @ApiModelProperty(value = "描述")
 
     private String description;
+
     @ApiModelProperty(value = "字段名称")
 
     private String columnName;
+
     @ApiModelProperty(value = "字段类型")
 
     private String columnType;
+
     @ApiModelProperty(value = "字段长度")
 
     private String columnLength;
@@ -72,6 +71,7 @@ public class BasicModelAndMetaDataDTO {
     @ApiModelProperty(value = "是否统计")
 
     private String statistics;
+
     @ApiModelProperty(value = "模型字段排序")
 
     private String modelDataSort;
@@ -79,171 +79,4 @@ public class BasicModelAndMetaDataDTO {
     @ApiModelProperty(value = "字段描述")
     private String columnDescription;
 
-    public String getSchemaName() {
-        return schemaName;
-    }
-
-    public void setSchemaName(String schemaName) {
-        this.schemaName = schemaName;
-    }
-
-    public String getcName() {
-        return cName;
-    }
-
-    public void setcName(String cName) {
-        this.cName = cName;
-    }
-
-    public String getModelName() {
-        return modelName;
-    }
-
-    public void setModelName(String modelName) {
-        this.modelName = modelName;
-    }
-
-    public String getModelType() {
-        return modelType;
-    }
-
-    public void setModelType(String modelType) {
-        this.modelType = modelType;
-    }
-
-    public String getEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(String enabled) {
-        this.enabled = enabled;
-    }
-
-    public String getModelSort() {
-        return modelSort;
-    }
-
-    public void setModelSort(String modelSort) {
-        this.modelSort = modelSort;
-    }
-
-    public String getDsName() {
-        return dsName;
-    }
-
-    public void setDsName(String dsName) {
-        this.dsName = dsName;
-    }
-
-    public String getTableName() {
-        return tableName;
-    }
-
-    public void setTableName(String tableName) {
-        this.tableName = tableName;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getColumnName() {
-        return columnName;
-    }
-
-    public void setColumnName(String columnName) {
-        this.columnName = columnName;
-    }
-
-    public String getColumnType() {
-        return columnType;
-    }
-
-    public void setColumnType(String columnType) {
-        this.columnType = columnType;
-    }
-
-    public String getColumnLength() {
-        return columnLength;
-    }
-
-    public void setColumnLength(String columnLength) {
-        this.columnLength = columnLength;
-    }
-
-    public String getColumnPrecision() {
-        return columnPrecision;
-    }
-
-    public void setColumnPrecision(String columnPrecision) {
-        this.columnPrecision = columnPrecision;
-    }
-
-    public String getColumnChineseName() {
-        return columnChineseName;
-    }
-
-    public void setColumnChineseName(String columnChineseName) {
-        this.columnChineseName = columnChineseName;
-    }
-
-    public String getDimensionMetric() {
-        return dimensionMetric;
-    }
-
-    public void setDimensionMetric(String dimensionMetric) {
-        this.dimensionMetric = dimensionMetric;
-    }
-
-    public String getStatistics() {
-        return statistics;
-    }
-
-    public void setStatistics(String statistics) {
-        this.statistics = statistics;
-    }
-
-    public String getModelDataSort() {
-        return modelDataSort;
-    }
-
-    public void setModelDataSort(String modelDataSort) {
-        this.modelDataSort = modelDataSort;
-    }
-
-    public String getColumnDescription() {
-        return columnDescription;
-    }
-
-
-    @Override
-    public String toString() {
-        return "BasicModelAndMetaDataDTO{" +
-                "cName='" + cName + '\'' +
-                ", modelName='" + modelName + '\'' +
-                ", modelType='" + modelType + '\'' +
-                ", enabled='" + enabled + '\'' +
-                ", modelSort='" + modelSort + '\'' +
-                ", dsName='" + dsName + '\'' +
-                ", tableName='" + tableName + '\'' +
-                ", description='" + description + '\'' +
-                ", columnName='" + columnName + '\'' +
-                ", columnType='" + columnType + '\'' +
-                ", columnLength='" + columnLength + '\'' +
-                ", columnPrecision='" + columnPrecision + '\'' +
-                ", columnChineseName='" + columnChineseName + '\'' +
-                ", dimensionMetric='" + dimensionMetric + '\'' +
-                ", statistics='" + statistics + '\'' +
-                ", modelDataSort='" + modelDataSort + '\'' +
-                ", columnDescription='" + columnDescription + '\'' +
-                '}';
-    }
-
-    public void setColumnDescription(String columnDescription) {
-        this.columnDescription = columnDescription;
-    }
 }

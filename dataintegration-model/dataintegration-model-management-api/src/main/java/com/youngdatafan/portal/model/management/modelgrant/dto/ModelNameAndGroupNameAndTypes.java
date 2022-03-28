@@ -2,20 +2,14 @@ package com.youngdatafan.portal.model.management.modelgrant.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-
 import java.util.List;
 import java.util.Set;
+import lombok.Data;
 
 /**
- * <p>****************************************************************************</p>
- * <ul style="margin:15px;">
- * <li>Description : description</li>
- * <li>Version     : 1.0</li>
- * <li>Creation    : 2020/2/16 8:49 PM</li>
- * <li>Author      : ksice_xt</li>
- * </ul>
- * <p>****************************************************************************</p>
+ * 模型名称分组名称和类型对象.
  */
+@Data
 @ApiModel(description = "模型名称分组名称和类型对象")
 public class ModelNameAndGroupNameAndTypes {
 
@@ -33,43 +27,4 @@ public class ModelNameAndGroupNameAndTypes {
 
     private Long total;
 
-    public List<BusinessModelListDTO> getBusinessModelListDTOS() {
-        return businessModelListDTOS;
-    }
-
-    public void setBusinessModelListDTOS(List<BusinessModelListDTO> businessModelListDTOS) {
-        this.businessModelListDTOS = businessModelListDTOS;
-    }
-
-    public Long getTotal() {
-        return total;
-    }
-
-    public void setTotal(Long total) {
-        this.total = total;
-    }
-
-    public List<String> getModelNames() {
-        return modelNames;
-    }
-
-    public void setModelNames(List<String> modelNames) {
-        this.modelNames = modelNames;
-    }
-
-    public Set<String> getGroupNames() {
-        return groupNames;
-    }
-
-    public void setGroupNames(Set<String> groupNames) {
-        this.groupNames = groupNames;
-    }
-
-    public Set<String> getGroupTypes() {
-        return groupTypes;
-    }
-
-    public void setGroupTypes(Set<String> groupTypes) {
-        this.groupTypes = groupTypes;
-    }
 }

@@ -216,7 +216,7 @@ public class OutinterfaceModelServiceImpl implements OutinterfaceModelService {
 
                 outinterfaceModelMetadata.setColumnName(s.getColumnName());
 
-                outinterfaceModelMetadata.setCustomColumnName(StringUtils.isEmpty(s.getcName()) ? null : s.getcName());
+                outinterfaceModelMetadata.setCustomColumnName(StringUtils.isEmpty(s.getCName()) ? null : s.getCName());
 
                 outinterfaceModelMetadata.setColumnSerial(s.getModelDataSort());
 

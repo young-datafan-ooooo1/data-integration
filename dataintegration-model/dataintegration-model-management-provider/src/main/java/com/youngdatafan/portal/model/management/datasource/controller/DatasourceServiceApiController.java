@@ -95,7 +95,7 @@ public class DatasourceServiceApiController implements DatasourceServiceApi {
     //jdbc:mysql://10.242.10.170:3306/dp_dev?useUnicode=true&characterEncoding=utf-8&useSSL=false
     //jdbc:clickhouse://10.242.10.170:8123/default
     @Override
-    public Result<Boolean, Object> JCAdd(String userId, JCDataSourceVO jcDataSourceVO) {
+    public Result<Boolean, Object> jcAdd(String userId, JCDataSourceVO jcDataSourceVO) {
 
         Datasource datasource = new Datasource();
 
@@ -132,7 +132,7 @@ public class DatasourceServiceApiController implements DatasourceServiceApi {
     }
 
     @Override
-    public Result<Boolean, Object> JCUpdate(String userId, JCDataSourceVO jcDataSourceVO) {
+    public Result<Boolean, Object> jcUpdate(String userId, JCDataSourceVO jcDataSourceVO) {
 
         Datasource datasource = new Datasource();
 

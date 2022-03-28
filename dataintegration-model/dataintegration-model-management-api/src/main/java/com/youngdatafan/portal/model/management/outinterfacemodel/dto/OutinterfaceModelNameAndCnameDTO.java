@@ -2,17 +2,12 @@ package com.youngdatafan.portal.model.management.outinterfacemodel.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 /**
- * <p>****************************************************************************</p>
- * <ul style="margin:15px;">
- * <li>Description : description</li>
- * <li>Version     : 1.0</li>
- * <li>Creation    : 2020/2/24 2:27 PM</li>
- * <li>Author      : ksice_xt</li>
- * </ul>
- * <p>****************************************************************************</p>
+ * 模型id和模型名称对象.
  */
+@Data
 @ApiModel(description = "模型id和模型名称对象")
 public class OutinterfaceModelNameAndCnameDTO {
 
@@ -24,19 +19,4 @@ public class OutinterfaceModelNameAndCnameDTO {
 
     private String cName;
 
-    public String getModelName() {
-        return modelName;
-    }
-
-    public void setModelName(String modelName) {
-        this.modelName = modelName;
-    }
-
-    public String getcName() {
-        return cName;
-    }
-
-    public void setcName(String cName) {
-        this.cName = cName;
-    }
 }
