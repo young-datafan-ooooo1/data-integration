@@ -3,15 +3,12 @@ package com.youngdatafan.portal.system.management.config.service.impl;
 import com.youngdatafan.portal.system.management.config.entity.DpPortalSysconf;
 import com.youngdatafan.portal.system.management.config.mapper.DpPortalSysconfMapper;
 import com.youngdatafan.portal.system.management.config.service.DpPortalSysconfService;
+import java.util.List;
+import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
-import java.util.List;
-
 /**
- * @Author: jeremychen
- * @Descripition:
- * @Date:2020/7/24 5:33 下午
+ * DpPortalSysconfService.
  */
 @Service
 public class DpPortalSysconfServiceImpl implements DpPortalSysconfService {

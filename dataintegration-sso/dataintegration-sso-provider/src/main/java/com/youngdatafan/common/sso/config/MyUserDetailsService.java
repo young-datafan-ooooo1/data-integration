@@ -17,6 +17,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * MyUserDetailsService.
+ */
 @Slf4j
 @Component
 public class MyUserDetailsService implements UserDetailsService {
@@ -26,7 +29,6 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Autowired
     private UserServiceApiClient userServiceApiClient;
-
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {

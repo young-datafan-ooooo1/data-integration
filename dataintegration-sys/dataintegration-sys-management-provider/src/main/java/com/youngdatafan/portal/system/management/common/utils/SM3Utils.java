@@ -4,17 +4,15 @@ import com.youngdatafan.dataintegration.core.util.encryption.sm.Sm3Digest;
 import org.bouncycastle.util.encoders.Hex;
 
 /**
- * @Author: jeremychen
- * @Descripition:
- * @Date:2020/2/11 3:29 下午
+ * SM3Utils.
  */
 public class SM3Utils {
 
     /**
-     * 加密
+     * 加密.
      *
-     * @param s
-     * @return
+     * @param s parameter
+     * @return String
      */
     public static String encode(String s) {
         byte[] md = new byte[32];

@@ -5,11 +5,18 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.BeanUtils;
 
 /**
- * @description:github Pagehelper工具
- * @Author:yuyufeng
- * @Date:2019/7/22 10:38
+ * Pagehelper工具.
  */
 public class PageInfoUtil {
+    /**
+     * pageInfo2PageInfoDTO.
+     *
+     * @param pageInfoPO pageInfoPO
+     * @param dClass     dClass
+     * @param <P>        pageInfoPO
+     * @param <D>        dClass
+     * @return PageInfo
+     */
     public static <P, D> PageInfo<D> pageInfo2PageInfoDTO(PageInfo<P> pageInfoPO, Class<D> dClass) {
         Page<D> page = new Page<>(pageInfoPO.getPageNum(), pageInfoPO.getPageSize());
         page.setTotal(pageInfoPO.getTotal());

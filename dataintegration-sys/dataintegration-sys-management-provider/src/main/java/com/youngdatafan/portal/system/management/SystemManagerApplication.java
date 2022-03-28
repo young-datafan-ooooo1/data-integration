@@ -26,6 +26,11 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableFeignClients
 public class SystemManagerApplication {
 
+    /**
+     * main.
+     *
+     * @param args args
+     */
     public static void main(String[] args) {
         new SpringApplicationBuilder(SystemManagerApplication.class).run(args);
     }

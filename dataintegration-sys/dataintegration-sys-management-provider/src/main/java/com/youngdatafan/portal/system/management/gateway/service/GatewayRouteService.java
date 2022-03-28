@@ -7,25 +7,24 @@ import com.youngdatafan.portal.system.management.gateway.dto.DpGatewayRouteMsgDT
 import com.youngdatafan.portal.system.management.gateway.entity.DpGatewayRoute;
 import com.youngdatafan.portal.system.management.gateway.mapper.DpGatewayRouteMapper;
 import com.youngdatafan.portal.system.management.gateway.vo.DpGatewayRouteVO;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.Date;
+import java.util.List;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
-
 /**
+ * GatewayRouteService.
+ *
  * @author gavin
  * @since 2020/6/12 5:20 下午
  */
 @Service
 public class GatewayRouteService {
-    private static final Logger log = LoggerFactory.getLogger(GatewayRouteService.class);
 
     private final DpGatewayRouteMapper dpGatewayRouteMapper;
+
     private final RedisPublisherService redisPublisherService;
 
     @Value("${gateway.route.channel:gateway_route}")
@@ -38,9 +37,10 @@ public class GatewayRouteService {
     }
 
     /**
-     * 增加或者更新规则
+     * 增加或者更新规则.
      *
      * @param dpGatewayRouteVO DpGatewayRouteVO
+     * @return DpGatewayRouteDTO
      */
     public DpGatewayRouteDTO upsert(DpGatewayRouteVO dpGatewayRouteVO) {
         DpGatewayRoute record = new DpGatewayRoute();
@@ -60,12 +60,17 @@ public class GatewayRouteService {
         BeanUtils.copyProperties(record, result);
 
         // 发送redis消息
-        redisPublisherService.pubMsg(gatewayRouteChannel
-                , JsonUtils.toString(new DpGatewayRouteMsgDTO(MsgType.UPSET, result)));
+        redisPublisherService.pubMsg(gatewayRouteChannel, JsonUtils.toString(new DpGatewayRouteMsgDTO(MsgType.UPSET, result)));
 
         return result;
     }
 
+    /**
+     * deleteByPrimaryKey.
+     *
+     * @param id id
+     * @return int
+     */
     public int deleteByPrimaryKey(String id) {
         final int i = dpGatewayRouteMapper.deleteByPrimaryKey(id);
         DpGatewayRouteDTO dpGatewayRouteDTO = new DpGatewayRouteDTO();
@@ -73,11 +78,15 @@ public class GatewayRouteService {
         dpGatewayRouteDTO.setStatus(1);
 
         // 发送redis消息
-        redisPublisherService.pubMsg(gatewayRouteChannel
-                , JsonUtils.toString(new DpGatewayRouteMsgDTO(MsgType.DELETE, dpGatewayRouteDTO)));
+        redisPublisherService.pubMsg(gatewayRouteChannel, JsonUtils.toString(new DpGatewayRouteMsgDTO(MsgType.DELETE, dpGatewayRouteDTO)));
         return i;
     }
 
+    /**
+     * selectAll.
+     *
+     * @return list
+     */
     public List<DpGatewayRouteDTO> selectAll() {
         return dpGatewayRouteMapper.selectAll();
     }

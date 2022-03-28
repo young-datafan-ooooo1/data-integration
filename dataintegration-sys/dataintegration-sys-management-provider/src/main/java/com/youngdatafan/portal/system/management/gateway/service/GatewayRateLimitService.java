@@ -7,22 +7,22 @@ import com.youngdatafan.portal.system.management.gateway.dto.DpGatewayRateLimitM
 import com.youngdatafan.portal.system.management.gateway.entity.DpGatewayRatelimit;
 import com.youngdatafan.portal.system.management.gateway.mapper.DpGatewayRatelimitMapper;
 import com.youngdatafan.portal.system.management.gateway.vo.DpGatewayRateLimitVO;
+import java.util.Date;
+import java.util.List;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
-
+/**
+ * GatewayRateLimitService.
+ */
 @Service
 public class GatewayRateLimitService {
-    private static final Logger log = LoggerFactory.getLogger(GatewayRouteService.class);
 
     private final DpGatewayRatelimitMapper dpGatewayRatelimitMapper;
+
     private final RedisPublisherService redisPublisherService;
 
     @Value("${gateway.ratelimit.channel:gateway_ratelimit}")
@@ -35,9 +35,10 @@ public class GatewayRateLimitService {
     }
 
     /**
-     * 增加或者更新规则
+     * 增加或者更新规则.
      *
      * @param dpGatewayRateLimitVO DpGatewayRateLimitVO
+     * @return DpGatewayRateLimitDTO
      */
     public DpGatewayRateLimitDTO upsert(DpGatewayRateLimitVO dpGatewayRateLimitVO) {
         DpGatewayRatelimit record = new DpGatewayRatelimit();
@@ -58,12 +59,17 @@ public class GatewayRateLimitService {
         BeanUtils.copyProperties(record, result);
 
         // 发送redis消息
-        redisPublisherService.pubMsg(gatewayRateLimitChannel
-                , JsonUtils.toString(new DpGatewayRateLimitMsgDTO(MsgType.UPSET, result)));
+        redisPublisherService.pubMsg(gatewayRateLimitChannel, JsonUtils.toString(new DpGatewayRateLimitMsgDTO(MsgType.UPSET, result)));
 
         return result;
     }
 
+    /**
+     * deleteByPrimaryKey.
+     *
+     * @param id id
+     * @return int
+     */
     public int deleteByPrimaryKey(String id) {
         final DpGatewayRatelimit dpGatewayRatelimit = dpGatewayRatelimitMapper.selectByPrimaryKey(id);
         if (dpGatewayRatelimit == null) {
@@ -77,11 +83,15 @@ public class GatewayRateLimitService {
         dpGatewayRateLimitDTO.setStatus(1);
 
         // 发送redis消息
-        redisPublisherService.pubMsg(gatewayRateLimitChannel
-                , JsonUtils.toString(new DpGatewayRateLimitMsgDTO(MsgType.DELETE, dpGatewayRateLimitDTO)));
+        redisPublisherService.pubMsg(gatewayRateLimitChannel, JsonUtils.toString(new DpGatewayRateLimitMsgDTO(MsgType.DELETE, dpGatewayRateLimitDTO)));
         return i;
     }
 
+    /**
+     * selectAll.
+     *
+     * @return list
+     */
     public List<DpGatewayRateLimitDTO> selectAll() {
         return dpGatewayRatelimitMapper.selectAll();
     }

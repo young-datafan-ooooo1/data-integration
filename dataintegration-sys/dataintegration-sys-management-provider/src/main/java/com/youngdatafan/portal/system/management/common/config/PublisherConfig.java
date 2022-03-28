@@ -6,7 +6,7 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
 /**
- * redis消息发布配置
+ * redis消息发布配置.
  *
  * @author gavin
  * @since 2020/6/13 2:17 下午
@@ -14,6 +14,12 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 @Configuration
 public class PublisherConfig {
 
+    /**
+     * template.
+     *
+     * @param connectionFactory RedisConnectionFactory
+     * @return StringRedisTemplate
+     */
     @Bean
     public StringRedisTemplate template(RedisConnectionFactory connectionFactory) {
         return new StringRedisTemplate(connectionFactory);

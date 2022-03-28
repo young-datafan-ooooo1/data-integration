@@ -1,32 +1,31 @@
 package com.youngdatafan.portal.system.management.user.service.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.youngdatafan.portal.system.management.common.utils.PageInfoUtil;
 import com.youngdatafan.portal.system.management.user.dto.UserDTO;
 import com.youngdatafan.portal.system.management.user.entity.DpPortalUser;
 import com.youngdatafan.portal.system.management.user.entity.UserRoleEntity;
 import com.youngdatafan.portal.system.management.user.mapper.DpPortalUserMapper;
 import com.youngdatafan.portal.system.management.user.service.DpPortalUserService;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
+import java.util.Date;
+import java.util.List;
+import javax.annotation.Resource;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
-import java.util.Date;
-import java.util.List;
-
 /**
- * @Author: jeremychen
- * @Descripition:
- * @Date:2020/2/10 2:14 下午
+ * DpPortalUserServiceImpl.
  */
 @Service
 public class DpPortalUserServiceImpl implements DpPortalUserService {
 
-    final static private String redisKey = "userLogin";
+    private String redisKey = "userLogin";
+
     @Resource
     private StringRedisTemplate stringRedisTemplate;
+
     @Resource
     private DpPortalUserMapper dpPortalUserMapper;
 

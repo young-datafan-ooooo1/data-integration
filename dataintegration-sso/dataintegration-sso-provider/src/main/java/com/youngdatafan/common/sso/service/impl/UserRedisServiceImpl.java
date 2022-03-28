@@ -8,24 +8,23 @@ import com.youngdatafan.common.sso.config.JwtTokenEnhancer;
 import com.youngdatafan.common.sso.entity.LoginInfo;
 import com.youngdatafan.common.sso.service.UserRedisService;
 import com.youngdatafan.dataintegration.core.util.Md5Utils;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
+import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
-
 /**
- * @Author: jeremychen
- * @Descripition:
- * @Date:2020/3/13 2:36 下午
+ * UserRedisServiceImpl.
  */
 @Service
 public class UserRedisServiceImpl implements UserRedisService {
 
-    final static private String ssoUserLoginErrorCnt = "sso_user_login_error_cnt";
-    final static private String ssoUserLoginStatusInfo = "sso_user_login_status_info";
+    private String ssoUserLoginErrorCnt = "sso_user_login_error_cnt";
+
+    private String ssoUserLoginStatusInfo = "sso_user_login_status_info";
+
     @Resource
     private StringRedisTemplate stringRedisTemplate;
 
@@ -65,14 +64,15 @@ public class UserRedisServiceImpl implements UserRedisService {
 
     @Override
     public void addLoginStatus(LoginInfo loginInfo) {
-        stringRedisTemplate.opsForValue().set(Md5Utils.encode(ssoUserLoginStatusInfo + "#" + loginInfo.getUserName(), "utf-8", false), loginInfo.toJSON(), loginStatusExpireTime, TimeUnit.MILLISECONDS);
+        stringRedisTemplate.opsForValue()
+            .set(Md5Utils.encode(ssoUserLoginStatusInfo + "#" + loginInfo.getUserName(), "utf-8", false), loginInfo.toJSON(), loginStatusExpireTime, TimeUnit.MILLISECONDS);
 
     }
 
     @Override
     public LoginInfo getLoginStatus(String userName) {
         String info = stringRedisTemplate.opsForValue().get(Md5Utils.encode(ssoUserLoginStatusInfo + "#" + userName, "utf-8", false));
-        if (info != null && !info.equals("")) {
+        if (info != null && !"".equals(info)) {
             return LoginInfo.toObject(info);
         } else {
             return null;
@@ -87,9 +87,7 @@ public class UserRedisServiceImpl implements UserRedisService {
     @Override
     public void addTokenUidCache(String tokenUid, long tokenUidCacheTimeoutSeconds) {
         // 保存token uid到redis
-        stringRedisTemplate.opsForValue().set(JwtTokenEnhancer.TOKEN_LAST_ACCESS_TIME + tokenUid, String.valueOf(System.currentTimeMillis())
-                , tokenUidCacheTimeoutSeconds
-                , TimeUnit.SECONDS);
+        stringRedisTemplate.opsForValue().set(JwtTokenEnhancer.TOKEN_LAST_ACCESS_TIME + tokenUid, String.valueOf(System.currentTimeMillis()), tokenUidCacheTimeoutSeconds, TimeUnit.SECONDS);
     }
 
     @Override

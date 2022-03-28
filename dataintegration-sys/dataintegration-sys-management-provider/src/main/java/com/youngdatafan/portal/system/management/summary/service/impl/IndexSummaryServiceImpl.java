@@ -3,8 +3,6 @@ package com.youngdatafan.portal.system.management.summary.service.impl;
 import com.youngdatafan.portal.system.management.summary.dto.LastSixItemDTO;
 import com.youngdatafan.portal.system.management.summary.dto.MonSumDTO;
 import com.youngdatafan.portal.system.management.summary.mapper.IndexSummaryMapper;
-import com.youngdatafan.portal.system.management.summary.model.*;
-import com.youngdatafan.portal.system.management.summary.service.IndexSummaryService;
 import com.youngdatafan.portal.system.management.summary.model.DpPortalBasicModel;
 import com.youngdatafan.portal.system.management.summary.model.DpPortalBusinessModel;
 import com.youngdatafan.portal.system.management.summary.model.DpPortalDashboard;
@@ -17,17 +15,19 @@ import com.youngdatafan.portal.system.management.summary.model.ProjectOnline;
 import com.youngdatafan.portal.system.management.summary.model.ProjectStatusSum;
 import com.youngdatafan.portal.system.management.summary.model.ProjectSumMonth;
 import com.youngdatafan.portal.system.management.summary.model.TaskRunSummary;
+import com.youngdatafan.portal.system.management.summary.service.IndexSummaryService;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
-import java.util.stream.Collectors;
-
 /**
- * @Author: jeremychen
- * @Descripition:
- * @Date:2020/4/18 3:30 下午
+ * IndexSummaryServiceImpl.
  */
 @Slf4j
 @Service
@@ -120,7 +120,7 @@ public class IndexSummaryServiceImpl implements IndexSummaryService {
         dpPortalBasicModels.forEach(o -> {
             LastSixItemDTO lastSixItemDTO = new LastSixItemDTO();
             lastSixItemDTO.setItemId(o.getModelName());
-            lastSixItemDTO.setItemName(o.getcName());
+            lastSixItemDTO.setItemName(o.getCName());
             list.add(lastSixItemDTO);
         });
         return list;
@@ -219,7 +219,6 @@ public class IndexSummaryServiceImpl implements IndexSummaryService {
     }
 
     private MonSumDTO generateMonSumDTO(List<MonthSumDetail> list) {
-        MonSumDTO monSumDTO = new MonSumDTO();
         int total = 0;
         int avg = 0;
         Map<String, Integer> details = new HashMap<>();
@@ -239,6 +238,7 @@ public class IndexSummaryServiceImpl implements IndexSummaryService {
             List<MonthSumDetail> list1 = map.get(s);
             details.put(s, list1 == null || list1.size() == 0 ? 0 : list1.get(0).getCnt());
         }
+        MonSumDTO monSumDTO = new MonSumDTO();
         monSumDTO.setTotal(total);
         monSumDTO.setAvgMon(avg);
         monSumDTO.setDetails(details);

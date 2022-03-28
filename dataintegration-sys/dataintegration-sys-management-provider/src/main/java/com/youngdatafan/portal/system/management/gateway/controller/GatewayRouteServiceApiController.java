@@ -5,13 +5,14 @@ import com.youngdatafan.portal.system.management.gateway.api.GatewayRouteService
 import com.youngdatafan.portal.system.management.gateway.dto.DpGatewayRouteDTO;
 import com.youngdatafan.portal.system.management.gateway.service.GatewayRouteService;
 import com.youngdatafan.portal.system.management.gateway.vo.DpGatewayRouteVO;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 /**
+ * GatewayRouteServiceApiController.
+ *
  * @author gavin
  * @since 2020/6/13 1:45 下午
  */

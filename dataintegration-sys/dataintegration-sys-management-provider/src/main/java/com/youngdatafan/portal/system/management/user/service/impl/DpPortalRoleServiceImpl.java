@@ -1,24 +1,21 @@
 package com.youngdatafan.portal.system.management.user.service.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.youngdatafan.portal.system.management.common.utils.PageInfoUtil;
 import com.youngdatafan.portal.system.management.user.dto.RoleDTO;
 import com.youngdatafan.portal.system.management.user.entity.DpPortalRole;
 import com.youngdatafan.portal.system.management.user.mapper.DpPortalRoleMapper;
 import com.youngdatafan.portal.system.management.user.service.DpPortalRoleService;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.Resource;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * @Author: jeremychen
- * @Descripition:
- * @Date:2020/2/11 3:03 下午
+ * DpPortalRoleServiceImpl.
  */
 @Service
 public class DpPortalRoleServiceImpl implements DpPortalRoleService {

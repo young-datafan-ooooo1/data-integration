@@ -1,5 +1,7 @@
 package com.youngdatafan.portal.system.management.user.controller;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageInfo;
 import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.dataintegration.core.util.StatusCode;
 import com.youngdatafan.dataintegration.core.util.UUIDUtils;
@@ -13,37 +15,36 @@ import com.youngdatafan.portal.system.management.user.service.DpPortalRoleServic
 import com.youngdatafan.portal.system.management.user.service.DpPortalUserRoleService;
 import com.youngdatafan.portal.system.management.user.vo.RoleAddVo;
 import com.youngdatafan.portal.system.management.user.vo.RoleUpdateVo;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageInfo;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-
 /**
- * @Author: jeremychen
- * @Descripition:
- * @Date:2020/2/11 3:51 下午
+ * RoleServiceApiController.
  */
 @RestController
 @RequestMapping("/role")
 public class RoleServiceApiController extends BaseController<DpPortalRole> implements RoleServiceApi {
 
-    @Autowired
-    private DpPortalRoleService dpPortalRoleService;
+    private final DpPortalRoleService dpPortalRoleService;
+
+    private final DpPortalRoleResourceService dpPortalRoleResourceService;
+
+    private final DpPortalUserRoleService dpPortalUserRoleService;
 
     @Autowired
-    private DpPortalRoleResourceService dpPortalRoleResourceService;
-
-    @Autowired
-    private DpPortalUserRoleService dpPortalUserRoleService;
-
+    public RoleServiceApiController(DpPortalRoleService dpPortalRoleService, DpPortalRoleResourceService dpPortalRoleResourceService,
+                                    DpPortalUserRoleService dpPortalUserRoleService) {
+        this.dpPortalRoleService = dpPortalRoleService;
+        this.dpPortalRoleResourceService = dpPortalRoleResourceService;
+        this.dpPortalUserRoleService = dpPortalUserRoleService;
+    }
 
     @Override
     @Transactional
@@ -134,6 +135,5 @@ public class RoleServiceApiController extends BaseController<DpPortalRole> imple
     public Result<List<String>, Object> selectRoleIdsByUserId(String userId) {
         return Result.success(dpPortalUserRoleService.selectRoleIdsByUserId(userId));
     }
-
 
 }

@@ -9,9 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
- * @Author: jeremychen
- * @Descripition: sso服务启动类
- * @Date:2020/3/13 12:36 下午
+ * sso服务启动类.
  */
 @EnableDiscoveryClient
 @EnableAutoConfiguration
@@ -20,6 +18,11 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @ComponentScan(value = "com.youngdatafan.common.sso")
 @EnableCaching
 public class SSOApplication {
+    /**
+     * main.
+     *
+     * @param args args
+     */
     public static void main(String[] args) {
         new SpringApplicationBuilder(SSOApplication.class).run(args);
     }

@@ -3,16 +3,13 @@ package com.youngdatafan.portal.system.management.user.service.impl;
 import com.youngdatafan.portal.system.management.user.entity.DpPortalUserRole;
 import com.youngdatafan.portal.system.management.user.mapper.DpPortalUserRoleMapper;
 import com.youngdatafan.portal.system.management.user.service.DpPortalUserRoleService;
-import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.Resource;
+import org.springframework.stereotype.Service;
 
 /**
- * @Author: jeremychen
- * @Descripition:
- * @Date:2020/2/10 6:14 下午
+ * DpPortalUserRoleServiceImpl.
  */
 @Service
 public class DpPortalUserRoleServiceImpl implements DpPortalUserRoleService {

@@ -25,12 +25,12 @@
     <resultMap id="ProjectStatusSumResult" type="com.youngdatafan.portal.system.management.summary.model.ProjectStatusSum">
         <result column="projec_type" jdbcType="VARCHAR" property="projecType"/>
         <result column="wfb" jdbcType="INTEGER" property="wfb"/>
-        <result column="ONLINE" jdbcType="INTEGER" property="ONLINE"/>
-        <result column="OFFLINE" jdbcType="INTEGER" property="OFFLINE"/>
-        <result column="CHECKING" jdbcType="INTEGER" property="CHECKING"/>
-        <result column="REFUSE" jdbcType="INTEGER" property="REFUSE"/>
-        <result column="CANCEL" jdbcType="INTEGER" property="CANCEL"/>
-        <result column="CANCELING" jdbcType="INTEGER" property="CANCELING"/>
+        <result column="ONLINE" jdbcType="INTEGER" property="online"/>
+        <result column="OFFLINE" jdbcType="INTEGER" property="offline"/>
+        <result column="CHECKING" jdbcType="INTEGER" property="checking"/>
+        <result column="REFUSE" jdbcType="INTEGER" property="refuse"/>
+        <result column="CANCEL" jdbcType="INTEGER" property="cancel"/>
+        <result column="CANCELING" jdbcType="INTEGER" property="canceling"/>
     </resultMap>
     <select id="selectTaskRunSummary" resultMap="TaskRunSummaryResult">
 
