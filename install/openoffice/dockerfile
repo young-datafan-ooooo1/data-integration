@@ -1,0 +1,41 @@
+FROM centos:7.6.1810
+
+# install jdk
+COPY jdk1.8.0_281 /opt/jdk1.8.0_281
+
+ENV JAVA_HOME /opt/jdk1.8.0_281
+ENV PATH=$JAVA_HOME/bin:$PATH
+
+#引入openoffice
+COPY Apache_OpenOffice_4.1.11 /tmp/Apache_OpenOffice_4.1.11
+
+RUN cd /tmp && pwd && \
+    yum install -y /tmp/Apache_OpenOffice_4.1.11/zh-CN/RPMS/*.rpm && \
+    yum install -y /tmp/Apache_OpenOffice_4.1.11/zh-CN/RPMS/desktop-integration/openoffice4.1.11-redhat-menus-4.1.11-9808.noarch.rpm && \
+    rm -rf /tmp/Apache_OpenOffice_4.1.11
+
+#必要的库
+RUN yum install -y libXext.x86_64 && \
+    yum install  -y gcc  && \
+    yum install  -y gcc-c++ && \
+    yum install  -y freetype-devel && \
+    yum install  -y glib2-devel  && \
+    yum install  -y cairo-devel
+
+#启动openoffice4服务报错:no suitable windowing system found, exiting问题
+RUN yum groupinstall -y "X Window System"
+
+#安装中文字体，解决中文乱码
+RUN cd /usr/share/fonts/ && \
+   chmod -R 755 /usr/share/fonts && \
+  yum install -y mkfontscale && \
+  yum install -y fontconfig && \
+  mkfontscale && \
+  mkfontdir && \
+ fc-cache -fv
+#清除yum缓存
+RUN yum clean all
+
+#启动服务，占用8100端口
+EXPOSE 8100
+CMD /opt/openoffice4/program/soffice -headless -accept="socket,host=127.0.0.1,port=8100;urp;" -nofirststartwizard &

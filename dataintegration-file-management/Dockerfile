@@ -1,4 +1,4 @@
-FROM image.senses-ai.com/centos7.6-openoffice:20211223
+FROM centos7.6-openoffice
 
 ENV LANG en_US.UTF-8
 # 使普通用户也能运行
