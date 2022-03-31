@@ -1,22 +1,19 @@
 /*
  * @Description:
  * @Date: 2021-06-17 10:17:44
- * @LastEditTime: 2022-03-16 15:45:04
+ * @LastEditTime: 2022-03-31 15:20:33
  */
 // 跨域代理前缀
 // const API_PROXY_PREFIX='/api'
-// const BASE_URL = process.env.NODE_ENV === 'production' ? process.env.VUE_APP_API_BASE_URL : API_PROXY_PREFIX
-const BASE_URL = process.env.VUE_APP_API_BASE_URL
+const locationUrl = `${location.protocol}//${location.hostname}`
 
-let BASE = location.origin + '/api'
-let ASSETS_URL = location.origin + '/static'
-if (process.env.NODE_ENV === 'development') {
-  BASE = BASE_URL
-  ASSETS_URL = 'http://192.168.10.160:10200/static'
+let BASE = `${locationUrl}:10200/api`
+
+if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === undefined) {
+  BASE = 'http://192.168.10.160:10200/api'
 }
 module.exports = {
   BASE,
-  ASSETS_URL,
   // 知识库模块
   KNOWLEDGE: `${BASE}/vulcan-knowledgebase-management-provider`,
   LOGIN: `${BASE}/rbac-user-server/oauth/token`,
