@@ -1,0 +1,129 @@
+version: '3'
+services:
+  consul:
+    image: consul:1.9.4
+    container_name: "consul"
+    restart: always
+    extra_hosts:
+      - "localhost:hostIp"
+    ports:
+      - "8500:8500"
+    volumes:
+      - ./data/consul:/consul/data
+    command: [agent,-server,-ui,-client=0.0.0.0,-bootstrap-expect=1]
+
+  dataintegration-group-provider:
+    image: dataintegration-group-provider
+    container_name: "dataintegration-group-provider"
+    restart: always
+    ports:
+      - "10201:10201"
+    environment:
+      JVM_CUSTOM: "-Dspring.cloud.consul.discovery.prefer-ip-address=true -Dspring.cloud.consul.discovery.ip-address=hostIp -Dspring.cloud.consul.host=hostIp -Dspring.datasource.url=jdbc:mysql://hostIp:3306/dataintegration?useUnicode=true&characterEncoding=utf-8&useSSL=false"
+
+  dataintegration-file-management-provider:
+    image: dataintegration-file-management-provider
+    container_name: "dataintegration-file-management-provider"
+    restart: always
+    ports:
+      - "10210:10210"
+    environment:
+      JVM_CUSTOM: "-Dspring.cloud.consul.discovery.prefer-ip-address=true -Dspring.cloud.consul.discovery.ip-address=hostIp -Dspring.cloud.consul.host=hostIp -Dspring.redis.host=hostIp  -Dspring.redis.port=6379 -Dfile.server.s3.server=hostIp -Dspring.datasource.url=jdbc:mysql://hostIp:3306/dataintegration?useUnicode=true&characterEncoding=utf-8&useSSL=false"
+
+
+  dataintegration-gateway:
+    image: dataintegration-gateway
+    container_name: "dataintegration-gateway"
+    restart: always
+    ports:
+      - "10200:10200"
+    environment:
+      JVM_CUSTOM: "-Dspring.cloud.consul.discovery.prefer-ip-address=true -Dspring.cloud.consul.discovery.ip-address=hostIp -Dspring.cloud.consul.host=hostIp -Dspring.redis.host=hostIp  -Dspring.redis.port=6379"
+
+  dataintegration-model-provider:
+    image: dataintegration-model-management-provider
+    container_name: "dataintegration-model-provider"
+    restart: always
+    ports:
+      - "10206:10206"
+    environment:
+      JVM_CUSTOM: "-Dspring.cloud.consul.discovery.prefer-ip-address=true -Dspring.cloud.consul.discovery.ip-address=hostIp -Dspring.cloud.consul.host=hostIp -Dspring.datasource.url=jdbc:mysql://hostIp:3306/dataintegration?useUnicode=true&characterEncoding=utf-8&useSSL=false"
+
+  dataintegration-project-provider:
+    image: dataintegration-project-provider
+    container_name: "dataintegration-project-provider"
+    restart: always
+    ports:
+      - "10202:10202"
+    environment:
+      JVM_CUSTOM: "-Dspring.cloud.consul.discovery.prefer-ip-address=true -Dspring.cloud.consul.discovery.ip-address=hostIp -Dspring.cloud.consul.host=hostIp -Dspring.datasource.url=jdbc:mysql://hostIp:3306/dataintegration?useUnicode=true&characterEncoding=utf-8&useSSL=false"
+
+  dataintegration-run-provider:
+    image: dataintegration-run-management-provider
+    container_name: "dataintegration-run-provider"
+    restart: always
+    ports:
+      - "10220:10220"
+    environment:
+      JVM_CUSTOM: "-Dspring.cloud.consul.discovery.prefer-ip-address=true -Dspring.cloud.consul.discovery.ip-address=hostIp -Dspring.cloud.consul.host=hostIp -Dspring.datasource.url=jdbc:mysql://hostIp:3306/dataintegration?useUnicode=true&characterEncoding=utf-8&useSSL=false -Dspring.redis.host=hostIp  -Dspring.redis.port=6379 -Dkettle.datasource.engine.metadata.url=jdbc:mysql://hostIp:3306/dataintegration?useUnicode=true&characterEncoding=utf-8&useSSL=false"
+
+  dataintegration-sso-provider:
+    image: dataintegration-sso-provider
+    container_name: "dataintegration-sso-provider"
+    restart: always
+    ports:
+      - "10217:10217"
+    environment:
+      JVM_CUSTOM: "-Dspring.cloud.consul.discovery.prefer-ip-address=true -Dspring.cloud.consul.discovery.ip-address=hostIp -Dspring.cloud.consul.host=hostIp -Dspring.datasource.url=jdbc:mysql://hostIp:3306/dataintegration?useUnicode=true&characterEncoding=utf-8&useSSL=false -Dspring.redis.host=hostIp -Dspring.redis.port=6379"
+
+  dataintegration-sys-provider:
+    image: dataintegration-sys-management-provider
+    container_name: "dataintegration-sys-provider"
+    restart: always
+    ports:
+      - "10205:10205"
+    environment:
+      JVM_CUSTOM: "-Dspring.cloud.consul.discovery.prefer-ip-address=true -Dspring.cloud.consul.discovery.ip-address=hostIp -Dspring.cloud.consul.host=hostIp -Dspring.datasource.url=jdbc:mysql://hostIp:3306/dataintegration?useUnicode=true&characterEncoding=utf-8&useSSL=false -Dspring.redis.host=hostIp -Dspring.redis.port=6379"
+
+  dataintegration-ui:
+    image: dataintegration-ui
+    container_name: "dataintegration-ui"
+    restart: always
+    ports:
+      - "18180:80"
+
+  mysql:
+    image: mysql:5.7.31
+    container_name: mysql
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      - "MYSQL_ROOT_PASSWORD=123456"
+      - "TZ=Asia/Shanghai"
+    volumes:
+      - ./conf/mysqld.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf
+      - ./data/mysql:/var/lib/mysql
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    restart: always
+    ports:
+      - 6379:6379
+    volumes:
+      - ./data/redis:/data:rw
+    command: --appendonly yes
+
+  minio:
+    image: minio/minio:RELEASE.2020-09-26T03-44-56Z
+    container_name: minio
+    ports:
+      - "19000:9000"
+    restart: always
+    command: server /data
+    environment:
+      MINIO_ACCESS_KEY: prime
+      MINIO_SECRET_KEY: prime@2020
+    volumes:
+      - ./data/minio:/data
