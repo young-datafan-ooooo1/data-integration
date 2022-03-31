@@ -7,12 +7,16 @@ import $ from 'jquery';
 import qs from 'qs'
 // let BASEOUTAPI = location.origin
 // let BASE = location.origin + '/api'
-let BASEOUTAPI = `http://192.168.10.160:10200`
-let BASE = `http://192.168.10.160:10200/api`
+const locationUrl = `${location.protocol}//${location.hostname}`
+let BASEOUTAPI = `${locationUrl}:10200`
+let BASE = `${locationUrl}:10200/api`
+//websocket连接地址
+let wsUrl = `ws://${location.hostname}:10200/ws/dataintegration-di-run-management-provider`
 
 if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === undefined) {
   BASE = 'http://192.168.10.160:10200/api'
   BASEOUTAPI = 'http://192.168.10.160:10200'
+  wsUrl = `ws://192.168.10.160:10200/ws/dataintegration-di-run-management-provider`
 }
 
 let projectUrl = `${BASE}/dataintegration-project-provider`;
@@ -29,7 +33,6 @@ let fileUrl = `${BASE}/dataintegration-file-management-provider`
 //集成平台管理地址 dataintegration-di-run-management-provider
 let dataDiscoveryUrl = `${BASE}/dataintegration-di-run-management-provider`
 //websocket连接地址
-let wsUrl = `${BASEOUTAPI}/ws/dataintegration-di-run-management-provider`
 let base = BASE;
 const exceldownloadUrl = `${dataDiscoveryUrl}/preview/excelDownload?access_token=`
 let downloadPro = `${projectUrl}/project/download?access_token=`
@@ -37,6 +40,7 @@ let downloadPro = `${projectUrl}/project/download?access_token=`
 export {
   base,
   exceldownloadUrl,
+  wsUrl,
   downloadPro,
 }
 let temp = 'http://10.242.10.109:10208'
@@ -435,10 +439,6 @@ export const getColumns = params => {
   })
 }
 
-
-export {
-  wsUrl,
-}
 export const selectBusinessMetaData = params => {
   return axios.get(`${modelManageUrl}/businessModel/select/businessMetaData`, {
     params: params

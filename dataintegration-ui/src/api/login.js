@@ -9,9 +9,7 @@ import {
 import $ from 'jquery';
 import qs from 'qs'
 import globalWs from "../common/webSocket";
-
-let base = 'http://192.168.10.160:10200/api';
-let wsUrl = 'ws://192.168.10.160:10200/ws/dataintegration-di-run-management-provider';
+import { base, wsUrl } from './api.js'
 
 export {
   base,
