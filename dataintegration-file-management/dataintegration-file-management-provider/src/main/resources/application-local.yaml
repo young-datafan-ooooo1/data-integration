@@ -80,7 +80,7 @@ file:
       createDir: true
     s3:
       server: 192.168.10.211
-      port: 38000
+      port: 8080
       userName: BMXG3WP8JA9D1GSD2AJJ
       password: vl32x2t0sBxy0BEgcY9Iz442HK2HobPTNw4T99yK
       rootPath: s3://
