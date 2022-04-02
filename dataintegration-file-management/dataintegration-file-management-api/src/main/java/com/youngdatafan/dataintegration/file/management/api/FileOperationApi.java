@@ -56,8 +56,6 @@ public interface FileOperationApi {
     /**
      * 新增文件.
      *
-     * @param sourceSystem  文件来源系统
-     * @param sourceWay     文件来源方式
      * @param sourceProject 来源项目
      * @param userId        用户id
      * @param userName      用户名称
@@ -67,16 +65,14 @@ public interface FileOperationApi {
      */
     @ApiOperation(value = "新增一个文件", notes = "新增一个文件")
     @PostMapping(value = "/add")
-    Result<DpPortalFileManagerDTO, Object> add(@NotBlank @ApiParam("来源系统") @RequestParam("sourceSystem") String sourceSystem, @NotBlank @ApiParam("来源方式") @RequestParam("sourceWay") String sourceWay,
-                                               @ApiParam("来源项目") @RequestParam(value = "sourceProject", required = false) String sourceProject,
-                                               @ApiParam("操作用户Id") @RequestHeader("authorization-userId") String userId, @ApiParam("操作用户Id") @RequestHeader("authorization-userName") String userName,
-                                               @Validated FileAddVO fileAddVO, HttpServletRequest request);
+    Result<DpPortalFileManagerDTO, Object> add(
+        @ApiParam("来源项目") @RequestParam(value = "sourceProject", required = false) String sourceProject,
+        @ApiParam("操作用户Id") @RequestHeader("authorization-userId") String userId, @ApiParam("操作用户Id") @RequestHeader("authorization-userName") String userName,
+        @Validated FileAddVO fileAddVO, HttpServletRequest request);
 
     /**
      * 新增文件夹.
      *
-     * @param sourceSystem  来源系统
-     * @param sourceWay     来源方式
      * @param sourceProject 来源项目
      * @param userId        用户id
      * @param userName      用户名
@@ -85,11 +81,10 @@ public interface FileOperationApi {
      */
     @ApiOperation(value = "新建文件夹", notes = "新建文件夹")
     @PostMapping(value = "/addDir")
-    Result<DpPortalFileManagerDTO, Object> addDir(@NotBlank @ApiParam("来源系统") @RequestParam("sourceSystem") String sourceSystem,
-                                                  @NotBlank @ApiParam("来源方式") @RequestParam("sourceWay") String sourceWay,
-                                                  @ApiParam("来源项目") @RequestParam(value = "sourceProject", required = false) String sourceProject,
-                                                  @ApiParam("操作用户Id") @RequestHeader("authorization-userId") String userId,
-                                                  @ApiParam("操作用户Id") @RequestHeader("authorization-userName") String userName, @Validated FileAddVO fileAddVO);
+    Result<DpPortalFileManagerDTO, Object> addDir(
+        @ApiParam("来源项目") @RequestParam(value = "sourceProject", required = false) String sourceProject,
+        @ApiParam("操作用户Id") @RequestHeader("authorization-userId") String userId,
+        @ApiParam("操作用户Id") @RequestHeader("authorization-userName") String userName, @Validated FileAddVO fileAddVO);
 
 
     /**

@@ -31,7 +31,6 @@ import com.youngdatafan.dataintegration.file.management.vo.FileAddVO;
 import com.youngdatafan.dataintegration.file.management.vo.FileUpdateVO;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -49,7 +48,6 @@ import java.util.zip.ZipOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.NotBlank;
-
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.io.IOUtils;
@@ -57,6 +55,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringEscapeUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -79,6 +78,12 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 @RestController
 @RequestMapping("/fileOperation")
 public class FileOperationApiController extends BaseController<DpPortalFileManagerDTO> implements FileOperationApi {
+
+    @Value("${youngdatafan.file.sourceSystem:集成}")
+    private String sourceSystem;
+
+    @Value("${youngdatafan.file.sourceWay:上传}")
+    private String sourceWay;
 
     @Autowired
     private FileSystemManagerService fileSystemManagerService;
@@ -118,7 +123,7 @@ public class FileOperationApiController extends BaseController<DpPortalFileManag
 
     @Override
     @Transactional
-    public Result<DpPortalFileManagerDTO, Object> add(String sourceSystem, String sourceWay, String sourceProject, String userId, String userName, FileAddVO fileAddVO, HttpServletRequest request) {
+    public Result<DpPortalFileManagerDTO, Object> add(String sourceProject, String userId, String userName, FileAddVO fileAddVO, HttpServletRequest request) {
         boolean isFolder = fileAddVO.getIsFolder().equals("1");
 
         if (!isFolder && (fileAddVO.getFileType() == null || fileAddVO.getFileType().equals(""))) {
@@ -173,7 +178,7 @@ public class FileOperationApiController extends BaseController<DpPortalFileManag
 
     @Override
     @Transactional
-    public Result<DpPortalFileManagerDTO, Object> addDir(String sourceSystem, String sourceWay, String sourceProject, String userId, String userName, FileAddVO fileAddVO) {
+    public Result<DpPortalFileManagerDTO, Object> addDir(String sourceProject, String userId, String userName, FileAddVO fileAddVO) {
 
         // 获取文件名
         if (dpPortalFileManagerService.checkeDirName(fileAddVO.getFileName(), userId) != null) {
@@ -211,7 +216,7 @@ public class FileOperationApiController extends BaseController<DpPortalFileManag
     @Override
     @Transactional
     public Result<DpPortalFileManagerDTO, Object> addBatch(String roleCode, String sourceSystem, String sourceWay, String sourceProject, String userId, FileAddVO fileAddVO, HttpServletRequest request)
-            throws IOException {
+        throws IOException {
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
         // 获取上传文件
         List<MultipartFile> files = multipartRequest.getFiles("file");
@@ -345,7 +350,7 @@ public class FileOperationApiController extends BaseController<DpPortalFileManag
 
     @Override
     public Result<PageInfo<DpPortalFileManagerDTO>, Object> selectPage(String roleCode, String userId, String pageSize, String
-            curPage, String fileType, String fileName) {
+        curPage, String fileType, String fileName) {
         Page page = this.initPage(pageSize, curPage);
         Map<String, Object> params = new HashMap<>();
         params.put("userId", userId);
@@ -366,7 +371,7 @@ public class FileOperationApiController extends BaseController<DpPortalFileManag
             response.setContentType("octets/stream");
             response.setContentType("application/zip;" + "charset = UTF-8");
             response.addHeader("Content-Disposition", "attachment;filename="
-                    + URLEncoder.encode(dirName + ".zip", "utf-8"));
+                + URLEncoder.encode(dirName + ".zip", "utf-8"));
 
             List<DpPortalFileManager> fileManagerList = dpPortalFileManagerService.selectByFileIds(fileIds);
             fileManagerList.forEach(fileManager -> {
@@ -431,7 +436,7 @@ public class FileOperationApiController extends BaseController<DpPortalFileManag
                 //设置字符集和文件后缀名
                 response.setContentType("application/zip;" + "charset = UTF-8");
                 response.addHeader("Content-Disposition", "attachment;filename="
-                        + URLEncoder.encode(dpPortalFileManager.getFileName() + ".zip", "utf-8"));
+                    + URLEncoder.encode(dpPortalFileManager.getFileName() + ".zip", "utf-8"));
 
                 String[] strings = fileNames.split(",");
                 for (int i = 0; i < strings.length; i++) {
@@ -475,7 +480,7 @@ public class FileOperationApiController extends BaseController<DpPortalFileManag
                 //设置字符集和文件后缀名
                 response.setContentType("application/" + dpPortalFileManager.getFileType() + ";" + "charset = UTF-8");
                 response.addHeader("Content-Disposition", "attachment;filename="
-                        + URLEncoder.encode(dpPortalFileManager.getFileName(), "utf-8"));
+                    + URLEncoder.encode(dpPortalFileManager.getFileName(), "utf-8"));
 
                 int length = 1024 * 1024 * 2;
                 int len;
@@ -514,7 +519,7 @@ public class FileOperationApiController extends BaseController<DpPortalFileManag
             //设置字符集和文件后缀名
             response.setContentType("application/zip;" + "charset = UTF-8");
             response.addHeader("Content-Disposition", "attachment;filename="
-                    + URLEncoder.encode(dpPortalFileManager.getFileName() + ".zip", "utf-8"));
+                + URLEncoder.encode(dpPortalFileManager.getFileName() + ".zip", "utf-8"));
 
             String[] strings = ids.split(",");
             String[] fileNames = dpPortalFileManagerService.selectFileNamesByFileIds(strings);
@@ -816,7 +821,7 @@ public class FileOperationApiController extends BaseController<DpPortalFileManag
             fileAddVO.setFileName("demand");
             fileAddVO.setIsFolder("1");
             fileAddVO.setOrder(99);
-            DpPortalFileManagerDTO dpPortalFileManagerDTO = addDir(defaultSourceSystem, defaultSourceWay, defaultSourceProject, userId, userName, fileAddVO).getContent();
+            DpPortalFileManagerDTO dpPortalFileManagerDTO = addDir(defaultSourceProject, userId, userName, fileAddVO).getContent();
             fileId = dpPortalFileManagerDTO.getFileId();
         }
 
@@ -914,7 +919,7 @@ public class FileOperationApiController extends BaseController<DpPortalFileManag
             response.setContentType("octets/stream");
             response.setContentType("charset = UTF-8");
             response.addHeader("Content-Disposition", "attachment;filename="
-                    + URLEncoder.encode(dmDemandFile.getFileName(), "utf-8"));
+                + URLEncoder.encode(dmDemandFile.getFileName(), "utf-8"));
 
             int length = 1024 * 1024 * 2;
             int len;
@@ -1022,6 +1027,7 @@ public class FileOperationApiController extends BaseController<DpPortalFileManag
 
     /**
      * 比较两个日期，忽略毫秒单位.
+     *
      * @param date1 日期1
      * @param date2 日期2
      * @return 两个日期是否相同
