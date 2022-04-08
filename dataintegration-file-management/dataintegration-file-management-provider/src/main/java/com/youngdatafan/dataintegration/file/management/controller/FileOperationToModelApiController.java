@@ -1,13 +1,12 @@
 package com.youngdatafan.dataintegration.file.management.controller;
 
 import com.amazonaws.AmazonServiceException;
-import com.amazonaws.services.s3.model.S3Object;
 import com.youngdatafan.dataintegration.core.exception.DpException;
 import com.youngdatafan.dataintegration.core.model.Result;
 import com.youngdatafan.dataintegration.core.util.StatusCode;
 import com.youngdatafan.dataintegration.core.util.UUIDUtils;
 import com.youngdatafan.dataintegration.file.management.api.ModelFileOperationApi;
-import com.youngdatafan.dataintegration.file.management.config.FileServerType;
+import com.youngdatafan.dataintegration.file.management.config.FileServerProperties;
 import com.youngdatafan.dataintegration.file.management.dto.DpPortalFileManagerDTO;
 import com.youngdatafan.dataintegration.file.management.model.DpPortalFileManager;
 import com.youngdatafan.dataintegration.file.management.service.DpPortalFileManagerService;
@@ -15,6 +14,13 @@ import com.youngdatafan.dataintegration.file.management.service.FileSystemManage
 import com.youngdatafan.dataintegration.file.management.utils.BaseController;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URLEncoder;
+import java.util.Date;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.constraints.NotBlank;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,18 +29,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.constraints.NotBlank;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.URLEncoder;
-import java.util.Date;
 
 /**
  * 文件操作模型控制器.
@@ -53,6 +51,9 @@ public class FileOperationToModelApiController extends BaseController<DpPortalFi
 
     @Autowired
     private FileSystemManagerService fileSystemManagerService;
+
+    @Autowired
+    private FileServerProperties fileServerProperties;
 
     @ApiOperation(value = "新增一个文件", notes = "新增一个文件")
     @PostMapping(value = "/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
@@ -80,7 +81,7 @@ public class FileOperationToModelApiController extends BaseController<DpPortalFi
         dpPortalFileManager.setPid("ai_model");
         dpPortalFileManager.setUploadTime(new Date());
         dpPortalFileManager.setCreateChannel("AIMODEL");
-        dpPortalFileManager.setFileServerType(FileServerType.s3.name());
+        dpPortalFileManager.setFileServerType(fileServerProperties.getUseServer());
         dpPortalFileManager.setFilePath(fileSystemManagerService.getRootPath() + userName + "/ai_model/" + dpPortalFileManager.getFileName());
         try {
             fileSystemManagerService.addFile(dpPortalFileManager.getFilePath(), file.getInputStream(), file.getSize());
@@ -101,14 +102,14 @@ public class FileOperationToModelApiController extends BaseController<DpPortalFi
         if (dpPortalFileManager == null) {
             throw new DpException(StatusCode.CODE_10010, "文件不存在");
         }
-        S3Object fileObject = fileSystemManagerService.getFileObject(dpPortalFileManager.getFilePath());
-        try (InputStream inputStream = fileObject.getObjectContent();
+        InputStream fileObject = fileSystemManagerService.getFileObject(dpPortalFileManager.getFilePath());
+        try (InputStream inputStream = fileObject;
              OutputStream outputStream = response.getOutputStream()) {
             response.setContentType("octets/stream");
             //设置字符集和文件后缀名
             response.setContentType("application/" + dpPortalFileManager.getFileType() + ";" + "charset = UTF-8");
             response.addHeader("Content-Disposition", "attachment;filename="
-                    + URLEncoder.encode(dpPortalFileManager.getFileId() + "." + dpPortalFileManager.getFileType(), "utf-8"));
+                + URLEncoder.encode(dpPortalFileManager.getFileId() + "." + dpPortalFileManager.getFileType(), "utf-8"));
 
             int length = 1024 * 1024 * 2;
             int len;

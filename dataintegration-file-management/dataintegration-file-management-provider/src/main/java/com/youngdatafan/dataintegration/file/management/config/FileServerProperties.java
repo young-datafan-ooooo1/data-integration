@@ -23,7 +23,7 @@ public class FileServerProperties {
      * 采用的服务器.
      */
     @ApiModelProperty("采用的服务器")
-    private FileServerType useServer;
+    private String useServer;
 
     /**
      * ftp服务器相关属性.
@@ -36,4 +36,10 @@ public class FileServerProperties {
      */
     @ApiModelProperty("s3服务器")
     private S3Properties s3;
+
+    /**
+     * s3服务器相关属性.
+     */
+    @ApiModelProperty("s3服务器")
+    private MinIoProperties minIos3;
 }
