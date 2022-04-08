@@ -10,6 +10,7 @@ import com.youngdatafan.dataintegration.file.management.model.DpPortalFileManage
 import com.youngdatafan.dataintegration.file.management.service.DpPortalFileManagerService;
 import com.youngdatafan.dataintegration.file.management.service.FileSystemManagerService;
 import com.youngdatafan.dataintegration.file.management.vo.FileSheetVO;
+import java.io.InputStream;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -58,20 +59,19 @@ public class FileContentDetailGetterApiController implements FileContentDetailGe
         if (!dpPortalFileManager.getFileType().equals("xls") && !dpPortalFileManager.getFileType().equals("xlsx")) {
             return Result.fail(StatusCode.CODE_10010, null, "不是excel文件");
         }
-
-        S3Object fileObject = fileSystemManagerService.getFileObject(dpPortalFileManager.getFilePath());
+        InputStream fileObject = fileSystemManagerService.getFileObject(dpPortalFileManager.getFilePath());
         Workbook workbook = null;
 
         try {
             List<String> sheetList = new ArrayList<>();
-            if (fileObject == null || fileObject.getObjectContent() == null) {
+            if (fileObject == null ) {
                 return Result.fail(StatusCode.CODE_10010, null, "文件不存在");
             }
 
             if (dpPortalFileManager.getFileType().equalsIgnoreCase("xls")) {
-                workbook = new HSSFWorkbook(fileObject.getObjectContent());
+                workbook = new HSSFWorkbook(fileObject);
             } else if (dpPortalFileManager.getFileType().equalsIgnoreCase("xlsx")) {
-                workbook = new XSSFWorkbook(fileObject.getObjectContent());
+                workbook = new XSSFWorkbook(fileObject);
             }
 
             int sheetCnt = workbook.getNumberOfSheets();
@@ -109,20 +109,20 @@ public class FileContentDetailGetterApiController implements FileContentDetailGe
             return Result.fail(StatusCode.CODE_10010, null, "文件未找到");
         }
 
-        S3Object fileObject = fileSystemManagerService.getFileObject(dpPortalFileManager.getFilePath());
+        InputStream fileObject = fileSystemManagerService.getFileObject(dpPortalFileManager.getFilePath());
         Workbook workbook = null;
 
         try {
             List<FieldInfoDTO> fieldInfoDTOS = new ArrayList<>();
-            if (fileObject == null || fileObject.getObjectContent() == null) {
+            if (fileObject == null ) {
                 return Result.fail(StatusCode.CODE_10010, null, "文件不存在");
             }
 
             if (dpPortalFileManager.getFileType().equalsIgnoreCase("xls") || dpPortalFileManager.getFileType().equalsIgnoreCase("xlsx")) {
                 if (dpPortalFileManager.getFileType().equalsIgnoreCase("xls")) {
-                    workbook = new HSSFWorkbook(fileObject.getObjectContent());
+                    workbook = new HSSFWorkbook(fileObject);
                 } else if (dpPortalFileManager.getFileType().equalsIgnoreCase("xlsx")) {
-                    workbook = new XSSFWorkbook(fileObject.getObjectContent());
+                    workbook = new XSSFWorkbook(fileObject);
                 }
                 Sheet sheet = workbook.getSheet(sheetName);
                 Row row = sheet.getRow(0);
@@ -178,7 +178,7 @@ public class FileContentDetailGetterApiController implements FileContentDetailGe
 
                 }
             } else {
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileObject.getObjectContent()));
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileObject));
                 String firstLine = bufferedReader.readLine();
                 String[] fields = firstLine.split(split);
                 for (int i = 0; i < fields.length; i++) {
@@ -228,18 +228,18 @@ public class FileContentDetailGetterApiController implements FileContentDetailGe
                     return Result.fail(StatusCode.CODE_10010, null, "不是excel文件");
                 }
 
-                S3Object fileObject = fileSystemManagerService.getFileObject(dpPortalFileManager.getFilePath());
+                InputStream fileObject = fileSystemManagerService.getFileObject(dpPortalFileManager.getFilePath());
                 Workbook workbook = null;
 
                 try {
-                    if (fileObject == null || fileObject.getObjectContent() == null) {
+                    if (fileObject == null ) {
                         return Result.fail(StatusCode.CODE_10010, null, "文件不存在");
                     }
 
                     if (dpPortalFileManager.getFileType().equalsIgnoreCase("xls")) {
-                        workbook = new HSSFWorkbook(fileObject.getObjectContent());
+                        workbook = new HSSFWorkbook(fileObject);
                     } else if (dpPortalFileManager.getFileType().equalsIgnoreCase("xlsx")) {
-                        workbook = new XSSFWorkbook(fileObject.getObjectContent());
+                        workbook = new XSSFWorkbook(fileObject);
                     }
 
                     int sheetCnt = workbook.getNumberOfSheets();

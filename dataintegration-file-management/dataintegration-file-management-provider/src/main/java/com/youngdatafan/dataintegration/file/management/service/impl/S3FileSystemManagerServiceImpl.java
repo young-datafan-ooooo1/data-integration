@@ -14,8 +14,10 @@ import com.amazonaws.services.s3.model.S3ObjectSummary;
 import com.amazonaws.services.s3.transfer.TransferManager;
 import com.amazonaws.services.s3.transfer.Upload;
 import com.youngdatafan.dataintegration.core.exception.DpException;
+import com.youngdatafan.dataintegration.core.util.StatusCode;
 import com.youngdatafan.dataintegration.file.management.config.FileServerProperties;
 import com.youngdatafan.dataintegration.file.management.config.S3Properties;
+import com.youngdatafan.dataintegration.file.management.dto.FileSummary;
 import com.youngdatafan.dataintegration.file.management.service.FileSystemManagerService;
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,9 +26,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import org.apache.poi.util.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
 /**
@@ -38,6 +42,7 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
+@ConditionalOnProperty(prefix = "file.server", name = "useServer", havingValue = "s3")
 public class S3FileSystemManagerServiceImpl implements FileSystemManagerService {
 
     private final Logger logger = LoggerFactory.getLogger(S3FileSystemManagerServiceImpl.class);
@@ -202,12 +207,17 @@ public class S3FileSystemManagerServiceImpl implements FileSystemManagerService 
      * @param filePath 文件路径
      */
     @Override
-    public void loopFolder(String filePath, Function<S3ObjectSummary, String> function) {
+    public void loopFolder(String filePath, Function<FileSummary, String> function) {
         String loopFilePath = getFileKey(filePath);
         ObjectListing objectListing = s3Client.listObjects(s3Properties.getBucket(), loopFilePath);
         do {
+
             for (S3ObjectSummary objectSummary : objectListing.getObjectSummaries()) {
-                function.apply(objectSummary);
+                FileSummary fileSummary = new FileSummary();
+                fileSummary.setKey(objectSummary.getKey());
+                fileSummary.setSize(objectSummary.getSize());
+                fileSummary.setLastModified(objectSummary.getLastModified());
+                function.apply(fileSummary);
             }
             objectListing = s3Client.listNextBatchOfObjects(objectListing);
         } while (objectListing.isTruncated());
@@ -255,15 +265,18 @@ public class S3FileSystemManagerServiceImpl implements FileSystemManagerService 
      * @return S3Object
      */
     @Override
-    public S3Object getFileObject(String relativePath) throws AmazonServiceException {
+    public InputStream getFileObject(String relativePath) throws AmazonServiceException {
         String finalRelativePath = getFileKey(relativePath);
-        S3Object object = null;
+        InputStream inputStream = null;
         try {
-            object = s3Client.getObject(s3Properties.getBucket(), finalRelativePath);
+            S3Object s3Object = s3Client.getObject(s3Properties.getBucket(), finalRelativePath);
+            inputStream = s3Object.getObjectContent();
+            return inputStream;
         } catch (Exception e) {
-            logger.error("s3 下载失败", e);
+            throw new DpException(StatusCode.CODE_10010, "文件下载失败", e);
+        } finally {
+            IOUtils.closeQuietly(inputStream);
         }
-        return object;
     }
 
     @Override

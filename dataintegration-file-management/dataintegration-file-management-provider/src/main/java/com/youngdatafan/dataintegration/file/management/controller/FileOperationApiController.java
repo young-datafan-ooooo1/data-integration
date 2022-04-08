@@ -1,7 +1,6 @@
 package com.youngdatafan.dataintegration.file.management.controller;
 
 import com.amazonaws.AmazonServiceException;
-import com.amazonaws.services.s3.model.S3Object;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 import com.youngdatafan.dataintegration.core.exception.DpException;
@@ -12,7 +11,6 @@ import com.youngdatafan.dataintegration.core.util.UUIDUtils;
 import com.youngdatafan.dataintegration.core.util.encryption.DefaultEncryptionUtils;
 import com.youngdatafan.dataintegration.file.management.api.FileOperationApi;
 import com.youngdatafan.dataintegration.file.management.config.FileServerProperties;
-import com.youngdatafan.dataintegration.file.management.config.FileServerType;
 import com.youngdatafan.dataintegration.file.management.dto.DpPortalFileManagerDTO;
 import com.youngdatafan.dataintegration.file.management.dto.FileInfoDTO;
 import com.youngdatafan.dataintegration.file.management.dto.FileSystemInfo;
@@ -102,11 +100,11 @@ public class FileOperationApiController extends BaseController<DpPortalFileManag
 
     @Override
     public void onlinePreview(String filePath, HttpServletResponse response) {
-        S3Object fileObject = fileSystemManagerService.getFileObject(filePath);
+        InputStream fileObject = fileSystemManagerService.getFileObject(filePath);
         if (fileObject == null) {
             throw new DpException(StatusCode.CODE_10010, "s3文件不存在");
         }
-        try (InputStream inputStream = fileObject.getObjectContent();
+        try (InputStream inputStream = fileObject;
         ) {
             FileType fileType = FileType.typeFromUrl(filePath);
             FilePreview filePreview = previewFactory.get(fileType);
@@ -153,7 +151,7 @@ public class FileOperationApiController extends BaseController<DpPortalFileManag
         dpPortalFileManager.setUploadTime(new Date());
         dpPortalFileManager.setEffectiveDays(fileAddVO.getEffectiveDays());
         dpPortalFileManager.setLastModifiedTime(new Date());
-        dpPortalFileManager.setFileServerType(FileServerType.s3.name());
+        dpPortalFileManager.setFileServerType(fileServerProperties.getUseServer());
         dpPortalFileManager.setFileSize(String.valueOf(files.get(0).getSize()));
         FolderInfoDTO folderInfoDTO = this.dpPortalFileManagerService.queryOneFolder(fileAddVO.getPid());
         try {
@@ -200,7 +198,7 @@ public class FileOperationApiController extends BaseController<DpPortalFileManag
         dpPortalFileManager.setIsValid("Y");
         dpPortalFileManager.setUploadTime(new Date());
         dpPortalFileManager.setLastModifiedTime(new Date());
-        dpPortalFileManager.setFileServerType(FileServerType.s3.name());
+        dpPortalFileManager.setFileServerType(fileServerProperties.getUseServer());
         dpPortalFileManager.setFilePath(fileSystemManagerService.getRootPath() + userName + "/" + dpPortalFileManager.getFileName() + "/");
         dpPortalFileManagerService.insert(dpPortalFileManager);
         if (fileServerProperties.getS3().getCreateDir()) {
@@ -320,7 +318,7 @@ public class FileOperationApiController extends BaseController<DpPortalFileManag
         dpPortalFileManager1.setUploadTime(new Date());
         dpPortalFileManager1.setLastModifiedTime(new Date());
         dpPortalFileManager1.setIsFolder(dpPortalFileManager.getIsFolder());
-        dpPortalFileManager1.setFileServerType(FileServerType.s3.name());
+        dpPortalFileManager1.setFileServerType(fileServerProperties.getUseServer());
         dpPortalFileManagerService.updateByPrimaryKeySelective(dpPortalFileManager1);
         DpPortalFileManagerDTO dpPortalFileManagerDTO = new DpPortalFileManagerDTO();
         BeanUtils.copyProperties(dpPortalFileManager1, dpPortalFileManagerDTO);
@@ -341,7 +339,7 @@ public class FileOperationApiController extends BaseController<DpPortalFileManag
         dpPortalFileManager1.setIsValid(fileUpdateVO.getIsValid());
         dpPortalFileManager1.setLastModifiedTime(new Date());
         dpPortalFileManager1.setIsFolder("1");
-        dpPortalFileManager1.setFileServerType(FileServerType.s3.name());
+        dpPortalFileManager1.setFileServerType(fileServerProperties.getUseServer());
         dpPortalFileManagerService.updateByPrimaryKeySelective(dpPortalFileManager1);
         DpPortalFileManagerDTO dpPortalFileManagerDTO = new DpPortalFileManagerDTO();
         BeanUtils.copyProperties(dpPortalFileManager1, dpPortalFileManagerDTO);
@@ -365,7 +363,7 @@ public class FileOperationApiController extends BaseController<DpPortalFileManag
     public void batchDownLoadFile(String roleCode, String userId, String[] fileIds, HttpServletResponse response) {
         String datetime = new SimpleDateFormat("yyyyMMdd").format(new Date());
         String dirName = "文件批量下载_" + datetime;
-        List<Pair<String, S3Object>> fileObjectList = new ArrayList<>();
+        List<Pair<String, InputStream>> fileObjectList = new ArrayList<>();
         try (OutputStream outputStream = response.getOutputStream();
              ZipOutputStream zout = new ZipOutputStream(outputStream)) {
             response.setContentType("octets/stream");
@@ -375,13 +373,13 @@ public class FileOperationApiController extends BaseController<DpPortalFileManag
 
             List<DpPortalFileManager> fileManagerList = dpPortalFileManagerService.selectByFileIds(fileIds);
             fileManagerList.forEach(fileManager -> {
-                S3Object child = fileSystemManagerService.getFileObject(fileManager.getFilePath());
+                InputStream child = fileSystemManagerService.getFileObject(fileManager.getFilePath());
                 fileObjectList.add(new Pair<>(fileManager.getFileName(), child));
             });
             ZipEntry zipEntry = new ZipEntry(dirName + File.separator);
             zout.putNextEntry(zipEntry);
             zout.flush();
-            for (Pair<String, S3Object> child : fileObjectList) {
+            for (Pair<String, InputStream> child : fileObjectList) {
                 InputStream inputStream = null;
                 if (child.getV() != null) {
                     try {
@@ -390,7 +388,7 @@ public class FileOperationApiController extends BaseController<DpPortalFileManag
                         int length = 1024 * 1024 * 2;
                         int len;
                         byte[] b = new byte[length];
-                        inputStream = child.getV().getObjectContent();
+                        inputStream = child.getV();
                         while ((len = inputStream.read(b)) != -1) {
                             zout.write(b, 0, len);
                             zout.flush();
@@ -406,9 +404,9 @@ public class FileOperationApiController extends BaseController<DpPortalFileManag
         } catch (AmazonServiceException | IOException e) {
             throw new DpException(StatusCode.CODE_10010, "下载文件失败", e);
         } finally {
-            for (Pair<String, S3Object> stringS3ObjectPair : fileObjectList) {
+            for (Pair<String, InputStream> stringS3ObjectPair : fileObjectList) {
                 try {
-                    S3Object s3Object = stringS3ObjectPair.getV();
+                    InputStream s3Object = stringS3ObjectPair.getV();
                     if (s3Object != null) {
                         s3Object.close();
                     }
@@ -424,7 +422,7 @@ public class FileOperationApiController extends BaseController<DpPortalFileManag
         DpPortalFileManager dpPortalFileManager = dpPortalFileManagerService.selectByFileId(roleCode, fileId, userId);
         boolean isFolder = dpPortalFileManager.getIsFolder().equals("1");
         if (isFolder) {
-            List<Pair<String, S3Object>> fileObjectList = new ArrayList<>();
+            List<Pair<String, InputStream>> fileObjectList = new ArrayList<>();
             if (fileNames == null || "".equals(fileNames)) {
                 throw new DpException(StatusCode.CODE_10010, "至少选择一个文件");
             }
@@ -441,17 +439,17 @@ public class FileOperationApiController extends BaseController<DpPortalFileManag
                 String[] strings = fileNames.split(",");
                 for (int i = 0; i < strings.length; i++) {
                     DpPortalFileManager dpPortalFileManager1 = dpPortalFileManagerService.selectByFileId(roleCode, strings[i], userId);
-                    S3Object child = fileSystemManagerService.getFileObject(dpPortalFileManager1.getFilePath());
-                    fileObjectList.add(new Pair<>(dpPortalFileManager1.getFileName(), child));
+                    InputStream fileObject = fileSystemManagerService.getFileObject(dpPortalFileManager1.getFilePath());
+                    fileObjectList.add(new Pair<>(dpPortalFileManager1.getFileName(), fileObject));
                 }
 
-                for (Pair<String, S3Object> child : fileObjectList) {
+                for (Pair<String, InputStream> child : fileObjectList) {
                     ZipEntry entry = new ZipEntry(child.getK());
                     zout.putNextEntry(entry);
                     int length = 1024 * 1024 * 2;
                     int len;
                     byte[] b = new byte[length];
-                    InputStream inputStream = child.getV().getObjectContent();
+                    InputStream inputStream = child.getV();
                     while ((len = inputStream.read(b)) != -1) {
                         zout.write(b, 0, len);
                         zout.flush();
@@ -464,7 +462,7 @@ public class FileOperationApiController extends BaseController<DpPortalFileManag
             } catch (AmazonServiceException | IOException e) {
                 throw new DpException(StatusCode.CODE_10010, "下载文件失败", e);
             } finally {
-                for (Pair<String, S3Object> stringS3ObjectPair : fileObjectList) {
+                for (Pair<String, InputStream> stringS3ObjectPair : fileObjectList) {
                     try {
                         stringS3ObjectPair.getV().close();
                     } catch (IOException e) {
@@ -473,8 +471,8 @@ public class FileOperationApiController extends BaseController<DpPortalFileManag
                 }
             }
         } else {
-            S3Object fileObject = fileSystemManagerService.getFileObject(dpPortalFileManager.getFilePath());
-            try (InputStream inputStream = fileObject.getObjectContent();
+            InputStream fileObject = fileSystemManagerService.getFileObject(dpPortalFileManager.getFilePath());
+            try (InputStream inputStream = fileObject;
                  OutputStream outputStream = response.getOutputStream()) {
                 response.setContentType("octets/stream");
                 //设置字符集和文件后缀名
@@ -508,7 +506,7 @@ public class FileOperationApiController extends BaseController<DpPortalFileManag
     public void downLoadOutputFile(String roleCode, String userId, String fileId, String ids, HttpServletResponse response) {
         DpPortalFileManager dpPortalFileManager = dpPortalFileManagerService.selectByFileId(roleCode, fileId, userId);
 
-        List<Pair<String, S3Object>> fileObjectList = new ArrayList<>();
+        List<Pair<String, InputStream>> fileObjectList = new ArrayList<>();
         if (ids == null || "".equals(ids)) {
             throw new DpException(StatusCode.CODE_10010, "至少选择一个文件");
         }
@@ -528,13 +526,13 @@ public class FileOperationApiController extends BaseController<DpPortalFileManag
                 fileObjectList.add(new Pair<>(dpPortalFileManager1.getFileName(), fileSystemManagerService.getFileObject(dpPortalFileManager1.getFilePath())));
             }
 
-            for (Pair<String, S3Object> child : fileObjectList) {
+            for (Pair<String, InputStream> child : fileObjectList) {
                 ZipEntry entry = new ZipEntry(child.getK());
                 zout.putNextEntry(entry);
                 int length = 1024 * 1024 * 2;
                 int len;
                 byte[] b = new byte[length];
-                InputStream inputStream = child.getV().getObjectContent();
+                InputStream inputStream = child.getV();
                 while ((len = inputStream.read(b)) != -1) {
                     zout.write(b, 0, len);
                     zout.flush();
@@ -547,7 +545,7 @@ public class FileOperationApiController extends BaseController<DpPortalFileManag
         } catch (AmazonServiceException | IOException e) {
             throw new DpException(StatusCode.CODE_10010, "下载文件失败", e);
         } finally {
-            for (Pair<String, S3Object> stringS3ObjectPair : fileObjectList) {
+            for (Pair<String, InputStream> stringS3ObjectPair : fileObjectList) {
                 try {
                     stringS3ObjectPair.getV().close();
                 } catch (IOException e) {
@@ -676,7 +674,7 @@ public class FileOperationApiController extends BaseController<DpPortalFileManag
                     dpPortalFileManagerNew.setIsValid("Y");
                     dpPortalFileManagerNew.setUploadTime(objectSummary.getLastModified());
                     dpPortalFileManagerNew.setLastModifiedTime(objectSummary.getLastModified());
-                    dpPortalFileManagerNew.setFileServerType(FileServerType.s3.name());
+                    dpPortalFileManagerNew.setFileServerType(fileServerProperties.getUseServer());
                     dpPortalFileManagerNew.setFileSize(String.valueOf(objectSummary.getSize()));
                     dpPortalFileManagerNew.setFilePath(dpPortalFileManager.getFilePath() + dpPortalFileManagerNew.getFileName());
                     metaInsterLists.add(dpPortalFileManagerNew);
@@ -882,7 +880,7 @@ public class FileOperationApiController extends BaseController<DpPortalFileManag
                     dpPortalFileManager.setUploadTime(new Date());
                     dpPortalFileManager.setLastModifiedTime(new Date());
                     dpPortalFileManager.setFilePath(path);
-                    dpPortalFileManager.setFileServerType(FileServerType.s3.name());
+                    dpPortalFileManager.setFileServerType(fileServerProperties.getUseServer());
                     dpPortalFileManager.setFileSize(String.valueOf(file.getSize()));
                     dpPortalFileManagerService.insert(dpPortalFileManager);
 
@@ -913,8 +911,8 @@ public class FileOperationApiController extends BaseController<DpPortalFileManag
         if (dmDemandFile == null) {
             throw new DpException(StatusCode.CODE_10010, "文件不存在");
         }
-        S3Object fileObject = fileSystemManagerService.getFileObject(dmDemandFile.getFilePath());
-        try (InputStream inputStream = fileObject.getObjectContent();
+        InputStream fileObject = fileSystemManagerService.getFileObject(dmDemandFile.getFilePath());
+        try (InputStream inputStream = fileObject;
              OutputStream outputStream = response.getOutputStream()) {
             response.setContentType("octets/stream");
             response.setContentType("charset = UTF-8");
@@ -1001,7 +999,7 @@ public class FileOperationApiController extends BaseController<DpPortalFileManag
         dpPortalFileManager.setEffectiveDays(effectiveDays);
         dpPortalFileManager.setUploadTime(new Date());
         dpPortalFileManager.setLastModifiedTime(new Date());
-        dpPortalFileManager.setFileServerType(FileServerType.s3.name());
+        dpPortalFileManager.setFileServerType(fileServerProperties.getUseServer());
         dpPortalFileManager.setFileSize(String.valueOf(file.getSize()));
         DpPortalFileManager dpPortalFileManager1 = dpPortalFileManagerService.selectByFileId(pid);
         try {

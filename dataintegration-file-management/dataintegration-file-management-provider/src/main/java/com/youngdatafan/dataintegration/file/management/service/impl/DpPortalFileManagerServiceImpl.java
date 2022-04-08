@@ -8,7 +8,7 @@ import com.youngdatafan.dataintegration.core.exception.DpException;
 import com.youngdatafan.dataintegration.core.util.PageableHelpUtil;
 import com.youngdatafan.dataintegration.core.util.StatusCode;
 import com.youngdatafan.dataintegration.core.util.UUIDUtils;
-import com.youngdatafan.dataintegration.file.management.config.FileServerType;
+import com.youngdatafan.dataintegration.file.management.config.FileServerProperties;
 import com.youngdatafan.dataintegration.file.management.dto.DpFileRegularCleanDTO;
 import com.youngdatafan.dataintegration.file.management.dto.DpPortalFileManagerDTO;
 import com.youngdatafan.dataintegration.file.management.dto.FileInfoDTO;
@@ -40,6 +40,7 @@ import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -53,6 +54,9 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 public class DpPortalFileManagerServiceImpl implements DpPortalFileManagerService {
+
+    @Autowired
+    private FileServerProperties fileServerProperties;
 
     @Resource
     private DpPortalFileManagerMapper dpPortalFileManagerMapper;
@@ -297,7 +301,7 @@ public class DpPortalFileManagerServiceImpl implements DpPortalFileManagerServic
         List<DpPortalFileManager> metaInsterLists = new ArrayList<>();
         //子目录下所有元数据
         List<DpPortalFileManager> dpPortalFileManagers = this.selectFileList(null, String.valueOf(folderInfoDTO.getUserId()), folderInfoDTO.getFolderId());
-       //检查s3文件是否存在
+        //检查s3文件是否存在
         clearFiles(dpPortalFileManagers);
         fileSystemManagerService.loopFolder(folderInfoDTO.getFilePath(), objectSummary -> {
             boolean flag = true;
@@ -336,7 +340,7 @@ public class DpPortalFileManagerServiceImpl implements DpPortalFileManagerServic
                 dpPortalFileManagerNew.setIsValid("Y");
                 dpPortalFileManagerNew.setUploadTime(objectSummary.getLastModified());
                 dpPortalFileManagerNew.setLastModifiedTime(objectSummary.getLastModified());
-                dpPortalFileManagerNew.setFileServerType(FileServerType.s3.name());
+                dpPortalFileManagerNew.setFileServerType(fileServerProperties.getUseServer());
                 dpPortalFileManagerNew.setFileSize(String.valueOf(objectSummary.getSize()));
                 dpPortalFileManagerNew.setFilePath(folderInfoDTO.getFilePath() + dpPortalFileManagerNew.getFileName());
                 metaInsterLists.add(dpPortalFileManagerNew);
