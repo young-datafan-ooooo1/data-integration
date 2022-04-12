@@ -1,4 +1,4 @@
-FROM centos7.6-openoffice
+FROM openjdk:8-alpine
 
 ENV LANG en_US.UTF-8
 # 使普通用户也能运行

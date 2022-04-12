@@ -100,13 +100,3 @@ logging:
     path: ./logs/${spring.application.name}
     # springboot admin获取日志使用
     name: ${logging.file.path}/all/${spring.application.name}.log
-
-##################################################
-# JodConverter Configuration
-
-jodconverter:
-  local:
-    enabled: true
-    office-home: /Applications/OpenOffice.app/Contents/
-    max-tasks-per-process: 10
-    port-numbers: 8123

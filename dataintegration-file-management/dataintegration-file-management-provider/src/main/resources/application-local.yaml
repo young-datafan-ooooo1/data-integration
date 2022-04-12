@@ -8,6 +8,8 @@ spring:
       port: 8500
       discovery:
         service-name: ${spring.application.name}
+        prefer-ip-address: true
+        instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.jdbc.Driver
@@ -100,11 +102,3 @@ logging:
     # springboot admin获取日志使用
     name: ${logging.file.path}/all/${spring.application.name}.log
 
-##################################################
-# JodConverter Configuration
-jodconverter:
-  local:
-    enabled: true
-    office-home: /opt/openoffice4/
-    max-tasks-per-process: 10
-    port-numbers: 8100

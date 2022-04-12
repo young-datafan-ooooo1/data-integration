@@ -20,8 +20,6 @@ import com.youngdatafan.dataintegration.file.management.model.DmDemandFile;
 import com.youngdatafan.dataintegration.file.management.model.DpPortalFileManager;
 import com.youngdatafan.dataintegration.file.management.model.FileType;
 import com.youngdatafan.dataintegration.file.management.service.DpPortalFileManagerService;
-import com.youngdatafan.dataintegration.file.management.service.FilePreview;
-import com.youngdatafan.dataintegration.file.management.service.FilePreviewFactory;
 import com.youngdatafan.dataintegration.file.management.service.FileSystemManagerService;
 import com.youngdatafan.dataintegration.file.management.utils.BaseController;
 import com.youngdatafan.dataintegration.file.management.vo.DmDemandFileVO;
@@ -48,9 +46,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.NotBlank;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringEscapeUtils;
+import org.apache.poi.util.IOUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -94,25 +92,6 @@ public class FileOperationApiController extends BaseController<DpPortalFileManag
 
     @Autowired
     private DmDemandFileMapper dmDemandFileMapper;
-
-    @Autowired
-    private FilePreviewFactory previewFactory;
-
-    @Override
-    public void onlinePreview(String filePath, HttpServletResponse response) {
-        InputStream fileObject = fileSystemManagerService.getFileObject(filePath);
-        if (fileObject == null) {
-            throw new DpException(StatusCode.CODE_10010, "s3文件不存在");
-        }
-        try (InputStream inputStream = fileObject;
-        ) {
-            FileType fileType = FileType.typeFromUrl(filePath);
-            FilePreview filePreview = previewFactory.get(fileType);
-            filePreview.filePreviewHandle(inputStream, response, FileType.getType(filePath));
-        } catch (Exception e) {
-            throw new DpException(StatusCode.CODE_10010, "文件转换失败", e);
-        }
-    }
 
     @Override
     public void fileOperationTest() {
