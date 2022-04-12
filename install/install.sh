@@ -1,7 +1,7 @@
 #服务器ip
 hostIp=$1
 #项目编译打包
-cd ../
+cd ../ && mvn clean package -DskipTests -Dcheckstyle.skip=true
 #构建镜像
 cd dataintegration-ui
 npm install
