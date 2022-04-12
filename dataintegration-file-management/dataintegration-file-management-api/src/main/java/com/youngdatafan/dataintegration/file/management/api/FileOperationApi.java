@@ -36,16 +36,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface FileOperationApi {
 
     /**
-     * 文件预览.
-     *
-     * @param response response
-     * @param filePath 文件路径
-     */
-    @ApiOperation(value = "文件预览", notes = "文件预览")
-    @GetMapping(value = "/onlinePreview")
-    void onlinePreview(@NotBlank @ApiParam("文件") @RequestParam("filePath") String filePath, HttpServletResponse response);
-
-    /**
      * 测试调用接口.
      */
     @ApiOperation(value = "测试用接口", notes = "测试用接口", produces = "application/json")

@@ -15,7 +15,6 @@
         <!--main函数-->
         <start-class>com.youngdatafan.dataintegration.file.management.FileManagerApplication</start-class>
         <s3.version>1.11.762</s3.version>
-        <openoffice.version>4.2.2</openoffice.version>
         <poi.version>3.17</poi.version>
         <mysql.version>5.1.47</mysql.version>
         <swagger2.version>3.0.0</swagger2.version>
@@ -144,24 +143,6 @@
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-scratchpad</artifactId>
             <version>${poi.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jodconverter</groupId>
-            <artifactId>jodconverter-core</artifactId>
-            <version>${openoffice.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jodconverter</groupId>
-            <artifactId>jodconverter-spring-boot-starter</artifactId>
-            <version>${openoffice.version}</version>
-        </dependency>
-
-        <!--jodconverter 本地支持包 -->
-        <dependency>
-            <groupId>org.jodconverter</groupId>
-            <artifactId>jodconverter-local</artifactId>
-            <version>${openoffice.version}</version>
         </dependency>
 
         <dependency>
