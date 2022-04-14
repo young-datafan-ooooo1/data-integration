@@ -73,7 +73,7 @@ TODO
 
 # 快速试用 Docker
 
-可以参考：https://www.young-datafan.com/docs-data-integration/quick-start/installation-docker/. 这个文档部署演示
+可以参考：http://www.young-datafan.com/docs-data-integration/quick-start/installation-docker/. 这个文档部署演示
 
 --------------------------------------------------------------------------------
 
