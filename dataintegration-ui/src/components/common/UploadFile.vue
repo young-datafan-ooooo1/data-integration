@@ -257,6 +257,9 @@
             param.append("fileType", params.fileType);
             // param.append('groupId', params.groupId);
             // param.append('groupName', params.groupName);
+            param.append('sourceSystem', '集成')
+            param.append('sourceWay', '上传')
+            param.append('sourceProject', '')
             param.append('notes', params.notes);
             param.append('order', params.order);
             param.append('isFolder', this.fileFolder);
@@ -353,13 +356,9 @@
               })
 
             }else{
-              let queryParam ={
-                fileName:params.fileName,
-                groupId:params.groupId
-              }
-              checkDir(queryParam).then(response=>{
+              checkDir(params.fileName).then(response=>{
                 if(response.code ==='10000'){
-                  if(response.content === undefined){
+                  if(response.content === '文件夹可用'){
                     addDir(param).then(res=>{
                       let{
                         data
@@ -437,6 +436,8 @@
                     })
                   }
                 })
+              }).finally(() => {
+                this.editLoading = false
               })
 
             }
