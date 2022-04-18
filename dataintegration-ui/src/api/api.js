@@ -778,8 +778,8 @@ export const addDir = params=>{
   })
 }
 //校验文件夹名称是否存在
-export const checkDir = params =>{
-  return axios.post(`${fileUrl}/fileOperation/checkDirName`, qs.stringify(params)).then(res =>
+export const checkDir = fileName =>{
+  return axios.post(`${fileUrl}/fileOperation/checkDirName?fileName=${fileName}`).then(res =>
     res.data);
 }
 
