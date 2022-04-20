@@ -56,7 +56,7 @@ public class MinIoTest {
      */
     @Test
     public void addFolderTest() {
-        minIoFileSystemManagerService.addFolder("songxiaolang/测试/");
+        minIoFileSystemManagerService.addFolder("songxiaolang/测试");
     }
 
     /**

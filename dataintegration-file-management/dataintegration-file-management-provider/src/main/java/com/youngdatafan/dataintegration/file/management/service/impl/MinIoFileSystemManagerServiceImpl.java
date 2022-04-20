@@ -19,6 +19,7 @@ import io.minio.StatObjectArgs;
 import io.minio.StatObjectResponse;
 import io.minio.messages.Item;
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.InputStream;
 import java.sql.Timestamp;
 import java.time.ZonedDateTime;
@@ -126,9 +127,10 @@ public class MinIoFileSystemManagerServiceImpl implements FileSystemManagerServi
 
     @Override
     public void addFolder(String parentFolder) throws DpException {
+        String lastFolder = parentFolder + File.separator;
         try {
             minioClient.putObject(
-                PutObjectArgs.builder().bucket(minIoProperties.getBucketName()).object(parentFolder).stream(
+                PutObjectArgs.builder().bucket(minIoProperties.getBucketName()).object(lastFolder).stream(
                     new ByteArrayInputStream(new byte[] {}), 0, -1)
                     .build());
         } catch (Exception e) {
