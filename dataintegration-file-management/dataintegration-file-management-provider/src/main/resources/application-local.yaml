@@ -70,7 +70,8 @@ pagehelper:
 #文件存储类型
 file:
   server:
-    useServer: s3
+    useServer: minio
+    extendsFileType: s3
     ftp:
       server: 192.168.124.166
       port: 20021

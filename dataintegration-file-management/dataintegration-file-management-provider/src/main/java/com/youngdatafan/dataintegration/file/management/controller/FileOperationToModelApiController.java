@@ -81,7 +81,7 @@ public class FileOperationToModelApiController extends BaseController<DpPortalFi
         dpPortalFileManager.setPid("ai_model");
         dpPortalFileManager.setUploadTime(new Date());
         dpPortalFileManager.setCreateChannel("AIMODEL");
-        dpPortalFileManager.setFileServerType(fileServerProperties.getUseServer());
+        dpPortalFileManager.setFileServerType(fileServerProperties.getExtendsFileType());
         dpPortalFileManager.setFilePath(fileSystemManagerService.getRootPath() + userName + "/ai_model/" + dpPortalFileManager.getFileName());
         try {
             fileSystemManagerService.addFile(dpPortalFileManager.getFilePath(), file.getInputStream(), file.getSize());

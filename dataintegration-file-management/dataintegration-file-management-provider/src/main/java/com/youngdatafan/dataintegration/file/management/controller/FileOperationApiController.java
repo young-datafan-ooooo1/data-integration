@@ -130,7 +130,7 @@ public class FileOperationApiController extends BaseController<DpPortalFileManag
         dpPortalFileManager.setUploadTime(new Date());
         dpPortalFileManager.setEffectiveDays(fileAddVO.getEffectiveDays());
         dpPortalFileManager.setLastModifiedTime(new Date());
-        dpPortalFileManager.setFileServerType(fileServerProperties.getUseServer());
+        dpPortalFileManager.setFileServerType(fileServerProperties.getExtendsFileType());
         dpPortalFileManager.setFileSize(String.valueOf(files.get(0).getSize()));
         FolderInfoDTO folderInfoDTO = this.dpPortalFileManagerService.queryOneFolder(fileAddVO.getPid());
         try {
@@ -177,7 +177,7 @@ public class FileOperationApiController extends BaseController<DpPortalFileManag
         dpPortalFileManager.setIsValid("Y");
         dpPortalFileManager.setUploadTime(new Date());
         dpPortalFileManager.setLastModifiedTime(new Date());
-        dpPortalFileManager.setFileServerType(fileServerProperties.getUseServer());
+        dpPortalFileManager.setFileServerType(fileServerProperties.getExtendsFileType());
         dpPortalFileManager.setFilePath(fileSystemManagerService.getRootPath() + userName + "/" + dpPortalFileManager.getFileName() + "/");
         dpPortalFileManagerService.insert(dpPortalFileManager);
         if (fileServerProperties.getS3().getCreateDir()) {
@@ -297,7 +297,7 @@ public class FileOperationApiController extends BaseController<DpPortalFileManag
         dpPortalFileManager1.setUploadTime(new Date());
         dpPortalFileManager1.setLastModifiedTime(new Date());
         dpPortalFileManager1.setIsFolder(dpPortalFileManager.getIsFolder());
-        dpPortalFileManager1.setFileServerType(fileServerProperties.getUseServer());
+        dpPortalFileManager1.setFileServerType(fileServerProperties.getExtendsFileType());
         dpPortalFileManagerService.updateByPrimaryKeySelective(dpPortalFileManager1);
         DpPortalFileManagerDTO dpPortalFileManagerDTO = new DpPortalFileManagerDTO();
         BeanUtils.copyProperties(dpPortalFileManager1, dpPortalFileManagerDTO);
@@ -318,7 +318,7 @@ public class FileOperationApiController extends BaseController<DpPortalFileManag
         dpPortalFileManager1.setIsValid(fileUpdateVO.getIsValid());
         dpPortalFileManager1.setLastModifiedTime(new Date());
         dpPortalFileManager1.setIsFolder("1");
-        dpPortalFileManager1.setFileServerType(fileServerProperties.getUseServer());
+        dpPortalFileManager1.setFileServerType(fileServerProperties.getExtendsFileType());
         dpPortalFileManagerService.updateByPrimaryKeySelective(dpPortalFileManager1);
         DpPortalFileManagerDTO dpPortalFileManagerDTO = new DpPortalFileManagerDTO();
         BeanUtils.copyProperties(dpPortalFileManager1, dpPortalFileManagerDTO);
@@ -653,7 +653,7 @@ public class FileOperationApiController extends BaseController<DpPortalFileManag
                     dpPortalFileManagerNew.setIsValid("Y");
                     dpPortalFileManagerNew.setUploadTime(objectSummary.getLastModified());
                     dpPortalFileManagerNew.setLastModifiedTime(objectSummary.getLastModified());
-                    dpPortalFileManagerNew.setFileServerType(fileServerProperties.getUseServer());
+                    dpPortalFileManagerNew.setFileServerType(fileServerProperties.getExtendsFileType());
                     dpPortalFileManagerNew.setFileSize(String.valueOf(objectSummary.getSize()));
                     dpPortalFileManagerNew.setFilePath(dpPortalFileManager.getFilePath() + dpPortalFileManagerNew.getFileName());
                     metaInsterLists.add(dpPortalFileManagerNew);
@@ -859,7 +859,7 @@ public class FileOperationApiController extends BaseController<DpPortalFileManag
                     dpPortalFileManager.setUploadTime(new Date());
                     dpPortalFileManager.setLastModifiedTime(new Date());
                     dpPortalFileManager.setFilePath(path);
-                    dpPortalFileManager.setFileServerType(fileServerProperties.getUseServer());
+                    dpPortalFileManager.setFileServerType(fileServerProperties.getExtendsFileType());
                     dpPortalFileManager.setFileSize(String.valueOf(file.getSize()));
                     dpPortalFileManagerService.insert(dpPortalFileManager);
 
@@ -978,7 +978,7 @@ public class FileOperationApiController extends BaseController<DpPortalFileManag
         dpPortalFileManager.setEffectiveDays(effectiveDays);
         dpPortalFileManager.setUploadTime(new Date());
         dpPortalFileManager.setLastModifiedTime(new Date());
-        dpPortalFileManager.setFileServerType(fileServerProperties.getUseServer());
+        dpPortalFileManager.setFileServerType(fileServerProperties.getExtendsFileType());
         dpPortalFileManager.setFileSize(String.valueOf(file.getSize()));
         DpPortalFileManager dpPortalFileManager1 = dpPortalFileManagerService.selectByFileId(pid);
         try {
