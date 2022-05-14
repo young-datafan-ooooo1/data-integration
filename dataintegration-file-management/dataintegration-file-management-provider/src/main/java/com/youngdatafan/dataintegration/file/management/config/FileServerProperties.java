@@ -25,6 +25,9 @@ public class FileServerProperties {
     @ApiModelProperty("采用的服务器")
     private String useServer;
 
+    @ApiModelProperty("继承服务类型")
+    private String extendsFileType;
+
     /**
      * ftp服务器相关属性.
      */

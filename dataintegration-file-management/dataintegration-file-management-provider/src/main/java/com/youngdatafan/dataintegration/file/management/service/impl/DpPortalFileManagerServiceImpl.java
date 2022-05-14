@@ -340,7 +340,7 @@ public class DpPortalFileManagerServiceImpl implements DpPortalFileManagerServic
                 dpPortalFileManagerNew.setIsValid("Y");
                 dpPortalFileManagerNew.setUploadTime(objectSummary.getLastModified());
                 dpPortalFileManagerNew.setLastModifiedTime(objectSummary.getLastModified());
-                dpPortalFileManagerNew.setFileServerType(fileServerProperties.getUseServer());
+                dpPortalFileManagerNew.setFileServerType(fileServerProperties.getExtendsFileType());
                 dpPortalFileManagerNew.setFileSize(String.valueOf(objectSummary.getSize()));
                 dpPortalFileManagerNew.setFilePath(folderInfoDTO.getFilePath() + dpPortalFileManagerNew.getFileName());
                 metaInsterLists.add(dpPortalFileManagerNew);

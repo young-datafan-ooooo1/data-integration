@@ -7,6 +7,7 @@ import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.ListObjectsRequest;
 import com.amazonaws.services.s3.model.ObjectListing;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.S3Object;
@@ -21,15 +22,16 @@ import com.youngdatafan.dataintegration.file.management.dto.FileSummary;
 import com.youngdatafan.dataintegration.file.management.service.FileSystemManagerService;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import org.apache.poi.util.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
@@ -54,6 +56,12 @@ public class S3FileSystemManagerServiceImpl implements FileSystemManagerService 
     private AmazonS3 s3Client;
 
     private S3Properties s3Properties;
+
+    @Value("${esCat.file.loopMaxCount:100000}")
+    private int loopMaxCount;
+
+    @Value("${esCat.file.loopLimit:10000}")
+    private Integer loopLimit;
 
     @Autowired
     public S3FileSystemManagerServiceImpl(FileServerProperties fileServerProperties) {
@@ -190,14 +198,12 @@ public class S3FileSystemManagerServiceImpl implements FileSystemManagerService 
      */
     @Override
     public void delFolder(String filePath) throws DpException {
-        String deleteFilePath = getFileKey(filePath);
-        ObjectListing objectListing = s3Client.listObjects(s3Properties.getBucket(), deleteFilePath);
-        do {
-            for (S3ObjectSummary objectSummary : objectListing.getObjectSummaries()) {
+        loopFolder(filePath, objectSummary -> {
+            if (objectSummary != null) {
                 s3Client.deleteObject(s3Properties.getBucket(), objectSummary.getKey());
             }
-            objectListing = s3Client.listNextBatchOfObjects(objectListing);
-        } while (objectListing.isTruncated());
+            return null;
+        });
     }
 
 
@@ -209,9 +215,28 @@ public class S3FileSystemManagerServiceImpl implements FileSystemManagerService 
     @Override
     public void loopFolder(String filePath, Function<FileSummary, String> function) {
         String loopFilePath = getFileKey(filePath);
-        ObjectListing objectListing = s3Client.listObjects(s3Properties.getBucket(), loopFilePath);
+        String nextMarker = null;
+        ObjectListing objectListing;
+        int loop = 0;
         do {
-
+            //防止陷入死循环循环超过最大次数，立即跳出
+            if (loop++ >= loopMaxCount) {
+                logger.warn("死循环循环超过最大次数，已经立即中断");
+                return;
+            }
+            if (nextMarker == null) {
+                objectListing = s3Client.listObjects(new ListObjectsRequest()
+                    .withBucketName(s3Properties.getBucket())
+                    .withPrefix(loopFilePath)
+                    .withMaxKeys(loopLimit));
+            } else {
+                //以后的分页附带nextMarker
+                objectListing = s3Client.listObjects(new ListObjectsRequest()
+                    .withBucketName(s3Properties.getBucket())
+                    .withPrefix(loopFilePath)
+                    .withMarker(nextMarker)
+                    .withMaxKeys(loopLimit));
+            }
             for (S3ObjectSummary objectSummary : objectListing.getObjectSummaries()) {
                 FileSummary fileSummary = new FileSummary();
                 fileSummary.setKey(objectSummary.getKey());
@@ -219,30 +244,22 @@ public class S3FileSystemManagerServiceImpl implements FileSystemManagerService 
                 fileSummary.setLastModified(objectSummary.getLastModified());
                 function.apply(fileSummary);
             }
-            objectListing = s3Client.listNextBatchOfObjects(objectListing);
+            nextMarker = objectListing.getNextMarker();
         } while (objectListing.isTruncated());
     }
 
     @Override
     public long getLastModifyFileTime(String filePath) {
-        String modifyFilePath = getFileKey(filePath);
-        ObjectListing objectListing = s3Client.listObjects(s3Properties.getBucket(), modifyFilePath);
-
-        long lastModifiedTime = 0;
-        do {
-
-            for (S3ObjectSummary objectSummary : objectListing.getObjectSummaries()) {
-                final long time = objectSummary.getLastModified().getTime();
-                if (lastModifiedTime == 0) {
-                    lastModifiedTime = time;
-                } else if (lastModifiedTime < time) {
-                    lastModifiedTime = time;
-                }
+        final AtomicLong atomicLong = new AtomicLong(0);
+        loopFolder(filePath, s3ObjectSummary -> {
+            final long time = s3ObjectSummary.getLastModified().getTime();
+            if (atomicLong.get() == 0 || atomicLong.get() < time) {
+                atomicLong.set(time);
             }
-            objectListing = s3Client.listNextBatchOfObjects(objectListing);
-        } while (objectListing.isTruncated());
+            return null;
+        });
 
-        return lastModifiedTime;
+        return atomicLong.get();
     }
 
     @Override
@@ -267,15 +284,11 @@ public class S3FileSystemManagerServiceImpl implements FileSystemManagerService 
     @Override
     public InputStream getFileObject(String relativePath) throws AmazonServiceException {
         String finalRelativePath = getFileKey(relativePath);
-        InputStream inputStream = null;
         try {
             S3Object s3Object = s3Client.getObject(s3Properties.getBucket(), finalRelativePath);
-            inputStream = s3Object.getObjectContent();
-            return inputStream;
+            return s3Object.getObjectContent();
         } catch (Exception e) {
             throw new DpException(StatusCode.CODE_10010, "文件下载失败", e);
-        } finally {
-            IOUtils.closeQuietly(inputStream);
         }
     }
 
