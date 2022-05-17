@@ -15,7 +15,9 @@
   <properties>
         <kettle.version>8.3.0.26-1479</kettle.version>
         <sofaboot.version>3.3.0</sofaboot.version>
-
+      <clickhouse.version>0.3.1</clickhouse.version>
+      <postgresql.version>42.2.9</postgresql.version>
+      <oracle.version>19.8.0.0</oracle.version>
     </properties>
     <dependencies>
         <!--核心依赖包-->
@@ -43,6 +45,30 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.46</version>
+        </dependency>
+
+        <!--postgresql-->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${postgresql.version}</version>
+        </dependency>
+        <!--oracle-->
+        <dependency>
+            <groupId>com.oracle.database.jdbc</groupId>
+            <artifactId>ojdbc8</artifactId>
+            <version>${oracle.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.oracle.database.nls</groupId>
+            <artifactId>orai18n</artifactId>
+            <version>${oracle.version}</version>
+        </dependency>
+        <!-- clickhouse jdbc-->
+        <dependency>
+            <groupId>ru.yandex.clickhouse</groupId>
+            <artifactId>clickhouse-jdbc</artifactId>
+            <version>${clickhouse.version}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/commons-net/commons-net -->

@@ -17,7 +17,9 @@
         <!--main函数-->
         <start-class>com.youngdatafan.portal.model.management.ModelManagerApplication</start-class>
         <mysql.version>5.1.47</mysql.version>
-        <clickhouse.version>0.2.4</clickhouse.version>
+        <clickhouse.version>0.3.1</clickhouse.version>
+        <postgresql.version>42.2.9</postgresql.version>
+        <oracle.version>19.8.0.0</oracle.version>
     </properties>
 
     <dependencies>
@@ -96,6 +98,36 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql.version}</version>
+        </dependency>
+
+        <!--mysql-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.version}</version>
+        </dependency>
+        <!--postgresql-->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${postgresql.version}</version>
+        </dependency>
+        <!--oracle-->
+        <dependency>
+            <groupId>com.oracle.database.jdbc</groupId>
+            <artifactId>ojdbc8</artifactId>
+            <version>${oracle.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.oracle.database.nls</groupId>
+            <artifactId>orai18n</artifactId>
+            <version>${oracle.version}</version>
+        </dependency>
+        <!-- clickhouse jdbc-->
+        <dependency>
+            <groupId>ru.yandex.clickhouse</groupId>
+            <artifactId>clickhouse-jdbc</artifactId>
+            <version>${clickhouse.version}</version>
         </dependency>
 
         <!--mybatis -->
