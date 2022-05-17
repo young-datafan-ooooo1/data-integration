@@ -28,11 +28,14 @@
 
 * dataintegration-common : 公共模块
 * dataintegration-group : 分组管理
+* dataintegration-gateway : 服务网关
 * dataintegration-project : 脚本管理
 * dataintegration-run : 数据集成运行模块
 * dataintegration-sso : sso单点登录模块
 * dataintegration-sys : 系统管理模块
-* dataintegration-vue : 前端vue模块
+* dataintegration-model : 模型管理
+* dataintegration-file-management : 文件管理
+* dataintegration-ui : 前端vue模块
 
 --------------------------------------------------------------------------------
 
@@ -78,12 +81,55 @@ TODO
 --------------------------------------------------------------------------------
 
 # 如何构建
-
+## 打包项目
 ```bash
-./mvnw clean install
+mvn -B clean compile install -Prelease -Dmaven.test.skip=true -Dcheckstyle.skip=true
+```
+## 启动前置环境
+* <a  href ="https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">Jdk1.8</a>
+* <a  href ="https://www.mysql.com/">Mysql 5.7.+</a>
+* <a  href ="https://docs.consulproject.org/docs/english-documentation/introduction/local_installation">consul</a>
+* <a  href ="https://redis.io/">Redis</a>
+
+### 创建数据库
+> 使用数据库连接工具连接数据库，创建数据库dataintegration，将项目/install/sql/dataintegration.sql导入数据库中，初始化数据库文件。
+### 服务启动
+#### 修改配置
+* dataintegration-gateway : 服务网关
+* dataintegration-group : 分组管理
+* dataintegration-project : 脚本管理
+* dataintegration-run : 数据集成运行模块
+* dataintegration-sso : sso单点登录模块
+* dataintegration-sys : 系统管理模块
+* dataintegration-model : 模型管理
+* dataintegration-file-management : 文件管理
+
+``` bash
+ 依次修改 application-local.yaml
+ spring.cloud.consul.host: 192.168.10.160 ,ip改为启动的consul IP
+ spring.cloud.consul.port: 8500 ,ip改为启动的consul 端口
+ spring.datasource.url: jdbc:mysql://192.168.10.211:13306/ 修改启动的mysql url
+ spring.datasource.username:  修改启动的mysql的账号
+ spring.datasource.password:  修改启动的mysql的密码
+ 使用idea或者其他工具运行服务 dataintegration-**-provider
 ```
 
-近期计划编写帮助手册
+#### 启动前端ui
+> 终端进入 dataintegration-ui 目录
+
+``` bash
+# install dependencies
+npm install
+
+# serve with hot reload at localhost:8080
+npm run dev
+
+```
+> 访问前端页面：http://127.0.0.1:8081/dataintegration-ui/#/  默认的用户是admin，默认的密码是Prime@2020
+
+###
+
+
 
 --------------------------------------------------------------------------------
 
