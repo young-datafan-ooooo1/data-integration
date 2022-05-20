@@ -17,6 +17,8 @@ if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === undefined
   BASE = 'http://192.168.10.160:10200/api'
   BASEOUTAPI = 'http://192.168.10.160:10200'
   wsUrl = `ws://192.168.10.160:10200/ws/dataintegration-di-run-management-provider`
+} else if(process.env.NODE_ENV === 'production') {
+  wsUrl = `ws://${locationUrl}:10200/ws/dataintegration-di-run-management-provider`
 }
 
 let projectUrl = `${BASE}/dataintegration-project-provider`;
