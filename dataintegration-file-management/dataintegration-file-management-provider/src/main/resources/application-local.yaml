@@ -90,11 +90,13 @@ file:
       bucket: escat-s3
       createDir: true
     minIos3:
+      server: 192.168.10.160
+      port: 19000
       url: http://192.168.10.160:19000
       accessKey: prime
       secretKey: prime@2020
       bucketName: escat-s3
-      rootPath: minio://
+      rootPath: s3://
 
 logging:
   file:

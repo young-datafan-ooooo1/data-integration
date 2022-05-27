@@ -1,6 +1,7 @@
 package com.youngdatafan.dataintegration.file.management.config;
 
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
@@ -12,6 +13,18 @@ import lombok.Data;
 @Data
 @ApiModel("MinIo文件服务器")
 public class MinIoProperties {
+
+    /**
+     * minio  ip.
+     */
+    @ApiModelProperty("服务器ip")
+    private String server;
+
+    /**
+     * minio  端口.
+     */
+    @ApiModelProperty("服务器端口")
+    private int port;
 
     /**
      * minio地址+端口号.
