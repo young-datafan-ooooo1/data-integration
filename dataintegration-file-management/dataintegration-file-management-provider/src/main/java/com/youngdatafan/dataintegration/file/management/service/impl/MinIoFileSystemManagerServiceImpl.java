@@ -273,7 +273,7 @@ public class MinIoFileSystemManagerServiceImpl implements FileSystemManagerServi
 
     @Override
     public String getRootPath() {
-        return minIoProperties.getRootPath() + minIoProperties.getUrl() + "/" + minIoProperties.getBucketName() + "/";
+        return minIoProperties.getRootPath() + minIoProperties.getServer() + ":" + minIoProperties.getPort() + "/" + minIoProperties.getBucketName() + "/";
     }
 
     /**
