@@ -298,6 +298,18 @@ public class PluginManageServiceApiController implements PluginManageServiceApi 
         }
     }
 
+    private static String removeSelfQuoteStr(String str) {
+        String finalStr = str.trim();
+        if (str.startsWith("\"") && str.endsWith("\"")) {
+            finalStr = finalStr.substring(1, finalStr.length() - 1);
+        } else if (finalStr.startsWith("[") && finalStr.endsWith("]")) {
+            finalStr = finalStr.substring(1, finalStr.length() - 1);
+        } else if (finalStr.startsWith("`") && finalStr.endsWith("`")) {
+            finalStr = finalStr.substring(1, finalStr.length() - 1);
+        }
+        return finalStr;
+    }
+
     @Override
     public Result getCreateTableDDL(String userId, CreateTableVO createTableVO) {
         DataSourceWrap dataSourceWrap = pluginRunDataSourceRepository.getDataSource(userId, createTableVO.getDataSourceId());
@@ -307,88 +319,80 @@ public class PluginManageServiceApiController implements PluginManageServiceApi 
             List<FieldsInfoVO> fieldsInfoVOS = createTableVO.getFieldsInfos();
             RowMetaInterface rowMetaInterface = new RowMeta();
             for (FieldsInfoVO fieldsInfoVO : fieldsInfoVOS) {
+                String name = removeSelfQuoteStr(fieldsInfoVO.getName());
                 ValueMetaInterface valueMetaInterface;
                 switch (ValueMetaInterface.getTypeCode(fieldsInfoVO.getType())) {
                     case ValueMetaInterface.TYPE_NONE:
                         valueMetaInterface = new ValueMetaNone();
-                        valueMetaInterface.setName(fieldsInfoVO.getName());
+                        valueMetaInterface.setName(name);
                         valueMetaInterface.setLength(fieldsInfoVO.getLength());
                         valueMetaInterface.setPrecision(fieldsInfoVO.getPrecision());
                         break;
                     case ValueMetaInterface.TYPE_NUMBER:
                         valueMetaInterface = new ValueMetaNumber();
-                        valueMetaInterface.setName(fieldsInfoVO.getName());
+                        valueMetaInterface.setName(name);
                         valueMetaInterface.setLength(fieldsInfoVO.getLength());
                         valueMetaInterface.setPrecision(fieldsInfoVO.getPrecision() < 0 ? 0 : fieldsInfoVO.getPrecision());
                         break;
                     case ValueMetaInterface.TYPE_STRING:
                         valueMetaInterface = new ValueMetaString();
-                        valueMetaInterface.setName(fieldsInfoVO.getName());
+                        valueMetaInterface.setName(name);
                         valueMetaInterface.setLength(fieldsInfoVO.getLength());
                         valueMetaInterface.setPrecision(fieldsInfoVO.getPrecision());
                         break;
                     case ValueMetaInterface.TYPE_DATE:
                         valueMetaInterface = new ValueMetaDate();
-                        valueMetaInterface.setName(fieldsInfoVO.getName());
+                        valueMetaInterface.setName(name);
                         valueMetaInterface.setLength(fieldsInfoVO.getLength());
                         valueMetaInterface.setPrecision(fieldsInfoVO.getPrecision());
                         break;
                     case ValueMetaInterface.TYPE_BOOLEAN:
                         valueMetaInterface = new ValueMetaBoolean();
-                        valueMetaInterface.setName(fieldsInfoVO.getName());
-
+                        valueMetaInterface.setName(name);
                         valueMetaInterface.setLength(fieldsInfoVO.getLength());
                         valueMetaInterface.setPrecision(fieldsInfoVO.getPrecision());
                         break;
                     case ValueMetaInterface.TYPE_INTEGER:
                         valueMetaInterface = new ValueMetaInteger();
-                        valueMetaInterface.setName(fieldsInfoVO.getName());
+                        valueMetaInterface.setName(name);
 
                         valueMetaInterface.setLength(fieldsInfoVO.getLength());
                         valueMetaInterface.setPrecision(fieldsInfoVO.getPrecision());
                         break;
                     case ValueMetaInterface.TYPE_BIGNUMBER:
                         valueMetaInterface = new ValueMetaBigNumber();
-                        valueMetaInterface.setName(fieldsInfoVO.getName());
+                        valueMetaInterface.setName(name);
 
                         valueMetaInterface.setLength(fieldsInfoVO.getLength());
                         valueMetaInterface.setPrecision(fieldsInfoVO.getPrecision() < 0 ? 0 : fieldsInfoVO.getPrecision());
                         break;
                     case ValueMetaInterface.TYPE_SERIALIZABLE:
                         valueMetaInterface = new ValueMetaSerializable();
-                        valueMetaInterface.setName(fieldsInfoVO.getName());
-
+                        valueMetaInterface.setName(name);
                         valueMetaInterface.setLength(fieldsInfoVO.getLength());
                         valueMetaInterface.setPrecision(fieldsInfoVO.getPrecision());
                         break;
                     case ValueMetaInterface.TYPE_BINARY:
                         valueMetaInterface = new ValueMetaBinary();
-                        valueMetaInterface.setName(fieldsInfoVO.getName());
-
+                        valueMetaInterface.setName(name);
                         valueMetaInterface.setLength(fieldsInfoVO.getLength());
                         valueMetaInterface.setPrecision(fieldsInfoVO.getPrecision());
                         break;
                     case ValueMetaInterface.TYPE_TIMESTAMP:
                         valueMetaInterface = new ValueMetaTimestamp();
-                        valueMetaInterface.setName(fieldsInfoVO.getName());
-
+                        valueMetaInterface.setName(name);
                         valueMetaInterface.setLength(fieldsInfoVO.getLength());
                         valueMetaInterface.setPrecision(fieldsInfoVO.getPrecision());
                         break;
                     case ValueMetaInterface.TYPE_INET:
                         valueMetaInterface = new ValueMetaInternetAddress();
-                        valueMetaInterface.setName(fieldsInfoVO.getName());
-
+                        valueMetaInterface.setName(name);
                         valueMetaInterface.setLength(fieldsInfoVO.getLength());
                         valueMetaInterface.setPrecision(fieldsInfoVO.getPrecision());
                         break;
                     default:
                         return Result.fail(StatusCode.CODE_10010.getCode(), "", "不支持的数据类型：" + fieldsInfoVO.getType());
                 }
-                if (valueMetaInterface != null) {
-                    rowMetaInterface.addValueMeta(valueMetaInterface);
-                }
-
             }
             String schema = createTableVO.getSchema();
             String tableName = schema != null && !schema.equals("") ? schema + "." + createTableVO.getTableName() : createTableVO.getTableName();
@@ -412,13 +416,9 @@ public class PluginManageServiceApiController implements PluginManageServiceApi 
 
             } else {
                 createSql = database.getCreateTableStatement(tableName, rowMetaInterface, quotedTk, use_autoinc, pk, semicolon);
-
-
                 log.info("create sql is :{}", createSql);
                 if (createSql != null && !createSql.equals("")) {
                     return Result.success(createSql);
-//                    database.execStatement(createSql);
-//                    database.disconnect();
                 } else {
                     return Result.fail(StatusCode.CODE_10010.getCode(), "", "建表语句生成失败！");
 
