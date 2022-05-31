@@ -36,6 +36,7 @@ import com.youngdatafan.portal.model.management.businessmodel.dto.GroupDTO;
 import com.youngdatafan.portal.model.management.businessmodel.dto.ModelTypeAndGroupListDTO;
 import com.youngdatafan.portal.model.management.common.enums.GroupTypeEnum;
 import java.io.IOException;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -48,6 +49,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
 import org.pentaho.di.core.database.Database;
 import org.pentaho.di.core.database.DatabaseMeta;
 import org.pentaho.di.core.encryption.KettleTwoWayPasswordEncoder;
@@ -443,18 +445,31 @@ public class PluginManageServiceApiController implements PluginManageServiceApi 
     @Override
     public Result executeCreateDDL(String userId, ExecuteDDLVO executeDDLVO) {
         Database database = null;
+        PreparedStatement preparedStatement = null;
         try {
             DataSourceWrap dataSourceWrap = pluginRunDataSourceRepository.getDataSource(userId, executeDDLVO.getDataSourceId());
             database = generateDataBase(dataSourceWrap, executeDDLVO.getDataSourceId());
-            database.prepareSQL(executeDDLVO.getDdl()).execute();
+            //有多行sql同时执行的话，一条一条执行
+            List<String> sqlList = Arrays.asList(executeDDLVO.getDdl().trim().replaceAll("\n", " ").split(";"));
+            if (!sqlList.isEmpty()) {
+                for (int i = 0; i < sqlList.size(); i++) {
+                    if (StringUtils.isNotBlank(sqlList.get(i))) {
+                        preparedStatement = database.prepareSQL(sqlList.get(i));
+                        preparedStatement.execute();
+                    }
+                }
+            }
             return Result.success("");
-
-
-        } catch (SQLException e) {
-            return Result.fail(StatusCode.CODE_10010.getCode(), "", e.getMessage());
-        } catch (KettleDatabaseException e) {
+        } catch (SQLException | KettleDatabaseException e) {
             return Result.fail(StatusCode.CODE_10010.getCode(), "", e.getMessage());
         } finally {
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
             if (database != null) {
                 database.disconnect();
 
