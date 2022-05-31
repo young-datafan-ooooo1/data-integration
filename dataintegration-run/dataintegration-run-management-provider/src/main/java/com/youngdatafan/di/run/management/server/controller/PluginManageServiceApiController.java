@@ -393,6 +393,7 @@ public class PluginManageServiceApiController implements PluginManageServiceApi 
                     default:
                         return Result.fail(StatusCode.CODE_10010.getCode(), "", "不支持的数据类型：" + fieldsInfoVO.getType());
                 }
+                rowMetaInterface.addValueMeta(valueMetaInterface);
             }
             String schema = createTableVO.getSchema();
             String tableName = schema != null && !schema.equals("") ? schema + "." + createTableVO.getTableName() : createTableVO.getTableName();
