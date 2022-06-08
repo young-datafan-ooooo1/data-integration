@@ -97,7 +97,7 @@
                   <el-input v-model="step.sheetname"  style="width: 65%" size="mini"></el-input>
                 </el-form-item>
                 <el-form-item label="保护工作表?">
-                  <el-checkbox  v-model="step.protect_sheet" @change="changetable"></el-checkbox>
+                  <el-checkbox v-model="step.protect_sheet" @change="changetable"></el-checkbox>
                 </el-form-item>
                 <el-form-item label="密码" prop="password">
                   <el-input v-model="step.password" size="mini" show-password style="width: 65%" :disabled="worktable"></el-input>
@@ -621,6 +621,7 @@
         this.step.file_server_type = item.fileServerType;
         this.step.ftp_username = item.userName;
         this.step.ftp_password = item.password;
+        this.step.file.password = item.password
       },
 
       changeFile() {

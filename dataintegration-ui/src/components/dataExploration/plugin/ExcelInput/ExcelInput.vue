@@ -310,7 +310,7 @@
               </el-table-column>
               <el-table-column label="操作" width="100px">
                 <template slot-scope="scope">
-                  <el-button size="mini" type="text" @click="deleteRow(scope.$index)">删除</el-button>
+                  <!-- <el-button size="mini" type="text" @click="deleteRow(scope.$index)">删除</el-button> -->
                   <el-button size="mini" type="text" @click="editLine(scope.row)">编辑</el-button>
                 </template>
               </el-table-column>

@@ -387,9 +387,9 @@
             <span style="float: right;margin-left: 5px">
               <el-button size="mini" @click="getCsvHeaderColumn()" type="primary">获取来自头部数据的字段</el-button>
             </span>
-            <span style="float: right">
-              <el-button size="mini" @click="addFields" type="primary">新增</el-button>
-            </span>
+            <!-- <span style="float: right">
+              <el-button size="mini" @click="addRow" type="primary">新增</el-button>
+            </span> -->
           </div>
           <el-table
             :data="showFields"
@@ -525,7 +525,7 @@
             </el-table-column>
             <el-table-column label="操作" width="100px" fixed="right">
               <template slot-scope="scope">
-                <el-button size="mini" type="text" @click="deleteRow(scope.$index)">删除</el-button>
+                <!-- <el-button size="mini" type="text" @click="deleteRow(scope.$index)">删除</el-button> -->
                 <el-button size="mini" type="text" @click="editLine(scope.row)">编辑</el-button>
               </template>
             </el-table-column>
