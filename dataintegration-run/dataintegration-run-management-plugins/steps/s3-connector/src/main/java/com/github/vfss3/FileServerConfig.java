@@ -23,6 +23,8 @@ public class FileServerConfig {
                 S3FileSystemConfigBuilder.getInstance().setCredentialsProvider(opts, new AWSStaticCredentialsProvider(new BasicAWSCredentials(username, password)));
                 break;
             default:
+                S3FileSystemConfigBuilder.getInstance().setUseHttps(opts, false);
+                S3FileSystemConfigBuilder.getInstance().setCredentialsProvider(opts, new AWSStaticCredentialsProvider(new BasicAWSCredentials(username, password)));
                 break;
         }
         return opts;

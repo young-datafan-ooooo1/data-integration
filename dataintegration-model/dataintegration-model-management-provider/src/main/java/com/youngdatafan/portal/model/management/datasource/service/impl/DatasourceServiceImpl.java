@@ -18,6 +18,7 @@ import com.youngdatafan.portal.model.management.datasource.service.DatasourceSer
 import com.youngdatafan.portal.model.management.datasource.vo.ConnectionDetailVO;
 import com.youngdatafan.portal.model.management.datasource.vo.DatasourceConnectorVO;
 import com.youngdatafan.portal.model.management.datasource.vo.JCDataSourceVO;
+import com.youngdatafan.portal.model.management.datasource.vo.ParameterVo;
 import com.youngdatafan.portal.model.management.util.jdbc.DatasourceExplainDTO;
 import com.youngdatafan.portal.model.management.util.jdbc.JdbcUtils;
 import java.sql.Connection;
@@ -313,6 +314,23 @@ public class DatasourceServiceImpl implements DatasourceService {
     public String getUrl(JCDataSourceVO jcDataSourceVO) throws Exception {
         ConnectionDetailVO connectionDetailVO = new ConnectionDetailVO();
         ConnectionDetailVO.ConnectionBean connectionBean = new ConnectionDetailVO.ConnectionBean();
+
+        ConnectionDetailVO.ConnectionBean.AttributesBean attributesBean = new ConnectionDetailVO.ConnectionBean.AttributesBean();
+
+        List<ParameterVo> optionsParameterVo = jcDataSourceVO.getDsConnectorSetting().getOptionsParameterVo();
+        List<ConnectionDetailVO.ConnectionBean.AttributesBean.AttributeBean> attributeBeanLis = new ArrayList<>();
+
+        for (ParameterVo parameterVo: optionsParameterVo) {
+            ConnectionDetailVO.ConnectionBean.AttributesBean.AttributeBean attributeBean = new ConnectionDetailVO.ConnectionBean.AttributesBean.AttributeBean();
+            attributeBean.setCode(parameterVo.getCode());
+            attributeBean.setAttribute(parameterVo.getAttribute());
+
+            attributeBeanLis.add(attributeBean);
+        }
+
+        attributesBean.setAttribute(attributeBeanLis);
+
+        connectionBean.setAttributes(attributesBean);
         connectionBean.setUsername(jcDataSourceVO.getDsUsername());
         connectionBean.setAccess(jcDataSourceVO.getAccess());
         connectionBean.setType(jcDataSourceVO.getDsType());

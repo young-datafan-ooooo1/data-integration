@@ -1,14 +1,22 @@
 package com.youngdatafan.portal.model.management.util.jdbc;
 
+import com.youngdatafan.dataintegration.core.util.JsonUtils;
+import com.youngdatafan.dataintegration.core.util.json.JSONLinkedObject;
 import com.youngdatafan.portal.model.management.basicmodel.dto.AllColumnDTO;
 import com.youngdatafan.portal.model.management.common.entity.ModelFilterVO;
 import com.youngdatafan.portal.model.management.datasource.dto.DatasourceDTO;
+import com.youngdatafan.portal.model.management.datasource.vo.ConnectionDetailVO;
 import com.youngdatafan.portal.model.management.util.enums.DimensionMetricEnum;
 import com.youngdatafan.portal.model.management.util.enums.TrueFalse;
+import org.apache.commons.lang.StringEscapeUtils;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.XML;
 import org.pentaho.di.core.database.Database;
 import org.pentaho.di.core.database.DatabaseMeta;
 import org.pentaho.di.core.encryption.KettleTwoWayPasswordEncoder;
 import org.pentaho.di.core.exception.KettleDatabaseException;
+import org.pentaho.di.core.exception.KettleXMLException;
 import org.pentaho.di.core.row.RowMetaInterface;
 import org.pentaho.di.core.row.ValueMetaInterface;
 import org.springframework.util.StringUtils;
@@ -188,9 +196,45 @@ public class JdbcUtils {
         }
         String password = PASSWORD_ENCODER.decode(datasourceDTO.getDsPassword());
 
-        DatabaseMeta databaseMeta = new DatabaseMeta(datasourceDTO.getDatasourceId()
-                , datasourceDTO.getDsType(), "JDBC", datasourceExplainDTO.getHost()
-                , datasourceExplainDTO.getDb(), datasourceExplainDTO.getPort(), datasourceDTO.getDsUsername(), password);
+        ConnectionDetailVO connectionDetailVO = new ConnectionDetailVO();
+        ConnectionDetailVO.ConnectionBean connectionBean = new ConnectionDetailVO.ConnectionBean();
+
+        ConnectionDetailVO.ConnectionBean.AttributesBean attributesBean = new ConnectionDetailVO.ConnectionBean.AttributesBean();
+
+        JSONArray jsonArray = new JSONObject(datasourceDTO.getDsConectorSetting()).getJSONArray("optionsParameterVo");
+        List<ConnectionDetailVO.ConnectionBean.AttributesBean.AttributeBean> attributeBeanLis = new ArrayList<>();
+
+        for (Object parameterVo: jsonArray) {
+            ConnectionDetailVO.ConnectionBean.AttributesBean.AttributeBean attributeBean = new ConnectionDetailVO.ConnectionBean.AttributesBean.AttributeBean();
+
+            JSONObject jsonObject = (JSONObject)parameterVo;
+            attributeBean.setCode(jsonObject.getString("code"));
+            attributeBean.setAttribute(jsonObject.getString("attribute"));
+
+            attributeBeanLis.add(attributeBean);
+        }
+
+        attributesBean.setAttribute(attributeBeanLis);
+
+        connectionBean.setAttributes(attributesBean);
+        connectionBean.setUsername(datasourceDTO.getDsUsername());
+        connectionBean.setAccess("JDBC");
+        connectionBean.setType(datasourceDTO.getDsType());
+        connectionBean.setServer(datasourceExplainDTO.getHost());
+        connectionBean.setDatabase(datasourceExplainDTO.getDb());
+        connectionBean.setPassword(password);
+        connectionBean.setPort(datasourceExplainDTO.getPort());
+        connectionDetailVO.setConnection(connectionBean);
+        String projectFile = StringEscapeUtils.unescapeXml(JsonUtils.toString(connectionDetailVO));
+        projectFile = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+                + XML.toString(new JSONLinkedObject(projectFile));
+        DatabaseMeta databaseMeta = null;
+        try {
+            databaseMeta = new DatabaseMeta(projectFile);
+        } catch (KettleXMLException e) {
+            throw new RuntimeException(e);
+        }
+
         final Database database = new Database(databaseMeta);
         try {
             database.connect();
