@@ -171,13 +171,13 @@
 </template>
 
 <script>
-  import {
-    selectGrantProject,
-    selectProjectByProjectName,
-    selectAllProject,
-    getAllBusinessModelPluginInfoByUserId,
-    loginOut,
-  } from '../../api/api.js'
+import {
+  selectGrantProject,
+  selectProjectByProjectName,
+  selectAllProject,
+  getAllBusinessModelPluginInfoByUserId,
+  loginOut, updatePassWord,
+} from '../../api/api.js'
   import {
     openFlow
   } from '../../common/common.js'
