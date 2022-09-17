@@ -113,7 +113,11 @@ public class DatasourceServiceApiController implements DatasourceServiceApi {
                 datasource.setDriverClassName(jcDataSourceVO.getCustomDriverClass());
             } else {
                 url = datasourceService.getUrl(jcDataSourceVO);
-                datasource.setDsUrl(url + "?access=" + jcDataSourceVO.getAccess());
+                if (!url.contains("?")) {
+                    datasource.setDsUrl(url + "?access=" + jcDataSourceVO.getAccess());
+                } else {
+                    datasource.setDsUrl(url + "&access=" + jcDataSourceVO.getAccess());
+                }
             }
 
             if (jcDataSourceVO.getDsConnectorSetting() != null) {
@@ -162,7 +166,11 @@ public class DatasourceServiceApiController implements DatasourceServiceApi {
                 datasource.setDriverClassName(jcDataSourceVO.getCustomDriverClass());
             } else {
                 url = datasourceService.getUrl(jcDataSourceVO);
-                datasource.setDsUrl(url + "?access=" + jcDataSourceVO.getAccess());
+                if (!url.contains("?")) {
+                    datasource.setDsUrl(url + "?access=" + jcDataSourceVO.getAccess());
+                }else{
+                    datasource.setDsUrl(url + "&access=" + jcDataSourceVO.getAccess());
+                }
             }
 
             if (jcDataSourceVO.getDsConnectorSetting() != null) {
